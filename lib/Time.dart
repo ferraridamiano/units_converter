@@ -42,7 +42,7 @@ class Time {
   int significantFigures;
   bool removeTrailingZeros;
   List<Unit> areaUnitList = [];
-  Node _area_conversion;
+  Node _time_conversion;
 
   ///Class for time conversions, e.g. if you want to convert 1 hour in seconds:
   ///```dart
@@ -54,7 +54,7 @@ class Time {
     this.significantFigures = significantFigures;
     this.removeTrailingZeros = removeTrailingZeros;
     TIME.values.forEach((element) => areaUnitList.add(Unit(element, symbol: mapSymbols[element])));
-    _area_conversion = Node(name:  TIME.seconds,
+    _time_conversion = Node(name:  TIME.seconds,
         leafNodes: [
           Node(coefficientProduct: 1e-1, name: TIME.deciseconds,),
           Node(coefficientProduct: 1e-2, name: TIME.centiseconds,),
@@ -81,15 +81,15 @@ class Time {
   void Convert(Unit unit) {
     assert(unit.value != null);
     assert(TIME.values.contains(unit.name));
-    _area_conversion.clearAllValues();
-    _area_conversion.clearSelectedNode();
-    var currentUnit = _area_conversion.getByName(unit.name);
+    _time_conversion.clearAllValues();
+    _time_conversion.clearSelectedNode();
+    var currentUnit = _time_conversion.getByName(unit.name);
     currentUnit.value = unit.value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
-    _area_conversion.convert();
+    _time_conversion.convert();
     for (var i = 0; i < TIME.values.length; i++) {
-      areaUnitList[i].value = _area_conversion.getByName(TIME.values.elementAt(i)).value;
+      areaUnitList[i].value = _time_conversion.getByName(TIME.values.elementAt(i)).value;
       areaUnitList[i].stringValue = mantissaCorrection(areaUnitList[i].value, significantFigures, removeTrailingZeros);
     }
   }

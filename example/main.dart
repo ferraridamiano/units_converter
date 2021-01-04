@@ -1,5 +1,4 @@
-import 'package:units_converter/Length.dart';
-import 'package:units_converter/UtilsConversion.dart';
+import 'package:units_converter/units_converter.dart';
 
 void main() {
   var length = Length(removeTrailingZeros: false);
