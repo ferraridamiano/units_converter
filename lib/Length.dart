@@ -20,32 +20,31 @@ enum LENGTH {
   parsec,
 }
 
-//Map between units and its symbol
-final Map<LENGTH, String> mapSymbols = {
-  LENGTH.meters: 'm',
-  LENGTH.centimeters: 'cm',
-  LENGTH.inches: 'in',
-  LENGTH.feet: 'ft',
-  LENGTH.nautical_miles: 'M',
-  LENGTH.yards: 'yd',
-  LENGTH.miles: 'mi',
-  LENGTH.millimeters: 'mm',
-  LENGTH.micrometers: 'µm',
-  LENGTH.nanometers: 'nm',
-  LENGTH.angstroms: 'Å',
-  LENGTH.picometers: 'pm',
-  LENGTH.kilometers: 'km',
-  LENGTH.astronomical_units: 'au',
-  LENGTH.light_years: 'ly',
-  LENGTH.parsec: 'pc',
-};
-
 class Length {
+  //Map between units and its symbol
+  final Map<LENGTH, String> mapSymbols = {
+    LENGTH.meters: 'm',
+    LENGTH.centimeters: 'cm',
+    LENGTH.inches: 'in',
+    LENGTH.feet: 'ft',
+    LENGTH.nautical_miles: 'M',
+    LENGTH.yards: 'yd',
+    LENGTH.miles: 'mi',
+    LENGTH.millimeters: 'mm',
+    LENGTH.micrometers: 'µm',
+    LENGTH.nanometers: 'nm',
+    LENGTH.angstroms: 'Å',
+    LENGTH.picometers: 'pm',
+    LENGTH.kilometers: 'km',
+    LENGTH.astronomical_units: 'au',
+    LENGTH.light_years: 'ly',
+    LENGTH.parsec: 'pc',
+  };
+
   int significantFigures;
   bool removeTrailingZeros;
   List<Unit> lengthUnitList = [];
   Node _length_conversion;
-
 
   ///Class for length conversions, e.g. if you want to convert 1 meter in inches:
   ///```dart
