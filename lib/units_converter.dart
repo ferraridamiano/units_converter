@@ -4,3 +4,4 @@ export 'Area.dart';
 export 'Volume.dart';
 export 'Time.dart';
 export 'Temperature.dart';
+export 'Speed.dart';
