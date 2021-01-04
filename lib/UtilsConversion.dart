@@ -111,8 +111,10 @@ class Node {
     node.value = value == null ? null : (value - node.coefficientSum) * (1 / node.coefficientProduct); //attenzione qui funziona al contrario
     node.convertedNode = true;
 
-    if (node.leafNodes != null) //se ha almeno un nodo foglia allora continuo
+    if (node.leafNodes != null) {
+      //se ha almeno un nodo foglia allora continuo
       node._applyDown();
+    }
   }
 
   void _reciprocoConvert(Node node) {
@@ -136,8 +138,10 @@ class Node {
     node.value = value == null ? null : node.coefficientProduct / (value - node.coefficientSum); //attenzione qui funziona al contrario
     node.convertedNode = true;
 
-    if (node.leafNodes != null) //se ha almeno un nodo foglia allora continuo
+    if (node.leafNodes != null) {
+      //se ha almeno un nodo foglia allora continuo
       node._applyDown();
+    }
   }
 
   //attenzione! Questo tipo di conversione è stata costruita esclusivamente sulla struttura dec-(bin-oct-hex). Un padre con 3 figli
@@ -145,9 +149,9 @@ class Node {
     //da basso a alto
     if (node.convertedNode) {
       //se un nodo foglia è già stato convertito
-      if (node.valueString == null)
+      if (node.valueString == null) {
         valueString = null;
-      else {
+      } else {
         valueString = baseToDec(node.valueString, node.base);
       }
       convertedNode = true;
@@ -169,16 +173,20 @@ class Node {
 
     node.convertedNode = true;
 
-    if (node.leafNodes != null) //se ha almeno un nodo foglia allora continuo
+    if (node.leafNodes != null) {
+      //se ha almeno un nodo foglia allora continuo
       node._applyDown();
+    }
   }
 
   //Resetta convertedNode su false per i nodi non selezionati dall'alto al basso (bisogna quindi chiamarlo dal nodo padre)
   void resetConvertedNode() {
-    if (!selectedNode) //se non è il nodo selezionato
+    if (!selectedNode) {
+      //se non è il nodo selezionato
       convertedNode = false; //resetto il fatto che il nodo sia già stato convertito
+    }
     if (leafNodes != null) {
-      for (Node node in leafNodes) {
+      for (var node in leafNodes) {
         //per ogni nodo dell'albero
         node.resetConvertedNode();
       }
@@ -187,8 +195,8 @@ class Node {
 
   // Resetta tutti i valori dei nodi (da chiamare sul nodo padre)
   void clearAllValues() {
-    List<Node> listanodi = _getNodiFiglio();
-    for (Node nodo in listanodi) {
+    var listanodi = _getNodiFiglio();
+    for (var nodo in listanodi) {
       nodo.value = null;
       nodo.valueString = null;
     }
@@ -196,16 +204,16 @@ class Node {
 
   //Da chiamare sul nodo padre, resetta lo stato di selezionato per tutti i nodi (utile per cambio pagina)
   void clearSelectedNode() {
-    List<Node> listanodi = _getNodiFiglio();
-    for (Node nodo in listanodi) {
+    var listanodi = _getNodiFiglio();
+    for (var nodo in listanodi) {
       nodo.selectedNode = false;
     }
   }
 
   List<Node> _getNodiFiglio() {
-    List<Node> listaNodi = [this];
+    var listaNodi = [this];
     if (leafNodes != null) {
-      for (Node node in leafNodes) {
+      for (var node in leafNodes) {
         listaNodi.addAll(node._getNodiFiglio());
       }
     }
@@ -229,23 +237,23 @@ class Node {
 ///removeTrailingZeros say if non important zeros should be removed, e.g. 1.000000 --> 1
 String mantissaCorrection(double value, int significantFigures, bool removeTrailingZeros) {
   //Round to a fixed number of significant figures
-  String stringValue = value.toStringAsPrecision(significantFigures);
-  String append = "";
+  var stringValue = value.toStringAsPrecision(significantFigures);
+  var append = '';
 
   //if the user want to remove the trailing zeros
   if (removeTrailingZeros) {
     //remove exponential part and append to the end
-    if (stringValue.contains("e")) {
-      append = "e" + stringValue.split("e")[1];
-      stringValue = stringValue.split("e")[0];
+    if (stringValue.contains('e')) {
+      append = 'e' + stringValue.split('e')[1];
+      stringValue = stringValue.split('e')[0];
     }
 
     //remove trailing zeros (just fractional part)
-    if (stringValue.contains(".")) {
-      int firstZeroIndex = stringValue.length;
-      for (; firstZeroIndex > stringValue.indexOf("."); firstZeroIndex--) {
-        String charAtIndex = stringValue.substring(firstZeroIndex - 1, firstZeroIndex);
-        if (charAtIndex != "0" && charAtIndex != ".") break;
+    if (stringValue.contains('.')) {
+      var firstZeroIndex = stringValue.length;
+      for (; firstZeroIndex > stringValue.indexOf('.'); firstZeroIndex--) {
+        var charAtIndex = stringValue.substring(firstZeroIndex - 1, firstZeroIndex);
+        if (charAtIndex != '0' && charAtIndex != '.') break;
       }
       stringValue = stringValue.substring(0, firstZeroIndex);
     }
@@ -254,13 +262,13 @@ String mantissaCorrection(double value, int significantFigures, bool removeTrail
 }
 
 String decToBase(String stringDec, int base) {
-  RegExp regExp = getBaseRegExp(10);
-  if (!regExp.hasMatch(stringDec)) return "";
+  var regExp = getBaseRegExp(10);
+  if (!regExp.hasMatch(stringDec)) return '';
 
-  String myString = "";
+  var myString = '';
   String restoString;
   int resto;
-  int dec = int.parse(stringDec);
+  var dec = int.parse(stringDec);
   while (dec > 0) {
     resto = (dec % base);
     restoString = resto.toString();
@@ -276,14 +284,14 @@ String decToBase(String stringDec, int base) {
 String baseToDec(String daConvertire, int base) {
   daConvertire = daConvertire.toUpperCase();
 
-  RegExp regExp = getBaseRegExp(base);
+  var regExp = getBaseRegExp(base);
 
-  if (!regExp.hasMatch(daConvertire)) return "";
+  if (!regExp.hasMatch(daConvertire)) return '';
 
-  int conversione = 0;
-  int len = daConvertire.length;
-  for (int i = 0; i < len; i++) {
-    int unitCode = daConvertire.codeUnitAt(i);
+  var conversione = 0;
+  var len = daConvertire.length;
+  for (var i = 0; i < len; i++) {
+    var unitCode = daConvertire.codeUnitAt(i);
     if (unitCode >= 65 && unitCode <= 70) {
       // da A a F
       conversione = conversione + (unitCode - 55) * pow(base, i);
@@ -300,22 +308,22 @@ RegExp getBaseRegExp(int base) {
   switch (base) {
     case 2:
       {
-        regExp = new RegExp(r'^[0-1]+$');
+        regExp = RegExp(r'^[0-1]+$');
         break;
       }
     case 8:
       {
-        regExp = new RegExp(r'^[0-7]+$');
+        regExp = RegExp(r'^[0-7]+$');
         break;
       }
     case 10:
       {
-        regExp = new RegExp(r'^[0-9]+$');
+        regExp = RegExp(r'^[0-9]+$');
         break;
       }
     case 16:
       {
-        regExp = new RegExp(r'^[0-9A-Fa-f]+$');
+        regExp = RegExp(r'^[0-9A-Fa-f]+$');
         break;
       }
   }
