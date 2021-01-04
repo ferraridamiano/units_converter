@@ -2,7 +2,7 @@ import 'package:units_converter/Length.dart';
 import 'package:units_converter/UtilsConversion.dart';
 
 void main() {
-  var length = Length();
+  var length = Length(removeTrailingZeros: false);
   length.Convert(Unit(LENGTH.meters, value: 1));
   var units = length.getAll();
   for (var unit in units) {

@@ -1,5 +1,6 @@
 import 'package:units_converter/UtilsConversion.dart';
 
+//Available length units
 enum LENGTH {
   meters,
   centimeters,
@@ -18,6 +19,8 @@ enum LENGTH {
   light_years,
   parsec,
 }
+
+//Map between units and its symbol
 final Map<LENGTH, String> mapSymbols = {
   LENGTH.meters: 'm',
   LENGTH.centimeters: 'cm',
@@ -38,12 +41,21 @@ final Map<LENGTH, String> mapSymbols = {
 };
 
 class Length {
-  static int significantFigures = 10;
-  static bool removeTrailingZeros = true;
+  int significantFigures;
+  bool removeTrailingZeros;
   List<Unit> lengthUnitList = [];
   Node _length_conversion;
 
-  Length() {
+
+  ///Class for length conversions, e.g. if you want to convert 1 meter in inches:
+  ///```dart
+  ///var length = Length(removeTrailingZeros: false);
+  ///length.Convert(Unit(LENGTH.meters, value: 1));
+  ///print(length.inches);
+  /// ```
+  Length({int significantFigures = 10, bool removeTrailingZeros = true}) {
+    this.significantFigures = significantFigures;
+    this.removeTrailingZeros = removeTrailingZeros;
     LENGTH.values.forEach((element) => lengthUnitList.add(Unit(element, symbol: mapSymbols[element])));
     _length_conversion = Node(name: LENGTH.meters, leafNodes: [
       Node(coefficientProduct: 0.01, name: LENGTH.centimeters, leafNodes: [
@@ -97,6 +109,7 @@ class Length {
     ]);
   }
 
+  ///Converts a Unit (with a specific value and name) to all other units
   void Convert(Unit unit) {
     assert(unit.value != null);
     assert(LENGTH.values.contains(unit.name));
@@ -129,6 +142,7 @@ class Length {
   Unit get light_years => _getUnit(LENGTH.light_years);
   Unit get parsec => _getUnit(LENGTH.parsec);
 
+  ///Returns all the length units converted with prefixes
   List<Unit> getAll() {
     return lengthUnitList;
   }
