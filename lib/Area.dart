@@ -113,7 +113,7 @@ class Area {
   Unit get acres => _getUnit(AREA.acres);
   Unit get are => _getUnit(AREA.are);
 
-  ///Returns all the AREA units converted with prefixes
+  ///Returns all the area units converted with prefixes
   List<Unit> getAll() {
     return areaUnitList;
   }
