@@ -12,11 +12,11 @@ enum FORCE {
 class Force {
   //Map between units and its symbol
   final Map<FORCE, String> mapSymbols = {
-    FORCE.newton: 'm²',
-    FORCE.dyne: 'cm²',
-    FORCE.pound_force: 'in²',
-    FORCE.kilogram_force: 'ft²',
-    FORCE.poundal: 'mi²',
+    FORCE.newton: 'N',
+    FORCE.dyne: 'dyn',
+    FORCE.pound_force: 'lbf',
+    FORCE.kilogram_force: 'kgf',
+    FORCE.poundal: 'pdl',
   };
 
   int significantFigures;

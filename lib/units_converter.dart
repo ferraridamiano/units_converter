@@ -12,3 +12,4 @@ export 'Energy.dart';
 export 'Angles.dart';
 export 'Power.dart';
 export 'Force.dart';
+export 'Torque.dart';
