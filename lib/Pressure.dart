@@ -36,15 +36,23 @@ class Pressure {
     this.significantFigures = significantFigures;
     this.removeTrailingZeros = removeTrailingZeros;
     PRESSURE.values.forEach((element) => areaUnitList.add(Unit(element, symbol: mapSymbols[element])));
-    _pressure_conversion = Node(name:  'pascal',
-        leafNodes: [
-          Node(coefficientProduct: 101325.0, name:  'atmosfere',leafNodes:[
-            Node(coefficientProduct: 0.987, name:  'bar',leafNodes:[
-              Node(coefficientProduct: 1e-3, name:  'millibar',),
-            ]),
-          ]),
-          Node(coefficientProduct: 6894.757293168, name:  'psi',),
-          Node(coefficientProduct: 133.322368421, name:  'torr',),
+    _pressure_conversion = Node(name: PRESSURE.pascal, leafNodes: [
+      Node(coefficientProduct: 101325.0, name: PRESSURE.atmosphere, leafNodes: [
+        Node(coefficientProduct: 0.987, name: PRESSURE.bar, leafNodes: [
+          Node(
+            coefficientProduct: 1e-3,
+            name: PRESSURE.millibar,
+          ),
+        ]),
+      ]),
+      Node(
+        coefficientProduct: 6894.757293168,
+        name: PRESSURE.psi,
+      ),
+      Node(
+        coefficientProduct: 133.322368421,
+        name: PRESSURE.torr,
+      ),
     ]);
   }
 
