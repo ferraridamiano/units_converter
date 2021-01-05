@@ -34,19 +34,19 @@ class Mass {
   int significantFigures;
   bool removeTrailingZeros;
   List<Unit> areaUnitList = [];
-  Node _area_conversion;
+  Node _mass_conversion;
 
-  ///Class for mass conversions, e.g. if you want to convert 1 square meters in acres:
+  ///Class for mass conversions, e.g. if you want to convert 1 gram in ounces:
   ///```dart
   ///var mass = Mass(removeTrailingZeros: false);
-  ///mass.Convert(Unit(MASS.square_meters, value: 1));
-  ///print(MASS.acres);
+  ///mass.Convert(Unit(MASS.grams, value: 1));
+  ///print(MASS.ounces);
   /// ```
   Mass({int significantFigures = 10, bool removeTrailingZeros = true}) {
     this.significantFigures = significantFigures;
     this.removeTrailingZeros = removeTrailingZeros;
     MASS.values.forEach((element) => areaUnitList.add(Unit(element, symbol: mapSymbols[element])));
-    _area_conversion = Node(name: MASS.grams, leafNodes: [
+    _mass_conversion = Node(name: MASS.grams, leafNodes: [
       Node(
         coefficientProduct: 100.0,
         name: MASS.ettograms,
@@ -90,15 +90,15 @@ class Mass {
   void Convert(Unit unit) {
     assert(unit.value != null);
     assert(MASS.values.contains(unit.name));
-    _area_conversion.clearAllValues();
-    _area_conversion.clearSelectedNode();
-    var currentUnit = _area_conversion.getByName(unit.name);
+    _mass_conversion.clearAllValues();
+    _mass_conversion.clearSelectedNode();
+    var currentUnit = _mass_conversion.getByName(unit.name);
     currentUnit.value = unit.value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
-    _area_conversion.convert();
+    _mass_conversion.convert();
     for (var i = 0; i < MASS.values.length; i++) {
-      areaUnitList[i].value = _area_conversion.getByName(MASS.values.elementAt(i)).value;
+      areaUnitList[i].value = _mass_conversion.getByName(MASS.values.elementAt(i)).value;
       areaUnitList[i].stringValue = mantissaCorrection(areaUnitList[i].value, significantFigures, removeTrailingZeros);
     }
   }

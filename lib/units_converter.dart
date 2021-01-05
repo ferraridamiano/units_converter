@@ -7,3 +7,4 @@ export 'Temperature.dart';
 export 'Speed.dart';
 export 'SI_Prefixes.dart';
 export 'Mass.dart';
+export 'Pressure.dart';
