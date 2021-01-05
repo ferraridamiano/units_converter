@@ -6,3 +6,4 @@ export 'Time.dart';
 export 'Temperature.dart';
 export 'Speed.dart';
 export 'SI_Prefixes.dart';
+export 'Mass.dart';
