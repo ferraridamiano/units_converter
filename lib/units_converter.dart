@@ -14,3 +14,4 @@ export 'Power.dart';
 export 'Force.dart';
 export 'Torque.dart';
 export 'Fuel_Consumption.dart';
+export 'DigitalData.dart';
