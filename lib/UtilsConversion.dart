@@ -22,7 +22,7 @@ class Node {
     this.convertedNode = false,
     this.selectedNode = false,
     this.conversionType = LINEAR_CONVERSION,
-    this.valueString,
+    this.stringValue,
     this.base,
   });
 
@@ -35,7 +35,7 @@ class Node {
   bool selectedNode;
   int conversionType;
   int base;
-  String valueString;
+  String stringValue;
 
   void convert() {
     if (!convertedNode) {
@@ -149,10 +149,10 @@ class Node {
     //da basso a alto
     if (node.convertedNode) {
       //se un nodo foglia è già stato convertito
-      if (node.valueString == null) {
-        valueString = null;
+      if (node.stringValue == null) {
+        stringValue = null;
       } else {
-        valueString = baseToDec(node.valueString, node.base);
+        stringValue = baseToDec(node.stringValue, node.base);
       }
       convertedNode = true;
       _applyDown(); //converto i nodi sottostanti
@@ -165,10 +165,10 @@ class Node {
 
   void _baseApplyDown(Node node) {
     //da alto a a basso
-    if (valueString == null) {
-      node.valueString = null;
+    if (stringValue == null) {
+      node.stringValue = null;
     } else {
-      node.valueString = decToBase(valueString, node.base);
+      node.stringValue = decToBase(stringValue, node.base);
     }
 
     node.convertedNode = true;
@@ -198,7 +198,7 @@ class Node {
     var listanodi = _getNodiFiglio();
     for (var nodo in listanodi) {
       nodo.value = null;
-      nodo.valueString = null;
+      nodo.stringValue = null;
     }
   }
 
