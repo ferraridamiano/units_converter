@@ -35,7 +35,7 @@ class Fuel_Consumption {
     FUEL_CONSUMPTION.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     _unit_conversion = Node(name: FUEL_CONSUMPTION.kilometers_per_liter, leafNodes: [
       Node(
-        conversionType: RECIPROCO_CONVERSION,
+        conversionType: RECIPROCAL_CONVERSION,
         coefficientProduct: 100.0,
         name: FUEL_CONSUMPTION.liters_per_100_km,
       ),

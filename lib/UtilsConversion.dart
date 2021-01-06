@@ -1,7 +1,7 @@
 import 'dart:math';
 
 const LINEAR_CONVERSION = 1; // y=ax+b
-const RECIPROCO_CONVERSION = 2; // y=(a/x)+b
+const RECIPROCAL_CONVERSION = 2; // y=(a/x)+b
 const BASE_CONVERSION = 3; // conversione speciale (dec è father e tutti gli altri figlio)
 
 class Node {
@@ -31,16 +31,16 @@ class Node {
 
   void convert() {
     if (!convertedNode) {
-      //se non è già convertito
+      //if not already converted
       for (var node in leafNodes) {
-        //per ogni nodo foglia controlla se ha valore
+        //for each leaf nodes check if it has a value
         switch (node.conversionType) {
           case LINEAR_CONVERSION:
             {
               _linearConvert(node);
               break;
             }
-          case RECIPROCO_CONVERSION:
+          case RECIPROCAL_CONVERSION:
             {
               _reciprocoConvert(node);
               break;
@@ -68,7 +68,7 @@ class Node {
             _linearApplyDown(node);
             break;
           }
-        case RECIPROCO_CONVERSION:
+        case RECIPROCAL_CONVERSION:
           {
             _reciprocoApplyDown(node);
             break;
@@ -83,80 +83,75 @@ class Node {
   }
 
   void _linearConvert(Node node) {
-    //da basso a alto
+    //from low to high
     if (node.convertedNode) {
-      //se un nodo foglia è già stato convertito
-      value = node.value == null //faccio in calcoli del nodo padre rispetto a lui
+      //if a leaf node is already converted
+      value = node.value == null //compute from father node respect to him
           ? null
-          : (node.value * node.coefficientProduct) + (node.coefficientSum); //metto in questo nodo il valore convertito
+          : (node.value * node.coefficientProduct) + (node.coefficientSum); //put in this node the converted value
       convertedNode = true;
-      _applyDown(); //converto i nodi sottostanti
-    } else if (node.leafNodes != null) {
-      //Però ha almeno un nodo foglia
-      node.convert(); //ripeti la procedura
+      _applyDown(); //convert lower nodes
+    } else if (node.leafNodes != null) {//but has at leas a leaf node
+      node.convert(); //repeat
       if (node.convertedNode) convert();
     }
   }
 
   void _linearApplyDown(Node node) {
-    //da alto a a basso
-    node.value = value == null ? null : (value - node.coefficientSum) * (1 / node.coefficientProduct); //attenzione qui funziona al contrario
+    //from high to low
+    node.value = value == null ? null : (value - node.coefficientSum) * (1 / node.coefficientProduct); //warning here is the converse
     node.convertedNode = true;
 
-    if (node.leafNodes != null) {
-      //se ha almeno un nodo foglia allora continuo
+    if (node.leafNodes != null) {//if it has at least a leaf node let's go away
       node._applyDown();
     }
   }
 
   void _reciprocoConvert(Node node) {
-    //da basso a alto
+    //from low to high
     if (node.convertedNode) {
-      //se un nodo foglia è già stato convertito
-      value = node.value == null //faccio in calcoli del nodo padre rispetto a lui
+      //if a leaf node is already converted
+      value = node.value == null //compute from father node respect to him
           ? null
-          : (node.coefficientProduct / node.value) + node.coefficientSum; //metto in questo nodo il valore convertito
+          : (node.coefficientProduct / node.value) + node.coefficientSum; //put in this node the converted value
       convertedNode = true;
-      _applyDown(); //converto i nodi sottostanti
-    } else if (node.leafNodes != null) {
-      //Però ha almeno un nodo foglia
-      node.convert(); //ripeti la procedura
+      _applyDown(); //convert lower nodes
+    } else if (node.leafNodes != null) { //but has at leas a leaf node
+      node.convert(); //repeat
       if (node.convertedNode) convert();
     }
   }
 
   void _reciprocoApplyDown(Node node) {
-    //da alto a a basso
-    node.value = value == null ? null : node.coefficientProduct / (value - node.coefficientSum); //attenzione qui funziona al contrario
+    //from high to low
+    node.value = value == null ? null : node.coefficientProduct / (value - node.coefficientSum); //warning here is the converse
     node.convertedNode = true;
 
-    if (node.leafNodes != null) {
-      //se ha almeno un nodo foglia allora continuo
+    if (node.leafNodes != null) {//if it has at least a leaf node let's go away
       node._applyDown();
     }
   }
 
-  //attenzione! Questo tipo di conversione è stata costruita esclusivamente sulla struttura dec-(bin-oct-hex). Un padre con 3 figli
+  //WARNING! This type of conversion has been built just for base conversion dec-(bin-oct-hex). A father with 3 children
   void _baseConvert(Node node) {
-    //da basso a alto
+    //from low to high
     if (node.convertedNode) {
-      //se un nodo foglia è già stato convertito
+      //if a leaf node is already converted
       if (node.stringValue == null) {
         stringValue = null;
       } else {
         stringValue = baseToDec(node.stringValue, node.base);
       }
       convertedNode = true;
-      _applyDown(); //converto i nodi sottostanti
-    } else if (node.leafNodes != null) {
-      //Però ha almeno un nodo foglia
-      node.convert(); //ripeti la procedura
+      _applyDown(); //convert lower nodes
+    } else if (node.leafNodes != null) { //but has at leas a leaf node
+      node.convert(); //repeat
       if (node.convertedNode) convert();
     }
   }
 
   void _baseApplyDown(Node node) {
-    //da alto a a basso
+    //from high to low
     if (stringValue == null) {
       node.stringValue = null;
     } else {
@@ -166,26 +161,26 @@ class Node {
     node.convertedNode = true;
 
     if (node.leafNodes != null) {
-      //se ha almeno un nodo foglia allora continuo
+      //if it has at least a leaf node let's go away
       node._applyDown();
     }
   }
 
-  //Resetta convertedNode su false per i nodi non selezionati dall'alto al basso (bisogna quindi chiamarlo dal nodo padre)
+  /// Reset convertedNode (false) for each non-selected node from high to low. Call it on the father node!
   void resetConvertedNode() {
     if (!selectedNode) {
-      //se non è il nodo selezionato
-      convertedNode = false; //resetto il fatto che il nodo sia già stato convertito
+      //if it is not the selected node
+      convertedNode = false; //reset
     }
     if (leafNodes != null) {
       for (var node in leafNodes) {
-        //per ogni nodo dell'albero
+        //for each node of the tree
         node.resetConvertedNode();
       }
     }
   }
 
-  // Resetta tutti i valori dei nodi (da chiamare sul nodo padre)
+  /// Reset all the values of the nodes. Call it on the father node!
   void clearAllValues() {
     var listanodi = _getNodiFiglio();
     for (var nodo in listanodi) {
@@ -194,7 +189,7 @@ class Node {
     }
   }
 
-  //Da chiamare sul nodo padre, resetta lo stato di selezionato per tutti i nodi (utile per cambio pagina)
+  /// Reset selectedNode (false). Call it on the father node!
   void clearSelectedNode() {
     var listanodi = _getNodiFiglio();
     for (var nodo in listanodi) {
@@ -202,6 +197,7 @@ class Node {
     }
   }
 
+  /// Returns every node of the tree as a List. Call it on the father node!
   List<Node> _getNodiFiglio() {
     var listaNodi = [this];
     if (leafNodes != null) {
@@ -273,26 +269,26 @@ String decToBase(String stringDec, int base) {
   return myString;
 }
 
-String baseToDec(String daConvertire, int base) {
-  daConvertire = daConvertire.toUpperCase();
+String baseToDec(String toBeConverted, int base) {
+  toBeConverted = toBeConverted.toUpperCase();
 
   var regExp = getBaseRegExp(base);
 
-  if (!regExp.hasMatch(daConvertire)) return '';
+  if (!regExp.hasMatch(toBeConverted)) return '';
 
-  var conversione = 0;
-  var len = daConvertire.length;
+  var conversion = 0;
+  var len = toBeConverted.length;
   for (var i = 0; i < len; i++) {
-    var unitCode = daConvertire.codeUnitAt(i);
+    var unitCode = toBeConverted.codeUnitAt(i);
     if (unitCode >= 65 && unitCode <= 70) {
       // da A a F
-      conversione = conversione + (unitCode - 55) * pow(base, i);
+      conversion = conversion + (unitCode - 55) * pow(base, i);
     } else if (unitCode >= 48 && unitCode <= 57) {
       //da 0 a 9
-      conversione = conversione + (unitCode - 48) * pow(base, len - i - 1);
+      conversion = conversion + (unitCode - 48) * pow(base, len - i - 1);
     }
   }
-  return conversione.toString();
+  return conversion.toString();
 }
 
 RegExp getBaseRegExp(int base) {
