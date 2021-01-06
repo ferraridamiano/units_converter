@@ -1,4 +1,5 @@
-import 'package:units_converter/UtilsConversion.dart';
+import 'UtilsConversion.dart';
+import 'Unit.dart';
 
 //Available FUEL_CONSUMPTION units
 enum FUEL_CONSUMPTION {

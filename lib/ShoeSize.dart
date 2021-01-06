@@ -1,4 +1,5 @@
-import 'package:units_converter/UtilsConversion.dart';
+import 'UtilsConversion.dart';
+import 'Unit.dart';
 
 //Available SHOE_SIZE units
 enum SHOE_SIZE {

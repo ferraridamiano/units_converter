@@ -1,13 +1,5 @@
 import 'dart:math';
 
-class Unit {
-  double value;
-  String stringValue;
-  var name;
-  String symbol;
-  Unit(this.name, {this.value, this.stringValue, this.symbol});
-}
-
 const LINEAR_CONVERSION = 1; // y=ax+b
 const RECIPROCO_CONVERSION = 2; // y=(a/x)+b
 const BASE_CONVERSION = 3; // conversione speciale (dec è father e tutti gli altri figlio)

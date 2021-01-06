@@ -1,4 +1,5 @@
-import 'package:units_converter/UtilsConversion.dart';
+import 'UtilsConversion.dart';
+import 'Unit.dart';
 
 class SimpleCustomConversion {
   //Map between units and its symbol
