@@ -17,3 +17,4 @@ export 'Fuel_Consumption.dart';
 export 'DigitalData.dart';
 export 'ShoeSize.dart';
 export 'NumeralSystems.dart';
+export 'SimpleCustomConversion.dart';
