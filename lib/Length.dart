@@ -126,6 +126,7 @@ class Length {
 
   Unit get meters => _getUnit(LENGTH.meters);
   Unit get centimeters => _getUnit(LENGTH.centimeters);
+  Unit get inches => _getUnit(LENGTH.inches);
   Unit get feet => _getUnit(LENGTH.feet);
   Unit get nautical_miles => _getUnit(LENGTH.nautical_miles);
   Unit get yards => _getUnit(LENGTH.yards);
