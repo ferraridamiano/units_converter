@@ -44,8 +44,8 @@ class Length {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> lengthUnitList = [];
-  Node _length_conversion;
+  List<Unit> unitList = [];
+  Node _unit_conversion;
 
   ///Class for length conversions, e.g. if you want to convert 1 meter in inches:
   ///```dart
@@ -56,8 +56,8 @@ class Length {
   Length({int significantFigures = 10, bool removeTrailingZeros = true}) {
     this.significantFigures = significantFigures;
     this.removeTrailingZeros = removeTrailingZeros;
-    LENGTH.values.forEach((element) => lengthUnitList.add(Unit(element, symbol: mapSymbols[element])));
-    _length_conversion = Node(name: LENGTH.meters, leafNodes: [
+    LENGTH.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
+    _unit_conversion = Node(name: LENGTH.meters, leafNodes: [
       Node(coefficientProduct: 0.01, name: LENGTH.centimeters, leafNodes: [
         Node(coefficientProduct: 2.54, name: LENGTH.inches, leafNodes: [
           Node(
@@ -109,20 +109,18 @@ class Length {
     ]);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.value != null);
-    assert(LENGTH.values.contains(unit.name));
-    _length_conversion.clearAllValues();
-    _length_conversion.clearSelectedNode();
-    var currentUnit = _length_conversion.getByName(unit.name);
-    currentUnit.value = unit.value;
+  ///Converts a unit with a specific name (e.g. LENGTH.meters) and value to all other units
+  void Convert(LENGTH name, double value) {
+    _unit_conversion.clearAllValues();
+    _unit_conversion.clearSelectedNode();
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.value = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
-    _length_conversion.convert();
+    _unit_conversion.convert();
     for (var i = 0; i < LENGTH.values.length; i++) {
-      lengthUnitList[i].value = _length_conversion.getByName(LENGTH.values.elementAt(i)).value;
-      lengthUnitList[i].stringValue = mantissaCorrection(lengthUnitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = _unit_conversion.getByName(LENGTH.values.elementAt(i)).value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
 
@@ -144,11 +142,11 @@ class Length {
 
   ///Returns all the length units converted with prefixes
   List<Unit> getAll() {
-    return lengthUnitList;
+    return unitList;
   }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {
-    return lengthUnitList.where((element) => element.name == name).first;
+    return unitList.where((element) => element.name == name).first;
   }
 }

@@ -22,8 +22,8 @@ class Force {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> areaUnitList = [];
-  Node _force_conversion;
+  List<Unit> unitList = [];
+  Node _unit_conversion;
 
   ///Class for force conversions, e.g. if you want to convert 1 newton in pound force:
   ///```dart
@@ -34,8 +34,8 @@ class Force {
   Force({int significantFigures = 10, bool removeTrailingZeros = true}) {
     this.significantFigures = significantFigures;
     this.removeTrailingZeros = removeTrailingZeros;
-    FORCE.values.forEach((element) => areaUnitList.add(Unit(element, symbol: mapSymbols[element])));
-    _force_conversion = Node(name: FORCE.newton, leafNodes: [
+    FORCE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
+    _unit_conversion = Node(name: FORCE.newton, leafNodes: [
       Node(
         coefficientProduct: 1e-5,
         name: FORCE.dyne,
@@ -55,20 +55,18 @@ class Force {
     ]);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.value != null);
-    assert(FORCE.values.contains(unit.name));
-    _force_conversion.clearAllValues();
-    _force_conversion.clearSelectedNode();
-    var currentUnit = _force_conversion.getByName(unit.name);
-    currentUnit.value = unit.value;
+  ///Converts a unit with a specific name (e.g. FORCE.newton) and value to all other units
+  void Convert(FORCE name, double value) {
+    _unit_conversion.clearAllValues();
+    _unit_conversion.clearSelectedNode();
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.value = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
-    _force_conversion.convert();
+    _unit_conversion.convert();
     for (var i = 0; i < FORCE.values.length; i++) {
-      areaUnitList[i].value = _force_conversion.getByName(FORCE.values.elementAt(i)).value;
-      areaUnitList[i].stringValue = mantissaCorrection(areaUnitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = _unit_conversion.getByName(FORCE.values.elementAt(i)).value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
 
@@ -80,11 +78,11 @@ class Force {
 
   ///Returns all the force units converted with prefixes
   List<Unit> getAll() {
-    return areaUnitList;
+    return unitList;
   }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {
-    return areaUnitList.where((element) => element.name == name).first;
+    return unitList.where((element) => element.name == name).first;
   }
 }

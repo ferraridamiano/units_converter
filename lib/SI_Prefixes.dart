@@ -54,8 +54,8 @@ class Si_Prefixes {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> areaUnitList = [];
-  Node _si_prefixes_conversion;
+  List<Unit> unitList = [];
+  Node _unit_conversion;
 
   ///Class for si_prefixes conversions, e.g. if you want to convert 1 base unit in milli:
   ///```dart
@@ -66,8 +66,8 @@ class Si_Prefixes {
   Si_Prefixes({int significantFigures = 10, bool removeTrailingZeros = true}) {
     this.significantFigures = significantFigures;
     this.removeTrailingZeros = removeTrailingZeros;
-    SI_PREFIXES.values.forEach((element) => areaUnitList.add(Unit(element, symbol: mapSymbols[element])));
-    _si_prefixes_conversion = Node(name: SI_PREFIXES.base, leafNodes: [
+    SI_PREFIXES.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
+    _unit_conversion = Node(name: SI_PREFIXES.base, leafNodes: [
       Node(
         coefficientProduct: 1e1,
         name: SI_PREFIXES.deca,
@@ -151,20 +151,18 @@ class Si_Prefixes {
     ]);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.value != null);
-    assert(SI_PREFIXES.values.contains(unit.name));
-    _si_prefixes_conversion.clearAllValues();
-    _si_prefixes_conversion.clearSelectedNode();
-    var currentUnit = _si_prefixes_conversion.getByName(unit.name);
-    currentUnit.value = unit.value;
+  ///Converts a unit with a specific name (e.g. SI_PREFIXES.milli) and value to all other units
+  void Convert(SI_PREFIXES name, double value) {
+    _unit_conversion.clearAllValues();
+    _unit_conversion.clearSelectedNode();
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.value = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
-    _si_prefixes_conversion.convert();
+    _unit_conversion.convert();
     for (var i = 0; i < SI_PREFIXES.values.length; i++) {
-      areaUnitList[i].value = _si_prefixes_conversion.getByName(SI_PREFIXES.values.elementAt(i)).value;
-      areaUnitList[i].stringValue = mantissaCorrection(areaUnitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = _unit_conversion.getByName(SI_PREFIXES.values.elementAt(i)).value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
 
@@ -192,11 +190,11 @@ class Si_Prefixes {
 
   ///Returns all the si_prefixes units converted with prefixes
   List<Unit> getAll() {
-    return areaUnitList;
+    return unitList;
   }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {
-    return areaUnitList.where((element) => element.name == name).first;
+    return unitList.where((element) => element.name == name).first;
   }
 }

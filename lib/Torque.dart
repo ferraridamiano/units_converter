@@ -22,8 +22,8 @@ class Torque {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> areaUnitList = [];
-  Node _torque_conversion;
+  List<Unit> unitList = [];
+  Node _unit_conversion;
 
   ///Class for torque conversions, e.g. if you want to convert 1 square meters in acres:
   ///```dart
@@ -34,8 +34,8 @@ class Torque {
   Torque({int significantFigures = 10, bool removeTrailingZeros = true}) {
     this.significantFigures = significantFigures;
     this.removeTrailingZeros = removeTrailingZeros;
-    TORQUE.values.forEach((element) => areaUnitList.add(Unit(element, symbol: mapSymbols[element])));
-    _torque_conversion = Node(name: TORQUE.newton_meter,
+    TORQUE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
+    _unit_conversion = Node(name: TORQUE.newton_meter,
         leafNodes: [
           Node(coefficientProduct: 1e-5, name: TORQUE.dyne_meter,),
           Node(coefficientProduct: 1.35581794902490555 , name: TORQUE.pound_force_feet,),
@@ -44,20 +44,18 @@ class Torque {
     ]);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.value != null);
-    assert(TORQUE.values.contains(unit.name));
-    _torque_conversion.clearAllValues();
-    _torque_conversion.clearSelectedNode();
-    var currentUnit = _torque_conversion.getByName(unit.name);
-    currentUnit.value = unit.value;
+  ///Converts a unit with a specific name (e.g. TORQUE.newton_meter) and value to all other units
+  void Convert(TORQUE name, double value) {
+    _unit_conversion.clearAllValues();
+    _unit_conversion.clearSelectedNode();
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.value = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
-    _torque_conversion.convert();
+    _unit_conversion.convert();
     for (var i = 0; i < TORQUE.values.length; i++) {
-      areaUnitList[i].value = _torque_conversion.getByName(TORQUE.values.elementAt(i)).value;
-      areaUnitList[i].stringValue = mantissaCorrection(areaUnitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = _unit_conversion.getByName(TORQUE.values.elementAt(i)).value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
 
@@ -69,11 +67,11 @@ class Torque {
 
   ///Returns all the torque units converted with prefixes
   List<Unit> getAll() {
-    return areaUnitList;
+    return unitList;
   }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {
-    return areaUnitList.where((element) => element.name == name).first;
+    return unitList.where((element) => element.name == name).first;
   }
 }

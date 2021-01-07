@@ -165,14 +165,12 @@ class DigitalData {
     ]);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.value != null);
-    assert(DIGITAL_DATA.values.contains(unit.name));
+  ///Converts a unit with a specific name (e.g. DIGITAL_DATA.byte) and value to all other units
+  void Convert(DIGITAL_DATA name, double value) {
     _unit_conversion.clearAllValues();
     _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(unit.name);
-    currentUnit.value = unit.value;
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.value = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
     _unit_conversion.convert();

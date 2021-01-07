@@ -22,8 +22,8 @@ class Speed {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> areaUnitList = [];
-  Node _speed_conversion;
+  List<Unit> unitList = [];
+  Node _unit_conversion;
 
   ///Class for speed conversions, e.g. if you want to convert 1 square meters in acres:
   ///```dart
@@ -34,8 +34,8 @@ class Speed {
   Speed({int significantFigures = 10, bool removeTrailingZeros = true}) {
     this.significantFigures = significantFigures;
     this.removeTrailingZeros = removeTrailingZeros;
-    SPEED.values.forEach((element) => areaUnitList.add(Unit(element, symbol: mapSymbols[element])));
-    _speed_conversion = Node(name: SPEED.meters_per_second, leafNodes: [
+    SPEED.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
+    _unit_conversion = Node(name: SPEED.meters_per_second, leafNodes: [
       Node(coefficientProduct: 1 / 3.6, name: SPEED.kilometers_per_hour, leafNodes: [
         Node(
           coefficientProduct: 1.609344,
@@ -53,20 +53,18 @@ class Speed {
     ]);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.value != null);
-    assert(SPEED.values.contains(unit.name));
-    _speed_conversion.clearAllValues();
-    _speed_conversion.clearSelectedNode();
-    var currentUnit = _speed_conversion.getByName(unit.name);
-    currentUnit.value = unit.value;
+  ///Converts a unit with a specific name (e.g. SPEED.miles_per_hour) and value to all other units
+  void Convert(SPEED name, double value) {
+    _unit_conversion.clearAllValues();
+    _unit_conversion.clearSelectedNode();
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.value = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
-    _speed_conversion.convert();
+    _unit_conversion.convert();
     for (var i = 0; i < SPEED.values.length; i++) {
-      areaUnitList[i].value = _speed_conversion.getByName(SPEED.values.elementAt(i)).value;
-      areaUnitList[i].stringValue = mantissaCorrection(areaUnitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = _unit_conversion.getByName(SPEED.values.elementAt(i)).value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
 
@@ -78,11 +76,11 @@ class Speed {
 
   ///Returns all the speed units converted with prefixes
   List<Unit> getAll() {
-    return areaUnitList;
+    return unitList;
   }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {
-    return areaUnitList.where((element) => element.name == name).first;
+    return unitList.where((element) => element.name == name).first;
   }
 }

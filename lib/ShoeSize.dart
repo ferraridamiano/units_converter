@@ -90,14 +90,12 @@ class ShoeSize {
     ]);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.value != null);
-    assert(SHOE_SIZE.values.contains(unit.name));
+  ///Converts a unit with a specific name (e.g. SHOE_SIZE.uk_india_woman) and value to all other units
+  void Convert(SHOE_SIZE name, double value) {
     _unit_conversion.clearAllValues();
     _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(unit.name);
-    currentUnit.value = unit.value;
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.value = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
     _unit_conversion.convert();

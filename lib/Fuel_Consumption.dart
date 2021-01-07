@@ -50,14 +50,12 @@ class Fuel_Consumption {
     ]);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.value != null);
-    assert(FUEL_CONSUMPTION.values.contains(unit.name));
+  ///Converts a unit with a specific name (e.g. FUEL_CONSUMPTION.liters_per_100_km) and value to all other units
+  void Convert(FUEL_CONSUMPTION name, double value) {
     _unit_conversion.clearAllValues();
     _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(unit.name);
-    currentUnit.value = unit.value;
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.value = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
     _unit_conversion.convert();

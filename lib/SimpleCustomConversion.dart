@@ -29,14 +29,13 @@ class SimpleCustomConversion {
     _unit_conversion = Node(name: baseUnit, leafNodes: leafNodes);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.value != null);
-    assert(mapConversion.keys.contains(unit.name));
+  ///Converts a unit with a specific name and value to all other units
+  void Convert(var name, double value) {
+    assert(mapConversion.keys.contains(name));
     _unit_conversion.clearAllValues();
     _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(unit.name);
-    currentUnit.value = unit.value;
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.value = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
     _unit_conversion.convert();

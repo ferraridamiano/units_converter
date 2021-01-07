@@ -24,8 +24,8 @@ class Pressure {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> areaUnitList = [];
-  Node _pressure_conversion;
+  List<Unit> unitList = [];
+  Node _unit_conversion;
 
   ///Class for pressure conversions, e.g. if you want to convert 1 bar in atmosphere:
   ///```dart
@@ -36,8 +36,8 @@ class Pressure {
   Pressure({int significantFigures = 10, bool removeTrailingZeros = true}) {
     this.significantFigures = significantFigures;
     this.removeTrailingZeros = removeTrailingZeros;
-    PRESSURE.values.forEach((element) => areaUnitList.add(Unit(element, symbol: mapSymbols[element])));
-    _pressure_conversion = Node(name: PRESSURE.pascal, leafNodes: [
+    PRESSURE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
+    _unit_conversion = Node(name: PRESSURE.pascal, leafNodes: [
       Node(coefficientProduct: 101325.0, name: PRESSURE.atmosphere, leafNodes: [
         Node(coefficientProduct: 0.987, name: PRESSURE.bar, leafNodes: [
           Node(
@@ -57,20 +57,18 @@ class Pressure {
     ]);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.value != null);
-    assert(PRESSURE.values.contains(unit.name));
-    _pressure_conversion.clearAllValues();
-    _pressure_conversion.clearSelectedNode();
-    var currentUnit = _pressure_conversion.getByName(unit.name);
-    currentUnit.value = unit.value;
+  ///Converts a unit with a specific name (e.g. PRESSURE.psi) and value to all other units
+  void Convert(PRESSURE name, double value) {
+    _unit_conversion.clearAllValues();
+    _unit_conversion.clearSelectedNode();
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.value = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
-    _pressure_conversion.convert();
+    _unit_conversion.convert();
     for (var i = 0; i < PRESSURE.values.length; i++) {
-      areaUnitList[i].value = _pressure_conversion.getByName(PRESSURE.values.elementAt(i)).value;
-      areaUnitList[i].stringValue = mantissaCorrection(areaUnitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = _unit_conversion.getByName(PRESSURE.values.elementAt(i)).value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
 
@@ -83,11 +81,11 @@ class Pressure {
 
   ///Returns all the pressure units converted with prefixes
   List<Unit> getAll() {
-    return areaUnitList;
+    return unitList;
   }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {
-    return areaUnitList.where((element) => element.name == name).first;
+    return unitList.where((element) => element.name == name).first;
   }
 }

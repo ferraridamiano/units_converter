@@ -47,14 +47,12 @@ class NumeralSystems {
     ]);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.stringValue != null);
-    assert(NUMERAL_SYSTEMS.values.contains(unit.name));
+  ///Converts a unit with a specific name (e.g. NUMERAL_SYSTEMS.decimal) and value to all other units
+  void Convert(NUMERAL_SYSTEMS name, String value) {
     _unit_conversion.clearAllValues();
     _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(unit.name);
-    currentUnit.stringValue = unit.stringValue;
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.stringValue = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
     _unit_conversion.convert();

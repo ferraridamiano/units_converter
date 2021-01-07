@@ -40,8 +40,8 @@ class Volume {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> areaUnitList = [];
-  Node _volume_conversion;
+  List<Unit> unitList = [];
+  Node _unit_conversion;
 
   ///Class for volume conversions, e.g. if you want to convert 1 liter in US Gallons:
   ///```dart
@@ -52,8 +52,8 @@ class Volume {
   Volume({int significantFigures = 10, bool removeTrailingZeros = true}) {
     this.significantFigures = significantFigures;
     this.removeTrailingZeros = removeTrailingZeros;
-    VOLUME.values.forEach((element) => areaUnitList.add(Unit(element, symbol: mapSymbols[element])));
-    _volume_conversion = Node(name: VOLUME.cubic_meters, leafNodes: [
+    VOLUME.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
+    _unit_conversion = Node(name: VOLUME.cubic_meters, leafNodes: [
       Node(coefficientProduct: 1e-3, name: VOLUME.liters, leafNodes: [
         Node(
           coefficientProduct: 4.54609,
@@ -101,20 +101,18 @@ class Volume {
     ]);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.value != null);
-    assert(VOLUME.values.contains(unit.name));
-    _volume_conversion.clearAllValues();
-    _volume_conversion.clearSelectedNode();
-    var currentUnit = _volume_conversion.getByName(unit.name);
-    currentUnit.value = unit.value;
+  ///Converts a unit with a specific name (e.g. VOLUME.cubic_feet) and value to all other units
+  void Convert(VOLUME name, double value) {
+    _unit_conversion.clearAllValues();
+    _unit_conversion.clearSelectedNode();
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.value = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
-    _volume_conversion.convert();
+    _unit_conversion.convert();
     for (var i = 0; i < VOLUME.values.length; i++) {
-      areaUnitList[i].value = _volume_conversion.getByName(VOLUME.values.elementAt(i)).value;
-      areaUnitList[i].stringValue = mantissaCorrection(areaUnitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = _unit_conversion.getByName(VOLUME.values.elementAt(i)).value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
 
@@ -135,11 +133,11 @@ class Volume {
 
   ///Returns all the volume units converted with prefixes
   List<Unit> getAll() {
-    return areaUnitList;
+    return unitList;
   }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {
-    return areaUnitList.where((element) => element.name == name).first;
+    return unitList.where((element) => element.name == name).first;
   }
 }

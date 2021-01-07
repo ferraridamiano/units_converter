@@ -26,8 +26,8 @@ class Power {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> areaUnitList = [];
-  Node _power_conversion;
+  List<Unit> unitList = [];
+  Node _unit_conversion;
 
   ///Class for power conversions, e.g. if you want to convert 1 kilowatt in european horse power:
   ///```dart
@@ -38,8 +38,8 @@ class Power {
   Power({int significantFigures = 10, bool removeTrailingZeros = true}) {
     this.significantFigures = significantFigures;
     this.removeTrailingZeros = removeTrailingZeros;
-    POWER.values.forEach((element) => areaUnitList.add(Unit(element, symbol: mapSymbols[element])));
-    _power_conversion = Node(name: POWER.watt, leafNodes: [
+    POWER.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
+    _unit_conversion = Node(name: POWER.watt, leafNodes: [
       Node(
         coefficientProduct: 1e-3,
         name: POWER.milliwatt,
@@ -67,20 +67,18 @@ class Power {
     ]);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.value != null);
-    assert(POWER.values.contains(unit.name));
-    _power_conversion.clearAllValues();
-    _power_conversion.clearSelectedNode();
-    var currentUnit = _power_conversion.getByName(unit.name);
-    currentUnit.value = unit.value;
+  ///Converts a unit with a specific name (e.g. POWER.european_horse_power) and value to all other units
+  void Convert(POWER name, double value) {
+    _unit_conversion.clearAllValues();
+    _unit_conversion.clearSelectedNode();
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.value = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
-    _power_conversion.convert();
+    _unit_conversion.convert();
     for (var i = 0; i < POWER.values.length; i++) {
-      areaUnitList[i].value = _power_conversion.getByName(POWER.values.elementAt(i)).value;
-      areaUnitList[i].stringValue = mantissaCorrection(areaUnitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = _unit_conversion.getByName(POWER.values.elementAt(i)).value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
 
@@ -94,11 +92,11 @@ class Power {
 
   ///Returns all the power units converted with prefixes
   List<Unit> getAll() {
-    return areaUnitList;
+    return unitList;
   }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {
-    return areaUnitList.where((element) => element.name == name).first;
+    return unitList.where((element) => element.name == name).first;
   }
 }

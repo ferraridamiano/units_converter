@@ -34,8 +34,8 @@ class Mass {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> areaUnitList = [];
-  Node _mass_conversion;
+  List<Unit> unitList = [];
+  Node _unit_conversion;
 
   ///Class for mass conversions, e.g. if you want to convert 1 gram in ounces:
   ///```dart
@@ -46,8 +46,8 @@ class Mass {
   Mass({int significantFigures = 10, bool removeTrailingZeros = true}) {
     this.significantFigures = significantFigures;
     this.removeTrailingZeros = removeTrailingZeros;
-    MASS.values.forEach((element) => areaUnitList.add(Unit(element, symbol: mapSymbols[element])));
-    _mass_conversion = Node(name: MASS.grams, leafNodes: [
+    MASS.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
+    _unit_conversion = Node(name: MASS.grams, leafNodes: [
       Node(
         coefficientProduct: 100.0,
         name: MASS.ettograms,
@@ -87,20 +87,18 @@ class Mass {
     ]);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.value != null);
-    assert(MASS.values.contains(unit.name));
-    _mass_conversion.clearAllValues();
-    _mass_conversion.clearSelectedNode();
-    var currentUnit = _mass_conversion.getByName(unit.name);
-    currentUnit.value = unit.value;
+  ///Converts a unit with a specific name (e.g. MASS.centigrams) and value to all other units
+  void Convert(MASS name, double value) {
+    _unit_conversion.clearAllValues();
+    _unit_conversion.clearSelectedNode();
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.value = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
-    _mass_conversion.convert();
+    _unit_conversion.convert();
     for (var i = 0; i < MASS.values.length; i++) {
-      areaUnitList[i].value = _mass_conversion.getByName(MASS.values.elementAt(i)).value;
-      areaUnitList[i].stringValue = mantissaCorrection(areaUnitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = _unit_conversion.getByName(MASS.values.elementAt(i)).value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
 
@@ -118,11 +116,11 @@ class Mass {
 
   ///Returns all the mass units converted with prefixes
   List<Unit> getAll() {
-    return areaUnitList;
+    return unitList;
   }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {
-    return areaUnitList.where((element) => element.name == name).first;
+    return unitList.where((element) => element.name == name).first;
   }
 }

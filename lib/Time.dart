@@ -42,8 +42,8 @@ class Time {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> areaUnitList = [];
-  Node _time_conversion;
+  List<Unit> unitList = [];
+  Node _unit_conversion;
 
   ///Class for time conversions, e.g. if you want to convert 1 hour in seconds:
   ///```dart
@@ -54,8 +54,8 @@ class Time {
   Time({int significantFigures = 10, bool removeTrailingZeros = true}) {
     this.significantFigures = significantFigures;
     this.removeTrailingZeros = removeTrailingZeros;
-    TIME.values.forEach((element) => areaUnitList.add(Unit(element, symbol: mapSymbols[element])));
-    _time_conversion = Node(name:  TIME.seconds,
+    TIME.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
+    _unit_conversion = Node(name:  TIME.seconds,
         leafNodes: [
           Node(coefficientProduct: 1e-1, name: TIME.deciseconds,),
           Node(coefficientProduct: 1e-2, name: TIME.centiseconds,),
@@ -78,20 +78,18 @@ class Time {
         ]);
   }
 
-  ///Converts a Unit (with a specific value and name) to all other units
-  void Convert(Unit unit) {
-    assert(unit.value != null);
-    assert(TIME.values.contains(unit.name));
-    _time_conversion.clearAllValues();
-    _time_conversion.clearSelectedNode();
-    var currentUnit = _time_conversion.getByName(unit.name);
-    currentUnit.value = unit.value;
+  ///Converts a unit with a specific name (e.g. TIME.days) and value to all other units
+  void Convert(TIME name, double value) {
+    _unit_conversion.clearAllValues();
+    _unit_conversion.clearSelectedNode();
+    var currentUnit = _unit_conversion.getByName(name);
+    currentUnit.value = value;
     currentUnit.selectedNode = true;
     currentUnit.convertedNode = true;
-    _time_conversion.convert();
+    _unit_conversion.convert();
     for (var i = 0; i < TIME.values.length; i++) {
-      areaUnitList[i].value = _time_conversion.getByName(TIME.values.elementAt(i)).value;
-      areaUnitList[i].stringValue = mantissaCorrection(areaUnitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = _unit_conversion.getByName(TIME.values.elementAt(i)).value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
 
@@ -113,11 +111,11 @@ class Time {
 
   ///Returns all the time units converted with prefixes
   List<Unit> getAll() {
-    return areaUnitList;
+    return unitList;
   }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {
-    return areaUnitList.where((element) => element.name == name).first;
+    return unitList.where((element) => element.name == name).first;
   }
 }
