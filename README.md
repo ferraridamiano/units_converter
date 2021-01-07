@@ -1,44 +1,6 @@
 # units_converter
 
-units_converter is a package written in dart for dart & flutter developer. You should not take care of **unit conversion** and **measure internationalization** in your app. Everything is already done in this package! But do you need to convert just few units and you don't want to import the whole package, no problem! units_converter is **modular**, you can **import just what you need**! You can also add your own **custom conversion**!
-
-## Which conversion?
-
-- Angles (degree, radians, etc.)
-
-- Area (hectares, acres, etc.)
-
-- Digital data (byte, gigabit, etc.)
-
-- Energy (Joule, kilowatt-hour, etc.)
-
-- Force (Newton, kilogram-force, etc.)
-
-- Fuel consumption (miles per hour, kilometers per hour, etc.)
-
-- Length (meter, miles, etc)
-
-- Mass (kilograms, ounces)
-
-- <u>Numeral systems (hexadecimal, binary, etc.)</u>
-
-- Power (kilowatt, horse power, etc.)
-
-- Pressure (bar, psi, etc.)
-
-- Shoe size (eu size, us size, etc.)
-
-- SI prefixes (giga, tera, etc.)
-
-- Speed (miles per hour, kilometers per hour, etc.)
-
-- Temperature (celsius, fahreneit, etc.)
-
-- Time (seconds, years, etc.)
-
-- Torque (newtons per meter, dyne meter)
-
-- Volume (liter, cubic meters, etc.)
+units_converter is a package written in dart for dart & flutter developers. You should not take care of **unit conversion** and **internationalize** your app, everything is already done with this package! Do you need to convert just few units and you don't want to import the whole package, no problem! units_converter is **modular**, you can **import just what you need**! You can also add your own **custom conversion**!
 
 ## Usage
 
@@ -49,7 +11,7 @@ You can use this package in two ways:
 1. Import everything (e.g. you have to develop a unit converter):
    
    ```dart
-   import 'package:units_converter/units_converter.dart';
+   import 'package:units_converter/units_converter.dart'; //this will import the whole package
    ```
 
 2. Import just what you need (e.g. you need to internationalize your city distance calculator and you are just interested in length conversion):
@@ -108,7 +70,8 @@ var numeralSystems = NumeralSystems(); //initialize NumeralSystems object
 numeralSystems.Convert(NUMERAL_SYSTEMS.decimal, '100'); //We give 100 decimal as input
 print('Binary: ${numeralSystems.binary.stringValue}'); //We get the binary value
 print('Hexadecimal: ${numeralSystems.hexadecimal.stringValue}'); //We get the hexadecimal value
-//Warning! Numeral systems conversion is the only conversion that need the input as a string, and not as a double/int for obvous reasons
+//Warning! Numeral systems conversion is the only conversion that need the input as a string,
+//and not as a double/int for obvious reasons
 ```
 
 Output:
@@ -118,7 +81,7 @@ Binary: 1100100
 Hexadecimal: 64
 ```
 
-Example 4: custom conversion, given a list of coefficient converts units
+**Example 4**: custom conversion, given a list of coefficient converts units
 
 ```dart
 //Define the relation between a units and the others. One of the units MUST have a value of 1
@@ -150,3 +113,41 @@ Output:
 ```
 1€ = 1.2271$
 ```
+
+## Which conversion?
+
+- Angles (degree, radians, etc.)
+
+- Area (hectares, acres, etc.)
+
+- Digital data (byte, gigabit, etc.)
+
+- Energy (Joule, kilowatt-hour, etc.)
+
+- Force (Newton, kilogram-force, etc.)
+
+- Fuel consumption (miles per hour, kilometers per hour, etc.)
+
+- Length (meter, miles, etc)
+
+- Mass (kilograms, ounces)
+
+- <u>Numeral systems (hexadecimal, binary, etc.)</u>
+
+- Power (kilowatt, horse power, etc.)
+
+- Pressure (bar, psi, etc.)
+
+- Shoe size (eu size, us size, etc.)
+
+- SI prefixes (giga, tera, etc.)
+
+- Speed (miles per hour, kilometers per hour, etc.)
+
+- Temperature (celsius, fahreneit, etc.)
+
+- Time (seconds, years, etc.)
+
+- Torque (newtons per meter, dyne meter)
+
+- Volume (liter, cubic meters, etc.)
