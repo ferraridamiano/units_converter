@@ -54,32 +54,32 @@ class ShoeSize {
       Node(coefficientProduct: 2.54, name: SHOE_SIZE.inches, leafNodes: [
         Node(
           coefficientProduct: 1 / 3,
-          coefficientSum: 4,
+          coefficientSum: 10 / 3,
           name: SHOE_SIZE.uk_india_child,
         ),
         Node(
           coefficientProduct: 1 / 3,
-          coefficientSum: 8.3333333,
+          coefficientSum: 23 / 3,
           name: SHOE_SIZE.uk_india_man,
         ),
         Node(
           coefficientProduct: 1 / 3,
-          coefficientSum: 8.5,
+          coefficientSum: 23.5 / 3,
           name: SHOE_SIZE.uk_india_woman,
         ),
         Node(
           coefficientProduct: 1 / 3,
-          coefficientSum: 3.89,
+          coefficientSum: 49 / 9,
           name: SHOE_SIZE.usa_canada_child,
         ),
         Node(
           coefficientProduct: 1 / 3,
-          coefficientSum: 8.0,
+          coefficientSum: 22 / 3,
           name: SHOE_SIZE.usa_canada_man,
         ),
         Node(
           coefficientProduct: 1 / 3,
-          coefficientSum: 7.5,
+          coefficientSum: 21 / 3,
           name: SHOE_SIZE.usa_canada_woman,
         ),
       ]),

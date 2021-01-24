@@ -91,7 +91,8 @@ class Node {
           : (node.value * node.coefficientProduct) + (node.coefficientSum); //put in this node the converted value
       convertedNode = true;
       _applyDown(); //convert lower nodes
-    } else if (node.leafNodes != null) {//but has at leas a leaf node
+    } else if (node.leafNodes != null) {
+      //but has at leas a leaf node
       node.convert(); //repeat
       if (node.convertedNode) convert();
     }
@@ -102,7 +103,8 @@ class Node {
     node.value = value == null ? null : (value - node.coefficientSum) * (1 / node.coefficientProduct); //warning here is the converse
     node.convertedNode = true;
 
-    if (node.leafNodes != null) {//if it has at least a leaf node let's go away
+    if (node.leafNodes != null) {
+      //if it has at least a leaf node let's go away
       node._applyDown();
     }
   }
@@ -116,7 +118,8 @@ class Node {
           : (node.coefficientProduct / node.value) + node.coefficientSum; //put in this node the converted value
       convertedNode = true;
       _applyDown(); //convert lower nodes
-    } else if (node.leafNodes != null) { //but has at leas a leaf node
+    } else if (node.leafNodes != null) {
+      //but has at leas a leaf node
       node.convert(); //repeat
       if (node.convertedNode) convert();
     }
@@ -127,7 +130,8 @@ class Node {
     node.value = value == null ? null : node.coefficientProduct / (value - node.coefficientSum); //warning here is the converse
     node.convertedNode = true;
 
-    if (node.leafNodes != null) {//if it has at least a leaf node let's go away
+    if (node.leafNodes != null) {
+      //if it has at least a leaf node let's go away
       node._applyDown();
     }
   }
@@ -144,7 +148,8 @@ class Node {
       }
       convertedNode = true;
       _applyDown(); //convert lower nodes
-    } else if (node.leafNodes != null) { //but has at leas a leaf node
+    } else if (node.leafNodes != null) {
+      //but has at leas a leaf node
       node.convert(); //repeat
       if (node.convertedNode) convert();
     }
@@ -282,7 +287,7 @@ String baseToDec(String toBeConverted, int base) {
     var unitCode = toBeConverted.codeUnitAt(i);
     if (unitCode >= 65 && unitCode <= 70) {
       // da A a F
-      conversion = conversion + (unitCode - 55) * pow(base, i);
+      conversion = conversion + (unitCode - 55) * pow(base, len - i - 1);
     } else if (unitCode >= 48 && unitCode <= 57) {
       //da 0 a 9
       conversion = conversion + (unitCode - 48) * pow(base, len - i - 1);
