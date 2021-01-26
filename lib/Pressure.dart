@@ -1,3 +1,4 @@
+import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
@@ -11,7 +12,7 @@ enum PRESSURE {
   torr, //Same as mmHg
 }
 
-class Pressure {
+class Pressure extends Property<PRESSURE, double> {
   //Map between units and its symbol
   final Map<PRESSURE, String> mapSymbols = {
     PRESSURE.pascal: 'Pa',
@@ -24,8 +25,6 @@ class Pressure {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> unitList = [];
-  Node _unit_conversion;
 
   ///Class for pressure conversions, e.g. if you want to convert 1 bar in atmosphere:
   ///```dart
@@ -33,11 +32,9 @@ class Pressure {
   ///pressure.Convert(Unit(PRESSURE.bar, value: 1));
   ///print(PRESSURE.atmosphere);
   /// ```
-  Pressure({int significantFigures = 10, bool removeTrailingZeros = true}) {
-    this.significantFigures = significantFigures;
-    this.removeTrailingZeros = removeTrailingZeros;
+  Pressure({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     PRESSURE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    _unit_conversion = Node(name: PRESSURE.pascal, leafNodes: [
+    unit_conversion = Node(name: PRESSURE.pascal, leafNodes: [
       Node(coefficientProduct: 101325.0, name: PRESSURE.atmosphere, leafNodes: [
         Node(coefficientProduct: 0.987, name: PRESSURE.bar, leafNodes: [
           Node(
@@ -58,16 +55,11 @@ class Pressure {
   }
 
   ///Converts a unit with a specific name (e.g. PRESSURE.psi) and value to all other units
-  void Convert(PRESSURE name, double value) {
-    _unit_conversion.clearAllValues();
-    _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(name);
-    currentUnit.value = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
-    _unit_conversion.convert();
+  @override
+  void convert(PRESSURE name, double value) {
+    super.convert(name, value);
     for (var i = 0; i < PRESSURE.values.length; i++) {
-      unitList[i].value = _unit_conversion.getByName(PRESSURE.values.elementAt(i)).value;
+      unitList[i].value = unit_conversion.getByName(PRESSURE.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
@@ -78,11 +70,6 @@ class Pressure {
   Unit get millibar => _getUnit(PRESSURE.millibar);
   Unit get psi => _getUnit(PRESSURE.psi);
   Unit get torr => _getUnit(PRESSURE.torr);
-
-  ///Returns all the pressure units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
-  }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {

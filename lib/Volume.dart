@@ -1,3 +1,4 @@
+import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
@@ -19,7 +20,7 @@ enum VOLUME {
   cubic_millimeters,
 }
 
-class Volume {
+class Volume extends Property<VOLUME, double> {
   //Map between units and its symbol
   final Map<VOLUME, String> mapSymbols = {
     VOLUME.cubic_meters: 'm³',
@@ -40,8 +41,6 @@ class Volume {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> unitList = [];
-  Node _unit_conversion;
 
   ///Class for volume conversions, e.g. if you want to convert 1 liter in US Gallons:
   ///```dart
@@ -49,11 +48,9 @@ class Volume {
   ///volume.Convert(Unit(VOLUME.liters, value: 1));
   ///print(VOLUME.us_gallons);
   /// ```
-  Volume({int significantFigures = 10, bool removeTrailingZeros = true}) {
-    this.significantFigures = significantFigures;
-    this.removeTrailingZeros = removeTrailingZeros;
+  Volume({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     VOLUME.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    _unit_conversion = Node(name: VOLUME.cubic_meters, leafNodes: [
+    unit_conversion = Node(name: VOLUME.cubic_meters, leafNodes: [
       Node(coefficientProduct: 1e-3, name: VOLUME.liters, leafNodes: [
         Node(
           coefficientProduct: 4.54609,
@@ -102,16 +99,11 @@ class Volume {
   }
 
   ///Converts a unit with a specific name (e.g. VOLUME.cubic_feet) and value to all other units
-  void Convert(VOLUME name, double value) {
-    _unit_conversion.clearAllValues();
-    _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(name);
-    currentUnit.value = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
-    _unit_conversion.convert();
+  @override
+  void convert(VOLUME name, double value) {
+    super.convert(name, value);
     for (var i = 0; i < VOLUME.values.length; i++) {
-      unitList[i].value = _unit_conversion.getByName(VOLUME.values.elementAt(i)).value;
+      unitList[i].value = unit_conversion.getByName(VOLUME.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
@@ -130,11 +122,6 @@ class Volume {
   Unit get cubic_feet => _getUnit(VOLUME.cubic_feet);
   Unit get cubic_inches => _getUnit(VOLUME.cubic_inches);
   Unit get cubic_millimeters => _getUnit(VOLUME.cubic_millimeters);
-
-  ///Returns all the volume units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
-  }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {

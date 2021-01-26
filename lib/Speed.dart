@@ -1,3 +1,4 @@
+import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
@@ -10,7 +11,7 @@ enum SPEED {
   feets_per_second,
 }
 
-class Speed {
+class Speed extends Property<SPEED, double> {
   //Map between units and its symbol
   final Map<SPEED, String> mapSymbols = {
     SPEED.meters_per_second: 'm/s',
@@ -22,8 +23,6 @@ class Speed {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> unitList = [];
-  Node _unit_conversion;
 
   ///Class for speed conversions, e.g. if you want to convert 1 square meters in acres:
   ///```dart
@@ -31,11 +30,9 @@ class Speed {
   ///speed.Convert(Unit(SPEED.square_meters, value: 1));
   ///print(SPEED.acres);
   /// ```
-  Speed({int significantFigures = 10, bool removeTrailingZeros = true}) {
-    this.significantFigures = significantFigures;
-    this.removeTrailingZeros = removeTrailingZeros;
+  Speed({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     SPEED.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    _unit_conversion = Node(name: SPEED.meters_per_second, leafNodes: [
+    unit_conversion = Node(name: SPEED.meters_per_second, leafNodes: [
       Node(coefficientProduct: 1 / 3.6, name: SPEED.kilometers_per_hour, leafNodes: [
         Node(
           coefficientProduct: 1.609344,
@@ -54,16 +51,11 @@ class Speed {
   }
 
   ///Converts a unit with a specific name (e.g. SPEED.miles_per_hour) and value to all other units
-  void Convert(SPEED name, double value) {
-    _unit_conversion.clearAllValues();
-    _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(name);
-    currentUnit.value = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
-    _unit_conversion.convert();
+  @override
+  void convert(SPEED name, double value) {
+    super.convert(name, value);
     for (var i = 0; i < SPEED.values.length; i++) {
-      unitList[i].value = _unit_conversion.getByName(SPEED.values.elementAt(i)).value;
+      unitList[i].value = unit_conversion.getByName(SPEED.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
@@ -73,11 +65,6 @@ class Speed {
   Unit get miles_per_hour => _getUnit(SPEED.miles_per_hour);
   Unit get knots => _getUnit(SPEED.knots);
   Unit get feets_per_second => _getUnit(SPEED.feets_per_second);
-
-  ///Returns all the speed units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
-  }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {

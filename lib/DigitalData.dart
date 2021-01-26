@@ -1,3 +1,4 @@
+import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
@@ -32,7 +33,7 @@ enum DIGITAL_DATA {
   exbibyte,
 }
 
-class DigitalData {
+class DigitalData extends Property<DIGITAL_DATA, double> {
   //Map between units and its symbol
   final Map<DIGITAL_DATA, String> mapSymbols = {
     DIGITAL_DATA.bit: 'b',
@@ -66,8 +67,6 @@ class DigitalData {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> unitList = [];
-  Node _unit_conversion;
 
   ///Class for digitalData conversions, e.g. if you want to convert 1 megabit in kilobyte:
   ///```dart
@@ -75,11 +74,9 @@ class DigitalData {
   ///digitalData.Convert(Unit(DIGITAL_DATA.megabit, value: 1));
   ///print(DIGITAL_DATA.kilobyte);
   /// ```
-  DigitalData({int significantFigures = 10, bool removeTrailingZeros = true}) {
-    this.significantFigures = significantFigures;
-    this.removeTrailingZeros = removeTrailingZeros;
+  DigitalData({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     DIGITAL_DATA.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    _unit_conversion = Node(name: DIGITAL_DATA.bit, leafNodes: [
+    unit_conversion = Node(name: DIGITAL_DATA.bit, leafNodes: [
       Node(
         coefficientProduct: 4.0,
         name: DIGITAL_DATA.nibble,
@@ -166,16 +163,11 @@ class DigitalData {
   }
 
   ///Converts a unit with a specific name (e.g. DIGITAL_DATA.byte) and value to all other units
-  void Convert(DIGITAL_DATA name, double value) {
-    _unit_conversion.clearAllValues();
-    _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(name);
-    currentUnit.value = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
-    _unit_conversion.convert();
+  @override
+  void convert(DIGITAL_DATA name, double value) {
+    super.convert(name, value);
     for (var i = 0; i < DIGITAL_DATA.values.length; i++) {
-      unitList[i].value = _unit_conversion.getByName(DIGITAL_DATA.values.elementAt(i)).value;
+      unitList[i].value = unit_conversion.getByName(DIGITAL_DATA.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
@@ -207,13 +199,6 @@ class DigitalData {
   Unit get tebibyte => _getUnit(DIGITAL_DATA.tebibyte);
   Unit get pebibyte => _getUnit(DIGITAL_DATA.pebibyte);
   Unit get exbibyte => _getUnit(DIGITAL_DATA.exbibyte);
-
-
-
-  ///Returns all the digitalData units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
-  }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {

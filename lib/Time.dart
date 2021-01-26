@@ -1,3 +1,4 @@
+import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
@@ -20,7 +21,7 @@ enum TIME {
   millennia,
 }
 
-class Time {
+class Time extends Property<TIME, double> {
   //Map between units and its symbol
   final Map<TIME, String> mapSymbols = {
     TIME.seconds: 'm²',
@@ -42,8 +43,6 @@ class Time {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> unitList = [];
-  Node _unit_conversion;
 
   ///Class for time conversions, e.g. if you want to convert 1 hour in seconds:
   ///```dart
@@ -51,11 +50,9 @@ class Time {
   ///time.Convert(Unit(TIME.hours, value: 1));
   ///print(TIME.seconds);
   /// ```
-  Time({int significantFigures = 10, bool removeTrailingZeros = true}) {
-    this.significantFigures = significantFigures;
-    this.removeTrailingZeros = removeTrailingZeros;
+  Time({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     TIME.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    _unit_conversion = Node(name:  TIME.seconds,
+    unit_conversion = Node(name:  TIME.seconds,
         leafNodes: [
           Node(coefficientProduct: 1e-1, name: TIME.deciseconds,),
           Node(coefficientProduct: 1e-2, name: TIME.centiseconds,),
@@ -79,16 +76,11 @@ class Time {
   }
 
   ///Converts a unit with a specific name (e.g. TIME.days) and value to all other units
-  void Convert(TIME name, double value) {
-    _unit_conversion.clearAllValues();
-    _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(name);
-    currentUnit.value = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
-    _unit_conversion.convert();
+  @override
+  void convert(TIME name, double value) {
+    super.convert(name, value);
     for (var i = 0; i < TIME.values.length; i++) {
-      unitList[i].value = _unit_conversion.getByName(TIME.values.elementAt(i)).value;
+      unitList[i].value = unit_conversion.getByName(TIME.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
@@ -108,11 +100,6 @@ class Time {
   Unit get decades => _getUnit(TIME.decades);
   Unit get centuries => _getUnit(TIME.centuries);
   Unit get millennia => _getUnit(TIME.millennia);
-
-  ///Returns all the time units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
-  }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {

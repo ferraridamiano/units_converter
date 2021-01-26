@@ -1,3 +1,4 @@
+import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
@@ -21,7 +22,7 @@ enum LENGTH {
   parsec,
 }
 
-class Length {
+class Length extends Property<LENGTH, double> {
   //Map between units and its symbol
   final Map<LENGTH, String> mapSymbols = {
     LENGTH.meters: 'm',
@@ -44,8 +45,6 @@ class Length {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> unitList = [];
-  Node _unit_conversion;
 
   ///Class for length conversions, e.g. if you want to convert 1 meter in inches:
   ///```dart
@@ -53,11 +52,9 @@ class Length {
   ///length.Convert(Unit(LENGTH.meters, value: 1));
   ///print(length.inches);
   /// ```
-  Length({int significantFigures = 10, bool removeTrailingZeros = true}) {
-    this.significantFigures = significantFigures;
-    this.removeTrailingZeros = removeTrailingZeros;
+  Length({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     LENGTH.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    _unit_conversion = Node(name: LENGTH.meters, leafNodes: [
+    unit_conversion = Node(name: LENGTH.meters, leafNodes: [
       Node(coefficientProduct: 0.01, name: LENGTH.centimeters, leafNodes: [
         Node(coefficientProduct: 2.54, name: LENGTH.inches, leafNodes: [
           Node(
@@ -110,16 +107,11 @@ class Length {
   }
 
   ///Converts a unit with a specific name (e.g. LENGTH.meters) and value to all other units
-  void Convert(LENGTH name, double value) {
-    _unit_conversion.clearAllValues();
-    _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(name);
-    currentUnit.value = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
-    _unit_conversion.convert();
+  @override
+  void convert(LENGTH name, double value) {
+    super.convert(name, value);
     for (var i = 0; i < LENGTH.values.length; i++) {
-      unitList[i].value = _unit_conversion.getByName(LENGTH.values.elementAt(i)).value;
+      unitList[i].value = unit_conversion.getByName(LENGTH.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
@@ -140,11 +132,6 @@ class Length {
   Unit get astronomical_units => _getUnit(LENGTH.astronomical_units);
   Unit get light_years => _getUnit(LENGTH.light_years);
   Unit get parsec => _getUnit(LENGTH.parsec);
-
-  ///Returns all the length units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
-  }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {

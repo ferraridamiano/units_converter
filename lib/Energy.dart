@@ -1,3 +1,4 @@
+import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
@@ -9,7 +10,7 @@ enum ENERGY {
   electronvolts,
 }
 
-class Energy {
+class Energy extends Property<ENERGY, double> {
   //Map between units and its symbol
   final Map<ENERGY, String> mapSymbols = {
     ENERGY.joules: 'J',
@@ -20,8 +21,6 @@ class Energy {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> unitList = [];
-  Node _unit_conversion;
 
   ///Class for energy conversions, e.g. if you want to convert 1 joule in kilowatt hours:
   ///```dart
@@ -29,11 +28,9 @@ class Energy {
   ///energy.Convert(Unit(ENERGY.joules, value: 1));
   ///print(ENERGY.kilowatt_hours);
   /// ```
-  Energy({int significantFigures = 10, bool removeTrailingZeros = true}) {
-    this.significantFigures = significantFigures;
-    this.removeTrailingZeros = removeTrailingZeros;
+  Energy({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     ENERGY.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    _unit_conversion = Node(name: ENERGY.joules, leafNodes: [
+    unit_conversion = Node(name: ENERGY.joules, leafNodes: [
       Node(
         coefficientProduct: 4.1867999409,
         name: ENERGY.calories,
@@ -50,16 +47,11 @@ class Energy {
   }
 
   ///Converts a unit with a specific name (e.g. ENERGY.calories) and value to all other units
-  void Convert(ENERGY name, double value) {
-    _unit_conversion.clearAllValues();
-    _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(name);
-    currentUnit.value = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
-    _unit_conversion.convert();
+  @override
+  void convert(ENERGY name, double value) {
+    super.convert(name, value);
     for (var i = 0; i < ENERGY.values.length; i++) {
-      unitList[i].value = _unit_conversion.getByName(ENERGY.values.elementAt(i)).value;
+      unitList[i].value = unit_conversion.getByName(ENERGY.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
@@ -68,11 +60,6 @@ class Energy {
   Unit get calories => _getUnit(ENERGY.calories);
   Unit get kilowatt_hours => _getUnit(ENERGY.kilowatt_hours);
   Unit get electronvolts => _getUnit(ENERGY.electronvolts);
-
-  ///Returns all the energy units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
-  }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {

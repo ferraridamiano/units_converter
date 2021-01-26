@@ -1,3 +1,4 @@
+import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
@@ -12,7 +13,7 @@ enum POWER {
   imperial_horse_power,
 }
 
-class Power {
+class Power extends Property<POWER, double> {
   //Map between units and its symbol
   final Map<POWER, String> mapSymbols = {
     POWER.watt: 'W',
@@ -26,8 +27,6 @@ class Power {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> unitList = [];
-  Node _unit_conversion;
 
   ///Class for power conversions, e.g. if you want to convert 1 kilowatt in european horse power:
   ///```dart
@@ -35,11 +34,9 @@ class Power {
   ///power.Convert(Unit(POWER.kilowatt, value: 1));
   ///print(POWER.european_horse_power);
   /// ```
-  Power({int significantFigures = 10, bool removeTrailingZeros = true}) {
-    this.significantFigures = significantFigures;
-    this.removeTrailingZeros = removeTrailingZeros;
+  Power({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     POWER.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    _unit_conversion = Node(name: POWER.watt, leafNodes: [
+    unit_conversion = Node(name: POWER.watt, leafNodes: [
       Node(
         coefficientProduct: 1e-3,
         name: POWER.milliwatt,
@@ -68,16 +65,11 @@ class Power {
   }
 
   ///Converts a unit with a specific name (e.g. POWER.european_horse_power) and value to all other units
-  void Convert(POWER name, double value) {
-    _unit_conversion.clearAllValues();
-    _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(name);
-    currentUnit.value = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
-    _unit_conversion.convert();
+  @override
+  void convert(POWER name, double value) {
+    super.convert(name, value);
     for (var i = 0; i < POWER.values.length; i++) {
-      unitList[i].value = _unit_conversion.getByName(POWER.values.elementAt(i)).value;
+      unitList[i].value = unit_conversion.getByName(POWER.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
@@ -89,11 +81,6 @@ class Power {
   Unit get gigawatt => _getUnit(POWER.gigawatt);
   Unit get european_horse_power => _getUnit(POWER.european_horse_power);
   Unit get imperial_horse_power => _getUnit(POWER.imperial_horse_power);
-
-  ///Returns all the power units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
-  }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {

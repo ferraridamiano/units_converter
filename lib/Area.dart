@@ -1,3 +1,4 @@
+import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
@@ -16,7 +17,7 @@ enum AREA {
   are,
 }
 
-class Area {
+class Area extends Property<AREA, double> {
   //Map between units and its symbol
   final Map<AREA, String> mapSymbols = {
     AREA.square_meters: 'm²',
@@ -34,8 +35,6 @@ class Area {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> unitList = [];
-  Node _unit_conversion;
 
   ///Class for area conversions, e.g. if you want to convert 1 square meters in acres:
   ///```dart
@@ -43,11 +42,9 @@ class Area {
   ///area.Convert(Unit(AREA.square_meters, value: 1));
   ///print(AREA.acres);
   /// ```
-  Area({int significantFigures = 10, bool removeTrailingZeros = true}) {
-    this.significantFigures = significantFigures;
-    this.removeTrailingZeros = removeTrailingZeros;
+  Area({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     AREA.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    _unit_conversion = Node(name: AREA.square_meters, leafNodes: [
+    unit_conversion = Node(name: AREA.square_meters, leafNodes: [
       Node(coefficientProduct: 1e-4, name: AREA.square_centimeters, leafNodes: [
         Node(coefficientProduct: 6.4516, name: AREA.square_inches, leafNodes: [
           Node(
@@ -86,16 +83,11 @@ class Area {
   }
 
   ///Converts a unit with a specific name (e.g. AREA.hectares) and value to all other units
-  void Convert(AREA name, double value) {
-    _unit_conversion.clearAllValues();
-    _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(name);
-    currentUnit.value = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
-    _unit_conversion.convert();
+  @override
+  void convert(AREA name, double value) {
+    super.convert(name, value);
     for (var i = 0; i < AREA.values.length; i++) {
-      unitList[i].value = _unit_conversion.getByName(AREA.values.elementAt(i)).value;
+      unitList[i].value = unit_conversion.getByName(AREA.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
@@ -111,11 +103,6 @@ class Area {
   Unit get hectares => _getUnit(AREA.hectares);
   Unit get acres => _getUnit(AREA.acres);
   Unit get are => _getUnit(AREA.are);
-
-  ///Returns all the area units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
-  }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {

@@ -1,3 +1,4 @@
+import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
@@ -15,7 +16,7 @@ enum SHOE_SIZE {
   japan,
 }
 
-class ShoeSize {
+class ShoeSize extends Property<SHOE_SIZE, double> {
   //Map between units and its symbol
   final Map<SHOE_SIZE, String> mapSymbols = {
     SHOE_SIZE.centimeters: 'cm',
@@ -32,8 +33,6 @@ class ShoeSize {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> unitList = [];
-  Node _unit_conversion;
 
   ///Class for ShoeSize conversions, e.g. if you want to convert 1 centimeter in eu shoes size:
   ///```dart
@@ -41,11 +40,9 @@ class ShoeSize {
   ///ShoeSize.Convert(Unit(SHOE_SIZE.centimeters, value: 1));
   ///print(SHOE_SIZE.eu_china);
   /// ```
-  ShoeSize({int significantFigures = 10, bool removeTrailingZeros = true}) {
-    this.significantFigures = significantFigures;
-    this.removeTrailingZeros = removeTrailingZeros;
+  ShoeSize({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     SHOE_SIZE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    _unit_conversion = Node(name: SHOE_SIZE.centimeters, leafNodes: [
+    unit_conversion = Node(name: SHOE_SIZE.centimeters, leafNodes: [
       Node(
         coefficientProduct: 1 / 1.5,
         coefficientSum: -1.5,
@@ -91,16 +88,11 @@ class ShoeSize {
   }
 
   ///Converts a unit with a specific name (e.g. SHOE_SIZE.uk_india_woman) and value to all other units
-  void Convert(SHOE_SIZE name, double value) {
-    _unit_conversion.clearAllValues();
-    _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(name);
-    currentUnit.value = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
-    _unit_conversion.convert();
+  @override
+  void convert(SHOE_SIZE name, double value) {
+    super.convert(name, value);
     for (var i = 0; i < SHOE_SIZE.values.length; i++) {
-      unitList[i].value = _unit_conversion.getByName(SHOE_SIZE.values.elementAt(i)).value;
+      unitList[i].value = unit_conversion.getByName(SHOE_SIZE.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
@@ -115,11 +107,6 @@ class ShoeSize {
   Unit get usa_canada_man => _getUnit(SHOE_SIZE.usa_canada_man);
   Unit get usa_canada_woman => _getUnit(SHOE_SIZE.usa_canada_woman);
   Unit get japan => _getUnit(SHOE_SIZE.japan);
-
-  ///Returns all the ShoeSize units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
-  }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {

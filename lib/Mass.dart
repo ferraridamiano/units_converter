@@ -1,3 +1,4 @@
+import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
@@ -16,7 +17,7 @@ enum MASS {
   centigrams,
 }
 
-class Mass {
+class Mass extends Property<MASS, double>{
   //Map between units and its symbol
   final Map<MASS, String> mapSymbols = {
     MASS.grams: 'g',
@@ -34,8 +35,6 @@ class Mass {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> unitList = [];
-  Node _unit_conversion;
 
   ///Class for mass conversions, e.g. if you want to convert 1 gram in ounces:
   ///```dart
@@ -43,11 +42,9 @@ class Mass {
   ///mass.Convert(Unit(MASS.grams, value: 1));
   ///print(MASS.ounces);
   /// ```
-  Mass({int significantFigures = 10, bool removeTrailingZeros = true}) {
-    this.significantFigures = significantFigures;
-    this.removeTrailingZeros = removeTrailingZeros;
+  Mass({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     MASS.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    _unit_conversion = Node(name: MASS.grams, leafNodes: [
+    unit_conversion = Node(name: MASS.grams, leafNodes: [
       Node(
         coefficientProduct: 100.0,
         name: MASS.ettograms,
@@ -88,16 +85,11 @@ class Mass {
   }
 
   ///Converts a unit with a specific name (e.g. MASS.centigrams) and value to all other units
-  void Convert(MASS name, double value) {
-    _unit_conversion.clearAllValues();
-    _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(name);
-    currentUnit.value = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
-    _unit_conversion.convert();
+  @override
+  void convert(MASS name, double value) {
+    super.convert(name, value);
     for (var i = 0; i < MASS.values.length; i++) {
-      unitList[i].value = _unit_conversion.getByName(MASS.values.elementAt(i)).value;
+      unitList[i].value = unit_conversion.getByName(MASS.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
@@ -113,11 +105,6 @@ class Mass {
   Unit get uma => _getUnit(MASS.uma);
   Unit get carats => _getUnit(MASS.carats);
   Unit get centigrams => _getUnit(MASS.centigrams);
-
-  ///Returns all the mass units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
-  }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {

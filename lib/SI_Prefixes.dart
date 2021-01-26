@@ -1,3 +1,4 @@
+import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
@@ -26,7 +27,7 @@ enum SI_PREFIXES {
   yocto,
 }
 
-class Si_Prefixes {
+class Si_Prefixes extends Property<SI_PREFIXES, double> {
   //Map between units and its symbol
   final Map<SI_PREFIXES, String> mapSymbols = {
     SI_PREFIXES.base: null,
@@ -54,8 +55,6 @@ class Si_Prefixes {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> unitList = [];
-  Node _unit_conversion;
 
   ///Class for si_prefixes conversions, e.g. if you want to convert 1 base unit in milli:
   ///```dart
@@ -63,11 +62,9 @@ class Si_Prefixes {
   ///si_prefixes.Convert(Unit(SI_PREFIXES.base, value: 1));
   ///print(SI_PREFIXES.milli);
   /// ```
-  Si_Prefixes({int significantFigures = 10, bool removeTrailingZeros = true}) {
-    this.significantFigures = significantFigures;
-    this.removeTrailingZeros = removeTrailingZeros;
+  Si_Prefixes({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     SI_PREFIXES.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    _unit_conversion = Node(name: SI_PREFIXES.base, leafNodes: [
+    unit_conversion = Node(name: SI_PREFIXES.base, leafNodes: [
       Node(
         coefficientProduct: 1e1,
         name: SI_PREFIXES.deca,
@@ -152,16 +149,11 @@ class Si_Prefixes {
   }
 
   ///Converts a unit with a specific name (e.g. SI_PREFIXES.milli) and value to all other units
-  void Convert(SI_PREFIXES name, double value) {
-    _unit_conversion.clearAllValues();
-    _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(name);
-    currentUnit.value = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
-    _unit_conversion.convert();
+  @override
+  void convert(SI_PREFIXES name, double value) {
+    super.convert(name, value);
     for (var i = 0; i < SI_PREFIXES.values.length; i++) {
-      unitList[i].value = _unit_conversion.getByName(SI_PREFIXES.values.elementAt(i)).value;
+      unitList[i].value = unit_conversion.getByName(SI_PREFIXES.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
@@ -187,11 +179,6 @@ class Si_Prefixes {
   Unit get atto => _getUnit(SI_PREFIXES.atto);
   Unit get zepto => _getUnit(SI_PREFIXES.zepto);
   Unit get yocto => _getUnit(SI_PREFIXES.yocto);
-
-  ///Returns all the si_prefixes units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
-  }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {

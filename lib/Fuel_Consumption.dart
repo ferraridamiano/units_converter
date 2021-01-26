@@ -1,3 +1,4 @@
+import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
@@ -9,7 +10,7 @@ enum FUEL_CONSUMPTION {
   miles_per_imperial_gallon,
 }
 
-class Fuel_Consumption {
+class Fuel_Consumption extends Property<FUEL_CONSUMPTION, double> {
   //Map between units and its symbol
   final Map<FUEL_CONSUMPTION, String> mapSymbols = {
     FUEL_CONSUMPTION.kilometers_per_liter: 'km/l',
@@ -20,8 +21,6 @@ class Fuel_Consumption {
 
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> unitList = [];
-  Node _unit_conversion;
 
   ///Class for fuel_consumption conversions, e.g. if you want to convert 1 kilometers per liter in liters per 100 km:
   ///```dart
@@ -29,11 +28,9 @@ class Fuel_Consumption {
   ///fuel_consumption.Convert(Unit(FUEL_CONSUMPTION.kilometers_per_liter, value: 1));
   ///print(FUEL_CONSUMPTION.liters_per_100_km);
   /// ```
-  Fuel_Consumption({int significantFigures = 10, bool removeTrailingZeros = true}) {
-    this.significantFigures = significantFigures;
-    this.removeTrailingZeros = removeTrailingZeros;
+  Fuel_Consumption({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     FUEL_CONSUMPTION.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    _unit_conversion = Node(name: FUEL_CONSUMPTION.kilometers_per_liter, leafNodes: [
+    unit_conversion = Node(name: FUEL_CONSUMPTION.kilometers_per_liter, leafNodes: [
       Node(
         conversionType: RECIPROCAL_CONVERSION,
         coefficientProduct: 100.0,
@@ -51,16 +48,11 @@ class Fuel_Consumption {
   }
 
   ///Converts a unit with a specific name (e.g. FUEL_CONSUMPTION.liters_per_100_km) and value to all other units
-  void Convert(FUEL_CONSUMPTION name, double value) {
-    _unit_conversion.clearAllValues();
-    _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(name);
-    currentUnit.value = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
-    _unit_conversion.convert();
+  @override
+  void convert(FUEL_CONSUMPTION name, double value) {
+    super.convert(name, value);
     for (var i = 0; i < FUEL_CONSUMPTION.values.length; i++) {
-      unitList[i].value = _unit_conversion.getByName(FUEL_CONSUMPTION.values.elementAt(i)).value;
+      unitList[i].value = unit_conversion.getByName(FUEL_CONSUMPTION.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
@@ -69,11 +61,6 @@ class Fuel_Consumption {
   Unit get liters_per_100_km => _getUnit(FUEL_CONSUMPTION.liters_per_100_km);
   Unit get miles_per_US_gallon => _getUnit(FUEL_CONSUMPTION.miles_per_US_gallon);
   Unit get miles_per_imperial_gallon => _getUnit(FUEL_CONSUMPTION.miles_per_imperial_gallon);
-
-  ///Returns all the fuel_consumption units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
-  }
 
   ///Returns the Unit with the corresponding name
   Unit _getUnit(var name) {

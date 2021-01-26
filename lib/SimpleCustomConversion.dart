@@ -1,20 +1,35 @@
+import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
-class SimpleCustomConversion {
+class SimpleCustomConversion extends Property<String, double> {
   //Map between units and its symbol
   final Map<String, String> mapSymbols;
   final Map<String, double> mapConversion;
   int significantFigures;
   bool removeTrailingZeros;
-  List<Unit> unitList = [];
-  Node _unit_conversion;
 
-  ///Class for area conversions, e.g. if you want to convert 1 square meters in acres:
+  ///Class for simple custom conversions. E.g.:
   ///```dart
-  ///var area = SimpleCustomConversion(removeTrailingZeros: false);
-  ///area.Convert(Unit(AREA.square_meters, value: 1));
-  ///print(AREA.acres);
+  ///final Map<String, double> conversionMap = {
+  ///  'EUR': 1,
+  ///  'USD': 1.2271,
+  ///  'GBP': 0.9033,
+  ///  'JPY': 126.25,
+  ///  'CNY': 7.9315,
+  ///};
+  /// //Optional
+  ///final Map<String, String> mapSymbols = {
+  ///  'EUR': '€',
+  ///  'USD': '\$',
+  ///  'GBP': '₤',
+  ///  'JPY': '¥',
+  ///  'CNY': '¥',
+  ///};
+  ///var customConversion = SimpleCustomConversion(conversionMap, mapSymbols: mapSymbols);
+  ///customConversion.Convert('EUR', 1);
+  ///Unit usd = customConversion.getUnit('USD');
+  ///print('1€ = ${usd.stringValue}${usd.symbol}');
   /// ```
   SimpleCustomConversion(this.mapConversion, {this.mapSymbols, this.significantFigures = 10, this.removeTrailingZeros = true}) {
     assert(mapConversion.containsValue(1), 'One conversion coefficient must be 1, this will considered the base unit');
@@ -26,28 +41,18 @@ class SimpleCustomConversion {
         leafNodes.add(Node(name: key, coefficientProduct: 1/value));
       }
     });
-    _unit_conversion = Node(name: baseUnit, leafNodes: leafNodes);
+    unit_conversion = Node(name: baseUnit, leafNodes: leafNodes);
   }
 
   ///Converts a unit with a specific name and value to all other units
-  void Convert(var name, double value) {
+  @override
+  void convert(String name, double value) {
     assert(mapConversion.keys.contains(name));
-    _unit_conversion.clearAllValues();
-    _unit_conversion.clearSelectedNode();
-    var currentUnit = _unit_conversion.getByName(name);
-    currentUnit.value = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
-    _unit_conversion.convert();
+    super.convert(name, value);
     for (var i = 0; i < mapConversion.length; i++) {
-      unitList[i].value = _unit_conversion.getByName(mapConversion.keys.elementAt(i)).value;
+      unitList[i].value = unit_conversion.getByName(mapConversion.keys.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
-  }
-
-  ///Returns all the area units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
   }
 
   ///Returns the Unit with the corresponding name
