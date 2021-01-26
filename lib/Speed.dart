@@ -31,6 +31,7 @@ class Speed extends Property<SPEED, double> {
   ///print(SPEED.acres);
   /// ```
   Speed({this.significantFigures = 10, this.removeTrailingZeros = true}) {
+    name = PROPERTY.SPEED;
     SPEED.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: SPEED.meters_per_second, leafNodes: [
       Node(coefficientProduct: 1 / 3.6, name: SPEED.kilometers_per_hour, leafNodes: [

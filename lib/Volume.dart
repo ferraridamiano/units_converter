@@ -49,6 +49,7 @@ class Volume extends Property<VOLUME, double> {
   ///print(VOLUME.us_gallons);
   /// ```
   Volume({this.significantFigures = 10, this.removeTrailingZeros = true}) {
+    name = PROPERTY.VOLUME;
     VOLUME.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: VOLUME.cubic_meters, leafNodes: [
       Node(coefficientProduct: 1e-3, name: VOLUME.liters, leafNodes: [

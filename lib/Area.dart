@@ -43,6 +43,7 @@ class Area extends Property<AREA, double> {
   ///print(AREA.acres);
   /// ```
   Area({this.significantFigures = 10, this.removeTrailingZeros = true}) {
+    name = PROPERTY.AREA;
     AREA.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: AREA.square_meters, leafNodes: [
       Node(coefficientProduct: 1e-4, name: AREA.square_centimeters, leafNodes: [

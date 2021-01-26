@@ -29,6 +29,7 @@ class Energy extends Property<ENERGY, double> {
   ///print(ENERGY.kilowatt_hours);
   /// ```
   Energy({this.significantFigures = 10, this.removeTrailingZeros = true}) {
+    name = PROPERTY.ENERGY;
     ENERGY.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: ENERGY.joules, leafNodes: [
       Node(

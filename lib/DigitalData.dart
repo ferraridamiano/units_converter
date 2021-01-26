@@ -75,6 +75,7 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
   ///print(DIGITAL_DATA.kilobyte);
   /// ```
   DigitalData({this.significantFigures = 10, this.removeTrailingZeros = true}) {
+    name = PROPERTY.DIGITAL_DATA;
     DIGITAL_DATA.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: DIGITAL_DATA.bit, leafNodes: [
       Node(

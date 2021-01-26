@@ -29,6 +29,7 @@ class Angle extends Property<ANGLE, double> {
   ///print(ANGLE.degree);
   /// ```
   Angle({this.significantFigures = 10, this.removeTrailingZeros = true}) {
+    name = PROPERTY.ANGLE;
     ANGLE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: ANGLE.degree, leafNodes: [
       Node(

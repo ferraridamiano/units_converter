@@ -29,6 +29,7 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
   ///print(FUEL_CONSUMPTION.liters_per_100_km);
   /// ```
   FuelConsumption({this.significantFigures = 10, this.removeTrailingZeros = true}) {
+    name = PROPERTY.FUEL_CONSUMPTION;
     FUEL_CONSUMPTION.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: FUEL_CONSUMPTION.kilometers_per_liter, leafNodes: [
       Node(

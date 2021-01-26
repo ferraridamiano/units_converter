@@ -51,6 +51,7 @@ class Time extends Property<TIME, double> {
   ///print(TIME.seconds);
   /// ```
   Time({this.significantFigures = 10, this.removeTrailingZeros = true}) {
+    name = PROPERTY.TIME;
     TIME.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name:  TIME.seconds,
         leafNodes: [

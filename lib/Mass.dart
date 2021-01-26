@@ -43,6 +43,7 @@ class Mass extends Property<MASS, double>{
   ///print(MASS.ounces);
   /// ```
   Mass({this.significantFigures = 10, this.removeTrailingZeros = true}) {
+    name = PROPERTY.MASS;
     MASS.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: MASS.grams, leafNodes: [
       Node(

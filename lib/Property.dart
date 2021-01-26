@@ -25,6 +25,7 @@ enum PROPERTY {
 class Property<K, V> {
   Node unit_conversion;
   List<Unit> unitList = [];
+  var name;
 
   void convert(K name, V value) {
     //Here we will suppose V is a double. In the case where V is a String (Numeral systems) I will override the entire function
