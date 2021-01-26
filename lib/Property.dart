@@ -1,8 +1,28 @@
 import 'Unit.dart';
 import 'UtilsConversion.dart';
 
-class Property<K, V> {
+enum PROPERTY {
+  ANGLE,
+  AREA,
+  DIGITAL_DATA,
+  ENERGY,
+  FORCE,
+  FUEL_CONSUMPTION,
+  LENGTH,
+  MASS,
+  NUMERAL_SYSTEMS,
+  POWER,
+  PRESSURE,
+  SHOE_SIZE,
+  SI_PREFIXES,
+  SPEED,
+  TEMPERATURE,
+  TIME,
+  TORQUE,
+  VOLUME,
+}
 
+class Property<K, V> {
   Node unit_conversion;
   List<Unit> unitList = [];
 
