@@ -10,7 +10,7 @@ enum FUEL_CONSUMPTION {
   miles_per_imperial_gallon,
 }
 
-class Fuel_Consumption extends Property<FUEL_CONSUMPTION, double> {
+class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
   //Map between units and its symbol
   final Map<FUEL_CONSUMPTION, String> mapSymbols = {
     FUEL_CONSUMPTION.kilometers_per_liter: 'km/l',
@@ -28,7 +28,7 @@ class Fuel_Consumption extends Property<FUEL_CONSUMPTION, double> {
   ///fuel_consumption.Convert(Unit(FUEL_CONSUMPTION.kilometers_per_liter, value: 1));
   ///print(FUEL_CONSUMPTION.liters_per_100_km);
   /// ```
-  Fuel_Consumption({this.significantFigures = 10, this.removeTrailingZeros = true}) {
+  FuelConsumption({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     FUEL_CONSUMPTION.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: FUEL_CONSUMPTION.kilometers_per_liter, leafNodes: [
       Node(

@@ -27,7 +27,7 @@ enum SI_PREFIXES {
   yocto,
 }
 
-class Si_Prefixes extends Property<SI_PREFIXES, double> {
+class SIPrefixes extends Property<SI_PREFIXES, double> {
   //Map between units and its symbol
   final Map<SI_PREFIXES, String> mapSymbols = {
     SI_PREFIXES.base: null,
@@ -62,7 +62,7 @@ class Si_Prefixes extends Property<SI_PREFIXES, double> {
   ///si_prefixes.Convert(Unit(SI_PREFIXES.base, value: 1));
   ///print(SI_PREFIXES.milli);
   /// ```
-  Si_Prefixes({this.significantFigures = 10, this.removeTrailingZeros = true}) {
+  SIPrefixes({this.significantFigures = 10, this.removeTrailingZeros = true}) {
     SI_PREFIXES.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: SI_PREFIXES.base, leafNodes: [
       Node(
