@@ -51,6 +51,7 @@ class Energy extends Property<ENERGY, double> {
   @override
   void convert(ENERGY name, double value) {
     super.convert(name, value);
+    if (value == null) return;
     for (var i = 0; i < ENERGY.values.length; i++) {
       unitList[i].value = unit_conversion.getByName(ENERGY.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);

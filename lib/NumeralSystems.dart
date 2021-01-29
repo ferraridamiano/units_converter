@@ -51,7 +51,18 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   @override
   void convert(NUMERAL_SYSTEMS name, String value) {
     unit_conversion.clearAllValues();
+    //if the value is null also the others units are null, this is convenient to delete
+    //all the other units value, for example in a unit converter app (such as Converter NOW)
+    if (value == null) {
+      unit_conversion.clearAllValues();
+      for (Unit unit in unitList) {
+        unit.value = null;
+        unit.stringValue = null;
+      }
+      return;
+    }
     unit_conversion.clearSelectedNode();
+    unit_conversion.resetConvertedNode();
     var currentUnit = unit_conversion.getByName(name);
     currentUnit.stringValue = value;
     currentUnit.selectedNode = true;

@@ -80,6 +80,7 @@ class Time extends Property<TIME, double> {
   @override
   void convert(TIME name, double value) {
     super.convert(name, value);
+    if (value == null) return;
     for (var i = 0; i < TIME.values.length; i++) {
       unitList[i].value = unit_conversion.getByName(TIME.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);

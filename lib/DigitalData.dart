@@ -167,6 +167,7 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
   @override
   void convert(DIGITAL_DATA name, double value) {
     super.convert(name, value);
+    if (value == null) return;
     for (var i = 0; i < DIGITAL_DATA.values.length; i++) {
       unitList[i].value = unit_conversion.getByName(DIGITAL_DATA.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);

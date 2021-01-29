@@ -92,6 +92,7 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
   @override
   void convert(SHOE_SIZE name, double value) {
     super.convert(name, value);
+    if (value == null) return;
     for (var i = 0; i < SHOE_SIZE.values.length; i++) {
       unitList[i].value = unit_conversion.getByName(SHOE_SIZE.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);

@@ -87,6 +87,7 @@ class Area extends Property<AREA, double> {
   @override
   void convert(AREA name, double value) {
     super.convert(name, value);
+    if (value == null) return;
     for (var i = 0; i < AREA.values.length; i++) {
       unitList[i].value = unit_conversion.getByName(AREA.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);

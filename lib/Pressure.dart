@@ -59,6 +59,7 @@ class Pressure extends Property<PRESSURE, double> {
   @override
   void convert(PRESSURE name, double value) {
     super.convert(name, value);
+    if (value == null) return;
     for (var i = 0; i < PRESSURE.values.length; i++) {
       unitList[i].value = unit_conversion.getByName(PRESSURE.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);

@@ -111,6 +111,7 @@ class Length extends Property<LENGTH, double> {
   @override
   void convert(LENGTH name, double value) {
     super.convert(name, value);
+    if (value == null) return;
     for (var i = 0; i < LENGTH.values.length; i++) {
       unitList[i].value = unit_conversion.getByName(LENGTH.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);

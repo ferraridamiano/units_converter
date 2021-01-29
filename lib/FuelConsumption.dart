@@ -52,6 +52,7 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
   @override
   void convert(FUEL_CONSUMPTION name, double value) {
     super.convert(name, value);
+    if (value == null) return;
     for (var i = 0; i < FUEL_CONSUMPTION.values.length; i++) {
       unitList[i].value = unit_conversion.getByName(FUEL_CONSUMPTION.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);

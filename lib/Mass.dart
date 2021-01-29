@@ -89,6 +89,7 @@ class Mass extends Property<MASS, double>{
   @override
   void convert(MASS name, double value) {
     super.convert(name, value);
+    if (value == null) return;
     for (var i = 0; i < MASS.values.length; i++) {
       unitList[i].value = unit_conversion.getByName(MASS.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);

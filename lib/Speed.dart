@@ -55,6 +55,7 @@ class Speed extends Property<SPEED, double> {
   @override
   void convert(SPEED name, double value) {
     super.convert(name, value);
+    if (value == null) return;
     for (var i = 0; i < SPEED.values.length; i++) {
       unitList[i].value = unit_conversion.getByName(SPEED.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);

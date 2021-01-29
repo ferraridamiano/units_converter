@@ -69,6 +69,7 @@ class Power extends Property<POWER, double> {
   @override
   void convert(POWER name, double value) {
     super.convert(name, value);
+    if (value == null) return;
     for (var i = 0; i < POWER.values.length; i++) {
       unitList[i].value = unit_conversion.getByName(POWER.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);

@@ -69,6 +69,7 @@ class Temperature extends Property<TEMPERATURE, double> {
   @override
   void convert(TEMPERATURE name, double value) {
     super.convert(name, value);
+    if (value == null) return;
     for (var i = 0; i < TEMPERATURE.values.length; i++) {
       unitList[i].value = unit_conversion.getByName(TEMPERATURE.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);

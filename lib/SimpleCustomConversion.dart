@@ -49,6 +49,7 @@ class SimpleCustomConversion extends Property<String, double> {
   void convert(String name, double value) {
     assert(mapConversion.keys.contains(name));
     super.convert(name, value);
+    if (value == null) return;
     for (var i = 0; i < mapConversion.length; i++) {
       unitList[i].value = unit_conversion.getByName(mapConversion.keys.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);

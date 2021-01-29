@@ -103,6 +103,7 @@ class Volume extends Property<VOLUME, double> {
   @override
   void convert(VOLUME name, double value) {
     super.convert(name, value);
+    if (value == null) return;
     for (var i = 0; i < VOLUME.values.length; i++) {
       unitList[i].value = unit_conversion.getByName(VOLUME.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
