@@ -23,6 +23,7 @@ class Speed extends Property<SPEED, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
+  var name;
 
   ///Class for speed conversions, e.g. if you want to convert 1 square meters in acres:
   ///```dart
@@ -30,8 +31,7 @@ class Speed extends Property<SPEED, double> {
   ///speed.Convert(Unit(SPEED.square_meters, value: 1));
   ///print(SPEED.acres);
   /// ```
-  Speed({this.significantFigures = 10, this.removeTrailingZeros = true}) {
-    name = PROPERTY.SPEED;
+  Speed({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.SPEED}) {
     SPEED.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: SPEED.meters_per_second, leafNodes: [
       Node(coefficientProduct: 1 / 3.6, name: SPEED.kilometers_per_hour, leafNodes: [

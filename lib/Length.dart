@@ -45,6 +45,7 @@ class Length extends Property<LENGTH, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
+  var name;
 
   ///Class for length conversions, e.g. if you want to convert 1 meter in inches:
   ///```dart
@@ -52,8 +53,7 @@ class Length extends Property<LENGTH, double> {
   ///length.Convert(Unit(LENGTH.meters, value: 1));
   ///print(length.inches);
   /// ```
-  Length({this.significantFigures = 10, this.removeTrailingZeros = true}) {
-    name = PROPERTY.LENGTH;
+  Length({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.LENGTH}) {
     LENGTH.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: LENGTH.meters, leafNodes: [
       Node(coefficientProduct: 0.01, name: LENGTH.centimeters, leafNodes: [

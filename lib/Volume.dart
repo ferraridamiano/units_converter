@@ -41,6 +41,7 @@ class Volume extends Property<VOLUME, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
+  var name;
 
   ///Class for volume conversions, e.g. if you want to convert 1 liter in US Gallons:
   ///```dart
@@ -48,8 +49,7 @@ class Volume extends Property<VOLUME, double> {
   ///volume.Convert(Unit(VOLUME.liters, value: 1));
   ///print(VOLUME.us_gallons);
   /// ```
-  Volume({this.significantFigures = 10, this.removeTrailingZeros = true}) {
-    name = PROPERTY.VOLUME;
+  Volume({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.VOLUME}) {
     VOLUME.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: VOLUME.cubic_meters, leafNodes: [
       Node(coefficientProduct: 1e-3, name: VOLUME.liters, leafNodes: [

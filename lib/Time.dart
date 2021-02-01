@@ -43,6 +43,7 @@ class Time extends Property<TIME, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
+  var name;
 
   ///Class for time conversions, e.g. if you want to convert 1 hour in seconds:
   ///```dart
@@ -50,8 +51,7 @@ class Time extends Property<TIME, double> {
   ///time.Convert(Unit(TIME.hours, value: 1));
   ///print(TIME.seconds);
   /// ```
-  Time({this.significantFigures = 10, this.removeTrailingZeros = true}) {
-    name = PROPERTY.TIME;
+  Time({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.TIME}) {
     TIME.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name:  TIME.seconds,
         leafNodes: [

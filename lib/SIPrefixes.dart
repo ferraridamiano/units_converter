@@ -55,6 +55,7 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
+  var name;
 
   ///Class for si_prefixes conversions, e.g. if you want to convert 1 base unit in milli:
   ///```dart
@@ -62,8 +63,7 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
   ///si_prefixes.Convert(Unit(SI_PREFIXES.base, value: 1));
   ///print(SI_PREFIXES.milli);
   /// ```
-  SIPrefixes({this.significantFigures = 10, this.removeTrailingZeros = true}) {
-    name = PROPERTY.SI_PREFIXES;
+  SIPrefixes({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.SI_PREFIXES}) {
     SI_PREFIXES.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: SI_PREFIXES.base, leafNodes: [
       Node(

@@ -25,6 +25,7 @@ class Pressure extends Property<PRESSURE, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
+  var name;
 
   ///Class for pressure conversions, e.g. if you want to convert 1 bar in atmosphere:
   ///```dart
@@ -32,8 +33,7 @@ class Pressure extends Property<PRESSURE, double> {
   ///pressure.Convert(Unit(PRESSURE.bar, value: 1));
   ///print(PRESSURE.atmosphere);
   /// ```
-  Pressure({this.significantFigures = 10, this.removeTrailingZeros = true}) {
-    name = PROPERTY.PRESSURE;
+  Pressure({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.PRESSURE}) {
     PRESSURE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: PRESSURE.pascal, leafNodes: [
       Node(coefficientProduct: 101325.0, name: PRESSURE.atmosphere, leafNodes: [

@@ -35,6 +35,7 @@ class Mass extends Property<MASS, double>{
 
   int significantFigures;
   bool removeTrailingZeros;
+  var name;
 
   ///Class for mass conversions, e.g. if you want to convert 1 gram in ounces:
   ///```dart
@@ -42,8 +43,7 @@ class Mass extends Property<MASS, double>{
   ///mass.Convert(Unit(MASS.grams, value: 1));
   ///print(MASS.ounces);
   /// ```
-  Mass({this.significantFigures = 10, this.removeTrailingZeros = true}) {
-    name = PROPERTY.MASS;
+  Mass({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.MASS}) {
     MASS.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: MASS.grams, leafNodes: [
       Node(

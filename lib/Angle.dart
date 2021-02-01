@@ -21,6 +21,7 @@ class Angle extends Property<ANGLE, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
+  var name;
 
   ///Class for angle conversions, e.g. if you want to convert 1 radiant in degree:
   ///```dart
@@ -28,8 +29,7 @@ class Angle extends Property<ANGLE, double> {
   ///angle.Convert(Unit(ANGLE.radians, value: 1));
   ///print(ANGLE.degree);
   /// ```
-  Angle({this.significantFigures = 10, this.removeTrailingZeros = true}) {
-    name = PROPERTY.ANGLE;
+  Angle({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.ANGLE}) {
     ANGLE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: ANGLE.degree, leafNodes: [
       Node(
