@@ -23,7 +23,6 @@ class Torque extends Property<TORQUE, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
-  var name;
 
   ///Class for torque conversions, e.g. if you want to convert 1 square meters in acres:
   ///```dart
@@ -31,7 +30,8 @@ class Torque extends Property<TORQUE, double> {
   ///torque.Convert(Unit(TORQUE.square_meters, value: 1));
   ///print(TORQUE.acres);
   /// ```
-  Torque({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.TORQUE}) {
+  Torque({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.TORQUE;
     TORQUE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: TORQUE.newton_meter,
         leafNodes: [

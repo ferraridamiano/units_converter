@@ -27,7 +27,6 @@ class Power extends Property<POWER, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
-  var name;
 
   ///Class for power conversions, e.g. if you want to convert 1 kilowatt in european horse power:
   ///```dart
@@ -35,7 +34,8 @@ class Power extends Property<POWER, double> {
   ///power.Convert(Unit(POWER.kilowatt, value: 1));
   ///print(POWER.european_horse_power);
   /// ```
-  Power({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.POWER}) {
+  Power({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.POWER;
     POWER.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: POWER.watt, leafNodes: [
       Node(

@@ -21,7 +21,6 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
-  var name;
 
   ///Class for fuel_consumption conversions, e.g. if you want to convert 1 kilometers per liter in liters per 100 km:
   ///```dart
@@ -29,7 +28,8 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
   ///fuel_consumption.Convert(Unit(FUEL_CONSUMPTION.kilometers_per_liter, value: 1));
   ///print(FUEL_CONSUMPTION.liters_per_100_km);
   /// ```
-  FuelConsumption({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.FUEL_CONSUMPTION}) {
+  FuelConsumption({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.FUEL_CONSUMPTION;
     FUEL_CONSUMPTION.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: FUEL_CONSUMPTION.kilometers_per_liter, leafNodes: [
       Node(

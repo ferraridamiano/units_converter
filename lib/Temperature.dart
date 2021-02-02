@@ -27,7 +27,6 @@ class Temperature extends Property<TEMPERATURE, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
-  var name;
 
   ///Class for temperature conversions, e.g. if you want to convert 1 celsius in kelvin:
   ///```dart
@@ -35,7 +34,8 @@ class Temperature extends Property<TEMPERATURE, double> {
   ///temperature.Convert(Unit(TEMPERATURE.celsius, value: 1));
   ///print(TEMPERATURE.kelvin);
   /// ```
-  Temperature({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.TEMPERATURE}) {
+  Temperature({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.TEMPERATURE;
     TEMPERATURE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: TEMPERATURE.fahrenheit, leafNodes: [
       Node(coefficientProduct: 1.8, coefficientSum: 32.0, name: TEMPERATURE.celsius, leafNodes: [

@@ -23,7 +23,6 @@ class Force extends Property<FORCE, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
-  var name;
 
   ///Class for force conversions, e.g. if you want to convert 1 newton in pound force:
   ///```dart
@@ -31,7 +30,8 @@ class Force extends Property<FORCE, double> {
   ///force.Convert(Unit(FORCE.newton, value: 1));
   ///print(FORCE.pound_force);
   /// ```
-  Force({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.FORCE}) {
+  Force({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.FORCE;
     FORCE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: FORCE.newton, leafNodes: [
       Node(

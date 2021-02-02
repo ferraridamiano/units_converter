@@ -21,7 +21,6 @@ class Energy extends Property<ENERGY, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
-  var name;
 
   ///Class for energy conversions, e.g. if you want to convert 1 joule in kilowatt hours:
   ///```dart
@@ -29,7 +28,8 @@ class Energy extends Property<ENERGY, double> {
   ///energy.Convert(Unit(ENERGY.joules, value: 1));
   ///print(ENERGY.kilowatt_hours);
   /// ```
-  Energy({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.ENERGY}) {
+  Energy({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.ENERGY;
     ENERGY.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: ENERGY.joules, leafNodes: [
       Node(

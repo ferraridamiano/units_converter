@@ -19,15 +19,14 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
     NUMERAL_SYSTEMS.binary: '₂',
   };
 
-  var name;
-
   ///Class for numeralSystems conversions, e.g. if you want to convert 10 (decimal) in binary:
   ///```dart
   ///var numeralSystems = NumeralSystems();
   ///numeralSystems.Convert(Unit(NUMERAL_SYSTEMS.decimal, stringValue: '10'));
   ///print(NUMERAL_SYSTEMS.binary.stringValue);
   /// ```
-  NumeralSystems({this.name = PROPERTY.NUMERAL_SYSTEMS}) {
+  NumeralSystems({name}) {
+    this.name = name ?? PROPERTY.NUMERAL_SYSTEMS;
     NUMERAL_SYSTEMS.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: NUMERAL_SYSTEMS.decimal, base: 10, leafNodes: [
       Node(

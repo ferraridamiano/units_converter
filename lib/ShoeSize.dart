@@ -33,7 +33,6 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
-  var name;
 
   ///Class for ShoeSize conversions, e.g. if you want to convert 1 centimeter in eu shoes size:
   ///```dart
@@ -41,7 +40,8 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
   ///ShoeSize.Convert(Unit(SHOE_SIZE.centimeters, value: 1));
   ///print(SHOE_SIZE.eu_china);
   /// ```
-  ShoeSize({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.SHOE_SIZE}) {
+  ShoeSize({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.SHOE_SIZE;
     SHOE_SIZE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: SHOE_SIZE.centimeters, leafNodes: [
       Node(

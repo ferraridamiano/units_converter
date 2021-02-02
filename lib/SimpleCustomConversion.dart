@@ -8,7 +8,6 @@ class SimpleCustomConversion extends Property<String, double> {
   final Map<String, double> mapConversion;
   int significantFigures;
   bool removeTrailingZeros;
-  var name;
 
   ///Class for simple custom conversions. E.g.:
   ///```dart
@@ -32,7 +31,8 @@ class SimpleCustomConversion extends Property<String, double> {
   ///Unit usd = customConversion.getUnit('USD');
   ///print('1€ = ${usd.stringValue}${usd.symbol}');
   /// ```
-  SimpleCustomConversion(this.mapConversion, {this.mapSymbols, this.significantFigures = 10, this.removeTrailingZeros = true, this.name}) {
+  SimpleCustomConversion(this.mapConversion, {this.mapSymbols, this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name;
     assert(mapConversion.containsValue(1), 'One conversion coefficient must be 1, this will considered the base unit');
     mapConversion.keys.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols!=null ? mapSymbols[element] : null)));
     var baseUnit = mapConversion.keys.firstWhere((element) => mapConversion[element] == 1); //take the base unit

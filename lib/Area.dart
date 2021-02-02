@@ -35,7 +35,6 @@ class Area extends Property<AREA, double> {
 
   int significantFigures;
   bool removeTrailingZeros;
-  var name;
 
   ///Class for area conversions, e.g. if you want to convert 1 square meters in acres:
   ///```dart
@@ -43,7 +42,8 @@ class Area extends Property<AREA, double> {
   ///area.Convert(Unit(AREA.square_meters, value: 1));
   ///print(AREA.acres);
   /// ```
-  Area({this.significantFigures = 10, this.removeTrailingZeros = true, this.name = PROPERTY.AREA}) {
+  Area({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.AREA;
     AREA.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: AREA.square_meters, leafNodes: [
       Node(coefficientProduct: 1e-4, name: AREA.square_centimeters, leafNodes: [
