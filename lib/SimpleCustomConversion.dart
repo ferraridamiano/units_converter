@@ -2,7 +2,7 @@ import 'Property.dart';
 import 'UtilsConversion.dart';
 import 'Unit.dart';
 
-class SimpleCustomConversion extends Property<String, double> {
+class SimpleCustomConversion extends Property<dynamic, double> {
   //Map between units and its symbol
   final Map<dynamic, String> mapSymbols;
   final Map<dynamic, double> mapConversion;
@@ -54,7 +54,7 @@ class SimpleCustomConversion extends Property<String, double> {
 
   ///Converts a unit with a specific name and value to all other units
   @override
-  void convert(String name, double value) {
+  void convert(var name, double value) {
     assert(mapConversion.keys.contains(name));
     super.convert(name, value);
     if (value == null) return;
