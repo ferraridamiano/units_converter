@@ -4,8 +4,8 @@ import 'Unit.dart';
 
 class SimpleCustomConversion extends Property<String, double> {
   //Map between units and its symbol
-  final Map<String, String> mapSymbols;
-  final Map<String, double> mapConversion;
+  final Map<dynamic, String> mapSymbols;
+  final Map<dynamic, double> mapConversion;
   int significantFigures;
   bool removeTrailingZeros;
 
@@ -34,12 +34,19 @@ class SimpleCustomConversion extends Property<String, double> {
   SimpleCustomConversion(this.mapConversion, {this.mapSymbols, this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     this.name = name;
     assert(mapConversion.containsValue(1), 'One conversion coefficient must be 1, this will considered the base unit');
-    mapConversion.keys.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols!=null ? mapSymbols[element] : null)));
+    if (mapSymbols != null) {
+      mapConversion.keys.forEach((element) {
+        assert(mapSymbols.keys.contains(element), 'The key of mapConversion must be the same key of mapSymbols');
+      });
+    }
+
+    mapConversion.keys.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols != null ? mapSymbols[element] : null)));
     var baseUnit = mapConversion.keys.firstWhere((element) => mapConversion[element] == 1); //take the base unit
     List<Node> leafNodes = [];
     mapConversion.forEach((key, value) {
-      if (key != baseUnit) {//I'm just interested in the relationship between the base unit and the other units.
-        leafNodes.add(Node(name: key, coefficientProduct: 1/value));
+      if (key != baseUnit) {
+        //I'm just interested in the relationship between the base unit and the other units.
+        leafNodes.add(Node(name: key, coefficientProduct: 1 / value));
       }
     });
     unit_conversion = Node(name: baseUnit, leafNodes: leafNodes);
