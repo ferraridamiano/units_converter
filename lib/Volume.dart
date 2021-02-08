@@ -110,23 +110,18 @@ class Volume extends Property<VOLUME, double> {
     }
   }
 
-  Unit get cubic_meters => _getUnit(VOLUME.cubic_meters);
-  Unit get liters => _getUnit(VOLUME.liters);
-  Unit get imperial_gallons => _getUnit(VOLUME.imperial_gallons);
-  Unit get us_gallons => _getUnit(VOLUME.us_gallons);
-  Unit get imperial_pints => _getUnit(VOLUME.imperial_pints);
-  Unit get us_pints => _getUnit(VOLUME.us_pints);
-  Unit get milliliters => _getUnit(VOLUME.milliliters);
-  Unit get tablespoons_us => _getUnit(VOLUME.tablespoons_us);
-  Unit get australian_tablespoons => _getUnit(VOLUME.australian_tablespoons);
-  Unit get cups => _getUnit(VOLUME.cups);
-  Unit get cubic_centimeters => _getUnit(VOLUME.cubic_centimeters);
-  Unit get cubic_feet => _getUnit(VOLUME.cubic_feet);
-  Unit get cubic_inches => _getUnit(VOLUME.cubic_inches);
-  Unit get cubic_millimeters => _getUnit(VOLUME.cubic_millimeters);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get cubic_meters => getUnit(VOLUME.cubic_meters);
+  Unit get liters => getUnit(VOLUME.liters);
+  Unit get imperial_gallons => getUnit(VOLUME.imperial_gallons);
+  Unit get us_gallons => getUnit(VOLUME.us_gallons);
+  Unit get imperial_pints => getUnit(VOLUME.imperial_pints);
+  Unit get us_pints => getUnit(VOLUME.us_pints);
+  Unit get milliliters => getUnit(VOLUME.milliliters);
+  Unit get tablespoons_us => getUnit(VOLUME.tablespoons_us);
+  Unit get australian_tablespoons => getUnit(VOLUME.australian_tablespoons);
+  Unit get cups => getUnit(VOLUME.cups);
+  Unit get cubic_centimeters => getUnit(VOLUME.cubic_centimeters);
+  Unit get cubic_feet => getUnit(VOLUME.cubic_feet);
+  Unit get cubic_inches => getUnit(VOLUME.cubic_inches);
+  Unit get cubic_millimeters => getUnit(VOLUME.cubic_millimeters);
 }

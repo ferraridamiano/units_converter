@@ -62,14 +62,9 @@ class Speed extends Property<SPEED, double> {
     }
   }
 
-  Unit get meters_per_second => _getUnit(SPEED.meters_per_second);
-  Unit get kilometers_per_hour => _getUnit(SPEED.kilometers_per_hour);
-  Unit get miles_per_hour => _getUnit(SPEED.miles_per_hour);
-  Unit get knots => _getUnit(SPEED.knots);
-  Unit get feets_per_second => _getUnit(SPEED.feets_per_second);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get meters_per_second => getUnit(SPEED.meters_per_second);
+  Unit get kilometers_per_hour => getUnit(SPEED.kilometers_per_hour);
+  Unit get miles_per_hour => getUnit(SPEED.miles_per_hour);
+  Unit get knots => getUnit(SPEED.knots);
+  Unit get feets_per_second => getUnit(SPEED.feets_per_second);
 }

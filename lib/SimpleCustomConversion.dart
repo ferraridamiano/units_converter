@@ -63,9 +63,4 @@ class SimpleCustomConversion extends Property<dynamic, double> {
       unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
     }
   }
-
-  ///Returns the Unit with the corresponding name
-  Unit getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
 }

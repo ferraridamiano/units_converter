@@ -63,14 +63,9 @@ class Force extends Property<FORCE, double> {
     }
   }
 
-  Unit get newton => _getUnit(FORCE.newton);
-  Unit get dyne => _getUnit(FORCE.dyne);
-  Unit get pound_force => _getUnit(FORCE.pound_force);
-  Unit get kilogram_force => _getUnit(FORCE.kilogram_force);
-  Unit get poundal => _getUnit(FORCE.poundal);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get newton => getUnit(FORCE.newton);
+  Unit get dyne => getUnit(FORCE.dyne);
+  Unit get pound_force => getUnit(FORCE.pound_force);
+  Unit get kilogram_force => getUnit(FORCE.kilogram_force);
+  Unit get poundal => getUnit(FORCE.poundal);
 }

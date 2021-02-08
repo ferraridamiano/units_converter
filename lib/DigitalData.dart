@@ -174,36 +174,31 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
     }
   }
 
-  Unit get bit => _getUnit(DIGITAL_DATA.bit);
-  Unit get nibble => _getUnit(DIGITAL_DATA.nibble);
-  Unit get kilobit => _getUnit(DIGITAL_DATA.kilobit);
-  Unit get megabit => _getUnit(DIGITAL_DATA.megabit);
-  Unit get gigabit => _getUnit(DIGITAL_DATA.gigabit);
-  Unit get terabit => _getUnit(DIGITAL_DATA.terabit);
-  Unit get petabit => _getUnit(DIGITAL_DATA.petabit);
-  Unit get exabit => _getUnit(DIGITAL_DATA.exabit);
-  Unit get kibibit => _getUnit(DIGITAL_DATA.kibibit);
-  Unit get mebibit => _getUnit(DIGITAL_DATA.mebibit);
-  Unit get gibibit => _getUnit(DIGITAL_DATA.gibibit);
-  Unit get tebibit => _getUnit(DIGITAL_DATA.tebibit);
-  Unit get pebibit => _getUnit(DIGITAL_DATA.pebibit);
-  Unit get exbibit => _getUnit(DIGITAL_DATA.exbibit);
-  Unit get byte => _getUnit(DIGITAL_DATA.byte);
-  Unit get kilobyte => _getUnit(DIGITAL_DATA.kilobyte);
-  Unit get megabyte => _getUnit(DIGITAL_DATA.megabyte);
-  Unit get gigabyte => _getUnit(DIGITAL_DATA.gigabyte);
-  Unit get terabyte => _getUnit(DIGITAL_DATA.terabyte);
-  Unit get petabyte => _getUnit(DIGITAL_DATA.petabyte);
-  Unit get exabyte => _getUnit(DIGITAL_DATA.exabyte);
-  Unit get kibibyte => _getUnit(DIGITAL_DATA.kibibyte);
-  Unit get mebibyte => _getUnit(DIGITAL_DATA.mebibyte);
-  Unit get gibibyte => _getUnit(DIGITAL_DATA.gibibyte);
-  Unit get tebibyte => _getUnit(DIGITAL_DATA.tebibyte);
-  Unit get pebibyte => _getUnit(DIGITAL_DATA.pebibyte);
-  Unit get exbibyte => _getUnit(DIGITAL_DATA.exbibyte);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get bit => getUnit(DIGITAL_DATA.bit);
+  Unit get nibble => getUnit(DIGITAL_DATA.nibble);
+  Unit get kilobit => getUnit(DIGITAL_DATA.kilobit);
+  Unit get megabit => getUnit(DIGITAL_DATA.megabit);
+  Unit get gigabit => getUnit(DIGITAL_DATA.gigabit);
+  Unit get terabit => getUnit(DIGITAL_DATA.terabit);
+  Unit get petabit => getUnit(DIGITAL_DATA.petabit);
+  Unit get exabit => getUnit(DIGITAL_DATA.exabit);
+  Unit get kibibit => getUnit(DIGITAL_DATA.kibibit);
+  Unit get mebibit => getUnit(DIGITAL_DATA.mebibit);
+  Unit get gibibit => getUnit(DIGITAL_DATA.gibibit);
+  Unit get tebibit => getUnit(DIGITAL_DATA.tebibit);
+  Unit get pebibit => getUnit(DIGITAL_DATA.pebibit);
+  Unit get exbibit => getUnit(DIGITAL_DATA.exbibit);
+  Unit get byte => getUnit(DIGITAL_DATA.byte);
+  Unit get kilobyte => getUnit(DIGITAL_DATA.kilobyte);
+  Unit get megabyte => getUnit(DIGITAL_DATA.megabyte);
+  Unit get gigabyte => getUnit(DIGITAL_DATA.gigabyte);
+  Unit get terabyte => getUnit(DIGITAL_DATA.terabyte);
+  Unit get petabyte => getUnit(DIGITAL_DATA.petabyte);
+  Unit get exabyte => getUnit(DIGITAL_DATA.exabyte);
+  Unit get kibibyte => getUnit(DIGITAL_DATA.kibibyte);
+  Unit get mebibyte => getUnit(DIGITAL_DATA.mebibyte);
+  Unit get gibibyte => getUnit(DIGITAL_DATA.gibibyte);
+  Unit get tebibyte => getUnit(DIGITAL_DATA.tebibyte);
+  Unit get pebibyte => getUnit(DIGITAL_DATA.pebibyte);
+  Unit get exbibyte => getUnit(DIGITAL_DATA.exbibyte);
 }

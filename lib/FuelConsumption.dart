@@ -59,13 +59,8 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
     }
   }
 
-  Unit get kilometers_per_liter => _getUnit(FUEL_CONSUMPTION.kilometers_per_liter);
-  Unit get liters_per_100_km => _getUnit(FUEL_CONSUMPTION.liters_per_100_km);
-  Unit get miles_per_US_gallon => _getUnit(FUEL_CONSUMPTION.miles_per_US_gallon);
-  Unit get miles_per_imperial_gallon => _getUnit(FUEL_CONSUMPTION.miles_per_imperial_gallon);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get kilometers_per_liter => getUnit(FUEL_CONSUMPTION.kilometers_per_liter);
+  Unit get liters_per_100_km => getUnit(FUEL_CONSUMPTION.liters_per_100_km);
+  Unit get miles_per_US_gallon => getUnit(FUEL_CONSUMPTION.miles_per_US_gallon);
+  Unit get miles_per_imperial_gallon => getUnit(FUEL_CONSUMPTION.miles_per_imperial_gallon);
 }

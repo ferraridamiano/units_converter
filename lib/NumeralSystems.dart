@@ -73,13 +73,8 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
     }
   }
 
-  Unit get decimal => _getUnit(NUMERAL_SYSTEMS.decimal);
-  Unit get hexadecimal => _getUnit(NUMERAL_SYSTEMS.hexadecimal);
-  Unit get octal => _getUnit(NUMERAL_SYSTEMS.octal);
-  Unit get binary => _getUnit(NUMERAL_SYSTEMS.binary);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get decimal => getUnit(NUMERAL_SYSTEMS.decimal);
+  Unit get hexadecimal => getUnit(NUMERAL_SYSTEMS.hexadecimal);
+  Unit get octal => getUnit(NUMERAL_SYSTEMS.octal);
+  Unit get binary => getUnit(NUMERAL_SYSTEMS.binary);
 }

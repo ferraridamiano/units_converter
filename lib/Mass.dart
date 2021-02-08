@@ -17,7 +17,7 @@ enum MASS {
   centigrams,
 }
 
-class Mass extends Property<MASS, double>{
+class Mass extends Property<MASS, double> {
   //Map between units and its symbol
   final Map<MASS, String> mapSymbols = {
     MASS.grams: 'g',
@@ -96,20 +96,15 @@ class Mass extends Property<MASS, double>{
     }
   }
 
-  Unit get grams => _getUnit(MASS.grams);
-  Unit get ettograms => _getUnit(MASS.ettograms);
-  Unit get kilograms => _getUnit(MASS.kilograms);
-  Unit get pounds => _getUnit(MASS.pounds);
-  Unit get ounces => _getUnit(MASS.ounces);
-  Unit get quintals => _getUnit(MASS.quintals);
-  Unit get tons => _getUnit(MASS.tons);
-  Unit get milligrams => _getUnit(MASS.milligrams);
-  Unit get uma => _getUnit(MASS.uma);
-  Unit get carats => _getUnit(MASS.carats);
-  Unit get centigrams => _getUnit(MASS.centigrams);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get grams => getUnit(MASS.grams);
+  Unit get ettograms => getUnit(MASS.ettograms);
+  Unit get kilograms => getUnit(MASS.kilograms);
+  Unit get pounds => getUnit(MASS.pounds);
+  Unit get ounces => getUnit(MASS.ounces);
+  Unit get quintals => getUnit(MASS.quintals);
+  Unit get tons => getUnit(MASS.tons);
+  Unit get milligrams => getUnit(MASS.milligrams);
+  Unit get uma => getUnit(MASS.uma);
+  Unit get carats => getUnit(MASS.carats);
+  Unit get centigrams => getUnit(MASS.centigrams);
 }

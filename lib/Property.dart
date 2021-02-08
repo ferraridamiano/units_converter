@@ -56,4 +56,9 @@ class Property<K, V> {
   List<Unit> getAll() {
     return unitList;
   }
+
+  ///Returns the Unit with the corresponding name
+  Unit getUnit(var name) {
+    return unitList.where((element) => element.name == name).single;
+  }
 }

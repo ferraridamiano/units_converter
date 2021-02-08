@@ -118,25 +118,20 @@ class Length extends Property<LENGTH, double> {
     }
   }
 
-  Unit get meters => _getUnit(LENGTH.meters);
-  Unit get centimeters => _getUnit(LENGTH.centimeters);
-  Unit get inches => _getUnit(LENGTH.inches);
-  Unit get feet => _getUnit(LENGTH.feet);
-  Unit get nautical_miles => _getUnit(LENGTH.nautical_miles);
-  Unit get yards => _getUnit(LENGTH.yards);
-  Unit get miles => _getUnit(LENGTH.miles);
-  Unit get millimeters => _getUnit(LENGTH.millimeters);
-  Unit get micrometers => _getUnit(LENGTH.micrometers);
-  Unit get nanometers => _getUnit(LENGTH.nanometers);
-  Unit get angstroms => _getUnit(LENGTH.angstroms);
-  Unit get picometers => _getUnit(LENGTH.picometers);
-  Unit get kilometers => _getUnit(LENGTH.kilometers);
-  Unit get astronomical_units => _getUnit(LENGTH.astronomical_units);
-  Unit get light_years => _getUnit(LENGTH.light_years);
-  Unit get parsec => _getUnit(LENGTH.parsec);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get meters => getUnit(LENGTH.meters);
+  Unit get centimeters => getUnit(LENGTH.centimeters);
+  Unit get inches => getUnit(LENGTH.inches);
+  Unit get feet => getUnit(LENGTH.feet);
+  Unit get nautical_miles => getUnit(LENGTH.nautical_miles);
+  Unit get yards => getUnit(LENGTH.yards);
+  Unit get miles => getUnit(LENGTH.miles);
+  Unit get millimeters => getUnit(LENGTH.millimeters);
+  Unit get micrometers => getUnit(LENGTH.micrometers);
+  Unit get nanometers => getUnit(LENGTH.nanometers);
+  Unit get angstroms => getUnit(LENGTH.angstroms);
+  Unit get picometers => getUnit(LENGTH.picometers);
+  Unit get kilometers => getUnit(LENGTH.kilometers);
+  Unit get astronomical_units => getUnit(LENGTH.astronomical_units);
+  Unit get light_years => getUnit(LENGTH.light_years);
+  Unit get parsec => getUnit(LENGTH.parsec);
 }

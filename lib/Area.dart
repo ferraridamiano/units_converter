@@ -94,20 +94,15 @@ class Area extends Property<AREA, double> {
     }
   }
 
-  Unit get square_meters => _getUnit(AREA.square_meters);
-  Unit get square_centimeters => _getUnit(AREA.square_centimeters);
-  Unit get square_inches => _getUnit(AREA.square_inches);
-  Unit get square_feet => _getUnit(AREA.square_feet);
-  Unit get square_miles => _getUnit(AREA.square_miles);
-  Unit get square_yard => _getUnit(AREA.square_yard);
-  Unit get square_millimeters => _getUnit(AREA.square_millimeters);
-  Unit get square_kilometers => _getUnit(AREA.square_kilometers);
-  Unit get hectares => _getUnit(AREA.hectares);
-  Unit get acres => _getUnit(AREA.acres);
-  Unit get are => _getUnit(AREA.are);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get square_meters => getUnit(AREA.square_meters);
+  Unit get square_centimeters => getUnit(AREA.square_centimeters);
+  Unit get square_inches => getUnit(AREA.square_inches);
+  Unit get square_feet => getUnit(AREA.square_feet);
+  Unit get square_miles => getUnit(AREA.square_miles);
+  Unit get square_yard => getUnit(AREA.square_yard);
+  Unit get square_millimeters => getUnit(AREA.square_millimeters);
+  Unit get square_kilometers => getUnit(AREA.square_kilometers);
+  Unit get hectares => getUnit(AREA.hectares);
+  Unit get acres => getUnit(AREA.acres);
+  Unit get are => getUnit(AREA.are);
 }

@@ -66,15 +66,10 @@ class Pressure extends Property<PRESSURE, double> {
     }
   }
 
-  Unit get pascal => _getUnit(PRESSURE.pascal);
-  Unit get atmosphere => _getUnit(PRESSURE.atmosphere);
-  Unit get bar => _getUnit(PRESSURE.bar);
-  Unit get millibar => _getUnit(PRESSURE.millibar);
-  Unit get psi => _getUnit(PRESSURE.psi);
-  Unit get torr => _getUnit(PRESSURE.torr);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get pascal => getUnit(PRESSURE.pascal);
+  Unit get atmosphere => getUnit(PRESSURE.atmosphere);
+  Unit get bar => getUnit(PRESSURE.bar);
+  Unit get millibar => getUnit(PRESSURE.millibar);
+  Unit get psi => getUnit(PRESSURE.psi);
+  Unit get torr => getUnit(PRESSURE.torr);
 }

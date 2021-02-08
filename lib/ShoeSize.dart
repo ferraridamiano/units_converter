@@ -99,19 +99,14 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
     }
   }
 
-  Unit get centimeters => _getUnit(SHOE_SIZE.centimeters);
-  Unit get inches => _getUnit(SHOE_SIZE.inches);
-  Unit get eu_china => _getUnit(SHOE_SIZE.eu_china);
-  Unit get uk_india_child => _getUnit(SHOE_SIZE.uk_india_child);
-  Unit get uk_india_man => _getUnit(SHOE_SIZE.uk_india_man);
-  Unit get uk_india_woman => _getUnit(SHOE_SIZE.uk_india_woman);
-  Unit get usa_canada_child => _getUnit(SHOE_SIZE.usa_canada_child);
-  Unit get usa_canada_man => _getUnit(SHOE_SIZE.usa_canada_man);
-  Unit get usa_canada_woman => _getUnit(SHOE_SIZE.usa_canada_woman);
-  Unit get japan => _getUnit(SHOE_SIZE.japan);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get centimeters => getUnit(SHOE_SIZE.centimeters);
+  Unit get inches => getUnit(SHOE_SIZE.inches);
+  Unit get eu_china => getUnit(SHOE_SIZE.eu_china);
+  Unit get uk_india_child => getUnit(SHOE_SIZE.uk_india_child);
+  Unit get uk_india_man => getUnit(SHOE_SIZE.uk_india_man);
+  Unit get uk_india_woman => getUnit(SHOE_SIZE.uk_india_woman);
+  Unit get usa_canada_child => getUnit(SHOE_SIZE.usa_canada_child);
+  Unit get usa_canada_man => getUnit(SHOE_SIZE.usa_canada_man);
+  Unit get usa_canada_woman => getUnit(SHOE_SIZE.usa_canada_woman);
+  Unit get japan => getUnit(SHOE_SIZE.japan);
 }

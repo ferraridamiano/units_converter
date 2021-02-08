@@ -58,13 +58,9 @@ class Angle extends Property<ANGLE, double> {
     }
   }
 
-  Unit get degree => _getUnit(ANGLE.degree);
-  Unit get minutes => _getUnit(ANGLE.minutes);
-  Unit get seconds => _getUnit(ANGLE.seconds);
-  Unit get radians => _getUnit(ANGLE.radians);
+  Unit get degree => getUnit(ANGLE.degree);
+  Unit get minutes => getUnit(ANGLE.minutes);
+  Unit get seconds => getUnit(ANGLE.seconds);
+  Unit get radians => getUnit(ANGLE.radians);
 
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
 }

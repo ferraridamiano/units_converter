@@ -76,16 +76,11 @@ class Temperature extends Property<TEMPERATURE, double> {
     }
   }
 
-  Unit get fahrenheit => _getUnit(TEMPERATURE.fahrenheit);
-  Unit get celsius => _getUnit(TEMPERATURE.celsius);
-  Unit get kelvin => _getUnit(TEMPERATURE.kelvin);
-  Unit get reamur => _getUnit(TEMPERATURE.reamur);
-  Unit get romer => _getUnit(TEMPERATURE.romer);
-  Unit get delisle => _getUnit(TEMPERATURE.delisle);
-  Unit get rankine => _getUnit(TEMPERATURE.rankine);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get fahrenheit => getUnit(TEMPERATURE.fahrenheit);
+  Unit get celsius => getUnit(TEMPERATURE.celsius);
+  Unit get kelvin => getUnit(TEMPERATURE.kelvin);
+  Unit get reamur => getUnit(TEMPERATURE.reamur);
+  Unit get romer => getUnit(TEMPERATURE.romer);
+  Unit get delisle => getUnit(TEMPERATURE.delisle);
+  Unit get rankine => getUnit(TEMPERATURE.rankine);
 }

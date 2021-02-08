@@ -58,13 +58,8 @@ class Energy extends Property<ENERGY, double> {
     }
   }
 
-  Unit get joules => _getUnit(ENERGY.joules);
-  Unit get calories => _getUnit(ENERGY.calories);
-  Unit get kilowatt_hours => _getUnit(ENERGY.kilowatt_hours);
-  Unit get electronvolts => _getUnit(ENERGY.electronvolts);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get joules => getUnit(ENERGY.joules);
+  Unit get calories => getUnit(ENERGY.calories);
+  Unit get kilowatt_hours => getUnit(ENERGY.kilowatt_hours);
+  Unit get electronvolts => getUnit(ENERGY.electronvolts);
 }

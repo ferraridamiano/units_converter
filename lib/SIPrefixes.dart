@@ -160,30 +160,25 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
     }
   }
 
-  Unit get base => _getUnit(SI_PREFIXES.base);
-  Unit get deca => _getUnit(SI_PREFIXES.deca);
-  Unit get hecto => _getUnit(SI_PREFIXES.hecto);
-  Unit get kilo => _getUnit(SI_PREFIXES.kilo);
-  Unit get mega => _getUnit(SI_PREFIXES.mega);
-  Unit get giga => _getUnit(SI_PREFIXES.giga);
-  Unit get tera => _getUnit(SI_PREFIXES.tera);
-  Unit get peta => _getUnit(SI_PREFIXES.peta);
-  Unit get exa => _getUnit(SI_PREFIXES.exa);
-  Unit get zetta => _getUnit(SI_PREFIXES.zetta);
-  Unit get yotta => _getUnit(SI_PREFIXES.yotta);
-  Unit get deci => _getUnit(SI_PREFIXES.deci);
-  Unit get centi => _getUnit(SI_PREFIXES.centi);
-  Unit get milli => _getUnit(SI_PREFIXES.milli);
-  Unit get micro => _getUnit(SI_PREFIXES.micro);
-  Unit get nano => _getUnit(SI_PREFIXES.nano);
-  Unit get pico => _getUnit(SI_PREFIXES.pico);
-  Unit get femto => _getUnit(SI_PREFIXES.femto);
-  Unit get atto => _getUnit(SI_PREFIXES.atto);
-  Unit get zepto => _getUnit(SI_PREFIXES.zepto);
-  Unit get yocto => _getUnit(SI_PREFIXES.yocto);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get base => getUnit(SI_PREFIXES.base);
+  Unit get deca => getUnit(SI_PREFIXES.deca);
+  Unit get hecto => getUnit(SI_PREFIXES.hecto);
+  Unit get kilo => getUnit(SI_PREFIXES.kilo);
+  Unit get mega => getUnit(SI_PREFIXES.mega);
+  Unit get giga => getUnit(SI_PREFIXES.giga);
+  Unit get tera => getUnit(SI_PREFIXES.tera);
+  Unit get peta => getUnit(SI_PREFIXES.peta);
+  Unit get exa => getUnit(SI_PREFIXES.exa);
+  Unit get zetta => getUnit(SI_PREFIXES.zetta);
+  Unit get yotta => getUnit(SI_PREFIXES.yotta);
+  Unit get deci => getUnit(SI_PREFIXES.deci);
+  Unit get centi => getUnit(SI_PREFIXES.centi);
+  Unit get milli => getUnit(SI_PREFIXES.milli);
+  Unit get micro => getUnit(SI_PREFIXES.micro);
+  Unit get nano => getUnit(SI_PREFIXES.nano);
+  Unit get pico => getUnit(SI_PREFIXES.pico);
+  Unit get femto => getUnit(SI_PREFIXES.femto);
+  Unit get atto => getUnit(SI_PREFIXES.atto);
+  Unit get zepto => getUnit(SI_PREFIXES.zepto);
+  Unit get yocto => getUnit(SI_PREFIXES.yocto);
 }

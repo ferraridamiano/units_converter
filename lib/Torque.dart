@@ -33,12 +33,23 @@ class Torque extends Property<TORQUE, double> {
   Torque({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     this.name = name ?? PROPERTY.TORQUE;
     TORQUE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name: TORQUE.newton_meter,
-        leafNodes: [
-          Node(coefficientProduct: 1e-5, name: TORQUE.dyne_meter,),
-          Node(coefficientProduct: 1.35581794902490555 , name: TORQUE.pound_force_feet,),
-          Node(coefficientProduct: 9.807, name: TORQUE.kilogram_force_meter,),
-          Node(coefficientProduct: 0.138254954376, name: TORQUE.poundal_meter,),
+    unit_conversion = Node(name: TORQUE.newton_meter, leafNodes: [
+      Node(
+        coefficientProduct: 1e-5,
+        name: TORQUE.dyne_meter,
+      ),
+      Node(
+        coefficientProduct: 1.35581794902490555,
+        name: TORQUE.pound_force_feet,
+      ),
+      Node(
+        coefficientProduct: 9.807,
+        name: TORQUE.kilogram_force_meter,
+      ),
+      Node(
+        coefficientProduct: 0.138254954376,
+        name: TORQUE.poundal_meter,
+      ),
     ]);
   }
 
@@ -53,14 +64,9 @@ class Torque extends Property<TORQUE, double> {
     }
   }
 
-  Unit get newton_meter => _getUnit(TORQUE.newton_meter);
-  Unit get dyne_meter => _getUnit(TORQUE.dyne_meter);
-  Unit get pound_force_feet => _getUnit(TORQUE.pound_force_feet);
-  Unit get kilogram_force_meter => _getUnit(TORQUE.kilogram_force_meter);
-  Unit get poundal_meter => _getUnit(TORQUE.poundal_meter);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get newton_meter => getUnit(TORQUE.newton_meter);
+  Unit get dyne_meter => getUnit(TORQUE.dyne_meter);
+  Unit get pound_force_feet => getUnit(TORQUE.pound_force_feet);
+  Unit get kilogram_force_meter => getUnit(TORQUE.kilogram_force_meter);
+  Unit get poundal_meter => getUnit(TORQUE.poundal_meter);
 }

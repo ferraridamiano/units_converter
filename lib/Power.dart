@@ -76,16 +76,11 @@ class Power extends Property<POWER, double> {
     }
   }
 
-  Unit get watt => _getUnit(POWER.watt);
-  Unit get milliwatt => _getUnit(POWER.milliwatt);
-  Unit get kilowatt => _getUnit(POWER.kilowatt);
-  Unit get megawatt => _getUnit(POWER.megawatt);
-  Unit get gigawatt => _getUnit(POWER.gigawatt);
-  Unit get european_horse_power => _getUnit(POWER.european_horse_power);
-  Unit get imperial_horse_power => _getUnit(POWER.imperial_horse_power);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get watt => getUnit(POWER.watt);
+  Unit get milliwatt => getUnit(POWER.milliwatt);
+  Unit get kilowatt => getUnit(POWER.kilowatt);
+  Unit get megawatt => getUnit(POWER.megawatt);
+  Unit get gigawatt => getUnit(POWER.gigawatt);
+  Unit get european_horse_power => getUnit(POWER.european_horse_power);
+  Unit get imperial_horse_power => getUnit(POWER.imperial_horse_power);
 }

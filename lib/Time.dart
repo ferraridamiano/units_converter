@@ -53,27 +53,56 @@ class Time extends Property<TIME, double> {
   Time({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     this.name = name ?? PROPERTY.TIME;
     TIME.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name:  TIME.seconds,
-        leafNodes: [
-          Node(coefficientProduct: 1e-1, name: TIME.deciseconds,),
-          Node(coefficientProduct: 1e-2, name: TIME.centiseconds,),
-          Node(coefficientProduct: 1e-3, name: TIME.milliseconds,),
-          Node(coefficientProduct: 1e-6, name: TIME.microseconds,),
-          Node(coefficientProduct: 1e-9, name: TIME.nanoseconds,),
-          Node(coefficientProduct: 60.0, name: TIME.minutes,leafNodes: [
-            Node(coefficientProduct: 60.0, name: TIME.hours,leafNodes: [
-              Node(coefficientProduct: 24.0, name: TIME.days,leafNodes: [
-                Node(coefficientProduct: 7.0, name: TIME.weeks,),
-                Node(coefficientProduct: 365.0, name: TIME.years_365,leafNodes: [
-                  Node(coefficientProduct: 5.0, name: TIME.lustra,),
-                  Node(coefficientProduct: 10.0, name: TIME.decades,),
-                  Node(coefficientProduct: 100.0, name: TIME.centuries,),
-                  Node(coefficientProduct: 1000.0, name: TIME.millennia,),
-                ]),
-              ]),
+    unit_conversion = Node(name: TIME.seconds, leafNodes: [
+      Node(
+        coefficientProduct: 1e-1,
+        name: TIME.deciseconds,
+      ),
+      Node(
+        coefficientProduct: 1e-2,
+        name: TIME.centiseconds,
+      ),
+      Node(
+        coefficientProduct: 1e-3,
+        name: TIME.milliseconds,
+      ),
+      Node(
+        coefficientProduct: 1e-6,
+        name: TIME.microseconds,
+      ),
+      Node(
+        coefficientProduct: 1e-9,
+        name: TIME.nanoseconds,
+      ),
+      Node(coefficientProduct: 60.0, name: TIME.minutes, leafNodes: [
+        Node(coefficientProduct: 60.0, name: TIME.hours, leafNodes: [
+          Node(coefficientProduct: 24.0, name: TIME.days, leafNodes: [
+            Node(
+              coefficientProduct: 7.0,
+              name: TIME.weeks,
+            ),
+            Node(coefficientProduct: 365.0, name: TIME.years_365, leafNodes: [
+              Node(
+                coefficientProduct: 5.0,
+                name: TIME.lustra,
+              ),
+              Node(
+                coefficientProduct: 10.0,
+                name: TIME.decades,
+              ),
+              Node(
+                coefficientProduct: 100.0,
+                name: TIME.centuries,
+              ),
+              Node(
+                coefficientProduct: 1000.0,
+                name: TIME.millennia,
+              ),
             ]),
           ]),
-        ]);
+        ]),
+      ]),
+    ]);
   }
 
   ///Converts a unit with a specific name (e.g. TIME.days) and value to all other units
@@ -87,24 +116,19 @@ class Time extends Property<TIME, double> {
     }
   }
 
-  Unit get seconds => _getUnit(TIME.seconds);
-  Unit get deciseconds => _getUnit(TIME.deciseconds);
-  Unit get centiseconds => _getUnit(TIME.centiseconds);
-  Unit get milliseconds => _getUnit(TIME.milliseconds);
-  Unit get microseconds => _getUnit(TIME.microseconds);
-  Unit get nanoseconds => _getUnit(TIME.nanoseconds);
-  Unit get minutes => _getUnit(TIME.minutes);
-  Unit get hours => _getUnit(TIME.hours);
-  Unit get days => _getUnit(TIME.days);
-  Unit get weeks => _getUnit(TIME.weeks);
-  Unit get years_365 => _getUnit(TIME.years_365);
-  Unit get lustra => _getUnit(TIME.lustra);
-  Unit get decades => _getUnit(TIME.decades);
-  Unit get centuries => _getUnit(TIME.centuries);
-  Unit get millennia => _getUnit(TIME.millennia);
-
-  ///Returns the Unit with the corresponding name
-  Unit _getUnit(var name) {
-    return unitList.where((element) => element.name == name).first;
-  }
+  Unit get seconds => getUnit(TIME.seconds);
+  Unit get deciseconds => getUnit(TIME.deciseconds);
+  Unit get centiseconds => getUnit(TIME.centiseconds);
+  Unit get milliseconds => getUnit(TIME.milliseconds);
+  Unit get microseconds => getUnit(TIME.microseconds);
+  Unit get nanoseconds => getUnit(TIME.nanoseconds);
+  Unit get minutes => getUnit(TIME.minutes);
+  Unit get hours => getUnit(TIME.hours);
+  Unit get days => getUnit(TIME.days);
+  Unit get weeks => getUnit(TIME.weeks);
+  Unit get years_365 => getUnit(TIME.years_365);
+  Unit get lustra => getUnit(TIME.lustra);
+  Unit get decades => getUnit(TIME.decades);
+  Unit get centuries => getUnit(TIME.centuries);
+  Unit get millennia => getUnit(TIME.millennia);
 }
