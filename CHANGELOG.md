@@ -1,3 +1,6 @@
+# 0.2.0+2
+Fix time typo and time symbols
+
 # 0.2.0+1
 Fix force conversion. Fix some comment and README
 
@@ -6,5 +9,4 @@ Added Property class. It is the parent of all the properties. In this way we can
 Now you can assign a custom name to a Property object.
 
 # 0.1.0
-
 First release
