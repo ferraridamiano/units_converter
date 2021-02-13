@@ -27,7 +27,7 @@ class SimpleCustomConversion extends Property<dynamic, double> {
   ///  'CNY': '¥',
   ///};
   ///var customConversion = SimpleCustomConversion(conversionMap, mapSymbols: mapSymbols);
-  ///customConversion.Convert('EUR', 1);
+  ///customConversion.convert('EUR', 1);
   ///Unit usd = customConversion.getUnit('USD');
   ///print('1€ = ${usd.stringValue}${usd.symbol}');
   /// ```

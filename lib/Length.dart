@@ -49,7 +49,7 @@ class Length extends Property<LENGTH, double> {
   ///Class for length conversions, e.g. if you want to convert 1 meter in inches:
   ///```dart
   ///var length = Length(removeTrailingZeros: false);
-  ///length.Convert(Unit(LENGTH.meters, value: 1));
+  ///length.convert(Unit(LENGTH.meters, value: 1));
   ///print(length.inches);
   /// ```
   Length({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {

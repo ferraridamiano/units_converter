@@ -39,7 +39,7 @@ class Area extends Property<AREA, double> {
   ///Class for area conversions, e.g. if you want to convert 1 square meters in acres:
   ///```dart
   ///var area = Area(removeTrailingZeros: false);
-  ///area.Convert(Unit(AREA.square_meters, value: 1));
+  ///area.convert(Unit(AREA.square_meters, value: 1));
   ///print(AREA.acres);
   /// ```
   Area({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {

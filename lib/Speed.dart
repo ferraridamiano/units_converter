@@ -27,7 +27,7 @@ class Speed extends Property<SPEED, double> {
   ///Class for speed conversions, e.g. if you want to convert 1 square meters in acres:
   ///```dart
   ///var speed = Speed(removeTrailingZeros: false);
-  ///speed.Convert(Unit(SPEED.square_meters, value: 1));
+  ///speed.convert(Unit(SPEED.square_meters, value: 1));
   ///print(SPEED.acres);
   /// ```
   Speed({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {

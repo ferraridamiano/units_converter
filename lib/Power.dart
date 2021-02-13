@@ -31,7 +31,7 @@ class Power extends Property<POWER, double> {
   ///Class for power conversions, e.g. if you want to convert 1 kilowatt in european horse power:
   ///```dart
   ///var power = Power(removeTrailingZeros: false);
-  ///power.Convert(Unit(POWER.kilowatt, value: 1));
+  ///power.convert(Unit(POWER.kilowatt, value: 1));
   ///print(POWER.european_horse_power);
   /// ```
   Power({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {

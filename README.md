@@ -28,7 +28,7 @@ You can use this package in two ways:
 
 ```dart
 var length = Length(removeTrailingZeros: false); //initialize Length object, let's specify that we want to keep the trailing zeros (e.g. 1.00) for stringValue
-length.Convert(LENGTH.meters, 1); //We give 1 meter as input
+length.convert(LENGTH.meters, 1); //We give 1 meter as input
 var unit = length.inches; //We get all ther others units
 print('name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
 ```
@@ -45,7 +45,7 @@ name:LENGTH.inches, value:39.370078740157474, stringValue:39.37007874, symbol:in
 
 ```dart
 var angle = Angle(significantFigures: 7, removeTrailingZeros: false); //this time let's also keep 7 significant figures
-angle.Convert(ANGLE.degree, 1); //We give 1 meter as input
+angle.convert(ANGLE.degree, 1); //We give 1 meter as input
 var units = angle.getAll(); //We get all ther others units
 for (var unit in units) {
   //Let's print them
@@ -67,7 +67,7 @@ As you can see in this example if you specify `removeTrailingZeros: false`, the 
 
 ```dart
 var numeralSystems = NumeralSystems(); //initialize NumeralSystems object
-numeralSystems.Convert(NUMERAL_SYSTEMS.decimal, '100'); //We give 100 decimal as input
+numeralSystems.convert(NUMERAL_SYSTEMS.decimal, '100'); //We give 100 decimal as input
 print('Binary: ${numeralSystems.binary.stringValue}'); //We get the binary value
 print('Hexadecimal: ${numeralSystems.hexadecimal.stringValue}'); //We get the hexadecimal value
 //Warning! Numeral systems conversion is the only conversion that need the input as a string,
@@ -103,7 +103,7 @@ final Map<String, String> mapSymbols = {
 };
 
 var customConversion = SimpleCustomConversion(conversionMap, mapSymbols: mapSymbols);
-customConversion.Convert('EUR', 1);
+customConversion.convert('EUR', 1);
 Unit usd = customConversion.getUnit('USD');
 print('1€ = ${usd.stringValue}${usd.symbol}');
 ```

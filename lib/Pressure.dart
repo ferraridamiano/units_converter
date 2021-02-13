@@ -29,7 +29,7 @@ class Pressure extends Property<PRESSURE, double> {
   ///Class for pressure conversions, e.g. if you want to convert 1 bar in atmosphere:
   ///```dart
   ///var pressure = Pressure(removeTrailingZeros: false);
-  ///pressure.Convert(Unit(PRESSURE.bar, value: 1));
+  ///pressure.convert(Unit(PRESSURE.bar, value: 1));
   ///print(PRESSURE.atmosphere);
   /// ```
   Pressure({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {

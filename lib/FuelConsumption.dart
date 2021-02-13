@@ -25,7 +25,7 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
   ///Class for fuel_consumption conversions, e.g. if you want to convert 1 kilometers per liter in liters per 100 km:
   ///```dart
   ///var fuel_consumption = Fuel_Consumption(removeTrailingZeros: false);
-  ///fuel_consumption.Convert(Unit(FUEL_CONSUMPTION.kilometers_per_liter, value: 1));
+  ///fuel_consumption.convert(Unit(FUEL_CONSUMPTION.kilometers_per_liter, value: 1));
   ///print(FUEL_CONSUMPTION.liters_per_100_km);
   /// ```
   FuelConsumption({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {

@@ -27,7 +27,7 @@ class Torque extends Property<TORQUE, double> {
   ///Class for torque conversions, e.g. if you want to convert 1 square meters in acres:
   ///```dart
   ///var torque = Torque(removeTrailingZeros: false);
-  ///torque.Convert(Unit(TORQUE.square_meters, value: 1));
+  ///torque.convert(Unit(TORQUE.square_meters, value: 1));
   ///print(TORQUE.acres);
   /// ```
   Torque({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {

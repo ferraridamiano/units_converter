@@ -22,7 +22,7 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   ///Class for numeralSystems conversions, e.g. if you want to convert 10 (decimal) in binary:
   ///```dart
   ///var numeralSystems = NumeralSystems();
-  ///numeralSystems.Convert(Unit(NUMERAL_SYSTEMS.decimal, stringValue: '10'));
+  ///numeralSystems.convert(Unit(NUMERAL_SYSTEMS.decimal, stringValue: '10'));
   ///print(NUMERAL_SYSTEMS.binary.stringValue);
   /// ```
   NumeralSystems({name}) {

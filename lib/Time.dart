@@ -47,7 +47,7 @@ class Time extends Property<TIME, double> {
   ///Class for time conversions, e.g. if you want to convert 1 hour in seconds:
   ///```dart
   ///var time = Time(removeTrailingZeros: false);
-  ///time.Convert(Unit(TIME.hours, value: 1));
+  ///time.convert(Unit(TIME.hours, value: 1));
   ///print(TIME.seconds);
   /// ```
   Time({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {

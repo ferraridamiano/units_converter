@@ -25,7 +25,7 @@ class Energy extends Property<ENERGY, double> {
   ///Class for energy conversions, e.g. if you want to convert 1 joule in kilowatt hours:
   ///```dart
   ///var energy = Energy(removeTrailingZeros: false);
-  ///energy.Convert(Unit(ENERGY.joules, value: 1));
+  ///energy.convert(Unit(ENERGY.joules, value: 1));
   ///print(ENERGY.kilowatt_hours);
   /// ```
   Energy({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {

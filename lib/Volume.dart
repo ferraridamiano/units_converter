@@ -45,7 +45,7 @@ class Volume extends Property<VOLUME, double> {
   ///Class for volume conversions, e.g. if you want to convert 1 liter in US Gallons:
   ///```dart
   ///var volume = Volume(removeTrailingZeros: false);
-  ///volume.Convert(Unit(VOLUME.liters, value: 1));
+  ///volume.convert(Unit(VOLUME.liters, value: 1));
   ///print(VOLUME.us_gallons);
   /// ```
   Volume({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {

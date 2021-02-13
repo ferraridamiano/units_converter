@@ -39,7 +39,7 @@ class Mass extends Property<MASS, double> {
   ///Class for mass conversions, e.g. if you want to convert 1 gram in ounces:
   ///```dart
   ///var mass = Mass(removeTrailingZeros: false);
-  ///mass.Convert(Unit(MASS.grams, value: 1));
+  ///mass.convert(Unit(MASS.grams, value: 1));
   ///print(MASS.ounces);
   /// ```
   Mass({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {

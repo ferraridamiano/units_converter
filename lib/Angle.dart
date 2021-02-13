@@ -25,7 +25,7 @@ class Angle extends Property<ANGLE, double> {
   ///Class for angle conversions, e.g. if you want to convert 1 radiant in degree:
   ///```dart
   ///var angle = Angle(removeTrailingZeros: false);
-  ///angle.Convert(Unit(ANGLE.radians, value: 1));
+  ///angle.convert(Unit(ANGLE.radians, value: 1));
   ///print(ANGLE.degree);
   /// ```
   Angle({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {

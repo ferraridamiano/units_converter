@@ -54,7 +54,8 @@ class Force extends Property<FORCE, double> {
   }
 
   ///Converts a unit with a specific name (e.g. FORCE.newton) and value to all other units
-  void Convert(FORCE name, double value) {
+  @override
+  void convert(FORCE name, double value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < FORCE.values.length; i++) {

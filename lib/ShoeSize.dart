@@ -37,7 +37,7 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
   ///Class for ShoeSize conversions, e.g. if you want to convert 1 centimeter in eu shoes size:
   ///```dart
   ///var ShoeSize = ShoeSize(removeTrailingZeros: false);
-  ///ShoeSize.Convert(Unit(SHOE_SIZE.centimeters, value: 1));
+  ///ShoeSize.convert(Unit(SHOE_SIZE.centimeters, value: 1));
   ///print(SHOE_SIZE.eu_china);
   /// ```
   ShoeSize({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
