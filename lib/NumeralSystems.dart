@@ -49,7 +49,7 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
 
   ///Converts a unit with a specific name (e.g. NUMERAL_SYSTEMS.decimal) and value to all other units
   @override
-  void convert(NUMERAL_SYSTEMS name, String value) {
+  void convert(NUMERAL_SYSTEMS name, String? value) {
     unit_conversion.clearAllValues();
     //if the value is null also the others units are null, this is convenient to delete
     //all the other units value, for example in a unit converter app (such as Converter NOW)
@@ -64,12 +64,12 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
     unit_conversion.clearSelectedNode();
     unit_conversion.resetConvertedNode();
     var currentUnit = unit_conversion.getByName(name);
-    currentUnit.stringValue = value;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
+    currentUnit?.stringValue = value;
+    currentUnit?.selectedNode = true;
+    currentUnit?.convertedNode = true;
     unit_conversion.convert();
     for (var i = 0; i < NUMERAL_SYSTEMS.values.length; i++) {
-      unitList[i].stringValue = unit_conversion.getByName(NUMERAL_SYSTEMS.values.elementAt(i)).stringValue;
+      unitList[i].stringValue = unit_conversion.getByName(NUMERAL_SYSTEMS.values.elementAt(i))?.stringValue;
     }
   }
 

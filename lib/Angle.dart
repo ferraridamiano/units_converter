@@ -49,12 +49,12 @@ class Angle extends Property<ANGLE, double> {
 
   ///Converts a unit with a specific name (e.g. ANGLE.degree) and value to all other units
   @override
-  void convert(ANGLE name, double value) {
+  void convert(ANGLE name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < ANGLE.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(ANGLE.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(ANGLE.values.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

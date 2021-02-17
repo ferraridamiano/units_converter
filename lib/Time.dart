@@ -103,12 +103,12 @@ class Time extends Property<TIME, double> {
 
   ///Converts a unit with a specific name (e.g. TIME.days) and value to all other units
   @override
-  void convert(TIME name, double value) {
+  void convert(TIME name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < TIME.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(TIME.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(TIME.values.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

@@ -67,12 +67,12 @@ class Power extends Property<POWER, double> {
 
   ///Converts a unit with a specific name (e.g. POWER.european_horse_power) and value to all other units
   @override
-  void convert(POWER name, double value) {
+  void convert(POWER name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < POWER.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(POWER.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(POWER.values.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

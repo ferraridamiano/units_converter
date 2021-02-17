@@ -21,14 +21,6 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
   final Map<SHOE_SIZE, String> mapSymbols = {
     SHOE_SIZE.centimeters: 'cm',
     SHOE_SIZE.inches: 'in',
-    SHOE_SIZE.eu_china: null,
-    SHOE_SIZE.uk_india_child: null,
-    SHOE_SIZE.uk_india_man: null,
-    SHOE_SIZE.uk_india_woman: null,
-    SHOE_SIZE.usa_canada_child: null,
-    SHOE_SIZE.usa_canada_man: null,
-    SHOE_SIZE.usa_canada_woman: null,
-    SHOE_SIZE.japan: null,
   };
 
   int significantFigures;
@@ -90,12 +82,12 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
 
   ///Converts a unit with a specific name (e.g. SHOE_SIZE.uk_india_woman) and value to all other units
   @override
-  void convert(SHOE_SIZE name, double value) {
+  void convert(SHOE_SIZE name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < SHOE_SIZE.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(SHOE_SIZE.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(SHOE_SIZE.values.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

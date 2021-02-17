@@ -67,12 +67,12 @@ class Temperature extends Property<TEMPERATURE, double> {
 
   ///Converts a unit with a specific name (e.g. TEMPERATURE.kelvin) and value to all other units
   @override
-  void convert(TEMPERATURE name, double value) {
+  void convert(TEMPERATURE name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < TEMPERATURE.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(TEMPERATURE.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(TEMPERATURE.values.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

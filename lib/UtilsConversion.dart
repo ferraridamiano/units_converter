@@ -6,7 +6,7 @@ const BASE_CONVERSION = 3; // conversione speciale (dec è father e tutti gli al
 
 class Node {
   Node({
-    this.leafNodes,
+    this.leafNodes = const [],
     this.coefficientProduct = 1.0,
     this.coefficientSum = 0.0,
     this.name,
@@ -21,13 +21,13 @@ class Node {
   List<Node> leafNodes;
   double coefficientProduct;
   double coefficientSum;
-  double value;
+  double? value;
   var name;
   bool convertedNode;
   bool selectedNode;
   int conversionType;
-  int base;
-  String stringValue;
+  int? base;
+  String? stringValue;
 
   void convert() {
     if (!convertedNode) {
@@ -88,10 +88,10 @@ class Node {
       //if a leaf node is already converted
       value = node.value == null //compute from father node respect to him
           ? null
-          : (node.value * node.coefficientProduct) + (node.coefficientSum); //put in this node the converted value
+          : (node.value! * node.coefficientProduct) + (node.coefficientSum); //put in this node the converted value
       convertedNode = true;
       _applyDown(); //convert lower nodes
-    } else if (node.leafNodes != null) {
+    } else if (node.leafNodes.isNotEmpty) {
       //but has at leas a leaf node
       node.convert(); //repeat
       if (node.convertedNode) convert();
@@ -100,10 +100,10 @@ class Node {
 
   void _linearApplyDown(Node node) {
     //from high to low
-    node.value = value == null ? null : (value - node.coefficientSum) * (1 / node.coefficientProduct); //warning here is the converse
+    node.value = value == null ? null : (value! - node.coefficientSum) * (1 / node.coefficientProduct); //warning here is the converse
     node.convertedNode = true;
 
-    if (node.leafNodes != null) {
+    if (node.leafNodes.isNotEmpty) {
       //if it has at least a leaf node let's go away
       node._applyDown();
     }
@@ -115,11 +115,11 @@ class Node {
       //if a leaf node is already converted
       value = node.value == null //compute from father node respect to him
           ? null
-          : (node.coefficientProduct / node.value) + node.coefficientSum; //put in this node the converted value
+          : (node.coefficientProduct / node.value!) + node.coefficientSum; //put in this node the converted value
       convertedNode = true;
       _applyDown(); //convert lower nodes
-    } else if (node.leafNodes != null) {
-      //but has at leas a leaf node
+    } else if (node.leafNodes.isNotEmpty) {
+      //but has at least a leaf node
       node.convert(); //repeat
       if (node.convertedNode) convert();
     }
@@ -127,10 +127,10 @@ class Node {
 
   void _reciprocoApplyDown(Node node) {
     //from high to low
-    node.value = value == null ? null : node.coefficientProduct / (value - node.coefficientSum); //warning here is the converse
+    node.value = value == null ? null : node.coefficientProduct / (value! - node.coefficientSum); //warning here is the converse
     node.convertedNode = true;
 
-    if (node.leafNodes != null) {
+    if (node.leafNodes.isNotEmpty) {
       //if it has at least a leaf node let's go away
       node._applyDown();
     }
@@ -144,11 +144,12 @@ class Node {
       if (node.stringValue == null) {
         stringValue = null;
       } else {
-        stringValue = baseToDec(node.stringValue, node.base);
+        assert(node.base != null, 'Node.base must be non null');
+        stringValue = baseToDec(node.stringValue!, node.base!);
       }
       convertedNode = true;
       _applyDown(); //convert lower nodes
-    } else if (node.leafNodes != null) {
+    } else if (node.leafNodes.isNotEmpty) {
       //but has at leas a leaf node
       node.convert(); //repeat
       if (node.convertedNode) convert();
@@ -160,12 +161,13 @@ class Node {
     if (stringValue == null) {
       node.stringValue = null;
     } else {
-      node.stringValue = decToBase(stringValue, node.base);
+      assert(node.base != null, 'Node.base must be non null');
+      node.stringValue = decToBase(stringValue!, node.base!);
     }
 
     node.convertedNode = true;
 
-    if (node.leafNodes != null) {
+    if (node.leafNodes.isNotEmpty) {
       //if it has at least a leaf node let's go away
       node._applyDown();
     }
@@ -177,7 +179,7 @@ class Node {
       //if it is not the selected node
       convertedNode = false; //reset
     }
-    if (leafNodes != null) {
+    if (leafNodes.isNotEmpty) {
       for (var node in leafNodes) {
         //for each node of the tree
         node.resetConvertedNode();
@@ -205,7 +207,7 @@ class Node {
   /// Returns every node of the tree as a List. Call it on the father node!
   List<Node> _getNodiFiglio() {
     var listaNodi = [this];
-    if (leafNodes != null) {
+    if (leafNodes.isNotEmpty) {
       for (var node in leafNodes) {
         listaNodi.addAll(node._getNodiFiglio());
       }
@@ -214,7 +216,7 @@ class Node {
   }
 
   ///Returns the Node with name == unitName. If it is not found, returns null
-  Node getByName(var unitName) {
+  Node? getByName(var unitName) {
     var nodeList = _getNodiFiglio();
     for (var node in nodeList) {
       if (unitName == node.name) {
@@ -281,44 +283,32 @@ String baseToDec(String toBeConverted, int base) {
 
   if (!regExp.hasMatch(toBeConverted)) return '';
 
-  var conversion = 0;
-  var len = toBeConverted.length;
-  for (var i = 0; i < len; i++) {
-    var unitCode = toBeConverted.codeUnitAt(i);
+  int conversion = 0;
+  int len = toBeConverted.length;
+  for (int i = 0; i < len; i++) {
+    int unitCode = toBeConverted.codeUnitAt(i);
     if (unitCode >= 65 && unitCode <= 70) {
       // da A a F
-      conversion = conversion + (unitCode - 55) * pow(base, len - i - 1);
+      conversion = conversion + (unitCode - 55) * pow(base, len - i - 1).toInt();
     } else if (unitCode >= 48 && unitCode <= 57) {
       //da 0 a 9
-      conversion = conversion + (unitCode - 48) * pow(base, len - i - 1);
+      conversion = conversion + (unitCode - 48) * pow(base, len - i - 1).toInt();
     }
   }
   return conversion.toString();
 }
 
 RegExp getBaseRegExp(int base) {
-  RegExp regExp;
+  assert([2, 8, 10, 16].contains(base), 'Base not supported');
   switch (base) {
     case 2:
-      {
-        regExp = RegExp(r'^[0-1]+$');
-        break;
-      }
+      return RegExp(r'^[0-1]+$');
     case 8:
-      {
-        regExp = RegExp(r'^[0-7]+$');
-        break;
-      }
-    case 10:
-      {
-        regExp = RegExp(r'^[0-9]+$');
-        break;
-      }
+      return RegExp(r'^[0-7]+$');
     case 16:
-      {
-        regExp = RegExp(r'^[0-9A-Fa-f]+$');
-        break;
-      }
+      return RegExp(r'^[0-9A-Fa-f]+$');
+    case 10:
+    default:
+      return RegExp(r'^[0-9]+$');
   }
-  return regExp;
 }

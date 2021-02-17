@@ -4,7 +4,7 @@ import 'Unit.dart';
 
 class SimpleCustomConversion extends Property<dynamic, double> {
   //Map between units and its symbol
-  final Map<dynamic, String> mapSymbols;
+  final Map<dynamic, String>? mapSymbols;
   final Map<dynamic, double> mapConversion;
   int significantFigures;
   bool removeTrailingZeros;
@@ -36,11 +36,11 @@ class SimpleCustomConversion extends Property<dynamic, double> {
     assert(mapConversion.containsValue(1), 'One conversion coefficient must be 1, this will considered the base unit');
     if (mapSymbols != null) {
       mapConversion.keys.forEach((element) {
-        assert(mapSymbols.keys.contains(element), 'The key of mapConversion must be the same key of mapSymbols');
+        assert(mapSymbols!.keys.contains(element), 'The key of mapConversion must be the same key of mapSymbols');
       });
     }
 
-    mapConversion.keys.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols != null ? mapSymbols[element] : null)));
+    mapConversion.keys.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols != null ? mapSymbols![element] : null)));
     var baseUnit = mapConversion.keys.firstWhere((element) => mapConversion[element] == 1); //take the base unit
     List<Node> leafNodes = [];
     mapConversion.forEach((key, value) {
@@ -54,13 +54,13 @@ class SimpleCustomConversion extends Property<dynamic, double> {
 
   ///Converts a unit with a specific name and value to all other units
   @override
-  void convert(var name, double value) {
+  void convert(var name, double? value) {
     assert(mapConversion.keys.contains(name));
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < mapConversion.length; i++) {
-      unitList[i].value = unit_conversion.getByName(mapConversion.keys.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(mapConversion.keys.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 }

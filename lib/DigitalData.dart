@@ -37,7 +37,6 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
   //Map between units and its symbol
   final Map<DIGITAL_DATA, String> mapSymbols = {
     DIGITAL_DATA.bit: 'b',
-    DIGITAL_DATA.nibble: null,
     DIGITAL_DATA.kilobit: 'kb',
     DIGITAL_DATA.megabit: 'Mb',
     DIGITAL_DATA.gigabit: 'Gb',
@@ -165,12 +164,12 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
 
   ///Converts a unit with a specific name (e.g. DIGITAL_DATA.byte) and value to all other units
   @override
-  void convert(DIGITAL_DATA name, double value) {
+  void convert(DIGITAL_DATA name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < DIGITAL_DATA.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(DIGITAL_DATA.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(DIGITAL_DATA.values.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

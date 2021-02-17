@@ -30,7 +30,6 @@ enum SI_PREFIXES {
 class SIPrefixes extends Property<SI_PREFIXES, double> {
   //Map between units and its symbol
   final Map<SI_PREFIXES, String> mapSymbols = {
-    SI_PREFIXES.base: null,
     SI_PREFIXES.deca: 'da-',
     SI_PREFIXES.hecto: 'h-',
     SI_PREFIXES.kilo: 'k-',
@@ -151,12 +150,12 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
 
   ///Converts a unit with a specific name (e.g. SI_PREFIXES.milli) and value to all other units
   @override
-  void convert(SI_PREFIXES name, double value) {
+  void convert(SI_PREFIXES name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < SI_PREFIXES.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(SI_PREFIXES.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(SI_PREFIXES.values.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

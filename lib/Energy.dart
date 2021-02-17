@@ -49,12 +49,12 @@ class Energy extends Property<ENERGY, double> {
 
   ///Converts a unit with a specific name (e.g. ENERGY.calories) and value to all other units
   @override
-  void convert(ENERGY name, double value) {
+  void convert(ENERGY name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < ENERGY.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(ENERGY.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(ENERGY.values.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

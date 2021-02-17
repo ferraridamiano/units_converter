@@ -25,7 +25,6 @@ class Mass extends Property<MASS, double> {
     MASS.kilograms: 'kg',
     MASS.pounds: 'lb',
     MASS.ounces: 'oz',
-    MASS.quintals: null,
     MASS.tons: 't',
     MASS.milligrams: 'mg',
     MASS.uma: 'u',
@@ -87,12 +86,12 @@ class Mass extends Property<MASS, double> {
 
   ///Converts a unit with a specific name (e.g. MASS.centigrams) and value to all other units
   @override
-  void convert(MASS name, double value) {
+  void convert(MASS name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < MASS.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(MASS.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(MASS.values.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

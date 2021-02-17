@@ -23,13 +23,13 @@ enum PROPERTY {
 }
 
 class Property<K, V> {
-  Node unit_conversion;
+  late Node unit_conversion;
   List<Unit> unitList = [];
-  var name;
+  dynamic? name;
 
   Property({this.name});
 
-  void convert(K name, V value) {
+  void convert(K name, V? value) {
     //Here we will suppose V is a double. In the case where V is a String (Numeral systems) I will override the entire function
 
     unit_conversion.clearAllValues();
@@ -46,9 +46,9 @@ class Property<K, V> {
     unit_conversion.clearSelectedNode();
     unit_conversion.resetConvertedNode();
     var currentUnit = unit_conversion.getByName(name);
-    currentUnit.value = value as double;
-    currentUnit.selectedNode = true;
-    currentUnit.convertedNode = true;
+    currentUnit?.value = value as double;
+    currentUnit?.selectedNode = true;
+    currentUnit?.convertedNode = true;
     unit_conversion.convert();
   }
 

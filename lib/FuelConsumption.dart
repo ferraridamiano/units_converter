@@ -50,12 +50,12 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
 
   ///Converts a unit with a specific name (e.g. FUEL_CONSUMPTION.liters_per_100_km) and value to all other units
   @override
-  void convert(FUEL_CONSUMPTION name, double value) {
+  void convert(FUEL_CONSUMPTION name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < FUEL_CONSUMPTION.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(FUEL_CONSUMPTION.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(FUEL_CONSUMPTION.values.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

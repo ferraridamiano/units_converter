@@ -55,12 +55,12 @@ class Torque extends Property<TORQUE, double> {
 
   ///Converts a unit with a specific name (e.g. TORQUE.newton_meter) and value to all other units
   @override
-  void convert(TORQUE name, double value) {
+  void convert(TORQUE name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < TORQUE.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(TORQUE.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(TORQUE.values.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

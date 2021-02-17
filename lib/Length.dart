@@ -109,12 +109,12 @@ class Length extends Property<LENGTH, double> {
 
   ///Converts a unit with a specific name (e.g. LENGTH.meters) and value to all other units
   @override
-  void convert(LENGTH name, double value) {
+  void convert(LENGTH name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < LENGTH.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(LENGTH.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(LENGTH.values.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

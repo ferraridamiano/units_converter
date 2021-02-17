@@ -53,12 +53,12 @@ class Speed extends Property<SPEED, double> {
 
   ///Converts a unit with a specific name (e.g. SPEED.miles_per_hour) and value to all other units
   @override
-  void convert(SPEED name, double value) {
+  void convert(SPEED name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < SPEED.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(SPEED.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(SPEED.values.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

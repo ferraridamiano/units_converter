@@ -101,12 +101,12 @@ class Volume extends Property<VOLUME, double> {
 
   ///Converts a unit with a specific name (e.g. VOLUME.cubic_feet) and value to all other units
   @override
-  void convert(VOLUME name, double value) {
+  void convert(VOLUME name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < VOLUME.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(VOLUME.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value, significantFigures, removeTrailingZeros);
+      unitList[i].value = unit_conversion.getByName(VOLUME.values.elementAt(i))?.value;
+      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 
