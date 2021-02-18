@@ -69,13 +69,11 @@ class Mass extends Property<MASS, double> {
                 Node(
                   coefficientProduct: 1 / 16,
                   name: MASS.ounces,
-                  leafNodes: [
-                    Node(
-                      coefficientProduct: 14,
-                      name: MASS.stones,
-                    ),
-                  ],
-                )
+                ),
+                Node(
+                  coefficientProduct: 14,
+                  name: MASS.stones,
+                ),
               ],
             ),
           ],
