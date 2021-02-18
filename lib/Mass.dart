@@ -17,6 +17,7 @@ enum MASS {
   centigrams,
   pennyweights,
   troy_ounces,
+  stones,
 }
 
 class Mass extends Property<MASS, double> {
@@ -34,6 +35,7 @@ class Mass extends Property<MASS, double> {
     MASS.centigrams: 'cg',
     MASS.pennyweights: 'dwt',
     MASS.troy_ounces: 'oz t',
+    MASS.stones: 'st.',
   };
 
   int significantFigures;
@@ -49,54 +51,71 @@ class Mass extends Property<MASS, double> {
     size = MASS.values.length;
     this.name = name ?? PROPERTY.MASS;
     MASS.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name: MASS.grams, leafNodes: [
-      Node(
-        coefficientProduct: 100.0,
-        name: MASS.ettograms,
-      ),
-      Node(coefficientProduct: 1000.0, name: MASS.kilograms, leafNodes: [
-        Node(coefficientProduct: 0.45359237, name: MASS.pounds, leafNodes: [
-          Node(
-            coefficientProduct: 1 / 16,
-            name: MASS.ounces,
-          )
-        ]),
-      ]),
-      Node(
-        coefficientProduct: 100000.0,
-        name: MASS.quintals,
-      ),
-      Node(
-        coefficientProduct: 1000000.0,
-        name: MASS.tons,
-      ),
-      Node(
-        coefficientProduct: 1e-2,
-        name: MASS.centigrams,
-      ),
-      Node(
-        coefficientProduct: 1e-3,
-        name: MASS.milligrams,
-      ),
-      Node(
-        coefficientProduct: 1.660539e-24,
-        name: MASS.uma,
-      ),
-      Node(
-        coefficientProduct: 0.2,
-        name: MASS.carats,
-      ),
-      Node(
-        coefficientProduct: 1.55517384,
-        name: MASS.pennyweights,
-        leafNodes: [
-          Node(
-            coefficientProduct: 20,
-            name: MASS.troy_ounces,
-          ),
-        ],
-      ),
-    ]);
+    unit_conversion = Node(
+      name: MASS.grams,
+      leafNodes: [
+        Node(
+          coefficientProduct: 100.0,
+          name: MASS.ettograms,
+        ),
+        Node(
+          coefficientProduct: 1000.0,
+          name: MASS.kilograms,
+          leafNodes: [
+            Node(
+              coefficientProduct: 0.45359237,
+              name: MASS.pounds,
+              leafNodes: [
+                Node(
+                  coefficientProduct: 1 / 16,
+                  name: MASS.ounces,
+                  leafNodes: [
+                    Node(
+                      coefficientProduct: 14,
+                      name: MASS.stones,
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
+        Node(
+          coefficientProduct: 100000.0,
+          name: MASS.quintals,
+        ),
+        Node(
+          coefficientProduct: 1000000.0,
+          name: MASS.tons,
+        ),
+        Node(
+          coefficientProduct: 1e-2,
+          name: MASS.centigrams,
+        ),
+        Node(
+          coefficientProduct: 1e-3,
+          name: MASS.milligrams,
+        ),
+        Node(
+          coefficientProduct: 1.660539e-24,
+          name: MASS.uma,
+        ),
+        Node(
+          coefficientProduct: 0.2,
+          name: MASS.carats,
+        ),
+        Node(
+          coefficientProduct: 1.55517384,
+          name: MASS.pennyweights,
+          leafNodes: [
+            Node(
+              coefficientProduct: 20,
+              name: MASS.troy_ounces,
+            ),
+          ],
+        ),
+      ],
+    );
   }
 
   ///Converts a unit with a specific name (e.g. MASS.centigrams) and value to all other units
@@ -123,4 +142,5 @@ class Mass extends Property<MASS, double> {
   Unit get centigrams => getUnit(MASS.centigrams);
   Unit get pennyweights => getUnit(MASS.pennyweights);
   Unit get troy_ounces => getUnit(MASS.troy_ounces);
+  Unit get stones => getUnit(MASS.stones);
 }
