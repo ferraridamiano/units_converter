@@ -15,6 +15,8 @@ enum MASS {
   uma, //unified atomic mass unit
   carats,
   centigrams,
+  pennyweights,
+  troy_ounces,
 }
 
 class Mass extends Property<MASS, double> {
@@ -30,6 +32,8 @@ class Mass extends Property<MASS, double> {
     MASS.uma: 'u',
     MASS.carats: 'ct',
     MASS.centigrams: 'cg',
+    MASS.pennyweights: 'dwt',
+    MASS.troy_ounces: 'oz t',
   };
 
   int significantFigures;
@@ -82,6 +86,16 @@ class Mass extends Property<MASS, double> {
         coefficientProduct: 0.2,
         name: MASS.carats,
       ),
+      Node(
+        coefficientProduct: 1.55517384,
+        name: MASS.pennyweights,
+        leafNodes: [
+          Node(
+            coefficientProduct: 20,
+            name: MASS.troy_ounces,
+          ),
+        ],
+      ),
     ]);
   }
 
@@ -107,4 +121,6 @@ class Mass extends Property<MASS, double> {
   Unit get uma => getUnit(MASS.uma);
   Unit get carats => getUnit(MASS.carats);
   Unit get centigrams => getUnit(MASS.centigrams);
+  Unit get pennyweights => getUnit(MASS.pennyweights);
+  Unit get troy_ounces => getUnit(MASS.troy_ounces);
 }
