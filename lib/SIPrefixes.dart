@@ -62,6 +62,7 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
   ///print(SI_PREFIXES.milli);
   /// ```
   SIPrefixes({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    size = SI_PREFIXES.values.length;
     this.name = name ?? PROPERTY.SI_PREFIXES;
     SI_PREFIXES.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: SI_PREFIXES.base, leafNodes: [

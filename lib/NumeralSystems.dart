@@ -26,6 +26,7 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   ///print(NUMERAL_SYSTEMS.binary.stringValue);
   /// ```
   NumeralSystems({name}) {
+    size = NUMERAL_SYSTEMS.values.length;
     this.name = name ?? PROPERTY.NUMERAL_SYSTEMS;
     NUMERAL_SYSTEMS.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: NUMERAL_SYSTEMS.decimal, base: 10, leafNodes: [

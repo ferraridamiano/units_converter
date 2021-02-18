@@ -31,6 +31,7 @@ class Force extends Property<FORCE, double> {
   ///print(FORCE.pound_force);
   /// ```
   Force({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    size = FORCE.values.length;
     this.name = name ?? PROPERTY.FORCE;
     FORCE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: FORCE.newton, leafNodes: [

@@ -53,6 +53,7 @@ class Length extends Property<LENGTH, double> {
   ///print(length.inches);
   /// ```
   Length({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    size = LENGTH.values.length;
     this.name = name ?? PROPERTY.LENGTH;
     LENGTH.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: LENGTH.meters, leafNodes: [

@@ -33,6 +33,7 @@ class Pressure extends Property<PRESSURE, double> {
   ///print(PRESSURE.atmosphere);
   /// ```
   Pressure({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    size = PRESSURE.values.length;
     this.name = name ?? PROPERTY.PRESSURE;
     PRESSURE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: PRESSURE.pascal, leafNodes: [

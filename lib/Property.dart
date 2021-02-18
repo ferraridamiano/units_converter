@@ -26,6 +26,7 @@ class Property<K, V> {
   late Node unit_conversion;
   List<Unit> unitList = [];
   dynamic? name;
+  late final int size;
 
   Property({this.name});
 

@@ -32,6 +32,7 @@ class SimpleCustomConversion extends Property<dynamic, double> {
   ///print('1€ = ${usd.stringValue}${usd.symbol}');
   /// ```
   SimpleCustomConversion(this.mapConversion, {this.mapSymbols, this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    size = mapConversion.length + 1; // +1 because we count also the base unit
     this.name = name;
     assert(mapConversion.containsValue(1), 'One conversion coefficient must be 1, this will considered the base unit');
     if (mapSymbols != null) {

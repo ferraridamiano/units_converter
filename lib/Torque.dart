@@ -31,6 +31,7 @@ class Torque extends Property<TORQUE, double> {
   ///print(TORQUE.acres);
   /// ```
   Torque({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    size = TORQUE.values.length;
     this.name = name ?? PROPERTY.TORQUE;
     TORQUE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: TORQUE.newton_meter, leafNodes: [

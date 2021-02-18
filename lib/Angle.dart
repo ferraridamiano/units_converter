@@ -29,6 +29,7 @@ class Angle extends Property<ANGLE, double> {
   ///print(ANGLE.degree);
   /// ```
   Angle({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    size = ANGLE.values.length;
     this.name = name ?? PROPERTY.ANGLE;
     ANGLE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: ANGLE.degree, leafNodes: [
@@ -62,5 +63,4 @@ class Angle extends Property<ANGLE, double> {
   Unit get minutes => getUnit(ANGLE.minutes);
   Unit get seconds => getUnit(ANGLE.seconds);
   Unit get radians => getUnit(ANGLE.radians);
-
 }

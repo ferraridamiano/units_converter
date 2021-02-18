@@ -35,6 +35,7 @@ class Temperature extends Property<TEMPERATURE, double> {
   ///print(TEMPERATURE.kelvin);
   /// ```
   Temperature({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    size = TEMPERATURE.values.length;
     this.name = name ?? PROPERTY.TEMPERATURE;
     TEMPERATURE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: TEMPERATURE.fahrenheit, leafNodes: [

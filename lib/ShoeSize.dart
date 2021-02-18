@@ -33,6 +33,7 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
   ///print(SHOE_SIZE.eu_china);
   /// ```
   ShoeSize({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    size = SHOE_SIZE.values.length;
     this.name = name ?? PROPERTY.SHOE_SIZE;
     SHOE_SIZE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: SHOE_SIZE.centimeters, leafNodes: [

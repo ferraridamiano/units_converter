@@ -35,6 +35,7 @@ class Power extends Property<POWER, double> {
   ///print(POWER.european_horse_power);
   /// ```
   Power({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    size = POWER.values.length;
     this.name = name ?? PROPERTY.POWER;
     POWER.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
     unit_conversion = Node(name: POWER.watt, leafNodes: [
