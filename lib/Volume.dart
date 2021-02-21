@@ -43,6 +43,8 @@ class Volume extends Property<VOLUME, double> {
     VOLUME.cubic_millimeters: 'mm³',
     VOLUME.imperial_fluid_ounces: 'imp fl oz',
     VOLUME.us_fluid_ounces: 'US fl oz',
+    VOLUME.imperial_gill: 'Imp. gi.',
+    VOLUME.us_gill: 'US. liq. gi',
   };
 
   int significantFigures;
