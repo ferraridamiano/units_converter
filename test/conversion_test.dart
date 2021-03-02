@@ -192,4 +192,111 @@ void main() {
     };
     runConversionTest(expectedResult, ShoeSize(), sensibility: 1e1);
   });
+
+  group('SI prefixes', () {
+    const Map<SI_PREFIXES, double> expectedResult = {
+      SI_PREFIXES.base: 1,
+      SI_PREFIXES.deca: 1e-1,
+      SI_PREFIXES.hecto: 1e-2,
+      SI_PREFIXES.kilo: 1e-3,
+      SI_PREFIXES.mega: 1e-6,
+      SI_PREFIXES.giga: 1e-9,
+      SI_PREFIXES.tera: 1e-12,
+      SI_PREFIXES.peta: 1e-15,
+      SI_PREFIXES.exa: 1e-18,
+      SI_PREFIXES.zetta: 1e-21,
+      SI_PREFIXES.yotta: 1e-24,
+      SI_PREFIXES.deci: 1e1,
+      SI_PREFIXES.centi: 1e2,
+      SI_PREFIXES.milli: 1e3,
+      SI_PREFIXES.micro: 1e6,
+      SI_PREFIXES.nano: 1e9,
+      SI_PREFIXES.pico: 1e12,
+      SI_PREFIXES.femto: 1e15,
+      SI_PREFIXES.atto: 1e18,
+      SI_PREFIXES.zepto: 1e21,
+      SI_PREFIXES.yocto: 1e24,
+    };
+    runConversionTest(expectedResult, SIPrefixes());
+  });
+
+  group('Speed', () {
+    const Map<SPEED, double> expectedResult = {
+      SPEED.meters_per_second: 1,
+      SPEED.kilometers_per_hour: 3.6,
+      SPEED.miles_per_hour: 2.2369362920544,
+      SPEED.knots: 1.9438444924406,
+      SPEED.feets_per_second: 3.2808398950131,
+    };
+    runConversionTest(expectedResult, Speed());
+  });
+
+  group('Temperature', () {
+    const Map<TEMPERATURE, double> expectedResult = {
+      TEMPERATURE.fahrenheit: 33.8,
+      TEMPERATURE.celsius: 1,
+      TEMPERATURE.kelvin: 274.15,
+      TEMPERATURE.reamur: 0.8,
+      TEMPERATURE.romer: 8.025,
+      TEMPERATURE.delisle: 148.5,
+      TEMPERATURE.rankine: 493.47,
+    };
+    runConversionTest(expectedResult, Temperature());
+  });
+
+  group('Time', () {
+    const Map<TIME, double> expectedResult = {
+      TIME.seconds: 1,
+      TIME.deciseconds: 10,
+      TIME.centiseconds: 100,
+      TIME.milliseconds: 1e3,
+      TIME.microseconds: 1e6,
+      TIME.nanoseconds: 1e9,
+      TIME.minutes: 1 / 60,
+      TIME.hours: 1 / (60 * 60),
+      TIME.days: 1 / (60 * 60 * 24),
+      TIME.weeks: 1 / (60 * 60 * 24 * 7),
+      TIME.years_365: 1 / (60 * 60 * 24 * 365),
+      TIME.lustrum: 1 / (60 * 60 * 24 * 365 * 5),
+      TIME.decades: 1 / (60 * 60 * 24 * 365 * 10),
+      TIME.centuries: 1 / (60 * 60 * 24 * 365 * 100),
+      TIME.millennium: 1 / (60 * 60 * 24 * 365 * 1000),
+    };
+    runConversionTest(expectedResult, Time());
+  });
+
+  group('Torque', () {
+    const Map<TORQUE, double> expectedResult = {
+      TORQUE.newton_meter: 1,
+      TORQUE.dyne_meter: 1e5,
+      TORQUE.pound_force_feet: 0.7375621489,
+      TORQUE.kilogram_force_meter: 0.10196798205364,
+      TORQUE.poundal_meter: 7.2330138512099,
+    };
+    runConversionTest(expectedResult, Torque());
+  });
+
+  group('Volume', () {
+    const Map<VOLUME, double> expectedResult = {
+      VOLUME.cubic_meters: 1,
+      VOLUME.liters: 1e3,
+      VOLUME.imperial_gallons: 219.96924829909,
+      VOLUME.us_gallons: 264.17205235815,
+      VOLUME.imperial_pints: 1759.7539863927,
+      VOLUME.us_pints: 2113.3764188652,
+      VOLUME.milliliters: 1e6,
+      VOLUME.tablespoons_us: 67567.567567568,
+      VOLUME.australian_tablespoons: 50000,
+      VOLUME.cups: 4166.6666666667,
+      VOLUME.cubic_centimeters: 1e6,
+      VOLUME.cubic_feet: 35.314666721489,
+      VOLUME.cubic_inches: 61023.744094732,
+      VOLUME.cubic_millimeters: 1e9,
+      VOLUME.imperial_fluid_ounces: 35195.07973,
+      VOLUME.us_fluid_ounces: 33814.0227,
+      VOLUME.imperial_gill: 7039.015946,
+      VOLUME.us_gill: 8453.505675,
+    };
+    runConversionTest(expectedResult, Volume(),sensibility: 1e9);
+  });
 }
