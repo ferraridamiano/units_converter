@@ -164,6 +164,33 @@ void main() {
     runConversionTest(expectedResult, Mass(), sensibility: 1e9);
   });
 
+  group('Numeral systems', () {
+    const Map<NUMERAL_SYSTEMS, String> expectedResult = {
+      NUMERAL_SYSTEMS.decimal: '178897',
+      NUMERAL_SYSTEMS.hexadecimal: '2BAD1',
+      NUMERAL_SYSTEMS.octal: '535321',
+      NUMERAL_SYSTEMS.binary: '101011101011010001',
+    };
+    NumeralSystems property = NumeralSystems();
+    final List listNames = expectedResult.keys.toList();
+    for (var unitName in listNames) {
+      test('Test from ${unitName.toString()}', () {
+        property.convert(unitName, expectedResult[unitName]);
+        List<Unit> unitList = property.getAll();
+        for (Unit unit in unitList) {
+          var name = unit.name;
+          String convertedValue = unitList.where((element) => element.name == name).single.stringValue!;
+          expect(
+            convertedValue,
+            expectedResult[name],
+            reason: 'Error with ${name.toString()}. Expected: ${expectedResult[name]}, result: ${convertedValue}',
+          );
+        }
+      });
+      property.convert(listNames[0], null); //clear all values
+    }
+  });
+
   group('Power', () {
     const Map<POWER, double> expectedResult = {
       POWER.watt: 1,
@@ -297,6 +324,6 @@ void main() {
       VOLUME.imperial_gill: 7039.015946,
       VOLUME.us_gill: 8453.505675,
     };
-    runConversionTest(expectedResult, Volume(),sensibility: 1e9);
+    runConversionTest(expectedResult, Volume(), sensibility: 1e9);
   });
 }
