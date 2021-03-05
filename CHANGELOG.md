@@ -1,3 +1,6 @@
+# 0.3.0
+Add support for null safety. Added some test. Added fluid ounces, gill, pennyweight, troy ounce. Bugfix.
+
 # 0.2.0+2
 Fix time typo and time symbols
 
