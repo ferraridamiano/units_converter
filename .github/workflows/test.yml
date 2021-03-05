@@ -19,7 +19,7 @@ jobs:
     - name: Setup Dart
       uses: cedx/setup-dart@v2.5.0
       with:
-        release-channel: beta
+        release-channel: stable
 
     - name: Dart version
       run: dart --version
