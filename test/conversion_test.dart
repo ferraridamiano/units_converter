@@ -140,6 +140,7 @@ void main() {
       LENGTH.astronomical_units: 6.6845871222684e-12,
       LENGTH.light_years: 1.057000451015e-16,
       LENGTH.parsec: 3.2423326718251e-17,
+      LENGTH.mils: 39370.0787401574803,
     };
     runConversionTest(expectedResult, Length());
   });

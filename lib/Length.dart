@@ -20,6 +20,7 @@ enum LENGTH {
   astronomical_units,
   light_years,
   parsec,
+  mils,
 }
 
 class Length extends Property<LENGTH, double> {
@@ -62,6 +63,10 @@ class Length extends Property<LENGTH, double> {
           Node(
             coefficientProduct: 12.0,
             name: LENGTH.feet,
+          ),
+          Node(
+            coefficientProduct: 1e-3,
+            name: LENGTH.mils,
           ),
         ]),
       ]),
@@ -135,4 +140,5 @@ class Length extends Property<LENGTH, double> {
   Unit get astronomical_units => getUnit(LENGTH.astronomical_units);
   Unit get light_years => getUnit(LENGTH.light_years);
   Unit get parsec => getUnit(LENGTH.parsec);
+  Unit get mils => getUnit(LENGTH.mils);
 }
