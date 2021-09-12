@@ -1,13 +1,13 @@
-import 'Property.dart';
-import 'UtilsConversion.dart';
-import 'Unit.dart';
+import 'package:units_converter/Models/property.dart';
+import 'package:units_converter/Models/unit.dart';
+import 'package:units_converter/utils/utils_conversion.dart';
 
 //Available FORCE units
 enum FORCE {
   newton,
   dyne,
-  pound_force,
-  kilogram_force,
+  poundForce,
+  kilogramForce,
   poundal,
 }
 
@@ -16,8 +16,8 @@ class Force extends Property<FORCE, double> {
   final Map<FORCE, String> mapSymbols = {
     FORCE.newton: 'N',
     FORCE.dyne: 'dyn',
-    FORCE.pound_force: 'lbf',
-    FORCE.kilogram_force: 'kgf',
+    FORCE.poundForce: 'lbf',
+    FORCE.kilogramForce: 'kgf',
     FORCE.poundal: 'pdl',
   };
 
@@ -32,20 +32,22 @@ class Force extends Property<FORCE, double> {
   /// ```
   Force({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = FORCE.values.length;
-    this.name = name ?? PROPERTY.FORCE;
-    FORCE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name: FORCE.newton, leafNodes: [
+    this.name = name ?? PROPERTY.force;
+    for (FORCE val in FORCE.values) {
+      unitList.add(Unit(val, symbol: mapSymbols[val]));
+    }
+    unitConversion = Node(name: FORCE.newton, leafNodes: [
       Node(
         coefficientProduct: 1e-5,
         name: FORCE.dyne,
       ),
       Node(
         coefficientProduct: 4.4482216152605,
-        name: FORCE.pound_force,
+        name: FORCE.poundForce,
       ),
       Node(
         coefficientProduct: 9.80665,
-        name: FORCE.kilogram_force,
+        name: FORCE.kilogramForce,
       ),
       Node(
         coefficientProduct: 0.138254954376,
@@ -60,14 +62,14 @@ class Force extends Property<FORCE, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < FORCE.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(FORCE.values.elementAt(i))?.value;
+      unitList[i].value = unitConversion.getByName(FORCE.values.elementAt(i))?.value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 
   Unit get newton => getUnit(FORCE.newton);
   Unit get dyne => getUnit(FORCE.dyne);
-  Unit get pound_force => getUnit(FORCE.pound_force);
-  Unit get kilogram_force => getUnit(FORCE.kilogram_force);
+  Unit get poundForce => getUnit(FORCE.poundForce);
+  Unit get kilogramForce => getUnit(FORCE.kilogramForce);
   Unit get poundal => getUnit(FORCE.poundal);
 }

@@ -1,6 +1,6 @@
-import 'Property.dart';
-import 'UtilsConversion.dart';
-import 'Unit.dart';
+import 'package:units_converter/Models/property.dart';
+import 'package:units_converter/Models/unit.dart';
+import 'package:units_converter/utils/utils_conversion.dart';
 
 //Available NUMERAL_SYSTEMS units
 enum NUMERAL_SYSTEMS {
@@ -27,21 +27,23 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   /// ```
   NumeralSystems({name}) {
     size = NUMERAL_SYSTEMS.values.length;
-    this.name = name ?? PROPERTY.NUMERAL_SYSTEMS;
-    NUMERAL_SYSTEMS.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name: NUMERAL_SYSTEMS.decimal, base: 10, leafNodes: [
+    this.name = name ?? PROPERTY.numeralSystems;
+    for (NUMERAL_SYSTEMS val in NUMERAL_SYSTEMS.values) {
+      unitList.add(Unit(val, symbol: mapSymbols[val]));
+    }
+    unitConversion = Node(name: NUMERAL_SYSTEMS.decimal, base: 10, leafNodes: [
       Node(
-        conversionType: BASE_CONVERSION,
+        conversionType: baseConversion,
         base: 16,
         name: NUMERAL_SYSTEMS.hexadecimal,
       ),
       Node(
-        conversionType: BASE_CONVERSION,
+        conversionType: baseConversion,
         base: 8,
         name: NUMERAL_SYSTEMS.octal,
       ),
       Node(
-        conversionType: BASE_CONVERSION,
+        conversionType: baseConversion,
         base: 2,
         name: NUMERAL_SYSTEMS.binary,
       ),
@@ -51,26 +53,26 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   ///Converts a unit with a specific name (e.g. NUMERAL_SYSTEMS.decimal) and value to all other units
   @override
   void convert(NUMERAL_SYSTEMS name, String? value) {
-    unit_conversion.clearAllValues();
+    unitConversion.clearAllValues();
     //if the value is null also the others units are null, this is convenient to delete
     //all the other units value, for example in a unit converter app (such as Converter NOW)
     if (value == null) {
-      unit_conversion.clearAllValues();
+      unitConversion.clearAllValues();
       for (Unit unit in unitList) {
         unit.value = null;
         unit.stringValue = null;
       }
       return;
     }
-    unit_conversion.clearSelectedNode();
-    unit_conversion.resetConvertedNode();
-    var currentUnit = unit_conversion.getByName(name);
+    unitConversion.clearSelectedNode();
+    unitConversion.resetConvertedNode();
+    var currentUnit = unitConversion.getByName(name);
     currentUnit?.stringValue = value;
     currentUnit?.selectedNode = true;
     currentUnit?.convertedNode = true;
-    unit_conversion.convert();
+    unitConversion.convert();
     for (var i = 0; i < NUMERAL_SYSTEMS.values.length; i++) {
-      unitList[i].stringValue = unit_conversion.getByName(NUMERAL_SYSTEMS.values.elementAt(i))?.stringValue;
+      unitList[i].stringValue = unitConversion.getByName(NUMERAL_SYSTEMS.values.elementAt(i))?.stringValue;
     }
   }
 

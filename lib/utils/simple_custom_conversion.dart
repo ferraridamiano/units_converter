@@ -1,6 +1,6 @@
-import 'Property.dart';
-import 'UtilsConversion.dart';
-import 'Unit.dart';
+import '../Models/property.dart';
+import 'utils_conversion.dart';
+import '../Models/unit.dart';
 
 class SimpleCustomConversion extends Property<dynamic, double> {
   //Map between units and its symbol
@@ -31,17 +31,19 @@ class SimpleCustomConversion extends Property<dynamic, double> {
   ///Unit usd = customConversion.getUnit('USD');
   ///print('1€ = ${usd.stringValue}${usd.symbol}');
   /// ```
-  SimpleCustomConversion(this.mapConversion, {this.mapSymbols, this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  SimpleCustomConversion(this.mapConversion,
+      {this.mapSymbols, this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = mapConversion.length;
     this.name = name;
     assert(mapConversion.containsValue(1), 'One conversion coefficient must be 1, this will considered the base unit');
     if (mapSymbols != null) {
-      mapConversion.keys.forEach((element) {
-        assert(mapSymbols!.keys.contains(element), 'The key of mapConversion must be the same key of mapSymbols');
-      });
+      for (var val in mapConversion.keys) {
+        assert(mapSymbols!.keys.contains(val), 'The key of mapConversion must be the same key of mapSymbols');
+      }
     }
-
-    mapConversion.keys.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols != null ? mapSymbols![element] : null)));
+    for (var val in mapConversion.keys) {
+      unitList.add(Unit(val, symbol: mapSymbols != null ? mapSymbols![val] : null));
+    }
     var baseUnit = mapConversion.keys.firstWhere((element) => mapConversion[element] == 1); //take the base unit
     List<Node> leafNodes = [];
     mapConversion.forEach((key, value) {
@@ -50,7 +52,7 @@ class SimpleCustomConversion extends Property<dynamic, double> {
         leafNodes.add(Node(name: key, coefficientProduct: 1 / value));
       }
     });
-    unit_conversion = Node(name: baseUnit, leafNodes: leafNodes);
+    unitConversion = Node(name: baseUnit, leafNodes: leafNodes);
   }
 
   ///Converts a unit with a specific name and value to all other units
@@ -60,7 +62,7 @@ class SimpleCustomConversion extends Property<dynamic, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < mapConversion.length; i++) {
-      unitList[i].value = unit_conversion.getByName(mapConversion.keys.elementAt(i))?.value;
+      unitList[i].value = unitConversion.getByName(mapConversion.keys.elementAt(i))?.value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

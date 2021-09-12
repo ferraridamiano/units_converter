@@ -1,8 +1,8 @@
 import 'dart:math';
 
-const LINEAR_CONVERSION = 1; // y=ax+b
-const RECIPROCAL_CONVERSION = 2; // y=(a/x)+b
-const BASE_CONVERSION = 3; // conversione speciale (dec è father e tutti gli altri figlio)
+const linearConversion = 1; // y=ax+b
+const reciprocalConversion = 2; // y=(a/x)+b
+const baseConversion = 3; // conversione speciale (dec è father e tutti gli altri figlio)
 
 class Node {
   Node({
@@ -13,7 +13,7 @@ class Node {
     this.value,
     this.convertedNode = false,
     this.selectedNode = false,
-    this.conversionType = LINEAR_CONVERSION,
+    this.conversionType = linearConversion,
     this.stringValue,
     this.base,
   });
@@ -22,6 +22,7 @@ class Node {
   double coefficientProduct;
   double coefficientSum;
   double? value;
+  // ignore: prefer_typing_uninitialized_variables
   var name;
   bool convertedNode;
   bool selectedNode;
@@ -35,17 +36,17 @@ class Node {
       for (var node in leafNodes) {
         //for each leaf nodes check if it has a value
         switch (node.conversionType) {
-          case LINEAR_CONVERSION:
+          case linearConversion:
             {
               _linearConvert(node);
               break;
             }
-          case RECIPROCAL_CONVERSION:
+          case reciprocalConversion:
             {
               _reciprocoConvert(node);
               break;
             }
-          case BASE_CONVERSION:
+          case baseConversion:
             {
               _baseConvert(node);
               break;
@@ -63,17 +64,17 @@ class Node {
   void _applyDown() {
     for (var node in leafNodes) {
       switch (node.conversionType) {
-        case LINEAR_CONVERSION:
+        case linearConversion:
           {
             _linearApplyDown(node);
             break;
           }
-        case RECIPROCAL_CONVERSION:
+        case reciprocalConversion:
           {
             _reciprocoApplyDown(node);
             break;
           }
-        case BASE_CONVERSION:
+        case baseConversion:
           {
             _baseApplyDown(node);
             break;

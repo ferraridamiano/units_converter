@@ -1,6 +1,6 @@
-import 'Property.dart';
-import 'UtilsConversion.dart';
-import 'Unit.dart';
+import 'package:units_converter/Models/property.dart';
+import 'package:units_converter/Models/unit.dart';
+import 'package:units_converter/utils/utils_conversion.dart';
 
 //Available PRESSURE units
 enum PRESSURE {
@@ -34,9 +34,11 @@ class Pressure extends Property<PRESSURE, double> {
   /// ```
   Pressure({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = PRESSURE.values.length;
-    this.name = name ?? PROPERTY.PRESSURE;
-    PRESSURE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name: PRESSURE.pascal, leafNodes: [
+    this.name = name ?? PROPERTY.pressure;
+    for (PRESSURE val in PRESSURE.values) {
+      unitList.add(Unit(val, symbol: mapSymbols[val]));
+    }
+    unitConversion = Node(name: PRESSURE.pascal, leafNodes: [
       Node(coefficientProduct: 101325.0, name: PRESSURE.atmosphere, leafNodes: [
         Node(coefficientProduct: 0.987, name: PRESSURE.bar, leafNodes: [
           Node(
@@ -62,7 +64,7 @@ class Pressure extends Property<PRESSURE, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < PRESSURE.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(PRESSURE.values.elementAt(i))?.value;
+      unitList[i].value = unitConversion.getByName(PRESSURE.values.elementAt(i))?.value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

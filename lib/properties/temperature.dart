@@ -1,6 +1,6 @@
-import 'Property.dart';
-import 'UtilsConversion.dart';
-import 'Unit.dart';
+import 'package:units_converter/Models/property.dart';
+import 'package:units_converter/Models/unit.dart';
+import 'package:units_converter/utils/utils_conversion.dart';
 
 //Available TEMPERATURE units
 enum TEMPERATURE {
@@ -36,9 +36,11 @@ class Temperature extends Property<TEMPERATURE, double> {
   /// ```
   Temperature({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = TEMPERATURE.values.length;
-    this.name = name ?? PROPERTY.TEMPERATURE;
-    TEMPERATURE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name: TEMPERATURE.fahrenheit, leafNodes: [
+    this.name = name ?? PROPERTY.temperature;
+    for (TEMPERATURE val in TEMPERATURE.values) {
+      unitList.add(Unit(val, symbol: mapSymbols[val]));
+    }
+    unitConversion = Node(name: TEMPERATURE.fahrenheit, leafNodes: [
       Node(coefficientProduct: 1.8, coefficientSum: 32.0, name: TEMPERATURE.celsius, leafNodes: [
         Node(
           coefficientSum: -273.15,
@@ -72,7 +74,7 @@ class Temperature extends Property<TEMPERATURE, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < TEMPERATURE.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(TEMPERATURE.values.elementAt(i))?.value;
+      unitList[i].value = unitConversion.getByName(TEMPERATURE.values.elementAt(i))?.value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

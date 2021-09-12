@@ -1,6 +1,6 @@
-import 'Property.dart';
-import 'UtilsConversion.dart';
-import 'Unit.dart';
+import 'package:units_converter/Models/property.dart';
+import 'package:units_converter/Models/unit.dart';
+import 'package:units_converter/utils/utils_conversion.dart';
 
 //Available DIGITAL_DATA units
 enum DIGITAL_DATA {
@@ -75,9 +75,11 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
   /// ```
   DigitalData({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = DIGITAL_DATA.values.length;
-    this.name = name ?? PROPERTY.DIGITAL_DATA;
-    DIGITAL_DATA.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name: DIGITAL_DATA.bit, leafNodes: [
+    this.name = name ?? PROPERTY.digitalData;
+    for (DIGITAL_DATA val in DIGITAL_DATA.values) {
+      unitList.add(Unit(val, symbol: mapSymbols[val]));
+    }
+    unitConversion = Node(name: DIGITAL_DATA.bit, leafNodes: [
       Node(
         coefficientProduct: 4.0,
         name: DIGITAL_DATA.nibble,
@@ -169,7 +171,7 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < DIGITAL_DATA.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(DIGITAL_DATA.values.elementAt(i))?.value;
+      unitList[i].value = unitConversion.getByName(DIGITAL_DATA.values.elementAt(i))?.value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

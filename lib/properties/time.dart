@@ -1,6 +1,6 @@
-import 'Property.dart';
-import 'UtilsConversion.dart';
-import 'Unit.dart';
+import 'package:units_converter/Models/property.dart';
+import 'package:units_converter/Models/unit.dart';
+import 'package:units_converter/utils/utils_conversion.dart';
 
 //Available TIME units
 enum TIME {
@@ -14,7 +14,7 @@ enum TIME {
   hours,
   days,
   weeks,
-  years_365,
+  years365,
   lustrum,
   decades,
   centuries,
@@ -33,7 +33,7 @@ class Time extends Property<TIME, double> {
     TIME.minutes: 'min',
     TIME.hours: 'h',
     TIME.days: 'd',
-    TIME.years_365: 'a',
+    TIME.years365: 'a',
     TIME.centuries: 'c.',
   };
 
@@ -48,9 +48,11 @@ class Time extends Property<TIME, double> {
   /// ```
   Time({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = TIME.values.length;
-    this.name = name ?? PROPERTY.TIME;
-    TIME.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name: TIME.seconds, leafNodes: [
+    this.name = name ?? PROPERTY.time;
+    for (TIME val in TIME.values) {
+      unitList.add(Unit(val, symbol: mapSymbols[val]));
+    }
+    unitConversion = Node(name: TIME.seconds, leafNodes: [
       Node(
         coefficientProduct: 1e-1,
         name: TIME.deciseconds,
@@ -78,7 +80,7 @@ class Time extends Property<TIME, double> {
               coefficientProduct: 7.0,
               name: TIME.weeks,
             ),
-            Node(coefficientProduct: 365.0, name: TIME.years_365, leafNodes: [
+            Node(coefficientProduct: 365.0, name: TIME.years365, leafNodes: [
               Node(
                 coefficientProduct: 5.0,
                 name: TIME.lustrum,
@@ -108,7 +110,7 @@ class Time extends Property<TIME, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < TIME.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(TIME.values.elementAt(i))?.value;
+      unitList[i].value = unitConversion.getByName(TIME.values.elementAt(i))?.value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
@@ -123,7 +125,7 @@ class Time extends Property<TIME, double> {
   Unit get hours => getUnit(TIME.hours);
   Unit get days => getUnit(TIME.days);
   Unit get weeks => getUnit(TIME.weeks);
-  Unit get years_365 => getUnit(TIME.years_365);
+  Unit get years365 => getUnit(TIME.years365);
   Unit get lustra => getUnit(TIME.lustrum);
   Unit get decades => getUnit(TIME.decades);
   Unit get centuries => getUnit(TIME.centuries);

@@ -1,6 +1,6 @@
-import 'Property.dart';
-import 'UtilsConversion.dart';
-import 'Unit.dart';
+import 'package:units_converter/Models/property.dart';
+import 'package:units_converter/Models/unit.dart';
+import 'package:units_converter/utils/utils_conversion.dart';
 
 //Available SI_PREFIXES units
 enum SI_PREFIXES {
@@ -63,9 +63,11 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
   /// ```
   SIPrefixes({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = SI_PREFIXES.values.length;
-    this.name = name ?? PROPERTY.SI_PREFIXES;
-    SI_PREFIXES.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name: SI_PREFIXES.base, leafNodes: [
+    this.name = name ?? PROPERTY.siPrefixes;
+    for (SI_PREFIXES val in SI_PREFIXES.values) {
+      unitList.add(Unit(val, symbol: mapSymbols[val]));
+    }
+    unitConversion = Node(name: SI_PREFIXES.base, leafNodes: [
       Node(
         coefficientProduct: 1e1,
         name: SI_PREFIXES.deca,
@@ -155,7 +157,7 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < SI_PREFIXES.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(SI_PREFIXES.values.elementAt(i))?.value;
+      unitList[i].value = unitConversion.getByName(SI_PREFIXES.values.elementAt(i))?.value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

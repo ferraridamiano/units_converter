@@ -1,31 +1,31 @@
-import 'Unit.dart';
-import 'UtilsConversion.dart';
+import 'unit.dart';
+import '../utils/utils_conversion.dart';
 
 enum PROPERTY {
-  ANGLE,
-  AREA,
-  DIGITAL_DATA,
-  ENERGY,
-  FORCE,
-  FUEL_CONSUMPTION,
-  LENGTH,
-  MASS,
-  NUMERAL_SYSTEMS,
-  POWER,
-  PRESSURE,
-  SHOE_SIZE,
-  SI_PREFIXES,
-  SPEED,
-  TEMPERATURE,
-  TIME,
-  TORQUE,
-  VOLUME,
+  angle,
+  area,
+  digitalData,
+  energy,
+  force,
+  fuelConsumption,
+  length,
+  mass,
+  numeralSystems,
+  power,
+  pressure,
+  shoeSize,
+  siPrefixes,
+  speed,
+  temperature,
+  time,
+  torque,
+  volume,
 }
 
 class Property<K, V> {
-  late Node unit_conversion;
+  late Node unitConversion;
   List<Unit> unitList = [];
-  dynamic? name;
+  dynamic name;
   late final int size;
 
   Property({this.name});
@@ -33,24 +33,24 @@ class Property<K, V> {
   void convert(K name, V? value) {
     //Here we will suppose V is a double. In the case where V is a String (Numeral systems) I will override the entire function
 
-    unit_conversion.clearAllValues();
+    unitConversion.clearAllValues();
     //if the value is null also the others units are null, this is convenient to delete
     //all the other units value, for example in a unit converter app (such as Converter NOW)
     if (value == null) {
-      unit_conversion.clearAllValues();
+      unitConversion.clearAllValues();
       for (Unit unit in unitList) {
         unit.value = null;
         unit.stringValue = null;
       }
       return;
     }
-    unit_conversion.clearSelectedNode();
-    unit_conversion.resetConvertedNode();
-    var currentUnit = unit_conversion.getByName(name);
+    unitConversion.clearSelectedNode();
+    unitConversion.resetConvertedNode();
+    var currentUnit = unitConversion.getByName(name);
     currentUnit?.value = value as double;
     currentUnit?.selectedNode = true;
     currentUnit?.convertedNode = true;
-    unit_conversion.convert();
+    unitConversion.convert();
   }
 
   ///Returns all the units converted with prefixes

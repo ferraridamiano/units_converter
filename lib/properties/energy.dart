@@ -1,12 +1,12 @@
-import 'Property.dart';
-import 'UtilsConversion.dart';
-import 'Unit.dart';
+import 'package:units_converter/Models/property.dart';
+import 'package:units_converter/Models/unit.dart';
+import 'package:units_converter/utils/utils_conversion.dart';
 
 //Available ENERGY units
 enum ENERGY {
   joules,
   calories,
-  kilowatt_hours,
+  kilowattHours,
   electronvolts,
 }
 
@@ -15,7 +15,7 @@ class Energy extends Property<ENERGY, double> {
   final Map<ENERGY, String> mapSymbols = {
     ENERGY.joules: 'J',
     ENERGY.calories: 'cal',
-    ENERGY.kilowatt_hours: 'kwh',
+    ENERGY.kilowattHours: 'kwh',
     ENERGY.electronvolts: 'eV',
   };
 
@@ -30,16 +30,18 @@ class Energy extends Property<ENERGY, double> {
   /// ```
   Energy({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = ENERGY.values.length;
-    this.name = name ?? PROPERTY.ENERGY;
-    ENERGY.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name: ENERGY.joules, leafNodes: [
+    this.name = name ?? PROPERTY.energy;
+    for (ENERGY val in ENERGY.values) {
+      unitList.add(Unit(val, symbol: mapSymbols[val]));
+    }
+    unitConversion = Node(name: ENERGY.joules, leafNodes: [
       Node(
         coefficientProduct: 4.1867999409,
         name: ENERGY.calories,
       ),
       Node(
         coefficientProduct: 3600000.0,
-        name: ENERGY.kilowatt_hours,
+        name: ENERGY.kilowattHours,
       ),
       Node(
         coefficientProduct: 1.60217646e-19,
@@ -54,13 +56,13 @@ class Energy extends Property<ENERGY, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < ENERGY.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(ENERGY.values.elementAt(i))?.value;
+      unitList[i].value = unitConversion.getByName(ENERGY.values.elementAt(i))?.value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 
   Unit get joules => getUnit(ENERGY.joules);
   Unit get calories => getUnit(ENERGY.calories);
-  Unit get kilowatt_hours => getUnit(ENERGY.kilowatt_hours);
+  Unit get kilowattHours => getUnit(ENERGY.kilowattHours);
   Unit get electronvolts => getUnit(ENERGY.electronvolts);
 }

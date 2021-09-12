@@ -1,22 +1,22 @@
-import 'Property.dart';
-import 'UtilsConversion.dart';
-import 'Unit.dart';
+import 'package:units_converter/Models/property.dart';
+import 'package:units_converter/Models/unit.dart';
+import 'package:units_converter/utils/utils_conversion.dart';
 
 //Available FUEL_CONSUMPTION units
 enum FUEL_CONSUMPTION {
-  kilometers_per_liter,
-  liters_per_100_km,
-  miles_per_US_gallon,
-  miles_per_imperial_gallon,
+  kilometersPerLiter,
+  litersPer100km,
+  milesPerUsGallon,
+  milesPerImperialGallon,
 }
 
 class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
   //Map between units and its symbol
   final Map<FUEL_CONSUMPTION, String> mapSymbols = {
-    FUEL_CONSUMPTION.kilometers_per_liter: 'km/l',
-    FUEL_CONSUMPTION.liters_per_100_km: 'l/100km',
-    FUEL_CONSUMPTION.miles_per_US_gallon: 'mpg',
-    FUEL_CONSUMPTION.miles_per_imperial_gallon: 'mpg',
+    FUEL_CONSUMPTION.kilometersPerLiter: 'km/l',
+    FUEL_CONSUMPTION.litersPer100km: 'l/100km',
+    FUEL_CONSUMPTION.milesPerUsGallon: 'mpg',
+    FUEL_CONSUMPTION.milesPerImperialGallon: 'mpg',
   };
 
   int significantFigures;
@@ -30,21 +30,23 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
   /// ```
   FuelConsumption({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = FUEL_CONSUMPTION.values.length;
-    this.name = name ?? PROPERTY.FUEL_CONSUMPTION;
-    FUEL_CONSUMPTION.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name: FUEL_CONSUMPTION.kilometers_per_liter, leafNodes: [
+    this.name = name ?? PROPERTY.fuelConsumption;
+    for (FUEL_CONSUMPTION val in FUEL_CONSUMPTION.values) {
+      unitList.add(Unit(val, symbol: mapSymbols[val]));
+    }
+    unitConversion = Node(name: FUEL_CONSUMPTION.kilometersPerLiter, leafNodes: [
       Node(
-        conversionType: RECIPROCAL_CONVERSION,
+        conversionType: reciprocalConversion,
         coefficientProduct: 100.0,
-        name: FUEL_CONSUMPTION.liters_per_100_km,
+        name: FUEL_CONSUMPTION.litersPer100km,
       ),
       Node(
         coefficientProduct: 0.4251437074,
-        name: FUEL_CONSUMPTION.miles_per_US_gallon,
+        name: FUEL_CONSUMPTION.milesPerUsGallon,
       ),
       Node(
         coefficientProduct: 0.3540061899,
-        name: FUEL_CONSUMPTION.miles_per_imperial_gallon,
+        name: FUEL_CONSUMPTION.milesPerImperialGallon,
       ),
     ]);
   }
@@ -55,13 +57,13 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < FUEL_CONSUMPTION.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(FUEL_CONSUMPTION.values.elementAt(i))?.value;
+      unitList[i].value = unitConversion.getByName(FUEL_CONSUMPTION.values.elementAt(i))?.value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 
-  Unit get kilometers_per_liter => getUnit(FUEL_CONSUMPTION.kilometers_per_liter);
-  Unit get liters_per_100_km => getUnit(FUEL_CONSUMPTION.liters_per_100_km);
-  Unit get miles_per_US_gallon => getUnit(FUEL_CONSUMPTION.miles_per_US_gallon);
-  Unit get miles_per_imperial_gallon => getUnit(FUEL_CONSUMPTION.miles_per_imperial_gallon);
+  Unit get kilometersPerLiter => getUnit(FUEL_CONSUMPTION.kilometersPerLiter);
+  Unit get litersPer100km => getUnit(FUEL_CONSUMPTION.litersPer100km);
+  Unit get milesPerUsGallon => getUnit(FUEL_CONSUMPTION.milesPerUsGallon);
+  Unit get milesPerImperialGallon => getUnit(FUEL_CONSUMPTION.milesPerImperialGallon);
 }

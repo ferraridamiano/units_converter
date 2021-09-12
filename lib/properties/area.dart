@@ -1,17 +1,17 @@
-import 'Property.dart';
-import 'UtilsConversion.dart';
-import 'Unit.dart';
+import 'package:units_converter/Models/property.dart';
+import 'package:units_converter/Models/unit.dart';
+import 'package:units_converter/utils/utils_conversion.dart';
 
 //Available AREA units
 enum AREA {
-  square_meters,
-  square_centimeters,
-  square_inches,
-  square_feet,
-  square_miles,
-  square_yard,
-  square_millimeters,
-  square_kilometers,
+  squareMeters,
+  squareCentimeters,
+  squareInches,
+  squareFeet,
+  squareMiles,
+  squareYard,
+  squareMillimeters,
+  squareKilometers,
   hectares,
   acres,
   are,
@@ -20,14 +20,14 @@ enum AREA {
 class Area extends Property<AREA, double> {
   //Map between units and its symbol
   final Map<AREA, String> mapSymbols = {
-    AREA.square_meters: 'm²',
-    AREA.square_centimeters: 'cm²',
-    AREA.square_inches: 'in²',
-    AREA.square_feet: 'ft²',
-    AREA.square_miles: 'mi²',
-    AREA.square_yard: 'yd²',
-    AREA.square_millimeters: 'mm²',
-    AREA.square_kilometers: 'km²',
+    AREA.squareMeters: 'm²',
+    AREA.squareCentimeters: 'cm²',
+    AREA.squareInches: 'in²',
+    AREA.squareFeet: 'ft²',
+    AREA.squareMiles: 'mi²',
+    AREA.squareYard: 'yd²',
+    AREA.squareMillimeters: 'mm²',
+    AREA.squareKilometers: 'km²',
     AREA.hectares: 'he',
     AREA.acres: 'ac',
     AREA.are: 'a',
@@ -44,20 +44,22 @@ class Area extends Property<AREA, double> {
   /// ```
   Area({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = AREA.values.length;
-    this.name = name ?? PROPERTY.AREA;
-    AREA.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name: AREA.square_meters, leafNodes: [
-      Node(coefficientProduct: 1e-4, name: AREA.square_centimeters, leafNodes: [
-        Node(coefficientProduct: 6.4516, name: AREA.square_inches, leafNodes: [
+    this.name = name ?? PROPERTY.area;
+    for (AREA val in AREA.values) {
+      unitList.add(Unit(val, symbol: mapSymbols[val]));
+    }
+    unitConversion = Node(name: AREA.squareMeters, leafNodes: [
+      Node(coefficientProduct: 1e-4, name: AREA.squareCentimeters, leafNodes: [
+        Node(coefficientProduct: 6.4516, name: AREA.squareInches, leafNodes: [
           Node(
             coefficientProduct: 144.0,
-            name: AREA.square_feet,
+            name: AREA.squareFeet,
           ),
         ]),
       ]),
       Node(
         coefficientProduct: 1e-6,
-        name: AREA.square_millimeters,
+        name: AREA.squareMillimeters,
       ),
       Node(
         coefficientProduct: 10000.0,
@@ -65,12 +67,12 @@ class Area extends Property<AREA, double> {
       ),
       Node(
         coefficientProduct: 1000000.0,
-        name: AREA.square_kilometers,
+        name: AREA.squareKilometers,
       ),
-      Node(coefficientProduct: 0.83612736, name: AREA.square_yard, leafNodes: [
+      Node(coefficientProduct: 0.83612736, name: AREA.squareYard, leafNodes: [
         Node(
           coefficientProduct: 3097600.0,
-          name: AREA.square_miles,
+          name: AREA.squareMiles,
         ),
         Node(
           coefficientProduct: 4840.0,
@@ -90,19 +92,19 @@ class Area extends Property<AREA, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < AREA.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(AREA.values.elementAt(i))?.value;
+      unitList[i].value = unitConversion.getByName(AREA.values.elementAt(i))?.value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 
-  Unit get square_meters => getUnit(AREA.square_meters);
-  Unit get square_centimeters => getUnit(AREA.square_centimeters);
-  Unit get square_inches => getUnit(AREA.square_inches);
-  Unit get square_feet => getUnit(AREA.square_feet);
-  Unit get square_miles => getUnit(AREA.square_miles);
-  Unit get square_yard => getUnit(AREA.square_yard);
-  Unit get square_millimeters => getUnit(AREA.square_millimeters);
-  Unit get square_kilometers => getUnit(AREA.square_kilometers);
+  Unit get squareMeters => getUnit(AREA.squareMeters);
+  Unit get squareCentimeters => getUnit(AREA.squareCentimeters);
+  Unit get squareInches => getUnit(AREA.squareInches);
+  Unit get squareFeet => getUnit(AREA.squareFeet);
+  Unit get squareMiles => getUnit(AREA.squareMiles);
+  Unit get squareYard => getUnit(AREA.squareYard);
+  Unit get squareMillimeters => getUnit(AREA.squareMillimeters);
+  Unit get squareKilometers => getUnit(AREA.squareKilometers);
   Unit get hectares => getUnit(AREA.hectares);
   Unit get acres => getUnit(AREA.acres);
   Unit get are => getUnit(AREA.are);

@@ -1,6 +1,6 @@
-import 'Property.dart';
-import 'UtilsConversion.dart';
-import 'Unit.dart';
+import 'package:units_converter/Models/property.dart';
+import 'package:units_converter/Models/unit.dart';
+import 'package:units_converter/utils/utils_conversion.dart';
 
 //Available MASS units
 enum MASS {
@@ -16,7 +16,7 @@ enum MASS {
   carats,
   centigrams,
   pennyweights,
-  troy_ounces,
+  troyOunces,
   stones,
 }
 
@@ -34,7 +34,7 @@ class Mass extends Property<MASS, double> {
     MASS.carats: 'ct',
     MASS.centigrams: 'cg',
     MASS.pennyweights: 'dwt',
-    MASS.troy_ounces: 'oz t',
+    MASS.troyOunces: 'oz t',
     MASS.stones: 'st.',
   };
 
@@ -49,9 +49,11 @@ class Mass extends Property<MASS, double> {
   /// ```
   Mass({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = MASS.values.length;
-    this.name = name ?? PROPERTY.MASS;
-    MASS.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(
+    this.name = name ?? PROPERTY.mass;
+    for (MASS val in MASS.values) {
+      unitList.add(Unit(val, symbol: mapSymbols[val]));
+    }
+    unitConversion = Node(
       name: MASS.grams,
       leafNodes: [
         Node(
@@ -108,7 +110,7 @@ class Mass extends Property<MASS, double> {
           leafNodes: [
             Node(
               coefficientProduct: 20,
-              name: MASS.troy_ounces,
+              name: MASS.troyOunces,
             ),
           ],
         ),
@@ -122,7 +124,7 @@ class Mass extends Property<MASS, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < MASS.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(MASS.values.elementAt(i))?.value;
+      unitList[i].value = unitConversion.getByName(MASS.values.elementAt(i))?.value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
@@ -139,6 +141,6 @@ class Mass extends Property<MASS, double> {
   Unit get carats => getUnit(MASS.carats);
   Unit get centigrams => getUnit(MASS.centigrams);
   Unit get pennyweights => getUnit(MASS.pennyweights);
-  Unit get troy_ounces => getUnit(MASS.troy_ounces);
+  Unit get troyOunces => getUnit(MASS.troyOunces);
   Unit get stones => getUnit(MASS.stones);
 }

@@ -22,7 +22,7 @@ void runConversionTest(Map<dynamic, double> expectedResult, Property property, {
         expect(
           isAcceptable(convertedValue, expectedResult[name]!, sensibility),
           true,
-          reason: 'Error with ${name.toString()}. Expected: ${expectedResult[name]}, result: ${convertedValue}',
+          reason: 'Error with ${name.toString()}. Expected: ${expectedResult[name]}, result: $convertedValue',
         );
       }
     });
@@ -43,14 +43,14 @@ void main() {
 
   group('Area conversion', () {
     const Map<AREA, double> expectedResult = {
-      AREA.square_meters: 1,
-      AREA.square_centimeters: 1e4,
-      AREA.square_inches: 1550.0031,
-      AREA.square_feet: 10.76391041671,
-      AREA.square_miles: 3.8610215854245e-7,
-      AREA.square_yard: 1.1959900463011,
-      AREA.square_millimeters: 1e6,
-      AREA.square_kilometers: 1e-6,
+      AREA.squareMeters: 1,
+      AREA.squareCentimeters: 1e4,
+      AREA.squareInches: 1550.0031,
+      AREA.squareFeet: 10.76391041671,
+      AREA.squareMiles: 3.8610215854245e-7,
+      AREA.squareYard: 1.1959900463011,
+      AREA.squareMillimeters: 1e6,
+      AREA.squareKilometers: 1e-6,
       AREA.hectares: 1e-4,
       AREA.acres: 0.00024710538146717,
       AREA.are: 0.01,
@@ -95,7 +95,7 @@ void main() {
     const Map<ENERGY, double> expectedResult = {
       ENERGY.joules: 1,
       ENERGY.calories: 0.2388459,
-      ENERGY.kilowatt_hours: 2.7777777778e-7,
+      ENERGY.kilowattHours: 2.7777777778e-7,
       ENERGY.electronvolts: 6.2415097523028e18,
     };
     runConversionTest(expectedResult, Energy());
@@ -105,8 +105,8 @@ void main() {
     const Map<FORCE, double> expectedResult = {
       FORCE.newton: 1,
       FORCE.dyne: 1e5,
-      FORCE.pound_force: 0.22480894309971,
-      FORCE.kilogram_force: 0.10197162129779,
+      FORCE.poundForce: 0.22480894309971,
+      FORCE.kilogramForce: 0.10197162129779,
       FORCE.poundal: 7.2330138512099,
     };
     runConversionTest(expectedResult, Force());
@@ -114,10 +114,10 @@ void main() {
 
   group('Fuel consumption', () {
     const Map<FUEL_CONSUMPTION, double> expectedResult = {
-      FUEL_CONSUMPTION.kilometers_per_liter: 1,
-      FUEL_CONSUMPTION.liters_per_100_km: 100,
-      FUEL_CONSUMPTION.miles_per_US_gallon: 2.3521458335008,
-      FUEL_CONSUMPTION.miles_per_imperial_gallon: 2.8248093635947,
+      FUEL_CONSUMPTION.kilometersPerLiter: 1,
+      FUEL_CONSUMPTION.litersPer100km: 100,
+      FUEL_CONSUMPTION.milesPerUsGallon: 2.3521458335008,
+      FUEL_CONSUMPTION.milesPerImperialGallon: 2.8248093635947,
     };
     runConversionTest(expectedResult, FuelConsumption());
   });
@@ -128,7 +128,7 @@ void main() {
       LENGTH.centimeters: 100,
       LENGTH.inches: 39.370078740157,
       LENGTH.feet: 3.2808398950131,
-      LENGTH.nautical_miles: 0.00053995680345572,
+      LENGTH.nauticalMiles: 0.00053995680345572,
       LENGTH.yards: 1.0936132983377,
       LENGTH.miles: 0.00062137119223733,
       LENGTH.millimeters: 1e3,
@@ -137,8 +137,8 @@ void main() {
       LENGTH.angstroms: 1e10,
       LENGTH.picometers: 1e12,
       LENGTH.kilometers: 1e-3,
-      LENGTH.astronomical_units: 6.6845871222684e-12,
-      LENGTH.light_years: 1.057000451015e-16,
+      LENGTH.astronomicalUnits: 6.6845871222684e-12,
+      LENGTH.lightYears: 1.057000451015e-16,
       LENGTH.parsec: 3.2423326718251e-17,
       LENGTH.mils: 39370.0787401574803,
     };
@@ -159,7 +159,7 @@ void main() {
       MASS.carats: 5,
       MASS.centigrams: 1e2,
       MASS.pennyweights: 0.6430149314,
-      MASS.troy_ounces: 0.03215074657,
+      MASS.troyOunces: 0.03215074657,
       MASS.stones: 0.0001574730444,
     };
     runConversionTest(expectedResult, Mass(), sensibility: 1e9);
@@ -184,7 +184,7 @@ void main() {
           expect(
             convertedValue,
             expectedResult[name],
-            reason: 'Error with ${name.toString()}. Expected: ${expectedResult[name]}, result: ${convertedValue}',
+            reason: 'Error with ${name.toString()}. Expected: ${expectedResult[name]}, result: $convertedValue',
           );
         }
       });
@@ -199,8 +199,8 @@ void main() {
       POWER.kilowatt: 1e-3,
       POWER.megawatt: 1e-6,
       POWER.gigawatt: 1e-9,
-      POWER.european_horse_power: 0.0013596216173039,
-      POWER.imperial_horse_power: 0.0013410220895991,
+      POWER.europeanHorsePower: 0.0013596216173039,
+      POWER.imperialHorsePower: 0.0013410220895991,
     };
     runConversionTest(expectedResult, Power());
   });
@@ -209,13 +209,13 @@ void main() {
     const Map<SHOE_SIZE, double> expectedResult = {
       SHOE_SIZE.centimeters: 25.167,
       SHOE_SIZE.inches: 9.908,
-      SHOE_SIZE.eu_china: 40,
-      SHOE_SIZE.uk_india_child: 19.724,
-      SHOE_SIZE.uk_india_man: 6.724,
-      SHOE_SIZE.uk_india_woman: 6.224,
-      SHOE_SIZE.usa_canada_child: 13.391,
-      SHOE_SIZE.usa_canada_man: 7.724,
-      SHOE_SIZE.usa_canada_woman: 8.724,
+      SHOE_SIZE.euChina: 40,
+      SHOE_SIZE.ukIndiaChild: 19.724,
+      SHOE_SIZE.ukIndiaMan: 6.724,
+      SHOE_SIZE.ukIndiaWoman: 6.224,
+      SHOE_SIZE.usaCanadaChild: 13.391,
+      SHOE_SIZE.usaCanadaMan: 7.724,
+      SHOE_SIZE.usaCanadaWoman: 8.724,
       SHOE_SIZE.japan: 26.667,
     };
     runConversionTest(expectedResult, ShoeSize(), sensibility: 1e1);
@@ -250,11 +250,11 @@ void main() {
 
   group('Speed', () {
     const Map<SPEED, double> expectedResult = {
-      SPEED.meters_per_second: 1,
-      SPEED.kilometers_per_hour: 3.6,
-      SPEED.miles_per_hour: 2.2369362920544,
+      SPEED.metersPerSecond: 1,
+      SPEED.kilometersPerHour: 3.6,
+      SPEED.milesPerHour: 2.2369362920544,
       SPEED.knots: 1.9438444924406,
-      SPEED.feets_per_second: 3.2808398950131,
+      SPEED.feetsPerSecond: 3.2808398950131,
     };
     runConversionTest(expectedResult, Speed());
   });
@@ -284,7 +284,7 @@ void main() {
       TIME.hours: 1 / (60 * 60),
       TIME.days: 1 / (60 * 60 * 24),
       TIME.weeks: 1 / (60 * 60 * 24 * 7),
-      TIME.years_365: 1 / (60 * 60 * 24 * 365),
+      TIME.years365: 1 / (60 * 60 * 24 * 365),
       TIME.lustrum: 1 / (60 * 60 * 24 * 365 * 5),
       TIME.decades: 1 / (60 * 60 * 24 * 365 * 10),
       TIME.centuries: 1 / (60 * 60 * 24 * 365 * 100),
@@ -295,35 +295,35 @@ void main() {
 
   group('Torque', () {
     const Map<TORQUE, double> expectedResult = {
-      TORQUE.newton_meter: 1,
-      TORQUE.dyne_meter: 1e5,
-      TORQUE.pound_force_feet: 0.7375621489,
-      TORQUE.kilogram_force_meter: 0.10196798205364,
-      TORQUE.poundal_meter: 7.2330138512099,
+      TORQUE.newtonMeter: 1,
+      TORQUE.dyneMeter: 1e5,
+      TORQUE.poundForceFeet: 0.7375621489,
+      TORQUE.kilogramForceMeter: 0.10196798205364,
+      TORQUE.poundalMeter: 7.2330138512099,
     };
     runConversionTest(expectedResult, Torque());
   });
 
   group('Volume', () {
     const Map<VOLUME, double> expectedResult = {
-      VOLUME.cubic_meters: 1,
+      VOLUME.cubicMeters: 1,
       VOLUME.liters: 1e3,
-      VOLUME.imperial_gallons: 219.96924829909,
-      VOLUME.us_gallons: 264.17205235815,
-      VOLUME.imperial_pints: 1759.7539863927,
-      VOLUME.us_pints: 2113.3764188652,
+      VOLUME.imperialGallons: 219.96924829909,
+      VOLUME.usGallons: 264.17205235815,
+      VOLUME.imperialPints: 1759.7539863927,
+      VOLUME.usPints: 2113.3764188652,
       VOLUME.milliliters: 1e6,
-      VOLUME.tablespoons_us: 67567.567567568,
-      VOLUME.australian_tablespoons: 50000,
+      VOLUME.tablespoonsUs: 67567.567567568,
+      VOLUME.australianTablespoons: 50000,
       VOLUME.cups: 4166.6666666667,
-      VOLUME.cubic_centimeters: 1e6,
-      VOLUME.cubic_feet: 35.314666721489,
-      VOLUME.cubic_inches: 61023.744094732,
-      VOLUME.cubic_millimeters: 1e9,
-      VOLUME.imperial_fluid_ounces: 35195.07973,
-      VOLUME.us_fluid_ounces: 33814.0227,
-      VOLUME.imperial_gill: 7039.015946,
-      VOLUME.us_gill: 8453.505675,
+      VOLUME.cubicCentimeters: 1e6,
+      VOLUME.cubicFeet: 35.314666721489,
+      VOLUME.cubicInches: 61023.744094732,
+      VOLUME.cubicMillimeters: 1e9,
+      VOLUME.imperialFluidOunces: 35195.07973,
+      VOLUME.usFluidOunces: 33814.0227,
+      VOLUME.imperialGill: 7039.015946,
+      VOLUME.usGill: 8453.505675,
     };
     runConversionTest(expectedResult, Volume(), sensibility: 1e9);
   });

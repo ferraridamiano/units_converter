@@ -1,6 +1,6 @@
-import 'Property.dart';
-import 'UtilsConversion.dart';
-import 'Unit.dart';
+import 'package:units_converter/Models/property.dart';
+import 'package:units_converter/Models/unit.dart';
+import 'package:units_converter/utils/utils_conversion.dart';
 
 //Available length units
 enum LENGTH {
@@ -8,7 +8,7 @@ enum LENGTH {
   centimeters,
   inches,
   feet,
-  nautical_miles,
+  nauticalMiles,
   yards,
   miles,
   millimeters,
@@ -17,8 +17,8 @@ enum LENGTH {
   angstroms,
   picometers,
   kilometers,
-  astronomical_units,
-  light_years,
+  astronomicalUnits,
+  lightYears,
   parsec,
   mils,
 }
@@ -30,7 +30,7 @@ class Length extends Property<LENGTH, double> {
     LENGTH.centimeters: 'cm',
     LENGTH.inches: 'in',
     LENGTH.feet: 'ft',
-    LENGTH.nautical_miles: 'M',
+    LENGTH.nauticalMiles: 'M',
     LENGTH.yards: 'yd',
     LENGTH.miles: 'mi',
     LENGTH.millimeters: 'mm',
@@ -39,8 +39,8 @@ class Length extends Property<LENGTH, double> {
     LENGTH.angstroms: 'Å',
     LENGTH.picometers: 'pm',
     LENGTH.kilometers: 'km',
-    LENGTH.astronomical_units: 'au',
-    LENGTH.light_years: 'ly',
+    LENGTH.astronomicalUnits: 'au',
+    LENGTH.lightYears: 'ly',
     LENGTH.parsec: 'pc',
   };
 
@@ -55,9 +55,11 @@ class Length extends Property<LENGTH, double> {
   /// ```
   Length({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = LENGTH.values.length;
-    this.name = name ?? PROPERTY.LENGTH;
-    LENGTH.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name: LENGTH.meters, leafNodes: [
+    this.name = name ?? PROPERTY.length;
+    for (LENGTH val in LENGTH.values) {
+      unitList.add(Unit(val, symbol: mapSymbols[val]));
+    }
+    unitConversion = Node(name: LENGTH.meters, leafNodes: [
       Node(coefficientProduct: 0.01, name: LENGTH.centimeters, leafNodes: [
         Node(coefficientProduct: 2.54, name: LENGTH.inches, leafNodes: [
           Node(
@@ -72,7 +74,7 @@ class Length extends Property<LENGTH, double> {
       ]),
       Node(
         coefficientProduct: 1852.0,
-        name: LENGTH.nautical_miles,
+        name: LENGTH.nauticalMiles,
       ),
       Node(coefficientProduct: 0.9144, name: LENGTH.yards, leafNodes: [
         Node(
@@ -101,8 +103,8 @@ class Length extends Property<LENGTH, double> {
         name: LENGTH.picometers,
       ),
       Node(coefficientProduct: 1000.0, name: LENGTH.kilometers, leafNodes: [
-        Node(coefficientProduct: 149597870.7, name: LENGTH.astronomical_units, leafNodes: [
-          Node(coefficientProduct: 63241.1, name: LENGTH.light_years, leafNodes: [
+        Node(coefficientProduct: 149597870.7, name: LENGTH.astronomicalUnits, leafNodes: [
+          Node(coefficientProduct: 63241.1, name: LENGTH.lightYears, leafNodes: [
             Node(
               coefficientProduct: 3.26,
               name: LENGTH.parsec,
@@ -119,7 +121,7 @@ class Length extends Property<LENGTH, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < LENGTH.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(LENGTH.values.elementAt(i))?.value;
+      unitList[i].value = unitConversion.getByName(LENGTH.values.elementAt(i))?.value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
@@ -128,7 +130,7 @@ class Length extends Property<LENGTH, double> {
   Unit get centimeters => getUnit(LENGTH.centimeters);
   Unit get inches => getUnit(LENGTH.inches);
   Unit get feet => getUnit(LENGTH.feet);
-  Unit get nautical_miles => getUnit(LENGTH.nautical_miles);
+  Unit get nauticalMiles => getUnit(LENGTH.nauticalMiles);
   Unit get yards => getUnit(LENGTH.yards);
   Unit get miles => getUnit(LENGTH.miles);
   Unit get millimeters => getUnit(LENGTH.millimeters);
@@ -137,8 +139,8 @@ class Length extends Property<LENGTH, double> {
   Unit get angstroms => getUnit(LENGTH.angstroms);
   Unit get picometers => getUnit(LENGTH.picometers);
   Unit get kilometers => getUnit(LENGTH.kilometers);
-  Unit get astronomical_units => getUnit(LENGTH.astronomical_units);
-  Unit get light_years => getUnit(LENGTH.light_years);
+  Unit get astronomicalUnits => getUnit(LENGTH.astronomicalUnits);
+  Unit get lightYears => getUnit(LENGTH.lightYears);
   Unit get parsec => getUnit(LENGTH.parsec);
   Unit get mils => getUnit(LENGTH.mils);
 }

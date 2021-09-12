@@ -1,6 +1,6 @@
-import 'package:units_converter/Property.dart';
-import 'UtilsConversion.dart';
-import 'Unit.dart';
+import 'package:units_converter/Models/property.dart';
+import 'package:units_converter/Models/unit.dart';
+import 'package:units_converter/utils/utils_conversion.dart';
 
 //Available ANGLE units
 enum ANGLE {
@@ -30,9 +30,11 @@ class Angle extends Property<ANGLE, double> {
   /// ```
   Angle({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = ANGLE.values.length;
-    this.name = name ?? PROPERTY.ANGLE;
-    ANGLE.values.forEach((element) => unitList.add(Unit(element, symbol: mapSymbols[element])));
-    unit_conversion = Node(name: ANGLE.degree, leafNodes: [
+    this.name = name ?? PROPERTY.angle;
+    for (ANGLE val in ANGLE.values) {
+      unitList.add(Unit(val, symbol: mapSymbols[val]));
+    }
+    unitConversion = Node(name: ANGLE.degree, leafNodes: [
       Node(
         coefficientProduct: 1 / 60,
         name: ANGLE.minutes,
@@ -54,7 +56,7 @@ class Angle extends Property<ANGLE, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < ANGLE.values.length; i++) {
-      unitList[i].value = unit_conversion.getByName(ANGLE.values.elementAt(i))?.value;
+      unitList[i].value = unitConversion.getByName(ANGLE.values.elementAt(i))?.value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
