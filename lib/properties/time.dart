@@ -1,5 +1,5 @@
-import 'package:units_converter/Models/property.dart';
-import 'package:units_converter/Models/unit.dart';
+import 'package:units_converter/models/property.dart';
+import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/utils/utils_conversion.dart';
 
 //Available TIME units

@@ -1,3 +1,7 @@
+# 0.4.0
+Breaking. In this release we used the `lints` package and changed enum to camelCase. We also added minutes/kilometer and
+energy foot pounds units.
+
 # 0.3.0+1
 Added mils.
 

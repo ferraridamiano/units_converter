@@ -1,6 +1,6 @@
-import '../Models/property.dart';
-import 'utils_conversion.dart';
-import '../Models/unit.dart';
+import 'package:units_converter/models/property.dart';
+import 'package:units_converter/models/unit.dart';
+import 'package:units_converter/utils/utils_conversion.dart';
 
 class SimpleCustomConversion extends Property<dynamic, double> {
   //Map between units and its symbol

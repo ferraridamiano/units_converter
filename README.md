@@ -17,9 +17,9 @@ You can use this package in two ways:
 2. Import just what you need (e.g. you need to internationalize your city distance calculator and you are just interested in length conversion):
    
    ```dart
-   import 'package:units_converter/Unit.dart';
-   import 'package:units_converter/Length.dart';
-   // import 'package:units_converter/Area.dart'; ...and every other conversion you need
+   import 'package:units_converter/models/unit.dart';
+   import 'package:units_converter/properties/length.dart';
+   // import 'package:units_converter/properties/area.dart'; ...and every other conversion you need
    ```
 
 ### Use it

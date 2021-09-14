@@ -1,5 +1,5 @@
-export 'package:units_converter/Models/unit.dart';
-export 'package:units_converter/Models/property.dart';
+export 'package:units_converter/models/unit.dart';
+export 'package:units_converter/models/property.dart';
 export 'package:units_converter/utils/simple_custom_conversion.dart';
 export 'package:units_converter/properties/length.dart';
 export 'package:units_converter/properties/area.dart';

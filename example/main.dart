@@ -53,9 +53,4 @@ void main() {
   Unit usd = customConversion.getUnit('USD');
   print('1€ = ${usd.stringValue}${usd.symbol}');
 
-
-  var speed = Speed();
-  speed.convert(SPEED.kilometersPerHour, 1);
-  var unit4 = speed.minutesPerKilometer; //We get all ther others units
-  print('name:${unit4.name}, value:${unit4.value}, stringValue:${unit4.stringValue}, symbol:${unit4.symbol}');
 }
