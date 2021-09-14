@@ -97,6 +97,7 @@ void main() {
       ENERGY.calories: 0.2388459,
       ENERGY.kilowattHours: 2.7777777778e-7,
       ENERGY.electronvolts: 6.2415097523028e18,
+      ENERGY.energyFootPound: 1.3558179483314004,
     };
     runConversionTest(expectedResult, Energy());
   });
@@ -255,6 +256,7 @@ void main() {
       SPEED.milesPerHour: 2.2369362920544,
       SPEED.knots: 1.9438444924406,
       SPEED.feetsPerSecond: 3.2808398950131,
+      SPEED.minutesPerKilometer: 60/3.6,
     };
     runConversionTest(expectedResult, Speed());
   });

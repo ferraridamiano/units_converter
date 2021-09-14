@@ -9,6 +9,7 @@ enum SPEED {
   milesPerHour,
   knots,
   feetsPerSecond,
+  minutesPerKilometer,
 }
 
 class Speed extends Property<SPEED, double> {
@@ -19,6 +20,7 @@ class Speed extends Property<SPEED, double> {
     SPEED.milesPerHour: 'mi/h',
     SPEED.knots: 'kts',
     SPEED.feetsPerSecond: 'ft/s',
+    SPEED.minutesPerKilometer: 'min/km',
   };
 
   int significantFigures;
@@ -46,6 +48,11 @@ class Speed extends Property<SPEED, double> {
           coefficientProduct: 1.852,
           name: SPEED.knots,
         ),
+        Node(
+          conversionType: reciprocalConversion,
+          coefficientProduct: 60,
+          name: SPEED.minutesPerKilometer,
+        )
       ]),
       Node(
         coefficientProduct: 0.3048,
@@ -70,4 +77,5 @@ class Speed extends Property<SPEED, double> {
   Unit get milesPerHour => getUnit(SPEED.milesPerHour);
   Unit get knots => getUnit(SPEED.knots);
   Unit get feetsPerSecond => getUnit(SPEED.feetsPerSecond);
+  Unit get minutesPerKilometer => getUnit(SPEED.minutesPerKilometer);
 }

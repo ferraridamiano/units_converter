@@ -8,6 +8,7 @@ enum ENERGY {
   calories,
   kilowattHours,
   electronvolts,
+  energyFootPound,
 }
 
 class Energy extends Property<ENERGY, double> {
@@ -17,6 +18,7 @@ class Energy extends Property<ENERGY, double> {
     ENERGY.calories: 'cal',
     ENERGY.kilowattHours: 'kwh',
     ENERGY.electronvolts: 'eV',
+    ENERGY.energyFootPound: 'ft⋅lbf',
   };
 
   int significantFigures;
@@ -47,6 +49,10 @@ class Energy extends Property<ENERGY, double> {
         coefficientProduct: 1.60217646e-19,
         name: ENERGY.electronvolts,
       ),
+      Node(
+        coefficientProduct: 1/1.3558179483314004,
+        name: ENERGY.energyFootPound,
+      ),
     ]);
   }
 
@@ -65,4 +71,5 @@ class Energy extends Property<ENERGY, double> {
   Unit get calories => getUnit(ENERGY.calories);
   Unit get kilowattHours => getUnit(ENERGY.kilowattHours);
   Unit get electronvolts => getUnit(ENERGY.electronvolts);
+  Unit get energyFootPound => getUnit(ENERGY.energyFootPound);
 }
