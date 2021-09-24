@@ -206,6 +206,20 @@ void main() {
     runConversionTest(expectedResult, Power());
   });
 
+  group('Pressure', () {
+    const Map<PRESSURE, double> expectedResult = {
+      PRESSURE.pascal: 1,
+      PRESSURE.atmosphere: 1/101325,
+      PRESSURE.bar: 1e-5,
+      PRESSURE.millibar: 1e-2,
+      PRESSURE.psi: 0.00014503773773,
+      PRESSURE.torr: 0.00750061682704,
+      PRESSURE.hectoPascal: 100,
+      PRESSURE.inchOfMercury: 0.00029529987508,
+    };
+    runConversionTest(expectedResult, Pressure(), sensibility: 1e4);
+  });
+
   group('Shoe size', () {
     const Map<SHOE_SIZE, double> expectedResult = {
       SHOE_SIZE.centimeters: 25.167,

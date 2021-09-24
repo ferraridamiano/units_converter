@@ -10,6 +10,8 @@ enum PRESSURE {
   millibar,
   psi,
   torr, //Same as mmHg
+  hectoPascal,
+  inchOfMercury,
 }
 
 class Pressure extends Property<PRESSURE, double> {
@@ -21,6 +23,8 @@ class Pressure extends Property<PRESSURE, double> {
     PRESSURE.millibar: 'mbar',
     PRESSURE.psi: 'psi',
     PRESSURE.torr: 'torr', //Same as mmHg
+    PRESSURE.hectoPascal: 'hPa',
+    PRESSURE.inchOfMercury: 'inHg',
   };
 
   int significantFigures;
@@ -54,7 +58,17 @@ class Pressure extends Property<PRESSURE, double> {
       Node(
         coefficientProduct: 133.322368421,
         name: PRESSURE.torr,
+        leafNodes: [
+          Node(
+            coefficientProduct: 25.4,
+            name: PRESSURE.inchOfMercury,
+          )
+        ]
       ),
+      Node(
+        coefficientProduct: 1e-2,
+        name: PRESSURE.hectoPascal,
+      )
     ]);
   }
 
@@ -75,4 +89,6 @@ class Pressure extends Property<PRESSURE, double> {
   Unit get millibar => getUnit(PRESSURE.millibar);
   Unit get psi => getUnit(PRESSURE.psi);
   Unit get torr => getUnit(PRESSURE.torr);
+  Unit get hectoPascal => getUnit(PRESSURE.hectoPascal);
+  Unit get inchOfMercury => getUnit(PRESSURE.inchOfMercury);
 }
