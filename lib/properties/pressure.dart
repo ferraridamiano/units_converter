@@ -66,7 +66,7 @@ class Pressure extends Property<PRESSURE, double> {
         ]
       ),
       Node(
-        coefficientProduct: 1e-2,
+        coefficientProduct: 1e2,
         name: PRESSURE.hectoPascal,
       )
     ]);

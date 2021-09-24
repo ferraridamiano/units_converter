@@ -214,7 +214,7 @@ void main() {
       PRESSURE.millibar: 1e-2,
       PRESSURE.psi: 0.00014503773773,
       PRESSURE.torr: 0.00750061682704,
-      PRESSURE.hectoPascal: 100,
+      PRESSURE.hectoPascal: 1e-2,
       PRESSURE.inchOfMercury: 0.00029529987508,
     };
     runConversionTest(expectedResult, Pressure(), sensibility: 1e4);
