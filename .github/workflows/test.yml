@@ -4,6 +4,7 @@ on:
   push:
     branches:
       main
+      code_cov
   pull_request:
     branches:
       main
@@ -25,5 +26,12 @@ jobs:
     - name: Download pub dependencies
       run: dart pub get
 
-    - name: Run tests
-      run: dart test
+    - name: Run tests and format coverage
+      run: |
+        dart test --coverage=coverage
+        dart run coverage:format_coverage --lcov --in=coverage \
+          --out=coverage/lcov.info --packages=.packages --report-on=lib
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
