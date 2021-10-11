@@ -3,8 +3,8 @@ name: Test
 on:
   push:
     branches:
-      main
-      code_cov
+      - main
+      - code_cov
   pull_request:
     branches:
       main
