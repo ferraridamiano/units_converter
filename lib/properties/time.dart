@@ -126,8 +126,8 @@ class Time extends Property<TIME, double> {
   Unit get days => getUnit(TIME.days);
   Unit get weeks => getUnit(TIME.weeks);
   Unit get years365 => getUnit(TIME.years365);
-  Unit get lustra => getUnit(TIME.lustrum);
+  Unit get lustrum => getUnit(TIME.lustrum);
   Unit get decades => getUnit(TIME.decades);
   Unit get centuries => getUnit(TIME.centuries);
-  Unit get millennia => getUnit(TIME.millennium);
+  Unit get millennium => getUnit(TIME.millennium);
 }
