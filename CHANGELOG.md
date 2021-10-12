@@ -1,3 +1,6 @@
+# 0.4.1
+Added hectoPascal. Added a bunch of other test (99% code coverage). Minor bug fix (non-critical).
+
 # 0.4.0
 Breaking. In this release we used the `lints` package and changed enum to camelCase. We also added minutes/kilometer and
 energy foot pounds units.
