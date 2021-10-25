@@ -29,7 +29,7 @@ void main() {
         ),
         Node(name: 'B'),
       ],
-    ).convert();
+    ).convert('A3', 2);
     expect(true, true);
   });
 }

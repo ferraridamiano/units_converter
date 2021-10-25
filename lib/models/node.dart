@@ -4,9 +4,11 @@ enum CONVERSION_TYPE {
   /// The conversion is expressed in a form like: y=ax+b. Where a is
   /// [coefficientProduct] and b is [coefficientSum].
   linearConversion,
+
   /// The conversion is expressed in a form like: y=(a/x)+b. Where a is
   /// [coefficientProduct] and b is [coefficientSum].
   reciprocalConversion,
+
   /// This is a special conversion. Use this just with base conversion.
   baseConversion,
 }
@@ -37,8 +39,8 @@ class Node {
   /// This method will first use a DFS-like algorithm to find the converted node
   /// and convert everything up until the root node. An then a BFS-like
   /// algorithm to convert all the nodes.
-  void convert() {
-    List<Node> pathToConvertedNode = _getNodePathUntilConvertedNode();
+  void convert(dynamic name, double? value) {
+    List<Node> pathToConvertedNode = _getNodesPathAndSelectNode(name, value);
     for (int i = pathToConvertedNode.length - 2; i >= 0; i--) {
       _convertTwoNodes(
           parent: pathToConvertedNode[i],
@@ -119,27 +121,32 @@ class Node {
 
   /// This function returns the path from the root Node up until the converted
   /// Node in the form of a list.
-  List<Node> _getNodePathUntilConvertedNode() {
-    if (isConverted == false) {
-      bool stopFlag = false;
-      Queue<Node> stack = Queue.from([this]); // we will use a queue as a stack
-      Queue<List<Node>> breadcrumbListQueue = Queue.from([
-        [this]
-      ]);
-      while (!stopFlag && stack.isNotEmpty) {
-        Node node = stack.removeLast();
-        List<Node> breadcrumbList = breadcrumbListQueue.removeLast();
-        if (node.leafNodes.isNotEmpty) {
-          for (Node leafNode in node.leafNodes) {
-            if (leafNode.isConverted == true) {
-              return [...breadcrumbList, leafNode];
-            }
-            stack.addLast(leafNode);
-            breadcrumbListQueue.addLast([...breadcrumbList, leafNode]);
+  List<Node> _getNodesPathAndSelectNode(dynamic name, double? value) {
+    Queue<Node> stack = Queue.from([this]); // we will use a queue as a stack
+    Queue<List<Node>> breadcrumbListQueue = Queue.from([
+      [this]
+    ]);
+    List<Node> result = [];
+    while (stack.isNotEmpty) {
+      Node node = stack.removeLast();
+      List<Node> breadcrumbList = breadcrumbListQueue.removeLast();
+      if (node.leafNodes.isNotEmpty) {
+        for (Node leafNode in node.leafNodes) {
+          // if the node is the starting point of the conversion we assign it
+          // its value and we mark it as converted. All the others are marked as
+          // not converted
+          if (leafNode.name == name) {
+            leafNode.value = value;
+            leafNode.isConverted = true;
+            result = [...breadcrumbList, leafNode];
+          } else {
+            leafNode.isConverted = false;
           }
+          stack.addLast(leafNode);
+          breadcrumbListQueue.addLast([...breadcrumbList, leafNode]);
         }
       }
     }
-    return [this];
+    return result;
   }
 }
