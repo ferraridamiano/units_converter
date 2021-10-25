@@ -1,6 +1,7 @@
+import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils_conversion.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available TIME units
 enum TIME {
@@ -102,6 +103,7 @@ class Time extends Property<TIME, double> {
         ]),
       ]),
     ]);
+    nodeList = unitConversion.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. TIME.days) and value to all other units
@@ -110,7 +112,7 @@ class Time extends Property<TIME, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < TIME.values.length; i++) {
-      unitList[i].value = unitConversion.getByName(TIME.values.elementAt(i))?.value;
+      unitList[i].value = getNodeByName(TIME.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

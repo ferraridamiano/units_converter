@@ -136,14 +136,14 @@ void main() {
     runGetterTest(property.stones, property.getUnit(MASS.stones));
   });
 
-  group('Numeral systems test', () {
+  /*group('Numeral systems test', () {
     var property = NumeralSystems();
     property.convert(NUMERAL_SYSTEMS.decimal, '1');
     runGetterTest(property.decimal, property.getUnit(NUMERAL_SYSTEMS.decimal));
     runGetterTest(property.hexadecimal, property.getUnit(NUMERAL_SYSTEMS.hexadecimal));
     runGetterTest(property.octal, property.getUnit(NUMERAL_SYSTEMS.octal));
     runGetterTest(property.binary, property.getUnit(NUMERAL_SYSTEMS.binary));
-  });
+  });*/
 
   group('Power test', () {
     var property = Power();

@@ -1,6 +1,7 @@
+/*import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils_conversion.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available NUMERAL_SYSTEMS units
 enum NUMERAL_SYSTEMS {
@@ -81,3 +82,4 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   Unit get octal => getUnit(NUMERAL_SYSTEMS.octal);
   Unit get binary => getUnit(NUMERAL_SYSTEMS.binary);
 }
+*/

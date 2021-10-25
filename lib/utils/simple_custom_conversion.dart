@@ -1,4 +1,4 @@
-import 'package:units_converter/models/property.dart';
+/*import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/utils/utils_conversion.dart';
 
@@ -67,3 +67,4 @@ class SimpleCustomConversion extends Property<dynamic, double> {
     }
   }
 }
+*/

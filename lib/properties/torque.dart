@@ -1,6 +1,7 @@
+import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils_conversion.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available TORQUE units
 enum TORQUE {
@@ -54,6 +55,7 @@ class Torque extends Property<TORQUE, double> {
         name: TORQUE.poundalMeter,
       ),
     ]);
+    nodeList = unitConversion.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. TORQUE.newton_meter) and value to all other units
@@ -62,7 +64,7 @@ class Torque extends Property<TORQUE, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < TORQUE.values.length; i++) {
-      unitList[i].value = unitConversion.getByName(TORQUE.values.elementAt(i))?.value;
+      unitList[i].value = getNodeByName(TORQUE.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

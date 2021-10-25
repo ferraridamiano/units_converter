@@ -1,6 +1,7 @@
+import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils_conversion.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available DIGITAL_DATA units
 enum DIGITAL_DATA {
@@ -163,6 +164,7 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
         ]),
       ]),
     ]);
+    nodeList = unitConversion.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. DIGITAL_DATA.byte) and value to all other units
@@ -171,7 +173,7 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < DIGITAL_DATA.values.length; i++) {
-      unitList[i].value = unitConversion.getByName(DIGITAL_DATA.values.elementAt(i))?.value;
+      unitList[i].value = getNodeByName(DIGITAL_DATA.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

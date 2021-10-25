@@ -21,10 +21,10 @@ void main() {
   //------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   //example 3: convert 100 (decimal) in binary and hexadecimal
-  var numeralSystems = NumeralSystems(); //initialize NumeralSystems object
+  /*var numeralSystems = NumeralSystems(); //initialize NumeralSystems object
   numeralSystems.convert(NUMERAL_SYSTEMS.decimal, '100'); //We give 100 decimal as input
   print('Binary: ${numeralSystems.binary.stringValue}'); //We get the binary value
-  print('Hexadecimal: ${numeralSystems.hexadecimal.stringValue}'); //We get the hexadecimal value
+  print('Hexadecimal: ${numeralSystems.hexadecimal.stringValue}'); //We get the hexadecimal value*/
   //Warning! Numeral systems conversion is the only conversion that need the input as a string, and not as a double/int for obvous reasons
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ void main() {
   //example 4: given a list of coefficient converts units
   //Define the relation between a units and the others. One of the units MUST have a value of 1
   //(it will be considered the base unit from where to start the conversion)
-  final Map<String, double> conversionMap = {
+  /*final Map<String, double> conversionMap = {
     'EUR': 1,
     'USD': 1.2271,
     'GBP': 0.9033,
@@ -51,6 +51,6 @@ void main() {
   var customConversion = SimpleCustomConversion(conversionMap, mapSymbols: mapSymbols);
   customConversion.convert('EUR', 1);
   Unit usd = customConversion.getUnit('USD');
-  print('1€ = ${usd.stringValue}${usd.symbol}');
+  print('1€ = ${usd.stringValue}${usd.symbol}');*/
 
 }

@@ -1,6 +1,7 @@
+import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils_conversion.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available SI_PREFIXES units
 enum SI_PREFIXES {
@@ -149,6 +150,7 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
         name: SI_PREFIXES.yocto,
       ),
     ]);
+    nodeList = unitConversion.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. SI_PREFIXES.milli) and value to all other units
@@ -157,7 +159,7 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < SI_PREFIXES.values.length; i++) {
-      unitList[i].value = unitConversion.getByName(SI_PREFIXES.values.elementAt(i))?.value;
+      unitList[i].value = getNodeByName(SI_PREFIXES.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

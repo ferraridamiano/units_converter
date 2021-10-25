@@ -1,6 +1,7 @@
+import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils_conversion.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available FUEL_CONSUMPTION units
 enum FUEL_CONSUMPTION {
@@ -36,7 +37,7 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
     }
     unitConversion = Node(name: FUEL_CONSUMPTION.kilometersPerLiter, leafNodes: [
       Node(
-        conversionType: reciprocalConversion,
+        conversionType: CONVERSION_TYPE.reciprocalConversion,
         coefficientProduct: 100.0,
         name: FUEL_CONSUMPTION.litersPer100km,
       ),
@@ -49,6 +50,7 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
         name: FUEL_CONSUMPTION.milesPerImperialGallon,
       ),
     ]);
+    nodeList = unitConversion.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. FUEL_CONSUMPTION.liters_per_100_km) and value to all other units
@@ -57,7 +59,7 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < FUEL_CONSUMPTION.values.length; i++) {
-      unitList[i].value = unitConversion.getByName(FUEL_CONSUMPTION.values.elementAt(i))?.value;
+      unitList[i].value = getNodeByName(FUEL_CONSUMPTION.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

@@ -72,21 +72,22 @@ class Node {
     /// down to the child node. Otherwise if false.
     bool fromParentToChild = true,
   }) {
-    switch (conversionType) {
+    switch (child.conversionType) {
       case CONVERSION_TYPE.linearConversion:
         if (fromParentToChild) {
           if (parent.value == null) {
+            //TODO remove all the null checks
             child.value = null;
           } else {
-            child.value =
-                parent.value! * child.coefficientProduct + child.coefficientSum;
+            child.value = (parent.value! - child.coefficientSum) /
+                child.coefficientProduct;
           }
         } else {
           if (child.value == null) {
             parent.value = null;
           } else {
-            parent.value = (child.value! - child.coefficientSum) /
-                child.coefficientProduct;
+            parent.value =
+                child.value! * child.coefficientProduct + child.coefficientSum;
           }
         }
         break;
@@ -95,15 +96,15 @@ class Node {
           if (parent.value == null) {
             child.value = null;
           } else {
-            child.value =
-                child.coefficientProduct / parent.value! + child.coefficientSum;
+            child.value = child.coefficientProduct /
+                (parent.value! - child.coefficientSum);
           }
         } else {
           if (child.value == null) {
             parent.value = null;
           } else {
-            parent.value = child.coefficientProduct /
-                (child.value! - child.coefficientSum);
+            parent.value =
+                child.coefficientProduct / child.value! + child.coefficientSum;
           }
         }
         break;
@@ -130,22 +131,31 @@ class Node {
     while (stack.isNotEmpty) {
       Node node = stack.removeLast();
       List<Node> breadcrumbList = breadcrumbListQueue.removeLast();
+      // if the node is the starting point of the conversion we assign it
+      // its value and we mark it as converted. All the others are marked as
+      // not converted
+      if (node.name == name) {
+        node.value = value;
+        node.isConverted = true;
+        result = [...breadcrumbList];
+      } else {
+        node.isConverted = false;
+      }
       if (node.leafNodes.isNotEmpty) {
         for (Node leafNode in node.leafNodes) {
-          // if the node is the starting point of the conversion we assign it
-          // its value and we mark it as converted. All the others are marked as
-          // not converted
-          if (leafNode.name == name) {
-            leafNode.value = value;
-            leafNode.isConverted = true;
-            result = [...breadcrumbList, leafNode];
-          } else {
-            leafNode.isConverted = false;
-          }
           stack.addLast(leafNode);
           breadcrumbListQueue.addLast([...breadcrumbList, leafNode]);
         }
       }
+    }
+    return result;
+  }
+
+  /// Recursive function to get a list of the nodes of the tree
+  List<Node> getTreeAsList() {
+    List<Node> result = [this];
+    for (Node node in leafNodes) {
+      result = [...result, ...node.getTreeAsList()];
     }
     return result;
   }

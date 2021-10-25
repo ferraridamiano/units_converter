@@ -166,7 +166,7 @@ void main() {
     runConversionTest(expectedResult, Mass(), sensibility: 1e9);
   });
 
-  group('Numeral systems', () {
+  /*group('Numeral systems', () {
     const Map<NUMERAL_SYSTEMS, String> expectedResult = {
       NUMERAL_SYSTEMS.decimal: '178897',
       NUMERAL_SYSTEMS.hexadecimal: '2BAD1',
@@ -191,7 +191,7 @@ void main() {
       });
       property.convert(listNames[0], null); //clear all values
     }
-  });
+  });*/
 
   group('Power', () {
     const Map<POWER, double> expectedResult = {
@@ -344,7 +344,7 @@ void main() {
     runConversionTest(expectedResult, Volume(), sensibility: 1e9);
   });
 
-  group('Simple custom conversion', () {
+  /*group('Simple custom conversion', () {
     const Map<String, double> expectedResult = {
       'EUR': 1,
       'CAD': 1.5213,
@@ -378,5 +378,5 @@ void main() {
       'PLN': 4.5529,
     };
     runConversionTest(expectedResult, SimpleCustomConversion(expectedResult));
-  });
+  });*/
 }

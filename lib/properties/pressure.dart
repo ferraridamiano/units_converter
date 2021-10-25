@@ -1,6 +1,7 @@
+import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils_conversion.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available PRESSURE units
 enum PRESSURE {
@@ -70,6 +71,7 @@ class Pressure extends Property<PRESSURE, double> {
         name: PRESSURE.hectoPascal,
       )
     ]);
+    nodeList = unitConversion.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. PRESSURE.psi) and value to all other units
@@ -78,7 +80,7 @@ class Pressure extends Property<PRESSURE, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < PRESSURE.values.length; i++) {
-      unitList[i].value = unitConversion.getByName(PRESSURE.values.elementAt(i))?.value;
+      unitList[i].value = getNodeByName(PRESSURE.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
