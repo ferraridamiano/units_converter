@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'package:units_converter/utils/utils.dart';
 
 enum CONVERSION_TYPE {
   /// The conversion is expressed in a form like: y=ax+b. Where a is
@@ -39,7 +40,7 @@ class Node {
   /// This method will first use a DFS-like algorithm to find the converted node
   /// and convert everything up until the root node. An then a BFS-like
   /// algorithm to convert all the nodes.
-  void convert(dynamic name, double? value) {
+  void convert(dynamic name, dynamic value) {
     List<Node> pathToConvertedNode = _getNodesPathAndSelectNode(name, value);
     for (int i = pathToConvertedNode.length - 2; i >= 0; i--) {
       _convertTwoNodes(
@@ -109,7 +110,21 @@ class Node {
         }
         break;
       case CONVERSION_TYPE.baseConversion:
-        //TODO
+        // Note: in this case the parent is always the decimal
+        assert(parent.base != null && child.base != null);
+        if (fromParentToChild) {
+          if (parent.stringValue == null) {
+            child.stringValue = null;
+          } else {
+            child.stringValue=decToBase(parent.stringValue!, child.base!);
+          }
+        } else {
+          if (child.stringValue == null) {
+            parent.stringValue = null;
+          } else {
+            parent.stringValue = baseToDec(child.stringValue!, child.base!);
+          }
+        }
         break;
     }
     // At this point the child (or the father) is converted
@@ -122,7 +137,7 @@ class Node {
 
   /// This function returns the path from the root Node up until the converted
   /// Node in the form of a list.
-  List<Node> _getNodesPathAndSelectNode(dynamic name, double? value) {
+  List<Node> _getNodesPathAndSelectNode(dynamic name, dynamic value) {
     Queue<Node> stack = Queue.from([this]); // we will use a queue as a stack
     Queue<List<Node>> breadcrumbListQueue = Queue.from([
       [this]
@@ -135,7 +150,13 @@ class Node {
       // its value and we mark it as converted. All the others are marked as
       // not converted
       if (node.name == name) {
-        node.value = value;
+        if(value is double){
+          node.value = value;
+        } else if(value is String){
+          node.stringValue = value;
+        } else{
+          throw Exception('Value not assigned. Must be double or string');
+        }
         node.isConverted = true;
         result = [...breadcrumbList];
       } else {

@@ -166,7 +166,7 @@ void main() {
     runConversionTest(expectedResult, Mass(), sensibility: 1e9);
   });
 
-  /*group('Numeral systems', () {
+  group('Numeral systems', () {
     const Map<NUMERAL_SYSTEMS, String> expectedResult = {
       NUMERAL_SYSTEMS.decimal: '178897',
       NUMERAL_SYSTEMS.hexadecimal: '2BAD1',
@@ -191,7 +191,7 @@ void main() {
       });
       property.convert(listNames[0], null); //clear all values
     }
-  });*/
+  });
 
   group('Power', () {
     const Map<POWER, double> expectedResult = {
