@@ -1,20 +1,13 @@
 import 'dart:collection';
 
-/*
-/// The conversion is expressed in a form like: y=ax+b. Where a is
-/// [coefficientProduct] and b is [coefficientSum].
-const linearConversion = 1;
-
-/// The conversion is expressed in a form like: y=(a/x)+b. Where a is
-/// [coefficientProduct] and b is [coefficientSum].
-const reciprocalConversion = 2;
-
-/// This is a special conversion. Use this just with base conversion.
-const baseConversion = 3;
-*/
 enum CONVERSION_TYPE {
+  /// The conversion is expressed in a form like: y=ax+b. Where a is
+  /// [coefficientProduct] and b is [coefficientSum].
   linearConversion,
+  /// The conversion is expressed in a form like: y=(a/x)+b. Where a is
+  /// [coefficientProduct] and b is [coefficientSum].
   reciprocalConversion,
+  /// This is a special conversion. Use this just with base conversion.
   baseConversion,
 }
 
@@ -29,7 +22,6 @@ class Node {
     this.conversionType = CONVERSION_TYPE.linearConversion,
     this.base,
     this.isConverted = false,
-    //this.areAdjNodeConverted = false,
   });
 
   List<Node> leafNodes;
@@ -41,18 +33,34 @@ class Node {
   int? base;
   String? stringValue;
   bool isConverted;
-  //bool areAdjNodeConverted;
 
   /// This method will first use a DFS-like algorithm to find the converted node
   /// and convert everything up until the root node. An then a BFS-like
   /// algorithm to convert all the nodes.
   void convert() {
     List<Node> pathToConvertedNode = _getNodePathUntilConvertedNode();
-    for (int i = pathToConvertedNode.length - 1; i > 0; i--) {}
+    for (int i = pathToConvertedNode.length - 2; i >= 0; i--) {
+      _convertTwoNodes(
+          parent: pathToConvertedNode[i],
+          child: pathToConvertedNode[i + 1],
+          fromParentToChild: false);
+    }
+
+    //Now we use a BFS-like algorithm to convert everything from the root node
+    //to every other node.
+    Queue<Node> queue = Queue.from([this]);
+    while (queue.isNotEmpty) {
+      Node node = queue.removeFirst();
+      if (node.leafNodes.isNotEmpty) {
+        for (Node leafNode in node.leafNodes) {
+          if (leafNode.isConverted == false) {
+            _convertTwoNodes(parent: node, child: leafNode);
+          }
+          queue.addLast(leafNode);
+        }
+      }
+    }
   }
-
-
-
 
   void _convertTwoNodes({
     required Node parent,
@@ -98,8 +106,14 @@ class Node {
         }
         break;
       case CONVERSION_TYPE.baseConversion:
-      //TODO
-      break;
+        //TODO
+        break;
+    }
+    // At this point the child (or the father) is converted
+    if (fromParentToChild) {
+      child.isConverted = true;
+    } else {
+      parent.isConverted = true;
     }
   }
 
