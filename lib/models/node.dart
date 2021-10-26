@@ -41,6 +41,8 @@ class Node {
   /// and convert everything up until the root node. An then a BFS-like
   /// algorithm to convert all the nodes.
   void convert(dynamic name, dynamic value) {
+    assert(value is String || value is double);
+
     List<Node> pathToConvertedNode = _getNodesPathAndSelectNode(name, value);
     for (int i = pathToConvertedNode.length - 2; i >= 0; i--) {
       _convertTwoNodes(
@@ -76,54 +78,29 @@ class Node {
     switch (child.conversionType) {
       case CONVERSION_TYPE.linearConversion:
         if (fromParentToChild) {
-          if (parent.value == null) {
-            //TODO remove all the null checks
-            child.value = null;
-          } else {
-            child.value = (parent.value! - child.coefficientSum) /
-                child.coefficientProduct;
-          }
+          child.value =
+              (parent.value! - child.coefficientSum) / child.coefficientProduct;
         } else {
-          if (child.value == null) {
-            parent.value = null;
-          } else {
-            parent.value =
-                child.value! * child.coefficientProduct + child.coefficientSum;
-          }
+          parent.value =
+              child.value! * child.coefficientProduct + child.coefficientSum;
         }
         break;
       case CONVERSION_TYPE.reciprocalConversion:
         if (fromParentToChild) {
-          if (parent.value == null) {
-            child.value = null;
-          } else {
-            child.value = child.coefficientProduct /
-                (parent.value! - child.coefficientSum);
-          }
+          child.value =
+              child.coefficientProduct / (parent.value! - child.coefficientSum);
         } else {
-          if (child.value == null) {
-            parent.value = null;
-          } else {
-            parent.value =
-                child.coefficientProduct / child.value! + child.coefficientSum;
-          }
+          parent.value =
+              child.coefficientProduct / child.value! + child.coefficientSum;
         }
         break;
       case CONVERSION_TYPE.baseConversion:
         // Note: in this case the parent is always the decimal
         assert(parent.base != null && child.base != null);
         if (fromParentToChild) {
-          if (parent.stringValue == null) {
-            child.stringValue = null;
-          } else {
-            child.stringValue=decToBase(parent.stringValue!, child.base!);
-          }
+          child.stringValue = decToBase(parent.stringValue!, child.base!);
         } else {
-          if (child.stringValue == null) {
-            parent.stringValue = null;
-          } else {
-            parent.stringValue = baseToDec(child.stringValue!, child.base!);
-          }
+          parent.stringValue = baseToDec(child.stringValue!, child.base!);
         }
         break;
     }
@@ -150,11 +127,11 @@ class Node {
       // its value and we mark it as converted. All the others are marked as
       // not converted
       if (node.name == name) {
-        if(value is double){
+        if (value is double) {
           node.value = value;
-        } else if(value is String){
+        } else if (value is String) {
           node.stringValue = value;
-        } else{
+        } else {
           throw Exception('Value not assigned. Must be double or string');
         }
         node.isConverted = true;

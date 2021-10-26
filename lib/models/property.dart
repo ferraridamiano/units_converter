@@ -46,7 +46,7 @@ class Property<K, V> {
       }
       return;
     }
-    unitConversion.convert(name, value as double?);
+    unitConversion.convert(name, value as double);
   }
 
   Node getNodeByName(var name) =>
