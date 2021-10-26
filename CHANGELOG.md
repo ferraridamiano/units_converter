@@ -1,3 +1,9 @@
+# 1.0.0
+`units_converter` is stable since some releases. In this first 1.x version we made a huge work to improve the algorithm
+conversion. Now it is **2x faster** then the previous one and it is simpler (less line of code with known algorithms).
+We added more test, the **code coverage is now 100%**.
+This release will not break anything, it is compatible with the previous one.
+
 # 0.4.1
 Added hectoPascal. Added a bunch of other test (99% code coverage). Minor bug fix (non-critical).
 

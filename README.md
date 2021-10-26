@@ -2,6 +2,9 @@
 [![codecov](https://codecov.io/gh/ferraridamiano/units_converter/branch/main/graph/badge.svg)](https://codecov.io/gh/ferraridamiano/units_converter)
 [![Pub](https://img.shields.io/pub/v/units_converter.svg)](https://pub.dev/packages/units_converter)
 [![license](https://img.shields.io/github/license/ferraridamiano/units_converter)](https://en.wikipedia.org/wiki/MIT_License)
+<a href="https://www.buymeacoffee.com/ferraridamiano">
+    <img src="https://shields.io/badge/ferraridamiano-Support--me-FFDD00?logo=buy-me-a-coffee&style=flat&link=https://www.buymeacoffee.com/ferraridamiano"/>
+</a>
 
 units_converter is a package written in dart for dart & flutter developers. You should not take care of **unit conversion** and **internationalize** your app, everything is already done with this package! Do you need to convert just few units and you don't want to import the whole package, no problem! units_converter is **modular**, you can **import just what you need**! You can also add your own **custom conversion**!
 
