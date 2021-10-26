@@ -37,7 +37,8 @@ class Area extends Property<AREA, double> {
   int significantFigures;
   bool removeTrailingZeros;
 
-  ///Class for area conversions, e.g. if you want to convert 1 square meters in acres:
+  ///Class for area conversions, e.g. if you want to convert 1 square meters in
+  ///acres:
   ///```dart
   ///var area = Area(removeTrailingZeros: false);
   ///area.convert(Unit(AREA.square_meters, value: 1));
@@ -88,14 +89,16 @@ class Area extends Property<AREA, double> {
     nodeList = unitConversion.getTreeAsList();
   }
 
-  ///Converts a unit with a specific name (e.g. AREA.hectares) and value to all other units
+  /// Converts a unit with a specific name (e.g. AREA.hectares) and value to all
+  /// other units
   @override
   void convert(AREA name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < AREA.values.length; i++) {
       unitList[i].value = getNodeByName(AREA.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

@@ -64,10 +64,11 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
       }
       return;
     }
-    
+
     unitConversion.convert(name, value);
     for (var i = 0; i < NUMERAL_SYSTEMS.values.length; i++) {
-      unitList[i].stringValue = getNodeByName(NUMERAL_SYSTEMS.values.elementAt(i)).stringValue;
+      unitList[i].stringValue =
+          getNodeByName(NUMERAL_SYSTEMS.values.elementAt(i)).stringValue;
     }
   }
 

@@ -77,7 +77,8 @@ class Power extends Property<POWER, double> {
     if (value == null) return;
     for (var i = 0; i < POWER.values.length; i++) {
       unitList[i].value = getNodeByName(POWER.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

@@ -35,33 +35,38 @@ class Temperature extends Property<TEMPERATURE, double> {
   ///temperature.convert(Unit(TEMPERATURE.celsius, value: 1));
   ///print(TEMPERATURE.kelvin);
   /// ```
-  Temperature({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  Temperature(
+      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = TEMPERATURE.values.length;
     this.name = name ?? PROPERTY.temperature;
     for (TEMPERATURE val in TEMPERATURE.values) {
       unitList.add(Unit(val, symbol: mapSymbols[val]));
     }
     unitConversion = Node(name: TEMPERATURE.fahrenheit, leafNodes: [
-      Node(coefficientProduct: 1.8, coefficientSum: 32.0, name: TEMPERATURE.celsius, leafNodes: [
-        Node(
-          coefficientSum: -273.15,
-          name: TEMPERATURE.kelvin,
-        ),
-        Node(
-          coefficientProduct: 5 / 4,
-          name: TEMPERATURE.reamur,
-        ),
-        Node(
-          coefficientProduct: 40 / 21,
-          coefficientSum: -100 / 7,
-          name: TEMPERATURE.romer,
-        ),
-        Node(
-          coefficientProduct: -2 / 3,
-          coefficientSum: 100,
-          name: TEMPERATURE.delisle,
-        ),
-      ]),
+      Node(
+          coefficientProduct: 1.8,
+          coefficientSum: 32.0,
+          name: TEMPERATURE.celsius,
+          leafNodes: [
+            Node(
+              coefficientSum: -273.15,
+              name: TEMPERATURE.kelvin,
+            ),
+            Node(
+              coefficientProduct: 5 / 4,
+              name: TEMPERATURE.reamur,
+            ),
+            Node(
+              coefficientProduct: 40 / 21,
+              coefficientSum: -100 / 7,
+              name: TEMPERATURE.romer,
+            ),
+            Node(
+              coefficientProduct: -2 / 3,
+              coefficientSum: 100,
+              name: TEMPERATURE.delisle,
+            ),
+          ]),
       Node(
         coefficientSum: -459.67,
         name: TEMPERATURE.rankine,
@@ -77,7 +82,8 @@ class Temperature extends Property<TEMPERATURE, double> {
     if (value == null) return;
     for (var i = 0; i < TEMPERATURE.values.length; i++) {
       unitList[i].value = getNodeByName(TEMPERATURE.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

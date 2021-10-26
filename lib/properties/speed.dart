@@ -40,21 +40,24 @@ class Speed extends Property<SPEED, double> {
       unitList.add(Unit(val, symbol: mapSymbols[val]));
     }
     unitConversion = Node(name: SPEED.metersPerSecond, leafNodes: [
-      Node(coefficientProduct: 1 / 3.6, name: SPEED.kilometersPerHour, leafNodes: [
-        Node(
-          coefficientProduct: 1.609344,
-          name: SPEED.milesPerHour,
-        ),
-        Node(
-          coefficientProduct: 1.852,
-          name: SPEED.knots,
-        ),
-        Node(
-          conversionType: CONVERSION_TYPE.reciprocalConversion,
-          coefficientProduct: 60,
-          name: SPEED.minutesPerKilometer,
-        )
-      ]),
+      Node(
+          coefficientProduct: 1 / 3.6,
+          name: SPEED.kilometersPerHour,
+          leafNodes: [
+            Node(
+              coefficientProduct: 1.609344,
+              name: SPEED.milesPerHour,
+            ),
+            Node(
+              coefficientProduct: 1.852,
+              name: SPEED.knots,
+            ),
+            Node(
+              conversionType: CONVERSION_TYPE.reciprocalConversion,
+              coefficientProduct: 60,
+              name: SPEED.minutesPerKilometer,
+            )
+          ]),
       Node(
         coefficientProduct: 0.3048,
         name: SPEED.feetsPerSecond,
@@ -70,7 +73,8 @@ class Speed extends Property<SPEED, double> {
     if (value == null) return;
     for (var i = 0; i < SPEED.values.length; i++) {
       unitList[i].value = getNodeByName(SPEED.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

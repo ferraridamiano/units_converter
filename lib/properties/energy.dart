@@ -31,7 +31,8 @@ class Energy extends Property<ENERGY, double> {
   ///energy.convert(Unit(ENERGY.joules, value: 1));
   ///print(ENERGY.kilowatt_hours);
   /// ```
-  Energy({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  Energy(
+      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = ENERGY.values.length;
     this.name = name ?? PROPERTY.energy;
     for (ENERGY val in ENERGY.values) {
@@ -51,7 +52,7 @@ class Energy extends Property<ENERGY, double> {
         name: ENERGY.electronvolts,
       ),
       Node(
-        coefficientProduct: 1/1.3558179483314004,
+        coefficientProduct: 1 / 1.3558179483314004,
         name: ENERGY.energyFootPound,
       ),
     ]);
@@ -65,7 +66,8 @@ class Energy extends Property<ENERGY, double> {
     if (value == null) return;
     for (var i = 0; i < ENERGY.values.length; i++) {
       unitList[i].value = getNodeByName(ENERGY.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

@@ -33,19 +33,26 @@ class SimpleCustomConversion extends Property<dynamic, double> {
   ///print('1€ = ${usd.stringValue}${usd.symbol}');
   /// ```
   SimpleCustomConversion(this.mapConversion,
-      {this.mapSymbols, this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+      {this.mapSymbols,
+      this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      name}) {
     size = mapConversion.length;
     this.name = name;
-    assert(mapConversion.containsValue(1), 'One conversion coefficient must be 1, this will considered the base unit');
+    assert(mapConversion.containsValue(1),
+        'One conversion coefficient must be 1, this will considered the base unit');
     if (mapSymbols != null) {
       for (var val in mapConversion.keys) {
-        assert(mapSymbols!.keys.contains(val), 'The key of mapConversion must be the same key of mapSymbols');
+        assert(mapSymbols!.keys.contains(val),
+            'The key of mapConversion must be the same key of mapSymbols');
       }
     }
     for (var val in mapConversion.keys) {
-      unitList.add(Unit(val, symbol: mapSymbols != null ? mapSymbols![val] : null));
+      unitList
+          .add(Unit(val, symbol: mapSymbols != null ? mapSymbols![val] : null));
     }
-    var baseUnit = mapConversion.keys.firstWhere((element) => mapConversion[element] == 1); //take the base unit
+    var baseUnit = mapConversion.keys.firstWhere(
+        (element) => mapConversion[element] == 1); //take the base unit
     List<Node> leafNodes = [];
     mapConversion.forEach((key, value) {
       if (key != baseUnit) {
@@ -65,7 +72,8 @@ class SimpleCustomConversion extends Property<dynamic, double> {
     if (value == null) return;
     for (var i = 0; i < mapConversion.length; i++) {
       unitList[i].value = getNodeByName(mapConversion.keys.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 }

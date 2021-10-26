@@ -57,7 +57,8 @@ class Volume extends Property<VOLUME, double> {
   ///volume.convert(Unit(VOLUME.liters, value: 1));
   ///print(VOLUME.us_gallons);
   /// ```
-  Volume({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  Volume(
+      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = VOLUME.values.length;
     this.name = name ?? PROPERTY.volume;
     for (VOLUME val in VOLUME.values) {
@@ -119,14 +120,20 @@ class Volume extends Property<VOLUME, double> {
             ),
           ]),
         ]),
-        Node(coefficientProduct: 1e-6, name: VOLUME.cubicCentimeters, leafNodes: [
-          Node(coefficientProduct: 16.387064, name: VOLUME.cubicInches, leafNodes: [
-            Node(
-              coefficientProduct: 1728.0,
-              name: VOLUME.cubicFeet,
-            ),
-          ]),
-        ]),
+        Node(
+            coefficientProduct: 1e-6,
+            name: VOLUME.cubicCentimeters,
+            leafNodes: [
+              Node(
+                  coefficientProduct: 16.387064,
+                  name: VOLUME.cubicInches,
+                  leafNodes: [
+                    Node(
+                      coefficientProduct: 1728.0,
+                      name: VOLUME.cubicFeet,
+                    ),
+                  ]),
+            ]),
         Node(
           coefficientProduct: 1e-9,
           name: VOLUME.cubicMillimeters,
@@ -143,7 +150,8 @@ class Volume extends Property<VOLUME, double> {
     if (value == null) return;
     for (var i = 0; i < VOLUME.values.length; i++) {
       unitList[i].value = getNodeByName(VOLUME.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

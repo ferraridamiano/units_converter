@@ -6,7 +6,9 @@ void main() {
     double? val1 = unit1.value;
     double? val2 = unit2.value;
     test('${unit1.name.toString()} test', () {
-      expect(val1, val2, reason: 'Failed ${unit1.name.toString()}: $val1 is different from $val2');
+      expect(val1, val2,
+          reason:
+              'Failed ${unit1.name.toString()}: $val1 is different from $val2');
     });
   }
 
@@ -23,13 +25,16 @@ void main() {
     var property = Area();
     property.convert(AREA.squareMeters, 1);
     runGetterTest(property.squareMeters, property.getUnit(AREA.squareMeters));
-    runGetterTest(property.squareCentimeters, property.getUnit(AREA.squareCentimeters));
+    runGetterTest(
+        property.squareCentimeters, property.getUnit(AREA.squareCentimeters));
     runGetterTest(property.squareInches, property.getUnit(AREA.squareInches));
     runGetterTest(property.squareFeet, property.getUnit(AREA.squareFeet));
     runGetterTest(property.squareMiles, property.getUnit(AREA.squareMiles));
     runGetterTest(property.squareYard, property.getUnit(AREA.squareYard));
-    runGetterTest(property.squareMillimeters, property.getUnit(AREA.squareMillimeters));
-    runGetterTest(property.squareKilometers, property.getUnit(AREA.squareKilometers));
+    runGetterTest(
+        property.squareMillimeters, property.getUnit(AREA.squareMillimeters));
+    runGetterTest(
+        property.squareKilometers, property.getUnit(AREA.squareKilometers));
     runGetterTest(property.hectares, property.getUnit(AREA.hectares));
     runGetterTest(property.acres, property.getUnit(AREA.acres));
     runGetterTest(property.are, property.getUnit(AREA.are));
@@ -71,9 +76,12 @@ void main() {
     property.convert(ENERGY.joules, 1);
     runGetterTest(property.joules, property.getUnit(ENERGY.joules));
     runGetterTest(property.calories, property.getUnit(ENERGY.calories));
-    runGetterTest(property.kilowattHours, property.getUnit(ENERGY.kilowattHours));
-    runGetterTest(property.electronvolts, property.getUnit(ENERGY.electronvolts));
-    runGetterTest(property.energyFootPound, property.getUnit(ENERGY.energyFootPound));
+    runGetterTest(
+        property.kilowattHours, property.getUnit(ENERGY.kilowattHours));
+    runGetterTest(
+        property.electronvolts, property.getUnit(ENERGY.electronvolts));
+    runGetterTest(
+        property.energyFootPound, property.getUnit(ENERGY.energyFootPound));
   });
 
   group('Force test', () {
@@ -82,17 +90,22 @@ void main() {
     runGetterTest(property.newton, property.getUnit(FORCE.newton));
     runGetterTest(property.dyne, property.getUnit(FORCE.dyne));
     runGetterTest(property.poundForce, property.getUnit(FORCE.poundForce));
-    runGetterTest(property.kilogramForce, property.getUnit(FORCE.kilogramForce));
+    runGetterTest(
+        property.kilogramForce, property.getUnit(FORCE.kilogramForce));
     runGetterTest(property.poundal, property.getUnit(FORCE.poundal));
   });
 
   group('Fuel consumption test', () {
     var property = FuelConsumption();
     property.convert(FUEL_CONSUMPTION.kilometersPerLiter, 1);
-    runGetterTest(property.kilometersPerLiter, property.getUnit(FUEL_CONSUMPTION.kilometersPerLiter));
-    runGetterTest(property.litersPer100km, property.getUnit(FUEL_CONSUMPTION.litersPer100km));
-    runGetterTest(property.milesPerUsGallon, property.getUnit(FUEL_CONSUMPTION.milesPerUsGallon));
-    runGetterTest(property.milesPerImperialGallon, property.getUnit(FUEL_CONSUMPTION.milesPerImperialGallon));
+    runGetterTest(property.kilometersPerLiter,
+        property.getUnit(FUEL_CONSUMPTION.kilometersPerLiter));
+    runGetterTest(property.litersPer100km,
+        property.getUnit(FUEL_CONSUMPTION.litersPer100km));
+    runGetterTest(property.milesPerUsGallon,
+        property.getUnit(FUEL_CONSUMPTION.milesPerUsGallon));
+    runGetterTest(property.milesPerImperialGallon,
+        property.getUnit(FUEL_CONSUMPTION.milesPerImperialGallon));
   });
 
   group('Length test', () {
@@ -102,7 +115,8 @@ void main() {
     runGetterTest(property.centimeters, property.getUnit(LENGTH.centimeters));
     runGetterTest(property.inches, property.getUnit(LENGTH.inches));
     runGetterTest(property.feet, property.getUnit(LENGTH.feet));
-    runGetterTest(property.nauticalMiles, property.getUnit(LENGTH.nauticalMiles));
+    runGetterTest(
+        property.nauticalMiles, property.getUnit(LENGTH.nauticalMiles));
     runGetterTest(property.yards, property.getUnit(LENGTH.yards));
     runGetterTest(property.miles, property.getUnit(LENGTH.miles));
     runGetterTest(property.millimeters, property.getUnit(LENGTH.millimeters));
@@ -111,7 +125,8 @@ void main() {
     runGetterTest(property.angstroms, property.getUnit(LENGTH.angstroms));
     runGetterTest(property.picometers, property.getUnit(LENGTH.picometers));
     runGetterTest(property.kilometers, property.getUnit(LENGTH.kilometers));
-    runGetterTest(property.astronomicalUnits, property.getUnit(LENGTH.astronomicalUnits));
+    runGetterTest(
+        property.astronomicalUnits, property.getUnit(LENGTH.astronomicalUnits));
     runGetterTest(property.lightYears, property.getUnit(LENGTH.lightYears));
     runGetterTest(property.parsec, property.getUnit(LENGTH.parsec));
     runGetterTest(property.mils, property.getUnit(LENGTH.mils));
@@ -140,7 +155,8 @@ void main() {
     var property = NumeralSystems();
     property.convert(NUMERAL_SYSTEMS.decimal, '1');
     runGetterTest(property.decimal, property.getUnit(NUMERAL_SYSTEMS.decimal));
-    runGetterTest(property.hexadecimal, property.getUnit(NUMERAL_SYSTEMS.hexadecimal));
+    runGetterTest(
+        property.hexadecimal, property.getUnit(NUMERAL_SYSTEMS.hexadecimal));
     runGetterTest(property.octal, property.getUnit(NUMERAL_SYSTEMS.octal));
     runGetterTest(property.binary, property.getUnit(NUMERAL_SYSTEMS.binary));
   });
@@ -153,8 +169,10 @@ void main() {
     runGetterTest(property.kilowatt, property.getUnit(POWER.kilowatt));
     runGetterTest(property.megawatt, property.getUnit(POWER.megawatt));
     runGetterTest(property.gigawatt, property.getUnit(POWER.gigawatt));
-    runGetterTest(property.europeanHorsePower, property.getUnit(POWER.europeanHorsePower));
-    runGetterTest(property.imperialHorsePower, property.getUnit(POWER.imperialHorsePower));
+    runGetterTest(property.europeanHorsePower,
+        property.getUnit(POWER.europeanHorsePower));
+    runGetterTest(property.imperialHorsePower,
+        property.getUnit(POWER.imperialHorsePower));
   });
 
   group('Pressure test', () {
@@ -167,21 +185,28 @@ void main() {
     runGetterTest(property.psi, property.getUnit(PRESSURE.psi));
     runGetterTest(property.torr, property.getUnit(PRESSURE.torr));
     runGetterTest(property.hectoPascal, property.getUnit(PRESSURE.hectoPascal));
-    runGetterTest(property.inchOfMercury, property.getUnit(PRESSURE.inchOfMercury));
+    runGetterTest(
+        property.inchOfMercury, property.getUnit(PRESSURE.inchOfMercury));
   });
 
   group('Shoe size test', () {
     var property = ShoeSize();
     property.convert(SHOE_SIZE.centimeters, 1);
-    runGetterTest(property.centimeters, property.getUnit(SHOE_SIZE.centimeters));
+    runGetterTest(
+        property.centimeters, property.getUnit(SHOE_SIZE.centimeters));
     runGetterTest(property.inches, property.getUnit(SHOE_SIZE.inches));
     runGetterTest(property.euChina, property.getUnit(SHOE_SIZE.euChina));
-    runGetterTest(property.ukIndiaChild, property.getUnit(SHOE_SIZE.ukIndiaChild));
+    runGetterTest(
+        property.ukIndiaChild, property.getUnit(SHOE_SIZE.ukIndiaChild));
     runGetterTest(property.ukIndiaMan, property.getUnit(SHOE_SIZE.ukIndiaMan));
-    runGetterTest(property.ukIndiaWoman, property.getUnit(SHOE_SIZE.ukIndiaWoman));
-    runGetterTest(property.usaCanadaChild, property.getUnit(SHOE_SIZE.usaCanadaChild));
-    runGetterTest(property.usaCanadaMan, property.getUnit(SHOE_SIZE.usaCanadaMan));
-    runGetterTest(property.usaCanadaWoman, property.getUnit(SHOE_SIZE.usaCanadaWoman));
+    runGetterTest(
+        property.ukIndiaWoman, property.getUnit(SHOE_SIZE.ukIndiaWoman));
+    runGetterTest(
+        property.usaCanadaChild, property.getUnit(SHOE_SIZE.usaCanadaChild));
+    runGetterTest(
+        property.usaCanadaMan, property.getUnit(SHOE_SIZE.usaCanadaMan));
+    runGetterTest(
+        property.usaCanadaWoman, property.getUnit(SHOE_SIZE.usaCanadaWoman));
     runGetterTest(property.japan, property.getUnit(SHOE_SIZE.japan));
   });
 
@@ -214,18 +239,23 @@ void main() {
   group('Speed test', () {
     var property = Speed();
     property.convert(SPEED.metersPerSecond, 1);
-    runGetterTest(property.metersPerSecond, property.getUnit(SPEED.metersPerSecond));
-    runGetterTest(property.kilometersPerHour, property.getUnit(SPEED.kilometersPerHour));
+    runGetterTest(
+        property.metersPerSecond, property.getUnit(SPEED.metersPerSecond));
+    runGetterTest(
+        property.kilometersPerHour, property.getUnit(SPEED.kilometersPerHour));
     runGetterTest(property.milesPerHour, property.getUnit(SPEED.milesPerHour));
     runGetterTest(property.knots, property.getUnit(SPEED.knots));
-    runGetterTest(property.feetsPerSecond, property.getUnit(SPEED.feetsPerSecond));
-    runGetterTest(property.minutesPerKilometer, property.getUnit(SPEED.minutesPerKilometer));
+    runGetterTest(
+        property.feetsPerSecond, property.getUnit(SPEED.feetsPerSecond));
+    runGetterTest(property.minutesPerKilometer,
+        property.getUnit(SPEED.minutesPerKilometer));
   });
 
   group('Temperature test', () {
     var property = Temperature();
     property.convert(TEMPERATURE.fahrenheit, 1);
-    runGetterTest(property.fahrenheit, property.getUnit(TEMPERATURE.fahrenheit));
+    runGetterTest(
+        property.fahrenheit, property.getUnit(TEMPERATURE.fahrenheit));
     runGetterTest(property.celsius, property.getUnit(TEMPERATURE.celsius));
     runGetterTest(property.kelvin, property.getUnit(TEMPERATURE.kelvin));
     runGetterTest(property.reamur, property.getUnit(TEMPERATURE.reamur));
@@ -259,8 +289,10 @@ void main() {
     property.convert(TORQUE.newtonMeter, 1);
     runGetterTest(property.newtonMeter, property.getUnit(TORQUE.newtonMeter));
     runGetterTest(property.dyneMeter, property.getUnit(TORQUE.dyneMeter));
-    runGetterTest(property.poundForceFeet, property.getUnit(TORQUE.poundForceFeet));
-    runGetterTest(property.kilogramForceMeter, property.getUnit(TORQUE.kilogramForceMeter));
+    runGetterTest(
+        property.poundForceFeet, property.getUnit(TORQUE.poundForceFeet));
+    runGetterTest(property.kilogramForceMeter,
+        property.getUnit(TORQUE.kilogramForceMeter));
     runGetterTest(property.poundalMeter, property.getUnit(TORQUE.poundalMeter));
   });
 
@@ -269,20 +301,28 @@ void main() {
     property.convert(VOLUME.cubicMeters, 1);
     runGetterTest(property.cubicMeters, property.getUnit(VOLUME.cubicMeters));
     runGetterTest(property.liters, property.getUnit(VOLUME.liters));
-    runGetterTest(property.imperialGallons, property.getUnit(VOLUME.imperialGallons));
+    runGetterTest(
+        property.imperialGallons, property.getUnit(VOLUME.imperialGallons));
     runGetterTest(property.usGallons, property.getUnit(VOLUME.usGallons));
-    runGetterTest(property.imperialPints, property.getUnit(VOLUME.imperialPints));
+    runGetterTest(
+        property.imperialPints, property.getUnit(VOLUME.imperialPints));
     runGetterTest(property.usPints, property.getUnit(VOLUME.usPints));
     runGetterTest(property.milliliters, property.getUnit(VOLUME.milliliters));
-    runGetterTest(property.tablespoonsUs, property.getUnit(VOLUME.tablespoonsUs));
-    runGetterTest(property.australianTablespoons, property.getUnit(VOLUME.australianTablespoons));
+    runGetterTest(
+        property.tablespoonsUs, property.getUnit(VOLUME.tablespoonsUs));
+    runGetterTest(property.australianTablespoons,
+        property.getUnit(VOLUME.australianTablespoons));
     runGetterTest(property.cups, property.getUnit(VOLUME.cups));
-    runGetterTest(property.cubicCentimeters, property.getUnit(VOLUME.cubicCentimeters));
+    runGetterTest(
+        property.cubicCentimeters, property.getUnit(VOLUME.cubicCentimeters));
     runGetterTest(property.cubicFeet, property.getUnit(VOLUME.cubicFeet));
     runGetterTest(property.cubicInches, property.getUnit(VOLUME.cubicInches));
-    runGetterTest(property.cubicMillimeters, property.getUnit(VOLUME.cubicMillimeters));
-    runGetterTest(property.imperialFluidOunces, property.getUnit(VOLUME.imperialFluidOunces));
-    runGetterTest(property.usFluidOunces, property.getUnit(VOLUME.usFluidOunces));
+    runGetterTest(
+        property.cubicMillimeters, property.getUnit(VOLUME.cubicMillimeters));
+    runGetterTest(property.imperialFluidOunces,
+        property.getUnit(VOLUME.imperialFluidOunces));
+    runGetterTest(
+        property.usFluidOunces, property.getUnit(VOLUME.usFluidOunces));
     runGetterTest(property.imperialGill, property.getUnit(VOLUME.imperialGill));
     runGetterTest(property.usGill, property.getUnit(VOLUME.usGill));
   });

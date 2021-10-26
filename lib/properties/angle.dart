@@ -52,14 +52,16 @@ class Angle extends Property<ANGLE, double> {
     nodeList = unitConversion.getTreeAsList();
   }
 
-  ///Converts a unit with a specific name (e.g. ANGLE.degree) and value to all other units
+  /// Converts a unit with a specific name (e.g. ANGLE.degree) and value to all
+  /// other units
   @override
   void convert(ANGLE name, double? value) {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < ANGLE.values.length; i++) {
       unitList[i].value = getNodeByName(ANGLE.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

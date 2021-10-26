@@ -29,13 +29,15 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
   ///fuel_consumption.convert(Unit(FUEL_CONSUMPTION.kilometers_per_liter, value: 1));
   ///print(FUEL_CONSUMPTION.liters_per_100_km);
   /// ```
-  FuelConsumption({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  FuelConsumption(
+      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = FUEL_CONSUMPTION.values.length;
     this.name = name ?? PROPERTY.fuelConsumption;
     for (FUEL_CONSUMPTION val in FUEL_CONSUMPTION.values) {
       unitList.add(Unit(val, symbol: mapSymbols[val]));
     }
-    unitConversion = Node(name: FUEL_CONSUMPTION.kilometersPerLiter, leafNodes: [
+    unitConversion =
+        Node(name: FUEL_CONSUMPTION.kilometersPerLiter, leafNodes: [
       Node(
         conversionType: CONVERSION_TYPE.reciprocalConversion,
         coefficientProduct: 100.0,
@@ -59,13 +61,16 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < FUEL_CONSUMPTION.values.length; i++) {
-      unitList[i].value = getNodeByName(FUEL_CONSUMPTION.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].value =
+          getNodeByName(FUEL_CONSUMPTION.values.elementAt(i)).value;
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 
   Unit get kilometersPerLiter => getUnit(FUEL_CONSUMPTION.kilometersPerLiter);
   Unit get litersPer100km => getUnit(FUEL_CONSUMPTION.litersPer100km);
   Unit get milesPerUsGallon => getUnit(FUEL_CONSUMPTION.milesPerUsGallon);
-  Unit get milesPerImperialGallon => getUnit(FUEL_CONSUMPTION.milesPerImperialGallon);
+  Unit get milesPerImperialGallon =>
+      getUnit(FUEL_CONSUMPTION.milesPerImperialGallon);
 }

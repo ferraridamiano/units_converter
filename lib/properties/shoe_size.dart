@@ -33,7 +33,8 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
   ///ShoeSize.convert(Unit(SHOE_SIZE.centimeters, value: 1));
   ///print(SHOE_SIZE.eu_china);
   /// ```
-  ShoeSize({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  ShoeSize(
+      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = SHOE_SIZE.values.length;
     this.name = name ?? PROPERTY.shoeSize;
     for (SHOE_SIZE val in SHOE_SIZE.values) {
@@ -92,7 +93,8 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
     if (value == null) return;
     for (var i = 0; i < SHOE_SIZE.values.length; i++) {
       unitList[i].value = getNodeByName(SHOE_SIZE.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

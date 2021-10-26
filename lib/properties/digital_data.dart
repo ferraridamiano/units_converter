@@ -74,7 +74,8 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
   ///digitalData.convert(Unit(DIGITAL_DATA.megabit, value: 1));
   ///print(DIGITAL_DATA.kilobyte);
   /// ```
-  DigitalData({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  DigitalData(
+      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = DIGITAL_DATA.values.length;
     this.name = name ?? PROPERTY.digitalData;
     for (DIGITAL_DATA val in DIGITAL_DATA.values) {
@@ -110,18 +111,30 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
         name: DIGITAL_DATA.exabit,
       ),
       Node(coefficientProduct: 1024.0, name: DIGITAL_DATA.kibibit, leafNodes: [
-        Node(coefficientProduct: 1024.0, name: DIGITAL_DATA.mebibit, leafNodes: [
-          Node(coefficientProduct: 1024.0, name: DIGITAL_DATA.gibibit, leafNodes: [
-            Node(coefficientProduct: 1024.0, name: DIGITAL_DATA.tebibit, leafNodes: [
-              Node(coefficientProduct: 1024.0, name: DIGITAL_DATA.pebibit, leafNodes: [
-                Node(
+        Node(
+            coefficientProduct: 1024.0,
+            name: DIGITAL_DATA.mebibit,
+            leafNodes: [
+              Node(
                   coefficientProduct: 1024.0,
-                  name: DIGITAL_DATA.exbibit,
-                )
-              ])
+                  name: DIGITAL_DATA.gibibit,
+                  leafNodes: [
+                    Node(
+                        coefficientProduct: 1024.0,
+                        name: DIGITAL_DATA.tebibit,
+                        leafNodes: [
+                          Node(
+                              coefficientProduct: 1024.0,
+                              name: DIGITAL_DATA.pebibit,
+                              leafNodes: [
+                                Node(
+                                  coefficientProduct: 1024.0,
+                                  name: DIGITAL_DATA.exbibit,
+                                )
+                              ])
+                        ])
+                  ])
             ])
-          ])
-        ])
       ]),
       Node(coefficientProduct: 8.0, name: DIGITAL_DATA.byte, leafNodes: [
         Node(
@@ -148,20 +161,35 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
           coefficientProduct: 1e18,
           name: DIGITAL_DATA.exabyte,
         ),
-        Node(coefficientProduct: 1024.0, name: DIGITAL_DATA.kibibyte, leafNodes: [
-          Node(coefficientProduct: 1024.0, name: DIGITAL_DATA.mebibyte, leafNodes: [
-            Node(coefficientProduct: 1024.0, name: DIGITAL_DATA.gibibyte, leafNodes: [
-              Node(coefficientProduct: 1024.0, name: DIGITAL_DATA.tebibyte, leafNodes: [
-                Node(coefficientProduct: 1024.0, name: DIGITAL_DATA.pebibyte, leafNodes: [
-                  Node(
-                    coefficientProduct: 1024.0,
-                    name: DIGITAL_DATA.exbibyte,
-                  ),
-                ]),
-              ]),
+        Node(
+            coefficientProduct: 1024.0,
+            name: DIGITAL_DATA.kibibyte,
+            leafNodes: [
+              Node(
+                  coefficientProduct: 1024.0,
+                  name: DIGITAL_DATA.mebibyte,
+                  leafNodes: [
+                    Node(
+                        coefficientProduct: 1024.0,
+                        name: DIGITAL_DATA.gibibyte,
+                        leafNodes: [
+                          Node(
+                              coefficientProduct: 1024.0,
+                              name: DIGITAL_DATA.tebibyte,
+                              leafNodes: [
+                                Node(
+                                    coefficientProduct: 1024.0,
+                                    name: DIGITAL_DATA.pebibyte,
+                                    leafNodes: [
+                                      Node(
+                                        coefficientProduct: 1024.0,
+                                        name: DIGITAL_DATA.exbibyte,
+                                      ),
+                                    ]),
+                              ]),
+                        ]),
+                  ]),
             ]),
-          ]),
-        ]),
       ]),
     ]);
     nodeList = unitConversion.getTreeAsList();
@@ -174,7 +202,8 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
     if (value == null) return;
     for (var i = 0; i < DIGITAL_DATA.values.length; i++) {
       unitList[i].value = getNodeByName(DIGITAL_DATA.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

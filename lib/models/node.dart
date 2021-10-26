@@ -57,7 +57,7 @@ class Node {
   dynamic name;
 
   /// This define the conversion type between this node and its parent. The
-  /// default is [CONVERSION_TYPE.linearConversion]. This is useless for the 
+  /// default is [CONVERSION_TYPE.linearConversion]. This is useless for the
   /// root node (because it has no parent node).
   CONVERSION_TYPE conversionType;
 
@@ -167,7 +167,8 @@ class Node {
       if (node.name == name) {
         if (value is double) {
           node.value = value;
-        } else { // value is String
+        } else {
+          // value is String
           node.stringValue = value;
         }
         node.isConverted = true;

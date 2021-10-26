@@ -54,7 +54,8 @@ class Length extends Property<LENGTH, double> {
   ///length.convert(Unit(LENGTH.meters, value: 1));
   ///print(length.inches);
   /// ```
-  Length({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  Length(
+      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = LENGTH.values.length;
     this.name = name ?? PROPERTY.length;
     for (LENGTH val in LENGTH.values) {
@@ -104,14 +105,20 @@ class Length extends Property<LENGTH, double> {
         name: LENGTH.picometers,
       ),
       Node(coefficientProduct: 1000.0, name: LENGTH.kilometers, leafNodes: [
-        Node(coefficientProduct: 149597870.7, name: LENGTH.astronomicalUnits, leafNodes: [
-          Node(coefficientProduct: 63241.1, name: LENGTH.lightYears, leafNodes: [
-            Node(
-              coefficientProduct: 3.26,
-              name: LENGTH.parsec,
-            ),
-          ]),
-        ]),
+        Node(
+            coefficientProduct: 149597870.7,
+            name: LENGTH.astronomicalUnits,
+            leafNodes: [
+              Node(
+                  coefficientProduct: 63241.1,
+                  name: LENGTH.lightYears,
+                  leafNodes: [
+                    Node(
+                      coefficientProduct: 3.26,
+                      name: LENGTH.parsec,
+                    ),
+                  ]),
+            ]),
       ]),
     ]);
     nodeList = unitConversion.getTreeAsList();
@@ -124,7 +131,8 @@ class Length extends Property<LENGTH, double> {
     if (value == null) return;
     for (var i = 0; i < LENGTH.values.length; i++) {
       unitList[i].value = getNodeByName(LENGTH.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

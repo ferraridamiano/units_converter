@@ -62,7 +62,8 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
   ///si_prefixes.convert(Unit(SI_PREFIXES.base, value: 1));
   ///print(SI_PREFIXES.milli);
   /// ```
-  SIPrefixes({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  SIPrefixes(
+      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = SI_PREFIXES.values.length;
     this.name = name ?? PROPERTY.siPrefixes;
     for (SI_PREFIXES val in SI_PREFIXES.values) {
@@ -160,7 +161,8 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
     if (value == null) return;
     for (var i = 0; i < SI_PREFIXES.values.length; i++) {
       unitList[i].value = getNodeByName(SI_PREFIXES.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

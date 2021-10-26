@@ -113,7 +113,8 @@ class Time extends Property<TIME, double> {
     if (value == null) return;
     for (var i = 0; i < TIME.values.length; i++) {
       unitList[i].value = getNodeByName(TIME.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

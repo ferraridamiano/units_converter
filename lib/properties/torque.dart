@@ -31,7 +31,8 @@ class Torque extends Property<TORQUE, double> {
   ///torque.convert(Unit(TORQUE.square_meters, value: 1));
   ///print(TORQUE.acres);
   /// ```
-  Torque({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  Torque(
+      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = TORQUE.values.length;
     this.name = name ?? PROPERTY.torque;
     for (TORQUE val in TORQUE.values) {
@@ -65,7 +66,8 @@ class Torque extends Property<TORQUE, double> {
     if (value == null) return;
     for (var i = 0; i < TORQUE.values.length; i++) {
       unitList[i].value = getNodeByName(TORQUE.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

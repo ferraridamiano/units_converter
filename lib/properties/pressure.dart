@@ -37,7 +37,8 @@ class Pressure extends Property<PRESSURE, double> {
   ///pressure.convert(Unit(PRESSURE.bar, value: 1));
   ///print(PRESSURE.atmosphere);
   /// ```
-  Pressure({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  Pressure(
+      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
     size = PRESSURE.values.length;
     this.name = name ?? PROPERTY.pressure;
     for (PRESSURE val in PRESSURE.values) {
@@ -56,16 +57,12 @@ class Pressure extends Property<PRESSURE, double> {
         coefficientProduct: 6894.757293168,
         name: PRESSURE.psi,
       ),
-      Node(
-        coefficientProduct: 133.322368421,
-        name: PRESSURE.torr,
-        leafNodes: [
-          Node(
-            coefficientProduct: 25.4,
-            name: PRESSURE.inchOfMercury,
-          )
-        ]
-      ),
+      Node(coefficientProduct: 133.322368421, name: PRESSURE.torr, leafNodes: [
+        Node(
+          coefficientProduct: 25.4,
+          name: PRESSURE.inchOfMercury,
+        )
+      ]),
       Node(
         coefficientProduct: 1e2,
         name: PRESSURE.hectoPascal,
@@ -81,7 +78,8 @@ class Pressure extends Property<PRESSURE, double> {
     if (value == null) return;
     for (var i = 0; i < PRESSURE.values.length; i++) {
       unitList[i].value = getNodeByName(PRESSURE.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
+      unitList[i].stringValue = mantissaCorrection(
+          unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 

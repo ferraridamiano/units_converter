@@ -4,13 +4,15 @@ import 'package:units_converter/units_converter.dart';
 /// This function defines if a value is accettable. e.g. if we expect to have 1 but we get 1.00000000012, is this a valid result or not?
 /// The term sensbility is used improperly.
 bool isAcceptable(double? convertedValue, double? expectedValue, sensibility) {
-  if((convertedValue == null && expectedValue != null)  || (convertedValue != null && expectedValue == null)){
+  if ((convertedValue == null && expectedValue != null) ||
+      (convertedValue != null && expectedValue == null)) {
     return false;
   }
   final double accuracy = expectedValue! / sensibility;
   final double upperConstraint = expectedValue + accuracy;
   final double lowerConstraint = expectedValue - accuracy;
-  return convertedValue! >= lowerConstraint && convertedValue <= upperConstraint;
+  return convertedValue! >= lowerConstraint &&
+      convertedValue <= upperConstraint;
 }
 
 void runConversionTest(Map<dynamic, double> expectedResult, Property property,
