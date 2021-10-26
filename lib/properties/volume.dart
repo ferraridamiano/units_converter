@@ -1,6 +1,7 @@
+import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils_conversion.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available VOLUME units
 enum VOLUME {
@@ -132,6 +133,7 @@ class Volume extends Property<VOLUME, double> {
         ),
       ],
     );
+    nodeList = unitConversion.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. VOLUME.cubic_feet) and value to all other units
@@ -140,7 +142,7 @@ class Volume extends Property<VOLUME, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < VOLUME.values.length; i++) {
-      unitList[i].value = unitConversion.getByName(VOLUME.values.elementAt(i))?.value;
+      unitList[i].value = getNodeByName(VOLUME.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

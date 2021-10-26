@@ -1,6 +1,7 @@
+import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils_conversion.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available SPEED units
 enum SPEED {
@@ -49,7 +50,7 @@ class Speed extends Property<SPEED, double> {
           name: SPEED.knots,
         ),
         Node(
-          conversionType: reciprocalConversion,
+          conversionType: CONVERSION_TYPE.reciprocalConversion,
           coefficientProduct: 60,
           name: SPEED.minutesPerKilometer,
         )
@@ -59,6 +60,7 @@ class Speed extends Property<SPEED, double> {
         name: SPEED.feetsPerSecond,
       ),
     ]);
+    nodeList = unitConversion.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. SPEED.miles_per_hour) and value to all other units
@@ -67,7 +69,7 @@ class Speed extends Property<SPEED, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < SPEED.values.length; i++) {
-      unitList[i].value = unitConversion.getByName(SPEED.values.elementAt(i))?.value;
+      unitList[i].value = getNodeByName(SPEED.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

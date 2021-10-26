@@ -1,6 +1,7 @@
+import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils_conversion.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available length units
 enum LENGTH {
@@ -113,6 +114,7 @@ class Length extends Property<LENGTH, double> {
         ]),
       ]),
     ]);
+    nodeList = unitConversion.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. LENGTH.meters) and value to all other units
@@ -121,7 +123,7 @@ class Length extends Property<LENGTH, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < LENGTH.values.length; i++) {
-      unitList[i].value = unitConversion.getByName(LENGTH.values.elementAt(i))?.value;
+      unitList[i].value = getNodeByName(LENGTH.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

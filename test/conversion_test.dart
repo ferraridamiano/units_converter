@@ -3,14 +3,18 @@ import 'package:units_converter/units_converter.dart';
 
 /// This function defines if a value is accettable. e.g. if we expect to have 1 but we get 1.00000000012, is this a valid result or not?
 /// The term sensbility is used improperly.
-bool isAcceptable(double convertedValue, double expectedValue, sensibility) {
-  final double accuracy = expectedValue / sensibility;
+bool isAcceptable(double? convertedValue, double? expectedValue, sensibility) {
+  if((convertedValue == null && expectedValue != null)  || (convertedValue != null && expectedValue == null)){
+    return false;
+  }
+  final double accuracy = expectedValue! / sensibility;
   final double upperConstraint = expectedValue + accuracy;
   final double lowerConstraint = expectedValue - accuracy;
-  return convertedValue >= lowerConstraint && convertedValue <= upperConstraint;
+  return convertedValue! >= lowerConstraint && convertedValue <= upperConstraint;
 }
 
-void runConversionTest(Map<dynamic, double> expectedResult, Property property, {double sensibility = 1e10}) {
+void runConversionTest(Map<dynamic, double> expectedResult, Property property,
+    {double sensibility = 1e10}) {
   final List listNames = expectedResult.keys.toList();
   for (var unitName in listNames) {
     test('Test from ${unitName.toString()}', () {
@@ -18,15 +22,33 @@ void runConversionTest(Map<dynamic, double> expectedResult, Property property, {
       List<Unit> unitList = property.getAll();
       for (Unit unit in unitList) {
         var name = unit.name;
-        double convertedValue = unitList.where((element) => element.name == name).single.value!;
+        double? convertedValue =
+            unitList.where((element) => element.name == name).single.value;
         expect(
           isAcceptable(convertedValue, expectedResult[name]!, sensibility),
           true,
-          reason: 'Error with ${name.toString()}. Expected: ${expectedResult[name]}, result: $convertedValue',
+          reason:
+              'Error with ${name.toString()}. Expected: ${expectedResult[name]}, result: $convertedValue',
         );
       }
     });
-    property.convert(listNames[0], null); //clear all values
+  }
+  for (var unitName in listNames) {
+    test('Test from ${unitName.toString()}', () {
+      property.convert(unitName, null);
+      List<Unit> unitList = property.getAll();
+      for (Unit unit in unitList) {
+        var name = unit.name;
+        double? convertedValue =
+            unitList.where((element) => element.name == name).single.value;
+        expect(
+          convertedValue,
+          null,
+          reason:
+              'Error with ${name.toString()}. Expected: null, result: $convertedValue',
+        );
+      }
+    });
   }
 }
 
@@ -181,15 +203,38 @@ void main() {
         List<Unit> unitList = property.getAll();
         for (Unit unit in unitList) {
           var name = unit.name;
-          String convertedValue = unitList.where((element) => element.name == name).single.stringValue!;
+          String? convertedValue = unitList
+              .where((element) => element.name == name)
+              .single
+              .stringValue!;
           expect(
             convertedValue,
             expectedResult[name],
-            reason: 'Error with ${name.toString()}. Expected: ${expectedResult[name]}, result: $convertedValue',
+            reason:
+                'Error with ${name.toString()}. Expected: ${expectedResult[name]}, result: $convertedValue',
           );
         }
       });
       property.convert(listNames[0], null); //clear all values
+    }
+    for (var unitName in listNames) {
+      test('Test from ${unitName.toString()}', () {
+        property.convert(unitName, null);
+        List<Unit> unitList = property.getAll();
+        for (Unit unit in unitList) {
+          var name = unit.name;
+          String? convertedValue = unitList
+              .where((element) => element.name == name)
+              .single
+              .stringValue;
+          expect(
+            convertedValue,
+            null,
+            reason:
+                'Error with ${name.toString()}. Expected: null, result: $convertedValue',
+          );
+        }
+      });
     }
   });
 
@@ -209,7 +254,7 @@ void main() {
   group('Pressure', () {
     const Map<PRESSURE, double> expectedResult = {
       PRESSURE.pascal: 1,
-      PRESSURE.atmosphere: 1/101325,
+      PRESSURE.atmosphere: 1 / 101325,
       PRESSURE.bar: 1e-5,
       PRESSURE.millibar: 1e-2,
       PRESSURE.psi: 0.00014503773773,
@@ -270,7 +315,7 @@ void main() {
       SPEED.milesPerHour: 2.2369362920544,
       SPEED.knots: 1.9438444924406,
       SPEED.feetsPerSecond: 3.2808398950131,
-      SPEED.minutesPerKilometer: 60/3.6,
+      SPEED.minutesPerKilometer: 60 / 3.6,
     };
     runConversionTest(expectedResult, Speed());
   });

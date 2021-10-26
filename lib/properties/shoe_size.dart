@@ -1,6 +1,7 @@
+import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils_conversion.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available SHOE_SIZE units
 enum SHOE_SIZE {
@@ -81,6 +82,7 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
         name: SHOE_SIZE.japan,
       ),
     ]);
+    nodeList = unitConversion.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. SHOE_SIZE.uk_india_woman) and value to all other units
@@ -89,7 +91,7 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < SHOE_SIZE.values.length; i++) {
-      unitList[i].value = unitConversion.getByName(SHOE_SIZE.values.elementAt(i))?.value;
+      unitList[i].value = getNodeByName(SHOE_SIZE.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

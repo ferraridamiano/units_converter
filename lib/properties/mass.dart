@@ -1,6 +1,7 @@
+import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils_conversion.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available MASS units
 enum MASS {
@@ -116,6 +117,7 @@ class Mass extends Property<MASS, double> {
         ),
       ],
     );
+    nodeList = unitConversion.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. MASS.centigrams) and value to all other units
@@ -124,7 +126,7 @@ class Mass extends Property<MASS, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < MASS.values.length; i++) {
-      unitList[i].value = unitConversion.getByName(MASS.values.elementAt(i))?.value;
+      unitList[i].value = getNodeByName(MASS.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }

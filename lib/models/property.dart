@@ -1,5 +1,7 @@
+import 'package:units_converter/models/node.dart';
+
 import 'unit.dart';
-import '../utils/utils_conversion.dart';
+//import '../utils/utils_conversion.dart';
 
 enum PROPERTY {
   angle,
@@ -25,6 +27,7 @@ enum PROPERTY {
 class Property<K, V> {
   late Node unitConversion;
   List<Unit> unitList = [];
+  late List<Node> nodeList;
   dynamic name;
   late final int size;
 
@@ -33,33 +36,26 @@ class Property<K, V> {
   void convert(K name, V? value) {
     //Here we will suppose V is a double. In the case where V is a String (Numeral systems) I will override the entire function
 
-    unitConversion.clearAllValues();
-    //if the value is null also the others units are null, this is convenient to delete
-    //all the other units value, for example in a unit converter app (such as Converter NOW)
+    // if the value is null also the others units are null, this is convenient
+    // in order to delete all the other units value, for example in a unit
+    // converter app (such as Converter NOW)
     if (value == null) {
-      unitConversion.clearAllValues();
       for (Unit unit in unitList) {
         unit.value = null;
         unit.stringValue = null;
       }
       return;
     }
-    unitConversion.clearSelectedNode();
-    unitConversion.resetConvertedNode();
-    var currentUnit = unitConversion.getByName(name);
-    currentUnit?.value = value as double;
-    currentUnit?.selectedNode = true;
-    currentUnit?.convertedNode = true;
-    unitConversion.convert();
+    unitConversion.convert(name, value as double);
   }
+
+  Node getNodeByName(var name) =>
+      nodeList.singleWhere((node) => node.name == name);
 
   ///Returns all the units converted with prefixes
-  List<Unit> getAll() {
-    return unitList;
-  }
+  List<Unit> getAll() => unitList;
 
   ///Returns the Unit with the corresponding name
-  Unit getUnit(var name) {
-    return unitList.where((element) => element.name == name).single;
-  }
+  Unit getUnit(var name) =>
+      unitList.where((element) => element.name == name).single;
 }

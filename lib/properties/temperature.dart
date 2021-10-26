@@ -1,6 +1,7 @@
+import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils_conversion.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available TEMPERATURE units
 enum TEMPERATURE {
@@ -66,6 +67,7 @@ class Temperature extends Property<TEMPERATURE, double> {
         name: TEMPERATURE.rankine,
       ),
     ]);
+    nodeList = unitConversion.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. TEMPERATURE.kelvin) and value to all other units
@@ -74,7 +76,7 @@ class Temperature extends Property<TEMPERATURE, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < TEMPERATURE.values.length; i++) {
-      unitList[i].value = unitConversion.getByName(TEMPERATURE.values.elementAt(i))?.value;
+      unitList[i].value = getNodeByName(TEMPERATURE.values.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
