@@ -1,6 +1,7 @@
-/*import 'package:units_converter/models/property.dart';
+import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils_conversion.dart';
+import 'package:units_converter/utils/utils.dart';
 
 class SimpleCustomConversion extends Property<dynamic, double> {
   //Map between units and its symbol
@@ -53,6 +54,7 @@ class SimpleCustomConversion extends Property<dynamic, double> {
       }
     });
     unitConversion = Node(name: baseUnit, leafNodes: leafNodes);
+    nodeList = unitConversion.getTreeAsList();
   }
 
   ///Converts a unit with a specific name and value to all other units
@@ -62,9 +64,8 @@ class SimpleCustomConversion extends Property<dynamic, double> {
     super.convert(name, value);
     if (value == null) return;
     for (var i = 0; i < mapConversion.length; i++) {
-      unitList[i].value = unitConversion.getByName(mapConversion.keys.elementAt(i))?.value;
+      unitList[i].value = getNodeByName(mapConversion.keys.elementAt(i)).value;
       unitList[i].stringValue = mantissaCorrection(unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 }
-*/

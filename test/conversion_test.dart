@@ -344,7 +344,7 @@ void main() {
     runConversionTest(expectedResult, Volume(), sensibility: 1e9);
   });
 
-  /*group('Simple custom conversion', () {
+  group('Simple custom conversion', () {
     const Map<String, double> expectedResult = {
       'EUR': 1,
       'CAD': 1.5213,
@@ -378,5 +378,5 @@ void main() {
       'PLN': 4.5529,
     };
     runConversionTest(expectedResult, SimpleCustomConversion(expectedResult));
-  });*/
+  });
 }
