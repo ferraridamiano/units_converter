@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'package:units_converter/utils/utils.dart';
 
+/// Defines the type of the conversion between two nodes.
 enum CONVERSION_TYPE {
   /// The conversion is expressed in a form like: y=ax+b. Where a is
   /// [coefficientProduct] and b is [coefficientSum].
@@ -14,6 +15,11 @@ enum CONVERSION_TYPE {
   baseConversion,
 }
 
+/// This is the building block of the conversion tree. Thanks to the [leafNodes]
+/// parameter you can set other [Node]s that depends on this parent node. Thanks
+/// to the [coefficientProduct], [coefficientSum], [conversionType] and [base]
+/// parameters you can set the relationship between this node and the parent
+/// node.
 class Node {
   Node({
     this.leafNodes = const [],
@@ -27,19 +33,46 @@ class Node {
     this.isConverted = false,
   });
 
+  /// This are the list of the [Node]s that depend by this node. These are the
+  /// children of this parent node.
   List<Node> leafNodes;
+
+  /// This is the product coefficient of [CONVERSION_TYPE.linearConversion] and
+  /// [CONVERSION_TYPE.reciprocalConversion]. It is the a coefficient.
   double coefficientProduct;
+
+  /// This is the sum coefficient of [CONVERSION_TYPE.linearConversion] and
+  /// [CONVERSION_TYPE.reciprocalConversion]. It is the b coefficient.
   double coefficientSum;
+
+  /// This the value that has the unit of measurement of this node. This is
+  /// valid for the most cases. But not for numeral systems conversion.
   double? value;
-  dynamic name;
-  CONVERSION_TYPE conversionType;
-  int? base;
+
+  /// This the value that has the unit of measurement of this node. This is
+  /// just for numeral systems conversion. In all the other cases use [value].
   String? stringValue;
+
+  /// This is the name of the unit. Can be a String or an enum.
+  dynamic name;
+
+  /// This define the conversion type between this node and its parent. The
+  /// default is [CONVERSION_TYPE.linearConversion]. This is useless for the 
+  /// root node (because it has no parent node).
+  CONVERSION_TYPE conversionType;
+
+  /// This is defined just for numeral system conversion. It defines the base of
+  /// this number. E.g. 16 for hexadecimal, 10 for decimal, 10 for binary, etc.
+  int? base;
+
+  /// If true this node is already converted, false otherwise. The node where
+  /// the conversion start has [isConverted] = true.
   bool isConverted;
 
-  /// This method will first use a DFS-like algorithm to find the converted node
-  /// and convert everything up until the root node. An then a BFS-like
-  /// algorithm to convert all the nodes.
+  /// **This method must be used on the root [Node] of the conversion**. It
+  /// converts all the [Node] of the tree from the [Node] which name is equal to
+  /// [name] ([value] is assigned to this [Node]) to all the other [Node]s of
+  /// the tree.
   void convert(dynamic name, dynamic value) {
     assert(value is String || value is double);
 
@@ -67,6 +100,9 @@ class Node {
     }
   }
 
+  /// This function performs the conversion from a [parent] node to the [child]
+  /// node if [fromParentToChild]=true (the default). Otherwise the conversion
+  /// is performed from child to parent.
   void _convertTwoNodes({
     required Node parent,
     required Node child,
@@ -113,7 +149,9 @@ class Node {
   }
 
   /// This function returns the path from the root Node up until the converted
-  /// Node in the form of a list.
+  /// Node in the form of a list. Moreover, it sets the node which name is equal
+  /// to name as converted [isConverted]=true. All the other nodes are marked as
+  /// not converted.
   List<Node> _getNodesPathAndSelectNode(dynamic name, dynamic value) {
     Queue<Node> stack = Queue.from([this]); // we will use a queue as a stack
     Queue<List<Node>> breadcrumbListQueue = Queue.from([
@@ -129,10 +167,8 @@ class Node {
       if (node.name == name) {
         if (value is double) {
           node.value = value;
-        } else if (value is String) {
+        } else { // value is String
           node.stringValue = value;
-        } else {
-          throw Exception('Value not assigned. Must be double or string');
         }
         node.isConverted = true;
         result = [...breadcrumbList];
