@@ -9,8 +9,8 @@ class CustomConversion extends Property<dynamic, double> {
   int significantFigures;
   bool removeTrailingZeros;
   final dynamic name;
-  List<Unit> unitList = [];
-  late List<Node> nodeList;
+  final List<Unit> _unitList = [];
+  late List<Node> _nodeList;
   Node conversionTree;
 
   ///Class for angle conversions, e.g. if you want to convert 1 radiant in degree:
@@ -25,8 +25,8 @@ class CustomConversion extends Property<dynamic, double> {
       required this.name,
       this.significantFigures = 10,
       this.removeTrailingZeros = true}) {
-    mapSymbols.forEach((key, value) => unitList.add(Unit(key, symbol: value)));
-    nodeList = conversionTree.getTreeAsList();
+    mapSymbols.forEach((key, value) => _unitList.add(Unit(key, symbol: value)));
+    _nodeList = conversionTree.getTreeAsList();
   }
 
   /// Converts a unit with a specific name (e.g. ANGLE.degree) and value to all
@@ -34,7 +34,7 @@ class CustomConversion extends Property<dynamic, double> {
   @override
   void convert(dynamic name, double? value) {
     if (value == null) {
-      for (Unit unit in unitList) {
+      for (Unit unit in _unitList) {
         unit.value = null;
         unit.stringValue = null;
       }
@@ -42,21 +42,19 @@ class CustomConversion extends Property<dynamic, double> {
     }
     conversionTree.convert(name, value);
     for (var i = 0; i < mapSymbols.length; i++) {
-      unitList[i].value = getNodeByName(unitList[i].name).value;
-      unitList[i].stringValue = mantissaCorrection(
-          unitList[i].value!, significantFigures, removeTrailingZeros);
+      _unitList[i].value =
+          _nodeList.singleWhere((node) => node.name == _unitList[i].name).value;
+      _unitList[i].stringValue = mantissaCorrection(
+          _unitList[i].value!, significantFigures, removeTrailingZeros);
     }
   }
 
-  Node getNodeByName(var name) =>
-      nodeList.singleWhere((node) => node.name == name);
-
   ///Returns all the units converted with prefixes
   @override
-  List<Unit> getAll() => unitList;
+  List<Unit> getAll() => _unitList;
 
   ///Returns the Unit with the corresponding name
   @override
   Unit getUnit(var name) =>
-      unitList.where((element) => element.name == name).single;
+      _unitList.where((element) => element.name == name).single;
 }
