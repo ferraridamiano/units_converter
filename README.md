@@ -138,7 +138,7 @@ Output:
 
 - Mass (kilograms, ounces)
 
-- <u>Numeral systems (hexadecimal, binary, etc.)</u>
+- Numeral systems (hexadecimal, binary, etc.)
 
 - Power (kilowatt, horse power, etc.)
 
