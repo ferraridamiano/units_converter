@@ -2,6 +2,7 @@ import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/utils/utils.dart';
+import 'package:units_converter/models/custom_conversion.dart';
 
 //Available SPEED units
 enum SPEED {
@@ -14,7 +15,7 @@ enum SPEED {
 }
 
 class Speed extends Property<SPEED, double> {
-  //Map between units and its symbol
+  /// Map between units and its symbol
   final Map<SPEED, String> mapSymbols = {
     SPEED.metersPerSecond: 'm/s',
     SPEED.kilometersPerHour: 'km/h',
@@ -24,8 +25,15 @@ class Speed extends Property<SPEED, double> {
     SPEED.minutesPerKilometer: 'min/km',
   };
 
+  /// The number of significan figures to keep. E.g. 1.23456789) has 9
+  /// significant figures
   int significantFigures;
+
+  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
+  /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
+
+  late CustomConversion _customConversion;
 
   ///Class for speed conversions, e.g. if you want to convert 1 square meters in acres:
   ///```dart
@@ -34,12 +42,7 @@ class Speed extends Property<SPEED, double> {
   ///print(SPEED.acres);
   /// ```
   Speed({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
-    size = SPEED.values.length;
-    this.name = name ?? PROPERTY.speed;
-    for (SPEED val in SPEED.values) {
-      unitList.add(Unit(val, symbol: mapSymbols[val]));
-    }
-    unitConversion = Node(name: SPEED.metersPerSecond, leafNodes: [
+    Node conversionTree = Node(name: SPEED.metersPerSecond, leafNodes: [
       Node(
           coefficientProduct: 1 / 3.6,
           name: SPEED.kilometersPerHour,
@@ -63,20 +66,23 @@ class Speed extends Property<SPEED, double> {
         name: SPEED.feetsPerSecond,
       ),
     ]);
-    nodeList = unitConversion.getTreeAsList();
+    
+    _customConversion = CustomConversion(
+        conversionTree: conversionTree,
+        mapSymbols: mapSymbols,
+        significantFigures: significantFigures,
+        removeTrailingZeros: removeTrailingZeros,
+        name: name ?? PROPERTY.angle);
   }
 
   ///Converts a unit with a specific name (e.g. SPEED.miles_per_hour) and value to all other units
   @override
-  void convert(SPEED name, double? value) {
-    super.convert(name, value);
-    if (value == null) return;
-    for (var i = 0; i < SPEED.values.length; i++) {
-      unitList[i].value = getNodeByName(SPEED.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(
-          unitList[i].value!, significantFigures, removeTrailingZeros);
-    }
-  }
+  void convert(SPEED name, double? value) =>
+      _customConversion.convert(name, value);
+  @override
+  List<Unit> getAll() => _customConversion.getAll();
+  @override
+  Unit getUnit(name) => _customConversion.getUnit(name);
 
   Unit get metersPerSecond => getUnit(SPEED.metersPerSecond);
   Unit get kilometersPerHour => getUnit(SPEED.kilometersPerHour);

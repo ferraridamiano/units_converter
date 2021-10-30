@@ -1,7 +1,7 @@
 import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils.dart';
+import 'package:units_converter/models/custom_conversion.dart';
 
 //Available length units
 enum LENGTH {
@@ -25,7 +25,7 @@ enum LENGTH {
 }
 
 class Length extends Property<LENGTH, double> {
-  //Map between units and its symbol
+  /// Map between units and its symbol
   final Map<LENGTH, String> mapSymbols = {
     LENGTH.meters: 'm',
     LENGTH.centimeters: 'cm',
@@ -45,8 +45,15 @@ class Length extends Property<LENGTH, double> {
     LENGTH.parsec: 'pc',
   };
 
+  /// The number of significan figures to keep. E.g. 1.23456789) has 9
+  /// significant figures
   int significantFigures;
+
+  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
+  /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
+
+  late CustomConversion _customConversion;
 
   ///Class for length conversions, e.g. if you want to convert 1 meter in inches:
   ///```dart
@@ -56,12 +63,7 @@ class Length extends Property<LENGTH, double> {
   /// ```
   Length(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
-    size = LENGTH.values.length;
-    this.name = name ?? PROPERTY.length;
-    for (LENGTH val in LENGTH.values) {
-      unitList.add(Unit(val, symbol: mapSymbols[val]));
-    }
-    unitConversion = Node(name: LENGTH.meters, leafNodes: [
+    Node conversionTree = Node(name: LENGTH.meters, leafNodes: [
       Node(coefficientProduct: 0.01, name: LENGTH.centimeters, leafNodes: [
         Node(coefficientProduct: 2.54, name: LENGTH.inches, leafNodes: [
           Node(
@@ -121,20 +123,23 @@ class Length extends Property<LENGTH, double> {
             ]),
       ]),
     ]);
-    nodeList = unitConversion.getTreeAsList();
+
+    _customConversion = CustomConversion(
+        conversionTree: conversionTree,
+        mapSymbols: mapSymbols,
+        significantFigures: significantFigures,
+        removeTrailingZeros: removeTrailingZeros,
+        name: name ?? PROPERTY.angle);
   }
 
   ///Converts a unit with a specific name (e.g. LENGTH.meters) and value to all other units
   @override
-  void convert(LENGTH name, double? value) {
-    super.convert(name, value);
-    if (value == null) return;
-    for (var i = 0; i < LENGTH.values.length; i++) {
-      unitList[i].value = getNodeByName(LENGTH.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(
-          unitList[i].value!, significantFigures, removeTrailingZeros);
-    }
-  }
+  void convert(LENGTH name, double? value) =>
+      _customConversion.convert(name, value);
+  @override
+  List<Unit> getAll() => _customConversion.getAll();
+  @override
+  Unit getUnit(name) => _customConversion.getUnit(name);
 
   Unit get meters => getUnit(LENGTH.meters);
   Unit get centimeters => getUnit(LENGTH.centimeters);

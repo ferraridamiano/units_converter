@@ -2,6 +2,7 @@ import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/utils/utils.dart';
+import 'package:units_converter/models/custom_conversion.dart';
 
 //Available PRESSURE units
 enum PRESSURE {
@@ -16,7 +17,7 @@ enum PRESSURE {
 }
 
 class Pressure extends Property<PRESSURE, double> {
-  //Map between units and its symbol
+  /// Map between units and its symbol
   final Map<PRESSURE, String> mapSymbols = {
     PRESSURE.pascal: 'Pa',
     PRESSURE.atmosphere: 'atm',
@@ -28,8 +29,15 @@ class Pressure extends Property<PRESSURE, double> {
     PRESSURE.inchOfMercury: 'inHg',
   };
 
+  /// The number of significan figures to keep. E.g. 1.23456789) has 9
+  /// significant figures
   int significantFigures;
+
+  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
+  /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
+
+  late CustomConversion _customConversion;
 
   ///Class for pressure conversions, e.g. if you want to convert 1 bar in atmosphere:
   ///```dart
@@ -39,12 +47,7 @@ class Pressure extends Property<PRESSURE, double> {
   /// ```
   Pressure(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
-    size = PRESSURE.values.length;
-    this.name = name ?? PROPERTY.pressure;
-    for (PRESSURE val in PRESSURE.values) {
-      unitList.add(Unit(val, symbol: mapSymbols[val]));
-    }
-    unitConversion = Node(name: PRESSURE.pascal, leafNodes: [
+    Node conversionTree = Node(name: PRESSURE.pascal, leafNodes: [
       Node(coefficientProduct: 101325.0, name: PRESSURE.atmosphere, leafNodes: [
         Node(coefficientProduct: 0.987, name: PRESSURE.bar, leafNodes: [
           Node(
@@ -68,20 +71,23 @@ class Pressure extends Property<PRESSURE, double> {
         name: PRESSURE.hectoPascal,
       )
     ]);
-    nodeList = unitConversion.getTreeAsList();
+
+    _customConversion = CustomConversion(
+        conversionTree: conversionTree,
+        mapSymbols: mapSymbols,
+        significantFigures: significantFigures,
+        removeTrailingZeros: removeTrailingZeros,
+        name: name ?? PROPERTY.angle);
   }
 
   ///Converts a unit with a specific name (e.g. PRESSURE.psi) and value to all other units
   @override
-  void convert(PRESSURE name, double? value) {
-    super.convert(name, value);
-    if (value == null) return;
-    for (var i = 0; i < PRESSURE.values.length; i++) {
-      unitList[i].value = getNodeByName(PRESSURE.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(
-          unitList[i].value!, significantFigures, removeTrailingZeros);
-    }
-  }
+  void convert(PRESSURE name, double? value) =>
+      _customConversion.convert(name, value);
+  @override
+  List<Unit> getAll() => _customConversion.getAll();
+  @override
+  Unit getUnit(name) => _customConversion.getUnit(name);
 
   Unit get pascal => getUnit(PRESSURE.pascal);
   Unit get atmosphere => getUnit(PRESSURE.atmosphere);

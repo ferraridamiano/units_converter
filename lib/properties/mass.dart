@@ -1,7 +1,7 @@
 import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils.dart';
+import 'package:units_converter/models/custom_conversion.dart';
 
 //Available MASS units
 enum MASS {
@@ -22,7 +22,7 @@ enum MASS {
 }
 
 class Mass extends Property<MASS, double> {
-  //Map between units and its symbol
+  ///Map between units and its symbol
   final Map<MASS, String> mapSymbols = {
     MASS.grams: 'g',
     MASS.ettograms: 'hg',
@@ -39,8 +39,15 @@ class Mass extends Property<MASS, double> {
     MASS.stones: 'st.',
   };
 
+  /// The number of significan figures to keep. E.g. 1.23456789) has 9
+  /// significant figures
   int significantFigures;
+
+  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
+  /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
+
+  late CustomConversion _customConversion;
 
   ///Class for mass conversions, e.g. if you want to convert 1 gram in ounces:
   ///```dart
@@ -49,12 +56,7 @@ class Mass extends Property<MASS, double> {
   ///print(MASS.ounces);
   /// ```
   Mass({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
-    size = MASS.values.length;
-    this.name = name ?? PROPERTY.mass;
-    for (MASS val in MASS.values) {
-      unitList.add(Unit(val, symbol: mapSymbols[val]));
-    }
-    unitConversion = Node(
+    Node conversionTree = Node(
       name: MASS.grams,
       leafNodes: [
         Node(
@@ -117,20 +119,23 @@ class Mass extends Property<MASS, double> {
         ),
       ],
     );
-    nodeList = unitConversion.getTreeAsList();
+
+    _customConversion = CustomConversion(
+        conversionTree: conversionTree,
+        mapSymbols: mapSymbols,
+        significantFigures: significantFigures,
+        removeTrailingZeros: removeTrailingZeros,
+        name: name ?? PROPERTY.angle);
   }
 
   ///Converts a unit with a specific name (e.g. MASS.centigrams) and value to all other units
   @override
-  void convert(MASS name, double? value) {
-    super.convert(name, value);
-    if (value == null) return;
-    for (var i = 0; i < MASS.values.length; i++) {
-      unitList[i].value = getNodeByName(MASS.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(
-          unitList[i].value!, significantFigures, removeTrailingZeros);
-    }
-  }
+  void convert(MASS name, double? value) =>
+      _customConversion.convert(name, value);
+  @override
+  List<Unit> getAll() => _customConversion.getAll();
+  @override
+  Unit getUnit(name) => _customConversion.getUnit(name);
 
   Unit get grams => getUnit(MASS.grams);
   Unit get ettograms => getUnit(MASS.ettograms);

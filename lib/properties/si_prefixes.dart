@@ -1,7 +1,7 @@
 import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils.dart';
+import 'package:units_converter/models/custom_conversion.dart';
 
 //Available SI_PREFIXES units
 enum SI_PREFIXES {
@@ -29,7 +29,7 @@ enum SI_PREFIXES {
 }
 
 class SIPrefixes extends Property<SI_PREFIXES, double> {
-  //Map between units and its symbol
+  /// Map between units and its symbol
   final Map<SI_PREFIXES, String> mapSymbols = {
     SI_PREFIXES.deca: 'da-',
     SI_PREFIXES.hecto: 'h-',
@@ -53,8 +53,15 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
     SI_PREFIXES.yocto: 'y-',
   };
 
+  /// The number of significan figures to keep. E.g. 1.23456789) has 9
+  /// significant figures
   int significantFigures;
+
+  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
+  /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
+
+  late CustomConversion _customConversion;
 
   ///Class for si_prefixes conversions, e.g. if you want to convert 1 base unit in milli:
   ///```dart
@@ -64,12 +71,7 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
   /// ```
   SIPrefixes(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
-    size = SI_PREFIXES.values.length;
-    this.name = name ?? PROPERTY.siPrefixes;
-    for (SI_PREFIXES val in SI_PREFIXES.values) {
-      unitList.add(Unit(val, symbol: mapSymbols[val]));
-    }
-    unitConversion = Node(name: SI_PREFIXES.base, leafNodes: [
+    Node conversionTree = Node(name: SI_PREFIXES.base, leafNodes: [
       Node(
         coefficientProduct: 1e1,
         name: SI_PREFIXES.deca,
@@ -151,20 +153,23 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
         name: SI_PREFIXES.yocto,
       ),
     ]);
-    nodeList = unitConversion.getTreeAsList();
+    
+    _customConversion = CustomConversion(
+        conversionTree: conversionTree,
+        mapSymbols: mapSymbols,
+        significantFigures: significantFigures,
+        removeTrailingZeros: removeTrailingZeros,
+        name: name ?? PROPERTY.angle);
   }
 
   ///Converts a unit with a specific name (e.g. SI_PREFIXES.milli) and value to all other units
   @override
-  void convert(SI_PREFIXES name, double? value) {
-    super.convert(name, value);
-    if (value == null) return;
-    for (var i = 0; i < SI_PREFIXES.values.length; i++) {
-      unitList[i].value = getNodeByName(SI_PREFIXES.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(
-          unitList[i].value!, significantFigures, removeTrailingZeros);
-    }
-  }
+  void convert(SI_PREFIXES name, double? value) =>
+      _customConversion.convert(name, value);
+  @override
+  List<Unit> getAll() => _customConversion.getAll();
+  @override
+  Unit getUnit(name) => _customConversion.getUnit(name);
 
   Unit get base => getUnit(SI_PREFIXES.base);
   Unit get deca => getUnit(SI_PREFIXES.deca);

@@ -1,7 +1,7 @@
 import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils.dart';
+import 'package:units_converter/models/custom_conversion.dart';
 
 //Available FORCE units
 enum FORCE {
@@ -13,7 +13,7 @@ enum FORCE {
 }
 
 class Force extends Property<FORCE, double> {
-  //Map between units and its symbol
+  /// Map between units and its symbol
   final Map<FORCE, String> mapSymbols = {
     FORCE.newton: 'N',
     FORCE.dyne: 'dyn',
@@ -22,8 +22,15 @@ class Force extends Property<FORCE, double> {
     FORCE.poundal: 'pdl',
   };
 
+  /// The number of significan figures to keep. E.g. 1.23456789) has 9
+  /// significant figures
   int significantFigures;
+
+  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
+  /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
+
+  late CustomConversion _customConversion;
 
   ///Class for force conversions, e.g. if you want to convert 1 newton in pound force:
   ///```dart
@@ -32,12 +39,7 @@ class Force extends Property<FORCE, double> {
   ///print(FORCE.pound_force);
   /// ```
   Force({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
-    size = FORCE.values.length;
-    this.name = name ?? PROPERTY.force;
-    for (FORCE val in FORCE.values) {
-      unitList.add(Unit(val, symbol: mapSymbols[val]));
-    }
-    unitConversion = Node(name: FORCE.newton, leafNodes: [
+    Node conversionTree = Node(name: FORCE.newton, leafNodes: [
       Node(
         coefficientProduct: 1e-5,
         name: FORCE.dyne,
@@ -55,20 +57,23 @@ class Force extends Property<FORCE, double> {
         name: FORCE.poundal,
       ),
     ]);
-    nodeList = unitConversion.getTreeAsList();
+    
+    _customConversion = CustomConversion(
+        conversionTree: conversionTree,
+        mapSymbols: mapSymbols,
+        significantFigures: significantFigures,
+        removeTrailingZeros: removeTrailingZeros,
+        name: name ?? PROPERTY.angle);
   }
 
   ///Converts a unit with a specific name (e.g. FORCE.newton) and value to all other units
   @override
-  void convert(FORCE name, double? value) {
-    super.convert(name, value);
-    if (value == null) return;
-    for (var i = 0; i < FORCE.values.length; i++) {
-      unitList[i].value = getNodeByName(FORCE.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(
-          unitList[i].value!, significantFigures, removeTrailingZeros);
-    }
-  }
+  void convert(FORCE name, double? value) =>
+      _customConversion.convert(name, value);
+  @override
+  List<Unit> getAll() => _customConversion.getAll();
+  @override
+  Unit getUnit(name) => _customConversion.getUnit(name);
 
   Unit get newton => getUnit(FORCE.newton);
   Unit get dyne => getUnit(FORCE.dyne);
