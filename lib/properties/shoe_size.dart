@@ -1,7 +1,6 @@
 import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils.dart';
 import 'package:units_converter/models/custom_conversion.dart';
 
 //Available SHOE_SIZE units
