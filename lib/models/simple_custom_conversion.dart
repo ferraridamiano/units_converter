@@ -5,7 +5,7 @@ import 'package:units_converter/models/custom_conversion.dart';
 
 class SimpleCustomConversion extends Property<dynamic, double> {
   /// Map between units and its symbol
-  final Map<dynamic, String> mapSymbols;
+  Map<dynamic, String?>? mapSymbols;
 
   /// The Map of the values of the conversion. In this map at least one element
   /// must have a value of 1, it will be considered the base unit. E.g.:
@@ -50,13 +50,18 @@ class SimpleCustomConversion extends Property<dynamic, double> {
   ///Unit usd = customConversion.getUnit('USD');
   ///print('1€ = ${usd.stringValue}${usd.symbol}');
   /// ```
-  SimpleCustomConversion(this.mapConversion, this.mapSymbols,
-      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  SimpleCustomConversion(this.mapConversion,
+      {this.mapSymbols,
+      this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      name}) {
     assert(mapConversion.containsValue(1),
         'One conversion coefficient must be 1, this will considered the base unit');
-    for (var val in mapConversion.keys) {
-      assert(mapSymbols.keys.contains(val),
-          'The key of mapConversion must be the same key of mapSymbols');
+    if (mapSymbols != null) {
+      for (var val in mapConversion.keys) {
+        assert(mapSymbols!.keys.contains(val),
+            'The key of mapConversion must be the same key of mapSymbols');
+      }
     }
     var baseUnit = mapConversion.keys.firstWhere(
         (element) => mapConversion[element] == 1); //take the base unit
@@ -67,10 +72,16 @@ class SimpleCustomConversion extends Property<dynamic, double> {
         leafNodes.add(Node(name: key, coefficientProduct: 1 / value));
       }
     });
+    if (mapSymbols == null) {
+      mapSymbols = <dynamic, String>{};
+      for (var val in mapConversion.keys) {
+        mapSymbols![val] = null;
+      }
+    }
     Node conversionTree = Node(name: baseUnit, leafNodes: leafNodes);
     _customConversion = CustomConversion(
         conversionTree: conversionTree,
-        mapSymbols: mapSymbols,
+        mapSymbols: mapSymbols!,
         significantFigures: significantFigures,
         removeTrailingZeros: removeTrailingZeros,
         name: name ?? PROPERTY.angle);

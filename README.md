@@ -6,7 +6,7 @@
     <img src="https://shields.io/badge/ferraridamiano-Support--me-FFDD00?logo=buy-me-a-coffee&style=flat&link=https://www.buymeacoffee.com/ferraridamiano"/>
 </a>
 
-units_converter is a package written in dart for dart & flutter developers. You should not take care of **unit conversion** and **internationalize** your app, everything is already done with this package! Do you need to convert just few units and you don't want to import the whole package, no problem! units_converter is **modular**, you can **import just what you need**! You can also add your own **custom conversion**!
+units_converter is a package written in dart for dart & flutter developers. You should not take care of **unit conversion** when you want to **internationalize** your app, everything is already done with this package! You can also add your own **custom conversion**!
 
 ## Usage
 
@@ -14,18 +14,16 @@ units_converter is a package written in dart for dart & flutter developers. You 
 
 You can use this package in two ways:
 
-1. Import everything (e.g. you have to develop a unit converter):
+1. Add `units_converter` to `pubspec.yaml`:
    
-   ```dart
-   import 'package:units_converter/units_converter.dart'; //this will import the whole package
+   ```yaml
+   units_converter: ^1.1.0
    ```
 
-2. Import just what you need (e.g. you need to internationalize your city distance calculator and you are just interested in length conversion):
+2. Import the library at the beginning of your `*.dart` file:
    
    ```dart
-   import 'package:units_converter/models/unit.dart';
-   import 'package:units_converter/properties/length.dart';
-   // import 'package:units_converter/properties/area.dart'; ...and every other conversion you need
+   import 'package:units_converter/units_converter.dart';
    ```
 
 ### Use it
@@ -33,9 +31,11 @@ You can use this package in two ways:
 **Example 1**: convert 1 meter in inches
 
 ```dart
-var length = Length(removeTrailingZeros: false); //initialize Length object, let's specify that we want to keep the trailing zeros (e.g. 1.00) for stringValue
-length.convert(LENGTH.meters, 1); //We give 1 meter as input
-var unit = length.inches; //We get all ther others units
+// We give 1 meter as input
+var length = Length()..convert(LENGTH.meters, 1);
+// We get the inches
+var unit = length.inches;
+// We print the Unit
 print('name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
 ```
 
@@ -45,16 +45,16 @@ Output:
 name:LENGTH.inches, value:39.370078740157474, stringValue:39.37007874, symbol:in
 ```
 
-
-
-**Example 2**: convert 1 degree in all the other angles units
+**Example 2**: convert 1 degree in all the other angles units. This time we want also to specify that we just want 7 significant figures and we don't want trailing zeros (e.g. 1.000000 -> 1).
 
 ```dart
-var angle = Angle(significantFigures: 7, removeTrailingZeros: false); //this time let's also keep 7 significant figures
-angle.convert(ANGLE.degree, 1); //We give 1 meter as input
+// Initialization of the object
+var angle = Angle(significantFigures: 7, removeTrailingZeros: false); // conversion
+angle.convert(ANGLE.degree, 1);
+// We get all the units
 var units = angle.getAll(); //We get all ther others units
+// Let's print all of them
 for (var unit in units) {
-  //Let's print them
   print('name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
 }
 ```
@@ -67,17 +67,19 @@ name:ANGLE.minutes, value:60.0, stringValue:60.00000, symbol:'
 name:ANGLE.seconds, value:3600.0, stringValue:3600.000, symbol:''
 ```
 
-As you can see in this example if you specify `removeTrailingZeros: false`, the `stringValue` keeps all the trailing zeros (the default is `true`). You can also ask for an exact number of significant figures in the `stringValue`.
+As you can see in this example if you specify `removeTrailingZeros: false`, the `stringValue` keeps all the trailing zeros (the default is `true`). You can also ask for an certain number of significant figures in the `stringValue`.
 
 **Example 3**: convert 100 (decimal) in binary and hexadecimal
 
+*Warning! Numeral systems conversion is the only conversion that need the input as a string, and not as a double/int for obvious reasons*
+
 ```dart
-var numeralSystems = NumeralSystems(); //initialize NumeralSystems object
-numeralSystems.convert(NUMERAL_SYSTEMS.decimal, '100'); //We give 100 decimal as input
-print('Binary: ${numeralSystems.binary.stringValue}'); //We get the binary value
-print('Hexadecimal: ${numeralSystems.hexadecimal.stringValue}'); //We get the hexadecimal value
-//Warning! Numeral systems conversion is the only conversion that need the input as a string,
-//and not as a double/int for obvious reasons
+// We give '100' decimal as input
+var numeralSystems = NumeralSystems()..convert(NUMERAL_SYSTEMS.decimal, '100');
+// We get the binary value
+print('Binary: ${numeralSystems.binary.stringValue}');
+// We get the hexadecimal value
+print('Hexadecimal: ${numeralSystems.hexadecimal.stringValue}'); 
 ```
 
 Output:
@@ -87,11 +89,11 @@ Binary: 1100100
 Hexadecimal: 64
 ```
 
-**Example 4**: custom conversion, given a list of coefficient converts units
+**Example 4**: custom conversion, given a list of coefficient converts units.
+
+*Use `SimpleCustomConversion` when you are dealing with a linear conversion between the units, i.e. when a unit is `x` times a value. In `SimpleCustomConversion` we have to define a conversionMap between a base unit, which must have a value of 1, and all the other units. In the example below we say that 1€ is 1.2271$, but also 0.9033₤, and so on and so forth.*
 
 ```dart
-//Define the relation between a units and the others. One of the units MUST have a value of 1
-//(it will be considered the base unit from where to start the conversion)
 final Map<String, double> conversionMap = {
   'EUR': 1,
   'USD': 1.2271,
@@ -99,7 +101,7 @@ final Map<String, double> conversionMap = {
   'JPY': 126.25,
   'CNY': 7.9315,
 };
-//Optional
+// The map of the symbols is optional but nice
 final Map<String, String> mapSymbols = {
   'EUR': '€',
   'USD': '\$',
@@ -120,6 +122,57 @@ Output:
 1€ = 1.2271$
 ```
 
+**Example 5**: complete custom conversion definition
+
+*Most of the case you will need just a SimpleCustomConversion (see example 4). But if you need to define special relationship between units you need CustomConversion. This allow you to perform conversion like: `y=ax+b` and `y=a/x+b` (where y and x are the value of two units and a and b are two coefficient), for example the conversion between Celsius and Fahreneit use the first relation and the conversion between km/l and l/100km has to be done with the second relation. Both can't be done with `SimpleCustomConversion`. In the example below I will show you how to define a fuel consumption conversion class.*
+
+```dart
+Node conversionTree = Node(
+  name: 'Dash',
+  leafNodes: [
+    Node(
+      name: 'KiloDash',
+      coefficientProduct: 1000,
+    ),
+    Node(
+      name: 'Dash+1',
+      coefficientSum: -1,
+      leafNodes: [
+        Node(
+          name: 'OneOver(OneDash+1)',
+          conversionType: CONVERSION_TYPE.reciprocalConversion,
+        ),
+      ],
+    ),
+  ],
+);
+final Map<String, String> symbolsMap = {
+  'Dash': 'dsh',
+  'KiloDash': 'kdsh',
+  'Dash+1': 'dsh+1',
+  'OneOver(OneDash+1)': '1/(dsh+1)',
+};
+var dash = CustomConversion(
+  conversionTree: conversionTree,
+  mapSymbols: symbolsMap,
+  name: 'Conversion of Dash',
+);
+dash.convert('Dash', 1);
+var myUnits = dash.getAll();
+for (var unit in myUnits) {
+  print(
+      'name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
+}
+```
+
+Output:
+```
+name:Dash, value:1.0, stringValue:1, symbol:dsh
+name:KiloDash, value:0.001, stringValue:0.001, symbol:kdsh
+name:Dash+1, value:2.0, stringValue:2, symbol:dsh+1
+name:OneOver(OneDash+1), value:0.5, stringValue:0.5, symbol:1/(dsh+1)
+```
+
 ## Which conversion?
 
 - Angles (degree, radians, etc.)
@@ -136,7 +189,7 @@ Output:
 
 - Length (meter, miles, etc)
 
-- Mass (kilograms, ounces)
+- Mass (kilograms, ounces, etc.)
 
 - <u>Numeral systems (hexadecimal, binary, etc.)</u>
 

@@ -5,7 +5,7 @@ import 'package:units_converter/utils/utils.dart';
 
 class CustomConversion extends Property<dynamic, double> {
   //Map between units and its symbol
-  final Map<dynamic, String> mapSymbols;
+  final Map<dynamic, String?> mapSymbols;
   int significantFigures;
   bool removeTrailingZeros;
   final dynamic name;
