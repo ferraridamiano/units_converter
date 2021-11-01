@@ -16,15 +16,17 @@ You can use this package in two ways:
 
 1. Add `units_converter` to `pubspec.yaml`:
    
-   ```yaml
-   units_converter: ^1.1.0
-   ```
+```yaml
+# pubspec.yaml
+dependencies:
+  units_converter: ^1.1.0 # Check out the latest version
+```
 
 2. Import the library at the beginning of your `*.dart` file:
    
-   ```dart
-   import 'package:units_converter/units_converter.dart';
-   ```
+```dart
+import 'package:units_converter/units_converter.dart';
+```
 
 ## Use it
 

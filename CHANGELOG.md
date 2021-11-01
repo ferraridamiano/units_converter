@@ -1,3 +1,6 @@
+# 1.1.0
+In this release we added a complete `CustomConversion` definition. You are not anymore tied to `SimpleCustomConversion`! Check it out in the updated README. We also simplified all the code!
+
 # 1.0.0
 `units_converter` is stable since some releases. In this first 1.x version we made a huge work to improve the algorithm
 conversion. Now it is **2x faster** then the previous one and it is simpler (less line of code with known algorithms).
