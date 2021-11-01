@@ -153,7 +153,7 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
         name: SI_PREFIXES.yocto,
       ),
     ]);
-    
+
     _customConversion = CustomConversion(
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,

@@ -105,7 +105,7 @@ class Time extends Property<TIME, double> {
         ]),
       ]),
     ]);
-    
+
     _customConversion = CustomConversion(
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,

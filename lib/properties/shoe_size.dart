@@ -85,7 +85,7 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
         name: SHOE_SIZE.japan,
       ),
     ]);
-    
+
     _customConversion = CustomConversion(
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,

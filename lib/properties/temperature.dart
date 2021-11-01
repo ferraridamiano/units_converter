@@ -74,7 +74,7 @@ class Temperature extends Property<TEMPERATURE, double> {
         name: TEMPERATURE.rankine,
       ),
     ]);
-    
+
     _customConversion = CustomConversion(
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,

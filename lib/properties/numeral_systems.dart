@@ -77,6 +77,7 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   ///Returns all the units converted with prefixes
   @override
   List<Unit> getAll() => _unitList;
+
   ///Returns the Unit with the corresponding name
   @override
   Unit getUnit(var name) =>

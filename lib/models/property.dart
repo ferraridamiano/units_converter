@@ -22,11 +22,10 @@ enum PROPERTY {
 }
 
 abstract class Property<K, V> {
-  
   void convert(K name, V? value);
 
   ///Returns all the units converted with prefixes
-  List<Unit> getAll() ;
+  List<Unit> getAll();
 
   ///Returns the [Unit] with the corresponding name
   Unit getUnit(var name);

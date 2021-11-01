@@ -58,7 +58,7 @@ class Energy extends Property<ENERGY, double> {
         name: ENERGY.energyFootPound,
       ),
     ]);
-    
+
     _customConversion = CustomConversion(
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,

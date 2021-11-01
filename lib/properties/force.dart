@@ -57,7 +57,7 @@ class Force extends Property<FORCE, double> {
         name: FORCE.poundal,
       ),
     ]);
-    
+
     _customConversion = CustomConversion(
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,

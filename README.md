@@ -6,11 +6,11 @@
     <img src="https://shields.io/badge/ferraridamiano-Support--me-FFDD00?logo=buy-me-a-coffee&style=flat&link=https://www.buymeacoffee.com/ferraridamiano"/>
 </a>
 
-units_converter is a package written in dart for dart & flutter developers. You should not take care of **unit conversion** when you want to **internationalize** your app, everything is already done with this package! You can also add your own **custom conversion**!
+`units_converter` is a package written in dart for dart & flutter developers. You should not take care of **unit conversion** when you want to **internationalize** your app, everything is already done with this package! You can also add your own **custom conversion**!
 
-## Usage
+This documentation is structured in examples of incresing complexity. But don't worry, in most cases you will only need the first example! 
 
-### Import it
+## Import it
 
 You can use this package in two ways:
 
@@ -26,9 +26,9 @@ You can use this package in two ways:
    import 'package:units_converter/units_converter.dart';
    ```
 
-### Use it
+## Use it
 
-**Example 1**: convert 1 meter in inches
+### Example 1: convert 1 meter in inches
 
 ```dart
 // We give 1 meter as input
@@ -45,7 +45,7 @@ Output:
 name:LENGTH.inches, value:39.370078740157474, stringValue:39.37007874, symbol:in
 ```
 
-**Example 2**: convert 1 degree in all the other angles units. This time we want also to specify that we just want 7 significant figures and we don't want trailing zeros (e.g. 1.000000 -> 1).
+### Example 2: convert 1 degree in all the other angles units. This time we want also to specify that we just want 7 significant figures and we don't want trailing zeros (e.g. 1.000000 -> 1).
 
 ```dart
 // Initialization of the object
@@ -69,7 +69,7 @@ name:ANGLE.seconds, value:3600.0, stringValue:3600.000, symbol:''
 
 As you can see in this example if you specify `removeTrailingZeros: false`, the `stringValue` keeps all the trailing zeros (the default is `true`). You can also ask for an certain number of significant figures in the `stringValue`.
 
-**Example 3**: convert 100 (decimal) in binary and hexadecimal
+### Example 3: convert 100 (decimal) in binary and hexadecimal
 
 *Warning! Numeral systems conversion is the only conversion that need the input as a string, and not as a double/int for obvious reasons*
 
@@ -89,7 +89,7 @@ Binary: 1100100
 Hexadecimal: 64
 ```
 
-**Example 4**: custom conversion, given a list of coefficient converts units.
+### Example 4: simple custom conversion (just give a list of coefficients)
 
 *Use `SimpleCustomConversion` when you are dealing with a linear conversion between the units, i.e. when a unit is `x` times a value. In `SimpleCustomConversion` we have to define a conversionMap between a base unit, which must have a value of 1, and all the other units. In the example below we say that 1€ is 1.2271$, but also 0.9033₤, and so on and so forth.*
 
@@ -122,9 +122,16 @@ Output:
 1€ = 1.2271$
 ```
 
-**Example 5**: complete custom conversion definition
+### Example 5: custom conversion
 
-*Most of the case you will need just a SimpleCustomConversion (see example 4). But if you need to define special relationship between units you need CustomConversion. This allow you to perform conversion like: `y=ax+b` and `y=a/x+b` (where y and x are the value of two units and a and b are two coefficient), for example the conversion between Celsius and Fahreneit use the first relation and the conversion between km/l and l/100km has to be done with the second relation. Both can't be done with `SimpleCustomConversion`. In the example below I will show you how to define a fuel consumption conversion class.*
+*In most cases, you will only need `SimpleCustomConversion` (see example 4). `SimpleCustomConversion` allow you to define conversions in the for of `y=ax`. But if you need to define special relationship between units you need `CustomConversion`. This allow you to perform conversion like: `y=ax+b` and `y=a/x+b` (where `y` and x are the value of two units and `a` and `b` are two coefficient), for example the conversion between Celsius and Fahreneit use the first relation and the conversion between km/l and l/100km has to be done with the second relation. Both can't be done with `SimpleCustomConversion`.*
+
+In the example below I will show you how to define a conversion tree of some imaginary  unit of measurement. Here I define the following relationship:
+* `KiloDash` = 1000 * `Dash`
+* `Dash+1` = `Dash` + 1
+  * `OneOver(OneDash+1)` = 1 / (`Dash+1`)
+
+As you can see all this relations can be structured like a conversion tree. Now you can take a look at the example below: it does in the code what we have just said.
 
 ```dart
 Node conversionTree = Node(
@@ -160,8 +167,7 @@ var dash = CustomConversion(
 dash.convert('Dash', 1);
 var myUnits = dash.getAll();
 for (var unit in myUnits) {
-  print(
-      'name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
+  print('name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
 }
 ```
 

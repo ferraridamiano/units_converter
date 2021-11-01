@@ -408,6 +408,7 @@ void main() {
       'USD': '\$',
       'GBP': '£',
     };
-    runConversionTest(expectedResult, SimpleCustomConversion(expectedResult, mapSymbol));
+    runConversionTest(expectedResult,
+        SimpleCustomConversion(expectedResult, mapSymbols: mapSymbol));
   });
 }

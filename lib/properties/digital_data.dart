@@ -194,7 +194,7 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
             ]),
       ]),
     ]);
-    
+
     _customConversion = CustomConversion(
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,

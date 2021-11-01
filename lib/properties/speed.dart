@@ -65,7 +65,7 @@ class Speed extends Property<SPEED, double> {
         name: SPEED.feetsPerSecond,
       ),
     ]);
-    
+
     _customConversion = CustomConversion(
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,

@@ -58,7 +58,7 @@ class Torque extends Property<TORQUE, double> {
         name: TORQUE.poundalMeter,
       ),
     ]);
-    
+
     _customConversion = CustomConversion(
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
