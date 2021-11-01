@@ -410,7 +410,17 @@ void main() {
     };
     runConversionTest(expectedResult,
         SimpleCustomConversion(expectedResult, mapSymbols: mapSymbol));
-    // test with null symbols
-    runConversionTest(expectedResult, SimpleCustomConversion(expectedResult));
+    // We use it with null symbols
+    var conversion = SimpleCustomConversion(expectedResult)..convert('EUR', 1);
+    // test single units
+    expectedResult.forEach((key, value) {
+      test(
+        'Test single unit: $key',
+        () {
+          expect(isAcceptable(conversion.getUnit(key).value, value, 1e10), true,
+              reason: 'Failed single unit test:($key)');
+        },
+      );
+    });
   });
 }
