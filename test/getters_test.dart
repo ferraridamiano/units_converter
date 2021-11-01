@@ -68,7 +68,7 @@ void main() {
     runGetterTest(property.mebibyte, property.getUnit(DIGITAL_DATA.mebibyte));
     runGetterTest(property.gibibyte, property.getUnit(DIGITAL_DATA.gibibyte));
     runGetterTest(property.tebibyte, property.getUnit(DIGITAL_DATA.tebibyte));
-    runGetterTest(property.tebibyte, property.getUnit(DIGITAL_DATA.pebibyte));
+    runGetterTest(property.pebibyte, property.getUnit(DIGITAL_DATA.pebibyte));
     runGetterTest(property.exbibyte, property.getUnit(DIGITAL_DATA.exbibyte));
   });
 
