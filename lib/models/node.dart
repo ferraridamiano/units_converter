@@ -91,7 +91,7 @@ class Node {
       Node node = queue.removeFirst();
       if (node.leafNodes.isNotEmpty) {
         for (Node leafNode in node.leafNodes) {
-          if (leafNode.isConverted == false) {
+          if (!leafNode.isConverted) {
             _convertTwoNodes(parent: node, child: leafNode);
           }
           queue.addLast(leafNode);

@@ -1,7 +1,7 @@
 import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils.dart';
+import 'package:units_converter/models/custom_conversion.dart';
 
 //Available SHOE_SIZE units
 enum SHOE_SIZE {
@@ -18,14 +18,29 @@ enum SHOE_SIZE {
 }
 
 class ShoeSize extends Property<SHOE_SIZE, double> {
-  //Map between units and its symbol
-  final Map<SHOE_SIZE, String> mapSymbols = {
+  /// Map between units and its symbol
+  final Map<SHOE_SIZE, String?> mapSymbols = {
     SHOE_SIZE.centimeters: 'cm',
     SHOE_SIZE.inches: 'in',
+    SHOE_SIZE.euChina: null,
+    SHOE_SIZE.ukIndiaChild: null,
+    SHOE_SIZE.ukIndiaMan: null,
+    SHOE_SIZE.ukIndiaWoman: null,
+    SHOE_SIZE.usaCanadaChild: null,
+    SHOE_SIZE.usaCanadaMan: null,
+    SHOE_SIZE.usaCanadaWoman: null,
+    SHOE_SIZE.japan: null,
   };
 
+  /// The number of significan figures to keep. E.g. 1.23456789) has 9
+  /// significant figures
   int significantFigures;
+
+  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
+  /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
+
+  late CustomConversion _customConversion;
 
   ///Class for ShoeSize conversions, e.g. if you want to convert 1 centimeter in eu shoes size:
   ///```dart
@@ -35,12 +50,7 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
   /// ```
   ShoeSize(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
-    size = SHOE_SIZE.values.length;
-    this.name = name ?? PROPERTY.shoeSize;
-    for (SHOE_SIZE val in SHOE_SIZE.values) {
-      unitList.add(Unit(val, symbol: mapSymbols[val]));
-    }
-    unitConversion = Node(name: SHOE_SIZE.centimeters, leafNodes: [
+    Node conversionTree = Node(name: SHOE_SIZE.centimeters, leafNodes: [
       Node(
         coefficientProduct: 1 / 1.5,
         coefficientSum: -1.5,
@@ -83,20 +93,23 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
         name: SHOE_SIZE.japan,
       ),
     ]);
-    nodeList = unitConversion.getTreeAsList();
+
+    _customConversion = CustomConversion(
+        conversionTree: conversionTree,
+        mapSymbols: mapSymbols,
+        significantFigures: significantFigures,
+        removeTrailingZeros: removeTrailingZeros,
+        name: name ?? PROPERTY.angle);
   }
 
   ///Converts a unit with a specific name (e.g. SHOE_SIZE.uk_india_woman) and value to all other units
   @override
-  void convert(SHOE_SIZE name, double? value) {
-    super.convert(name, value);
-    if (value == null) return;
-    for (var i = 0; i < SHOE_SIZE.values.length; i++) {
-      unitList[i].value = getNodeByName(SHOE_SIZE.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(
-          unitList[i].value!, significantFigures, removeTrailingZeros);
-    }
-  }
+  void convert(SHOE_SIZE name, double? value) =>
+      _customConversion.convert(name, value);
+  @override
+  List<Unit> getAll() => _customConversion.getAll();
+  @override
+  Unit getUnit(name) => _customConversion.getUnit(name);
 
   Unit get centimeters => getUnit(SHOE_SIZE.centimeters);
   Unit get inches => getUnit(SHOE_SIZE.inches);

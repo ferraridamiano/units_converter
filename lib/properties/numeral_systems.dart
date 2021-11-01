@@ -12,12 +12,16 @@ enum NUMERAL_SYSTEMS {
 
 class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   //Map between units and its symbol
-  final Map<NUMERAL_SYSTEMS, String> mapSymbols = {
+  final Map<NUMERAL_SYSTEMS, String?> mapSymbols = {
     NUMERAL_SYSTEMS.decimal: '₁₀',
     NUMERAL_SYSTEMS.hexadecimal: '₁₆',
     NUMERAL_SYSTEMS.octal: '₈',
     NUMERAL_SYSTEMS.binary: '₂',
   };
+
+  final List<Unit> _unitList = [];
+  late List<Node> _nodeList;
+  late Node _conversionTree;
 
   ///Class for numeralSystems conversions, e.g. if you want to convert 10 (decimal) in binary:
   ///```dart
@@ -26,12 +30,7 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   ///print(NUMERAL_SYSTEMS.binary.stringValue);
   /// ```
   NumeralSystems({name}) {
-    size = NUMERAL_SYSTEMS.values.length;
-    this.name = name ?? PROPERTY.numeralSystems;
-    for (NUMERAL_SYSTEMS val in NUMERAL_SYSTEMS.values) {
-      unitList.add(Unit(val, symbol: mapSymbols[val]));
-    }
-    unitConversion = Node(name: NUMERAL_SYSTEMS.decimal, base: 10, leafNodes: [
+    _conversionTree = Node(name: NUMERAL_SYSTEMS.decimal, base: 10, leafNodes: [
       Node(
         conversionType: CONVERSION_TYPE.baseConversion,
         base: 16,
@@ -48,7 +47,8 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
         name: NUMERAL_SYSTEMS.binary,
       ),
     ]);
-    nodeList = unitConversion.getTreeAsList();
+    mapSymbols.forEach((key, value) => _unitList.add(Unit(key, symbol: value)));
+    _nodeList = _conversionTree.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. NUMERAL_SYSTEMS.decimal) and value to all other units
@@ -58,19 +58,30 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
     // in order to delete all the other units value, for example in a unit
     // converter app (such as Converter NOW)
     if (value == null) {
-      for (Unit unit in unitList) {
+      for (Unit unit in _unitList) {
         unit.value = null;
         unit.stringValue = null;
       }
       return;
     }
 
-    unitConversion.convert(name, value);
+    _conversionTree.convert(name, value);
     for (var i = 0; i < NUMERAL_SYSTEMS.values.length; i++) {
-      unitList[i].stringValue =
-          getNodeByName(NUMERAL_SYSTEMS.values.elementAt(i)).stringValue;
+      _unitList[i].stringValue = _nodeList
+          .singleWhere(
+              (node) => node.name == NUMERAL_SYSTEMS.values.elementAt(i))
+          .stringValue;
     }
   }
+
+  ///Returns all the units converted with prefixes
+  @override
+  List<Unit> getAll() => _unitList;
+
+  ///Returns the Unit with the corresponding name
+  @override
+  Unit getUnit(var name) =>
+      _unitList.where((element) => element.name == name).single;
 
   Unit get decimal => getUnit(NUMERAL_SYSTEMS.decimal);
   Unit get hexadecimal => getUnit(NUMERAL_SYSTEMS.hexadecimal);

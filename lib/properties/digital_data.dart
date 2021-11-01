@@ -1,7 +1,7 @@
 import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils.dart';
+import 'package:units_converter/models/custom_conversion.dart';
 
 //Available DIGITAL_DATA units
 enum DIGITAL_DATA {
@@ -35,9 +35,10 @@ enum DIGITAL_DATA {
 }
 
 class DigitalData extends Property<DIGITAL_DATA, double> {
-  //Map between units and its symbol
-  final Map<DIGITAL_DATA, String> mapSymbols = {
+  /// Map between units and its symbol
+  final Map<DIGITAL_DATA, String?> mapSymbols = {
     DIGITAL_DATA.bit: 'b',
+    DIGITAL_DATA.nibble: null,
     DIGITAL_DATA.kilobit: 'kb',
     DIGITAL_DATA.megabit: 'Mb',
     DIGITAL_DATA.gigabit: 'Gb',
@@ -65,8 +66,15 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
     DIGITAL_DATA.exbibyte: 'EiB',
   };
 
+  /// The number of significan figures to keep. E.g. 1.23456789) has 9
+  /// significant figures
   int significantFigures;
+
+  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
+  /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
+
+  late CustomConversion _customConversion;
 
   ///Class for digitalData conversions, e.g. if you want to convert 1 megabit in kilobyte:
   ///```dart
@@ -76,12 +84,7 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
   /// ```
   DigitalData(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
-    size = DIGITAL_DATA.values.length;
-    this.name = name ?? PROPERTY.digitalData;
-    for (DIGITAL_DATA val in DIGITAL_DATA.values) {
-      unitList.add(Unit(val, symbol: mapSymbols[val]));
-    }
-    unitConversion = Node(name: DIGITAL_DATA.bit, leafNodes: [
+    Node conversionTree = Node(name: DIGITAL_DATA.bit, leafNodes: [
       Node(
         coefficientProduct: 4.0,
         name: DIGITAL_DATA.nibble,
@@ -192,20 +195,23 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
             ]),
       ]),
     ]);
-    nodeList = unitConversion.getTreeAsList();
+
+    _customConversion = CustomConversion(
+        conversionTree: conversionTree,
+        mapSymbols: mapSymbols,
+        significantFigures: significantFigures,
+        removeTrailingZeros: removeTrailingZeros,
+        name: name ?? PROPERTY.angle);
   }
 
   ///Converts a unit with a specific name (e.g. DIGITAL_DATA.byte) and value to all other units
   @override
-  void convert(DIGITAL_DATA name, double? value) {
-    super.convert(name, value);
-    if (value == null) return;
-    for (var i = 0; i < DIGITAL_DATA.values.length; i++) {
-      unitList[i].value = getNodeByName(DIGITAL_DATA.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(
-          unitList[i].value!, significantFigures, removeTrailingZeros);
-    }
-  }
+  void convert(DIGITAL_DATA name, double? value) =>
+      _customConversion.convert(name, value);
+  @override
+  List<Unit> getAll() => _customConversion.getAll();
+  @override
+  Unit getUnit(name) => _customConversion.getUnit(name);
 
   Unit get bit => getUnit(DIGITAL_DATA.bit);
   Unit get nibble => getUnit(DIGITAL_DATA.nibble);

@@ -1,7 +1,7 @@
 import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils.dart';
+import 'package:units_converter/models/custom_conversion.dart';
 
 //Available TORQUE units
 enum TORQUE {
@@ -13,8 +13,8 @@ enum TORQUE {
 }
 
 class Torque extends Property<TORQUE, double> {
-  //Map between units and its symbol
-  final Map<TORQUE, String> mapSymbols = {
+  /// Map between units and its symbol
+  final Map<TORQUE, String?> mapSymbols = {
     TORQUE.newtonMeter: 'N·m',
     TORQUE.dyneMeter: 'dyn·m',
     TORQUE.poundForceFeet: 'lbf·ft',
@@ -22,8 +22,15 @@ class Torque extends Property<TORQUE, double> {
     TORQUE.poundalMeter: 'pdl·m',
   };
 
+  /// The number of significan figures to keep. E.g. 1.23456789) has 9
+  /// significant figures
   int significantFigures;
+
+  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
+  /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
+
+  late CustomConversion _customConversion;
 
   ///Class for torque conversions, e.g. if you want to convert 1 square meters in acres:
   ///```dart
@@ -33,12 +40,7 @@ class Torque extends Property<TORQUE, double> {
   /// ```
   Torque(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
-    size = TORQUE.values.length;
-    this.name = name ?? PROPERTY.torque;
-    for (TORQUE val in TORQUE.values) {
-      unitList.add(Unit(val, symbol: mapSymbols[val]));
-    }
-    unitConversion = Node(name: TORQUE.newtonMeter, leafNodes: [
+    Node conversionTree = Node(name: TORQUE.newtonMeter, leafNodes: [
       Node(
         coefficientProduct: 1e-5,
         name: TORQUE.dyneMeter,
@@ -56,20 +58,23 @@ class Torque extends Property<TORQUE, double> {
         name: TORQUE.poundalMeter,
       ),
     ]);
-    nodeList = unitConversion.getTreeAsList();
+
+    _customConversion = CustomConversion(
+        conversionTree: conversionTree,
+        mapSymbols: mapSymbols,
+        significantFigures: significantFigures,
+        removeTrailingZeros: removeTrailingZeros,
+        name: name ?? PROPERTY.angle);
   }
 
   ///Converts a unit with a specific name (e.g. TORQUE.newton_meter) and value to all other units
   @override
-  void convert(TORQUE name, double? value) {
-    super.convert(name, value);
-    if (value == null) return;
-    for (var i = 0; i < TORQUE.values.length; i++) {
-      unitList[i].value = getNodeByName(TORQUE.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(
-          unitList[i].value!, significantFigures, removeTrailingZeros);
-    }
-  }
+  void convert(TORQUE name, double? value) =>
+      _customConversion.convert(name, value);
+  @override
+  List<Unit> getAll() => _customConversion.getAll();
+  @override
+  Unit getUnit(name) => _customConversion.getUnit(name);
 
   Unit get newtonMeter => getUnit(TORQUE.newtonMeter);
   Unit get dyneMeter => getUnit(TORQUE.dyneMeter);

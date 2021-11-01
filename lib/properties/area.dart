@@ -1,7 +1,7 @@
 import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils.dart';
+import 'package:units_converter/models/custom_conversion.dart';
 
 //Available AREA units
 enum AREA {
@@ -19,8 +19,8 @@ enum AREA {
 }
 
 class Area extends Property<AREA, double> {
-  //Map between units and its symbol
-  final Map<AREA, String> mapSymbols = {
+  /// Map between units and its symbol
+  final Map<AREA, String?> mapSymbols = {
     AREA.squareMeters: 'm²',
     AREA.squareCentimeters: 'cm²',
     AREA.squareInches: 'in²',
@@ -34,8 +34,15 @@ class Area extends Property<AREA, double> {
     AREA.are: 'a',
   };
 
+  /// The number of significan figures to keep. E.g. 1.23456789) has 9
+  /// significant figures
   int significantFigures;
+
+  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
+  /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
+
+  late CustomConversion _customConversion;
 
   ///Class for area conversions, e.g. if you want to convert 1 square meters in
   ///acres:
@@ -45,12 +52,7 @@ class Area extends Property<AREA, double> {
   ///print(AREA.acres);
   /// ```
   Area({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
-    size = AREA.values.length;
-    this.name = name ?? PROPERTY.area;
-    for (AREA val in AREA.values) {
-      unitList.add(Unit(val, symbol: mapSymbols[val]));
-    }
-    unitConversion = Node(name: AREA.squareMeters, leafNodes: [
+    Node conversionTree = Node(name: AREA.squareMeters, leafNodes: [
       Node(coefficientProduct: 1e-4, name: AREA.squareCentimeters, leafNodes: [
         Node(coefficientProduct: 6.4516, name: AREA.squareInches, leafNodes: [
           Node(
@@ -86,21 +88,24 @@ class Area extends Property<AREA, double> {
         name: AREA.are,
       ),
     ]);
-    nodeList = unitConversion.getTreeAsList();
+
+    _customConversion = CustomConversion(
+        conversionTree: conversionTree,
+        mapSymbols: mapSymbols,
+        significantFigures: significantFigures,
+        removeTrailingZeros: removeTrailingZeros,
+        name: name ?? PROPERTY.angle);
   }
 
   /// Converts a unit with a specific name (e.g. AREA.hectares) and value to all
   /// other units
   @override
-  void convert(AREA name, double? value) {
-    super.convert(name, value);
-    if (value == null) return;
-    for (var i = 0; i < AREA.values.length; i++) {
-      unitList[i].value = getNodeByName(AREA.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(
-          unitList[i].value!, significantFigures, removeTrailingZeros);
-    }
-  }
+  void convert(AREA name, double? value) =>
+      _customConversion.convert(name, value);
+  @override
+  List<Unit> getAll() => _customConversion.getAll();
+  @override
+  Unit getUnit(name) => _customConversion.getUnit(name);
 
   Unit get squareMeters => getUnit(AREA.squareMeters);
   Unit get squareCentimeters => getUnit(AREA.squareCentimeters);

@@ -1,7 +1,7 @@
 import 'package:units_converter/models/node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/utils/utils.dart';
+import 'package:units_converter/models/custom_conversion.dart';
 
 //Available VOLUME units
 enum VOLUME {
@@ -26,8 +26,8 @@ enum VOLUME {
 }
 
 class Volume extends Property<VOLUME, double> {
-  //Map between units and its symbol
-  final Map<VOLUME, String> mapSymbols = {
+  /// Map between units and its symbol
+  final Map<VOLUME, String?> mapSymbols = {
     VOLUME.cubicMeters: 'm³',
     VOLUME.liters: 'l',
     VOLUME.imperialGallons: 'imp gal',
@@ -48,8 +48,15 @@ class Volume extends Property<VOLUME, double> {
     VOLUME.usGill: 'US. liq. gi',
   };
 
+  /// The number of significan figures to keep. E.g. 1.23456789) has 9
+  /// significant figures
   int significantFigures;
+
+  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
+  /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
+
+  late CustomConversion _customConversion;
 
   ///Class for volume conversions, e.g. if you want to convert 1 liter in US Gallons:
   ///```dart
@@ -59,12 +66,7 @@ class Volume extends Property<VOLUME, double> {
   /// ```
   Volume(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
-    size = VOLUME.values.length;
-    this.name = name ?? PROPERTY.volume;
-    for (VOLUME val in VOLUME.values) {
-      unitList.add(Unit(val, symbol: mapSymbols[val]));
-    }
-    unitConversion = Node(
+    Node conversionTree = Node(
       name: VOLUME.cubicMeters,
       leafNodes: [
         Node(coefficientProduct: 1e-3, name: VOLUME.liters, leafNodes: [
@@ -140,20 +142,23 @@ class Volume extends Property<VOLUME, double> {
         ),
       ],
     );
-    nodeList = unitConversion.getTreeAsList();
+
+    _customConversion = CustomConversion(
+        conversionTree: conversionTree,
+        mapSymbols: mapSymbols,
+        significantFigures: significantFigures,
+        removeTrailingZeros: removeTrailingZeros,
+        name: name ?? PROPERTY.angle);
   }
 
   ///Converts a unit with a specific name (e.g. VOLUME.cubic_feet) and value to all other units
   @override
-  void convert(VOLUME name, double? value) {
-    super.convert(name, value);
-    if (value == null) return;
-    for (var i = 0; i < VOLUME.values.length; i++) {
-      unitList[i].value = getNodeByName(VOLUME.values.elementAt(i)).value;
-      unitList[i].stringValue = mantissaCorrection(
-          unitList[i].value!, significantFigures, removeTrailingZeros);
-    }
-  }
+  void convert(VOLUME name, double? value) =>
+      _customConversion.convert(name, value);
+  @override
+  List<Unit> getAll() => _customConversion.getAll();
+  @override
+  Unit getUnit(name) => _customConversion.getUnit(name);
 
   Unit get cubicMeters => getUnit(VOLUME.cubicMeters);
   Unit get liters => getUnit(VOLUME.liters);

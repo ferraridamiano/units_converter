@@ -397,33 +397,30 @@ void main() {
       'CAD': 1.5213,
       'HKD': 9.3363,
       'RUB': 88.6563,
-      'PHP': 58.399,
-      'DKK': 7.4361,
-      'NZD': 1.6599,
-      'CNY': 7.7846,
-      'AUD': 1.5449,
-      'RON': 4.8813,
-      'SEK': 10.1595,
-      'IDR': 17166.5,
-      'INR': 87.552,
-      'BRL': 6.7469,
       'USD': 1.2034,
-      'ILS': 3.983,
-      'JPY': 129.23,
-      'THB': 36.511,
-      'CHF': 1.1114,
-      'CZK': 26.208,
-      'MYR': 4.8828,
-      'TRY': 8.9666,
-      'MXN': 25.0615,
-      'NOK': 10.2595,
-      'HUF': 364.53,
-      'ZAR': 18.0926,
-      'SGD': 1.6024,
       'GBP': 0.8627,
-      'KRW': 1353.89,
-      'PLN': 4.5529,
     };
-    runConversionTest(expectedResult, SimpleCustomConversion(expectedResult));
+    const Map<String, String> mapSymbol = {
+      'EUR': '€',
+      'CAD': '\$',
+      'HKD': 'HK\$',
+      'RUB': '₽',
+      'USD': '\$',
+      'GBP': '£',
+    };
+    runConversionTest(expectedResult,
+        SimpleCustomConversion(expectedResult, mapSymbols: mapSymbol));
+    // We use it with null symbols
+    var conversion = SimpleCustomConversion(expectedResult)..convert('EUR', 1);
+    // test single units
+    expectedResult.forEach((key, value) {
+      test(
+        'Test single unit: $key',
+        () {
+          expect(isAcceptable(conversion.getUnit(key).value, value, 1e10), true,
+              reason: 'Failed single unit test:($key)');
+        },
+      );
+    });
   });
 }
