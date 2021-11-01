@@ -40,6 +40,8 @@ class Torque extends Property<TORQUE, double> {
   /// ```
   Torque(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.torque;
+    size = TORQUE.values.length;
     Node conversionTree = Node(name: TORQUE.newtonMeter, leafNodes: [
       Node(
         coefficientProduct: 1e-5,
@@ -63,8 +65,7 @@ class Torque extends Property<TORQUE, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. TORQUE.newton_meter) and value to all other units

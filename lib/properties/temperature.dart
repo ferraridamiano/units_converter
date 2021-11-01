@@ -44,6 +44,8 @@ class Temperature extends Property<TEMPERATURE, double> {
   /// ```
   Temperature(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.temperature;
+    size = TEMPERATURE.values.length;
     Node conversionTree = Node(name: TEMPERATURE.fahrenheit, leafNodes: [
       Node(
           coefficientProduct: 1.8,
@@ -79,8 +81,7 @@ class Temperature extends Property<TEMPERATURE, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. TEMPERATURE.kelvin) and value to all other units

@@ -30,6 +30,8 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   ///print(NUMERAL_SYSTEMS.binary.stringValue);
   /// ```
   NumeralSystems({name}) {
+    this.name = name ?? PROPERTY.numeralSystems;
+    size = NUMERAL_SYSTEMS.values.length;
     _conversionTree = Node(name: NUMERAL_SYSTEMS.decimal, base: 10, leafNodes: [
       Node(
         conversionType: CONVERSION_TYPE.baseConversion,

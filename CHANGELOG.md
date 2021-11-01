@@ -1,3 +1,6 @@
+# 1.1.1
+Fix compatibility issue of 1.1.0 with the previous release.
+
 # 1.1.0
 In this release we added a complete `CustomConversion` definition. You are not anymore tied to `SimpleCustomConversion`!
 Check it out in the updated README. We also simplified all the code!

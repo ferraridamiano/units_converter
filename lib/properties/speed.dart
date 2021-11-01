@@ -41,6 +41,8 @@ class Speed extends Property<SPEED, double> {
   ///print(SPEED.acres);
   /// ```
   Speed({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.speed;
+    size = SPEED.values.length;
     Node conversionTree = Node(name: SPEED.metersPerSecond, leafNodes: [
       Node(
           coefficientProduct: 1 / 3.6,
@@ -70,8 +72,7 @@ class Speed extends Property<SPEED, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. SPEED.miles_per_hour) and value to all other units

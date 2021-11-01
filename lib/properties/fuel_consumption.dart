@@ -38,6 +38,8 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
   /// ```
   FuelConsumption(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.fuelConsumption;
+    size = FUEL_CONSUMPTION.values.length;
     Node conversionTree =
         Node(name: FUEL_CONSUMPTION.kilometersPerLiter, leafNodes: [
       Node(
@@ -59,8 +61,7 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. FUEL_CONSUMPTION.liters_per_100_km) and value to all other units

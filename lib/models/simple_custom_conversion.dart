@@ -63,6 +63,8 @@ class SimpleCustomConversion extends Property<dynamic, double> {
             'The key of mapConversion must be the same key of mapSymbols');
       }
     }
+    this.name = name;
+    size = mapConversion.length;
     var baseUnit = mapConversion.keys.firstWhere(
         (element) => mapConversion[element] == 1); //take the base unit
     List<Node> leafNodes = [];

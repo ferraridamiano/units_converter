@@ -52,6 +52,8 @@ class Area extends Property<AREA, double> {
   ///print(AREA.acres);
   /// ```
   Area({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.area;
+    size = AREA.values.length;
     Node conversionTree = Node(name: AREA.squareMeters, leafNodes: [
       Node(coefficientProduct: 1e-4, name: AREA.squareCentimeters, leafNodes: [
         Node(coefficientProduct: 6.4516, name: AREA.squareInches, leafNodes: [
@@ -93,8 +95,7 @@ class Area extends Property<AREA, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   /// Converts a unit with a specific name (e.g. AREA.hectares) and value to all

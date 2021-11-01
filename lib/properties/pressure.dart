@@ -46,6 +46,8 @@ class Pressure extends Property<PRESSURE, double> {
   /// ```
   Pressure(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.pressure;
+    size = PRESSURE.values.length;
     Node conversionTree = Node(name: PRESSURE.pascal, leafNodes: [
       Node(coefficientProduct: 101325.0, name: PRESSURE.atmosphere, leafNodes: [
         Node(coefficientProduct: 0.987, name: PRESSURE.bar, leafNodes: [
@@ -75,8 +77,7 @@ class Pressure extends Property<PRESSURE, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. PRESSURE.psi) and value to all other units

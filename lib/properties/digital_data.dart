@@ -84,6 +84,8 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
   /// ```
   DigitalData(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.digitalData;
+    size = DIGITAL_DATA.values.length;
     Node conversionTree = Node(name: DIGITAL_DATA.bit, leafNodes: [
       Node(
         coefficientProduct: 4.0,
@@ -200,8 +202,7 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. DIGITAL_DATA.byte) and value to all other units

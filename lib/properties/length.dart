@@ -64,6 +64,8 @@ class Length extends Property<LENGTH, double> {
   /// ```
   Length(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.length;
+    size = LENGTH.values.length;
     Node conversionTree = Node(name: LENGTH.meters, leafNodes: [
       Node(coefficientProduct: 0.01, name: LENGTH.centimeters, leafNodes: [
         Node(coefficientProduct: 2.54, name: LENGTH.inches, leafNodes: [
@@ -129,8 +131,7 @@ class Length extends Property<LENGTH, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. LENGTH.meters) and value to all other units

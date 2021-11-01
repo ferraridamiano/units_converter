@@ -66,6 +66,8 @@ class Volume extends Property<VOLUME, double> {
   /// ```
   Volume(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.volume;
+    size = VOLUME.values.length;
     Node conversionTree = Node(
       name: VOLUME.cubicMeters,
       leafNodes: [
@@ -147,8 +149,7 @@ class Volume extends Property<VOLUME, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. VOLUME.cubic_feet) and value to all other units

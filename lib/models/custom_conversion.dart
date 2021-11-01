@@ -8,7 +8,6 @@ class CustomConversion extends Property<dynamic, double> {
   final Map<dynamic, String?> mapSymbols;
   int significantFigures;
   bool removeTrailingZeros;
-  final dynamic name;
   final List<Unit> _unitList = [];
   late List<Node> _nodeList;
   Node conversionTree;
@@ -22,9 +21,11 @@ class CustomConversion extends Property<dynamic, double> {
   CustomConversion(
       {required this.conversionTree,
       required this.mapSymbols,
-      required this.name,
+      name,
       this.significantFigures = 10,
       this.removeTrailingZeros = true}) {
+    this.name = name;
+    size = mapSymbols.length;
     mapSymbols.forEach((key, value) => _unitList.add(Unit(key, symbol: value)));
     _nodeList = conversionTree.getTreeAsList();
   }

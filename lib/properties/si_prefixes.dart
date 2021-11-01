@@ -72,6 +72,8 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
   /// ```
   SIPrefixes(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.siPrefixes;
+    size = SI_PREFIXES.values.length;
     Node conversionTree = Node(name: SI_PREFIXES.base, leafNodes: [
       Node(
         coefficientProduct: 1e1,
@@ -159,8 +161,7 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. SI_PREFIXES.milli) and value to all other units

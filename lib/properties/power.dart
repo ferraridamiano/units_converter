@@ -43,6 +43,8 @@ class Power extends Property<POWER, double> {
   ///print(POWER.european_horse_power);
   /// ```
   Power({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.power;
+    size = POWER.values.length;
     Node conversionTree = Node(name: POWER.watt, leafNodes: [
       Node(
         coefficientProduct: 1e-3,
@@ -74,8 +76,7 @@ class Power extends Property<POWER, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. POWER.european_horse_power) and value to all other units

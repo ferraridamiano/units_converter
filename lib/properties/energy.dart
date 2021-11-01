@@ -40,6 +40,8 @@ class Energy extends Property<ENERGY, double> {
   /// ```
   Energy(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.energy;
+    size = ENERGY.values.length;
     Node conversionTree = Node(name: ENERGY.joules, leafNodes: [
       Node(
         coefficientProduct: 4.1867999409,
@@ -63,8 +65,7 @@ class Energy extends Property<ENERGY, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. ENERGY.calories) and value to all other units

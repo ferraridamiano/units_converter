@@ -50,6 +50,8 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
   /// ```
   ShoeSize(
       {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.shoeSize;
+    size = SHOE_SIZE.values.length;
     Node conversionTree = Node(name: SHOE_SIZE.centimeters, leafNodes: [
       Node(
         coefficientProduct: 1 / 1.5,
@@ -98,8 +100,7 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. SHOE_SIZE.uk_india_woman) and value to all other units

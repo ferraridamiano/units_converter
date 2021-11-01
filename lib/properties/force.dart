@@ -39,6 +39,8 @@ class Force extends Property<FORCE, double> {
   ///print(FORCE.pound_force);
   /// ```
   Force({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.force;
+    size = FORCE.values.length;
     Node conversionTree = Node(name: FORCE.newton, leafNodes: [
       Node(
         coefficientProduct: 1e-5,
@@ -62,8 +64,7 @@ class Force extends Property<FORCE, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. FORCE.newton) and value to all other units

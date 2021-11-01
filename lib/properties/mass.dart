@@ -59,6 +59,8 @@ class Mass extends Property<MASS, double> {
   ///print(MASS.ounces);
   /// ```
   Mass({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.mass;
+    size = MASS.values.length;
     Node conversionTree = Node(
       name: MASS.grams,
       leafNodes: [
@@ -127,8 +129,7 @@ class Mass extends Property<MASS, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. MASS.centigrams) and value to all other units

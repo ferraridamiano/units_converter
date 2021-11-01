@@ -59,6 +59,8 @@ class Time extends Property<TIME, double> {
   ///print(TIME.seconds);
   /// ```
   Time({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.time;
+    size = TIME.values.length;
     Node conversionTree = Node(name: TIME.seconds, leafNodes: [
       Node(
         coefficientProduct: 1e-1,
@@ -114,8 +116,7 @@ class Time extends Property<TIME, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   ///Converts a unit with a specific name (e.g. TIME.days) and value to all other units

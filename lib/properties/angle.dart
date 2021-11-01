@@ -37,6 +37,8 @@ class Angle extends Property<ANGLE, double> {
   ///print(ANGLE.degree);
   /// ```
   Angle({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+    this.name = name ?? PROPERTY.angle;
+    size = ANGLE.values.length;
     Node conversionTree = Node(name: ANGLE.degree, leafNodes: [
       Node(
         coefficientProduct: 1 / 60,
@@ -56,8 +58,7 @@ class Angle extends Property<ANGLE, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        name: name ?? PROPERTY.angle);
+        removeTrailingZeros: removeTrailingZeros);
   }
 
   /// Converts a unit with a specific name (e.g. ANGLE.degree) and value to all

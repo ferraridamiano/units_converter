@@ -1,6 +1,6 @@
 name: units_converter
 description: Simple and light units conversion package for all your needs.
-version: 1.1.0
+version: 1.1.1
 homepage: https://github.com/ferraridamiano/units_converter
 
 environment:
