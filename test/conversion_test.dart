@@ -410,5 +410,7 @@ void main() {
     };
     runConversionTest(expectedResult,
         SimpleCustomConversion(expectedResult, mapSymbols: mapSymbol));
+    // test with null symbols
+    runConversionTest(expectedResult, SimpleCustomConversion(expectedResult));
   });
 }

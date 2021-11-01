@@ -73,7 +73,7 @@ class SimpleCustomConversion extends Property<dynamic, double> {
       }
     });
     if (mapSymbols == null) {
-      mapSymbols = <dynamic, String>{};
+      mapSymbols = <dynamic, String?>{};
       for (var val in mapConversion.keys) {
         mapSymbols![val] = null;
       }
