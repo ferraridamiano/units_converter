@@ -19,7 +19,7 @@ enum SHOE_SIZE {
 
 class ShoeSize extends Property<SHOE_SIZE, double> {
   /// Map between units and its symbol
-  final Map<SHOE_SIZE, String?> mapSymbols = {
+  static const Map<SHOE_SIZE, String?> mapSymbols = {
     SHOE_SIZE.centimeters: 'cm',
     SHOE_SIZE.inches: 'in',
     SHOE_SIZE.euChina: null,

@@ -20,7 +20,7 @@ enum AREA {
 
 class Area extends Property<AREA, double> {
   /// Map between units and its symbol
-  final Map<AREA, String?> mapSymbols = {
+  static const Map<AREA, String?> mapSymbols = {
     AREA.squareMeters: 'm²',
     AREA.squareCentimeters: 'cm²',
     AREA.squareInches: 'in²',

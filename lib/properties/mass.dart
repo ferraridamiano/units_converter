@@ -25,7 +25,7 @@ enum MASS {
 
 class Mass extends Property<MASS, double> {
   ///Map between units and its symbol
-  final Map<MASS, String?> mapSymbols = {
+  static const Map<MASS, String?> mapSymbols = {
     MASS.grams: 'g',
     MASS.ettograms: 'hg',
     MASS.kilograms: 'kg',

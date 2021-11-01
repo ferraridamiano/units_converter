@@ -12,7 +12,7 @@ enum NUMERAL_SYSTEMS {
 
 class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   //Map between units and its symbol
-  final Map<NUMERAL_SYSTEMS, String?> mapSymbols = {
+  static const Map<NUMERAL_SYSTEMS, String?> mapSymbols = {
     NUMERAL_SYSTEMS.decimal: '₁₀',
     NUMERAL_SYSTEMS.hexadecimal: '₁₆',
     NUMERAL_SYSTEMS.octal: '₈',

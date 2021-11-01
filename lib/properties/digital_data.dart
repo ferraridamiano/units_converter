@@ -36,7 +36,7 @@ enum DIGITAL_DATA {
 
 class DigitalData extends Property<DIGITAL_DATA, double> {
   /// Map between units and its symbol
-  final Map<DIGITAL_DATA, String?> mapSymbols = {
+  static const Map<DIGITAL_DATA, String?> mapSymbols = {
     DIGITAL_DATA.bit: 'b',
     DIGITAL_DATA.nibble: null,
     DIGITAL_DATA.kilobit: 'kb',

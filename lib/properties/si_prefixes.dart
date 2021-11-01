@@ -30,7 +30,7 @@ enum SI_PREFIXES {
 
 class SIPrefixes extends Property<SI_PREFIXES, double> {
   /// Map between units and its symbol
-  final Map<SI_PREFIXES, String?> mapSymbols = {
+  static const Map<SI_PREFIXES, String?> mapSymbols = {
     SI_PREFIXES.base: null,
     SI_PREFIXES.deca: 'da-',
     SI_PREFIXES.hecto: 'h-',

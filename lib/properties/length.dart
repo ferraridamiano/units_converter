@@ -26,7 +26,7 @@ enum LENGTH {
 
 class Length extends Property<LENGTH, double> {
   /// Map between units and its symbol
-  final Map<LENGTH, String?> mapSymbols = {
+  static const Map<LENGTH, String?> mapSymbols = {
     LENGTH.meters: 'm',
     LENGTH.centimeters: 'cm',
     LENGTH.inches: 'in',

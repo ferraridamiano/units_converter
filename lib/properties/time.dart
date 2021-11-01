@@ -24,7 +24,7 @@ enum TIME {
 
 class Time extends Property<TIME, double> {
   /// Map between units and its symbol
-  final Map<TIME, String?> mapSymbols = {
+  static const Map<TIME, String?> mapSymbols = {
     TIME.seconds: 's',
     TIME.deciseconds: 'ds',
     TIME.centiseconds: 'cs',

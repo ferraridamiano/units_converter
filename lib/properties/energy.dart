@@ -14,7 +14,7 @@ enum ENERGY {
 
 class Energy extends Property<ENERGY, double> {
   /// Map between units and its symbol
-  final Map<ENERGY, String?> mapSymbols = {
+  static const Map<ENERGY, String?> mapSymbols = {
     ENERGY.joules: 'J',
     ENERGY.calories: 'cal',
     ENERGY.kilowattHours: 'kwh',

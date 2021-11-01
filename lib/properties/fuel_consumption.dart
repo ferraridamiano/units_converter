@@ -13,7 +13,7 @@ enum FUEL_CONSUMPTION {
 
 class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
   /// Map between units and its symbol
-  final Map<FUEL_CONSUMPTION, String?> mapSymbols = {
+  static const Map<FUEL_CONSUMPTION, String?> mapSymbols = {
     FUEL_CONSUMPTION.kilometersPerLiter: 'km/l',
     FUEL_CONSUMPTION.litersPer100km: 'l/100km',
     FUEL_CONSUMPTION.milesPerUsGallon: 'mpg',

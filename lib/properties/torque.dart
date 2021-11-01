@@ -14,7 +14,7 @@ enum TORQUE {
 
 class Torque extends Property<TORQUE, double> {
   /// Map between units and its symbol
-  final Map<TORQUE, String?> mapSymbols = {
+  static const Map<TORQUE, String?> mapSymbols = {
     TORQUE.newtonMeter: 'N·m',
     TORQUE.dyneMeter: 'dyn·m',
     TORQUE.poundForceFeet: 'lbf·ft',
