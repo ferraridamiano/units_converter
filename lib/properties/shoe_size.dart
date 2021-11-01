@@ -19,9 +19,17 @@ enum SHOE_SIZE {
 
 class ShoeSize extends Property<SHOE_SIZE, double> {
   /// Map between units and its symbol
-  final Map<SHOE_SIZE, String> mapSymbols = {
+  final Map<SHOE_SIZE, String?> mapSymbols = {
     SHOE_SIZE.centimeters: 'cm',
     SHOE_SIZE.inches: 'in',
+    SHOE_SIZE.euChina: null,
+    SHOE_SIZE.ukIndiaChild: null,
+    SHOE_SIZE.ukIndiaMan: null,
+    SHOE_SIZE.ukIndiaWoman: null,
+    SHOE_SIZE.usaCanadaChild: null,
+    SHOE_SIZE.usaCanadaMan: null,
+    SHOE_SIZE.usaCanadaWoman: null,
+    SHOE_SIZE.japan: null,
   };
 
   /// The number of significan figures to keep. E.g. 1.23456789) has 9

@@ -26,7 +26,7 @@ enum LENGTH {
 
 class Length extends Property<LENGTH, double> {
   /// Map between units and its symbol
-  final Map<LENGTH, String> mapSymbols = {
+  final Map<LENGTH, String?> mapSymbols = {
     LENGTH.meters: 'm',
     LENGTH.centimeters: 'cm',
     LENGTH.inches: 'in',
@@ -43,6 +43,7 @@ class Length extends Property<LENGTH, double> {
     LENGTH.astronomicalUnits: 'au',
     LENGTH.lightYears: 'ly',
     LENGTH.parsec: 'pc',
+    LENGTH.mils: null,
   };
 
   /// The number of significan figures to keep. E.g. 1.23456789) has 9

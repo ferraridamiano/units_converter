@@ -27,7 +27,7 @@ enum VOLUME {
 
 class Volume extends Property<VOLUME, double> {
   /// Map between units and its symbol
-  final Map<VOLUME, String> mapSymbols = {
+  final Map<VOLUME, String?> mapSymbols = {
     VOLUME.cubicMeters: 'm³',
     VOLUME.liters: 'l',
     VOLUME.imperialGallons: 'imp gal',

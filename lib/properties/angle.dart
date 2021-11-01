@@ -13,7 +13,7 @@ enum ANGLE {
 
 class Angle extends Property<ANGLE, double> {
   /// Map between units and its symbol
-  final Map<ANGLE, String> mapSymbols = {
+  final Map<ANGLE, String?> mapSymbols = {
     ANGLE.degree: '°',
     ANGLE.minutes: "'",
     ANGLE.seconds: "''",

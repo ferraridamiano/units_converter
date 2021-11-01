@@ -15,7 +15,7 @@ enum SPEED {
 
 class Speed extends Property<SPEED, double> {
   /// Map between units and its symbol
-  final Map<SPEED, String> mapSymbols = {
+  final Map<SPEED, String?> mapSymbols = {
     SPEED.metersPerSecond: 'm/s',
     SPEED.kilometersPerHour: 'km/h',
     SPEED.milesPerHour: 'mi/h',

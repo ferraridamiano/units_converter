@@ -16,7 +16,7 @@ enum TEMPERATURE {
 
 class Temperature extends Property<TEMPERATURE, double> {
   /// Map between units and its symbol
-  final Map<TEMPERATURE, String> mapSymbols = {
+  final Map<TEMPERATURE, String?> mapSymbols = {
     TEMPERATURE.fahrenheit: '°F',
     TEMPERATURE.celsius: '°C',
     TEMPERATURE.kelvin: 'K',

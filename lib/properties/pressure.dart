@@ -17,7 +17,7 @@ enum PRESSURE {
 
 class Pressure extends Property<PRESSURE, double> {
   /// Map between units and its symbol
-  final Map<PRESSURE, String> mapSymbols = {
+  final Map<PRESSURE, String?> mapSymbols = {
     PRESSURE.pascal: 'Pa',
     PRESSURE.atmosphere: 'atm',
     PRESSURE.bar: 'bar',

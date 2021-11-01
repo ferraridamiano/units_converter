@@ -24,7 +24,7 @@ enum TIME {
 
 class Time extends Property<TIME, double> {
   /// Map between units and its symbol
-  final Map<TIME, String> mapSymbols = {
+  final Map<TIME, String?> mapSymbols = {
     TIME.seconds: 's',
     TIME.deciseconds: 'ds',
     TIME.centiseconds: 'cs',
@@ -34,8 +34,12 @@ class Time extends Property<TIME, double> {
     TIME.minutes: 'min',
     TIME.hours: 'h',
     TIME.days: 'd',
+    TIME.weeks: null,
     TIME.years365: 'a',
+    TIME.lustrum: null,
+    TIME.decades: null,
     TIME.centuries: 'c.',
+    TIME.millennium: null,
   };
 
   /// The number of significan figures to keep. E.g. 1.23456789) has 9

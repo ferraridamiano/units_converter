@@ -14,7 +14,7 @@ enum FORCE {
 
 class Force extends Property<FORCE, double> {
   /// Map between units and its symbol
-  final Map<FORCE, String> mapSymbols = {
+  final Map<FORCE, String?> mapSymbols = {
     FORCE.newton: 'N',
     FORCE.dyne: 'dyn',
     FORCE.poundForce: 'lbf',

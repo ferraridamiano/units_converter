@@ -16,7 +16,7 @@ enum POWER {
 
 class Power extends Property<POWER, double> {
   /// Map between units and its symbol
-  final Map<POWER, String> mapSymbols = {
+  final Map<POWER, String?> mapSymbols = {
     POWER.watt: 'W',
     POWER.milliwatt: 'mW',
     POWER.kilowatt: 'kW',

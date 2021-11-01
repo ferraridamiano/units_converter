@@ -13,7 +13,9 @@ enum MASS {
   quintals,
   tons,
   milligrams,
-  uma, //unified atomic mass unit
+
+  /// unified atomic mass unit
+  uma,
   carats,
   centigrams,
   pennyweights,
@@ -23,12 +25,13 @@ enum MASS {
 
 class Mass extends Property<MASS, double> {
   ///Map between units and its symbol
-  final Map<MASS, String> mapSymbols = {
+  final Map<MASS, String?> mapSymbols = {
     MASS.grams: 'g',
     MASS.ettograms: 'hg',
     MASS.kilograms: 'kg',
     MASS.pounds: 'lb',
     MASS.ounces: 'oz',
+    MASS.quintals: null,
     MASS.tons: 't',
     MASS.milligrams: 'mg',
     MASS.uma: 'u',
