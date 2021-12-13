@@ -1,3 +1,6 @@
+# 1.1.1+2
+Fix links in `README.md`.
+
 # 1.1.1+1
 Updated `README.md`.
 

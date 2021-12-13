@@ -12,12 +12,12 @@ This package is used by [Converter NOW](https://github.com/ferraridamiano/Conver
 This documentation is structured in examples of incresing complexity. But don't worry, in most cases you will only need the first examples.
 
 ## Table of Contents
-- [Convert a unit to another unit](#Convert-a-unit-to-another-unit)
-- [Convert a unit to all the another units](#Convert-a-unit-to-all-the-another-units)
+- [Convert a unit to another unit](#convert-a-unit-to-another-unit)
+- [Convert a unit to all the another units](#convert-a-unit-to-all-the-another-units)
 - [Special type of conversion: numeral systems conversion](#special-type-of-conversion-numeral-systems-conversion)
-- [Simple custom conversion](#Simple-custom-conversion)
-- [Custom conversion](#Custom-conversion)
-- [Which conversions?](#Which-conversions)
+- [Simple custom conversion](#simple-custom-conversion)
+- [Custom conversion](#custom-conversion)
+- [Which conversions?](#which-conversions)
 
 ## Convert a unit to another unit
 **Example 1**: convert 1 meter in inches
