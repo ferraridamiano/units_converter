@@ -1,36 +1,26 @@
 # units_converter
 [![codecov](https://codecov.io/gh/ferraridamiano/units_converter/branch/main/graph/badge.svg)](https://codecov.io/gh/ferraridamiano/units_converter)
-[![Pub](https://img.shields.io/pub/v/units_converter.svg)](https://pub.dev/packages/units_converter)
-[![license](https://img.shields.io/github/license/ferraridamiano/units_converter)](https://en.wikipedia.org/wiki/MIT_License)
-<a href="https://www.buymeacoffee.com/ferraridamiano">
-    <img src="https://shields.io/badge/ferraridamiano-Support--me-FFDD00?logo=buy-me-a-coffee&style=flat&link=https://www.buymeacoffee.com/ferraridamiano"/>
-</a>
+[![Pub](https://img.shields.io/pub/v/units_converter.svg?style=flat-square&logo=dart)](https://pub.dev/packages/units_converter)
+[![license](https://img.shields.io/github/license/ferraridamiano/units_converter?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
+[<img src="https://img.shields.io/static/v1?style=for-the-badge&message=PayPal&color=00457C&logo=PayPal&logoColor=FFFFFF&label="
+    alt="Donate with Paypal" height=21>](https://www.paypal.me/DemApps)
 
 `units_converter` is a package written in dart for dart & flutter developers. You should not take care of **unit conversion** when you want to **internationalize** your app, everything is already done with this package! You can also add your own **custom conversion**!
 
-This documentation is structured in examples of incresing complexity. But don't worry, in most cases you will only need the first example! 
+This package is used by [Converter NOW](https://github.com/ferraridamiano/ConverterNOW)!
 
-## Import it
+This documentation is structured in examples of incresing complexity. But don't worry, in most cases you will only need the first examples.
 
-You can use this package in two ways:
+## Table of Contents
+- [Convert a unit to another unit](#Convert-a-unit-to-another-unit)
+- [Convert a unit to all the another units](#Convert-a-unit-to-all-the-another-units)
+- [Special type of conversion: numeral systems conversion](#special-type-of-conversion-numeral-systems-conversion)
+- [Simple custom conversion](#Simple-custom-conversion)
+- [Custom conversion](#Custom-conversion)
+- [Which conversions?](#Which-conversions)
 
-1. Add `units_converter` to `pubspec.yaml`:
-   
-```yaml
-# pubspec.yaml
-dependencies:
-  units_converter: ^1.1.0 # Check out the latest version
-```
-
-2. Import the library at the beginning of your `*.dart` file:
-   
-```dart
-import 'package:units_converter/units_converter.dart';
-```
-
-## Use it
-
-### Example 1: convert 1 meter in inches
+## Convert a unit to another unit
+**Example 1**: convert 1 meter in inches
 
 ```dart
 // We give 1 meter as input
@@ -47,7 +37,8 @@ Output:
 name:LENGTH.inches, value:39.370078740157474, stringValue:39.37007874, symbol:in
 ```
 
-### Example 2: convert 1 degree in all the other angles units. This time we want also to specify that we just want 7 significant figures and we don't want trailing zeros (e.g. 1.000000 -> 1).
+## Convert a unit to all the another units
+**Example 2**: convert 1 degree in all the other angles units. This time we want also to specify that we just want 7 significant figures and we don't want trailing zeros (e.g. 1.000000 -> 1).
 
 ```dart
 // Initialization of the object
@@ -71,9 +62,10 @@ name:ANGLE.seconds, value:3600.0, stringValue:3600.000, symbol:''
 
 As you can see in this example if you specify `removeTrailingZeros: false`, the `stringValue` keeps all the trailing zeros (the default is `true`). You can also ask for an certain number of significant figures in the `stringValue`.
 
-### Example 3: convert 100 (decimal) in binary and hexadecimal
+## Special type of conversion: numeral systems conversion
+*Warning! Numeral systems conversion is the only conversion that need the input as a `String`, and not as a `double` / `int` for obvious reasons*
 
-*Warning! Numeral systems conversion is the only conversion that need the input as a string, and not as a double/int for obvious reasons*
+**Example 3**: convert '`100`' (decimal) to binary and hexadecimal
 
 ```dart
 // We give '100' decimal as input
@@ -91,9 +83,10 @@ Binary: 1100100
 Hexadecimal: 64
 ```
 
-### Example 4: simple custom conversion (just give a list of coefficients)
-
+## Simple custom conversion
 *Use `SimpleCustomConversion` when you are dealing with a linear conversion between the units, i.e. when a unit is `x` times a value. In `SimpleCustomConversion` we have to define a conversionMap between a base unit, which must have a value of 1, and all the other units. In the example below we say that 1€ is 1.2271$, but also 0.9033₤, and so on and so forth.*
+
+**Example 4**: define the currency exchange rate with their symbols (optional) and perform the conversion between two of them.
 
 ```dart
 final Map<String, double> conversionMap = {
@@ -124,14 +117,15 @@ Output:
 1€ = 1.2271$
 ```
 
-### Example 5: custom conversion
+## Custom conversion
 
-*In most cases, you will only need `SimpleCustomConversion` (see example 4). `SimpleCustomConversion` allow you to define conversions in the for of `y=ax`. But if you need to define special relationship between units you need `CustomConversion`. This allow you to perform conversion like: `y=ax+b` and `y=a/x+b` (where `y` and x are the value of two units and `a` and `b` are two coefficient), for example the conversion between Celsius and Fahreneit use the first relation and the conversion between km/l and l/100km has to be done with the second relation. Both can't be done with `SimpleCustomConversion`.*
+*In most cases, you will only need `SimpleCustomConversion` (see the previous section). `SimpleCustomConversion` allow you to define conversions in the for of `y=ax`. But if you need to define special relationship between units you need `CustomConversion`. This allow you to perform conversion like: `y=ax+b` and `y=a/x+b` (where `y` and x are the value of two units and `a` and `b` are two coefficient), for example the conversion between Celsius and Fahreneit use the first relation and the conversion between km/l and l/100km has to be done with the second relation. Both can't be done with `SimpleCustomConversion`.*
 
-In the example below I will show you how to define a conversion tree of some imaginary  unit of measurement. Here I define the following relationship:
+**Example 5**: let's define the following imaginary units of measurement:
+
 * `KiloDash` = 1000 * `Dash`
-* `Dash+1` = `Dash` + 1
-  * `OneOver(OneDash+1)` = 1 / (`Dash+1`)
+* `DashPlus1` = `Dash` + 1
+  * `OneOver(DashPlus1)` = 1 / (`DashPlus1`)
 
 As you can see all this relations can be structured like a conversion tree. Now you can take a look at the example below: it does in the code what we have just said.
 
@@ -144,11 +138,11 @@ Node conversionTree = Node(
       coefficientProduct: 1000,
     ),
     Node(
-      name: 'Dash+1',
+      name: 'DashPlus1',
       coefficientSum: -1,
       leafNodes: [
         Node(
-          name: 'OneOver(OneDash+1)',
+          name: 'OneOver(DashPlus1)',
           conversionType: CONVERSION_TYPE.reciprocalConversion,
         ),
       ],
@@ -158,8 +152,8 @@ Node conversionTree = Node(
 final Map<String, String> symbolsMap = {
   'Dash': 'dsh',
   'KiloDash': 'kdsh',
-  'Dash+1': 'dsh+1',
-  'OneOver(OneDash+1)': '1/(dsh+1)',
+  'DashPlus1': 'dsh+1',
+  'OneOver(DashPlus1)': '1/(dsh+1)',
 };
 var dash = CustomConversion(
   conversionTree: conversionTree,
@@ -177,11 +171,11 @@ Output:
 ```
 name:Dash, value:1.0, stringValue:1, symbol:dsh
 name:KiloDash, value:0.001, stringValue:0.001, symbol:kdsh
-name:Dash+1, value:2.0, stringValue:2, symbol:dsh+1
-name:OneOver(OneDash+1), value:0.5, stringValue:0.5, symbol:1/(dsh+1)
+name:DashPlus1, value:2.0, stringValue:2, symbol:dsh+1
+name:OneOver(DashPlus1), value:0.5, stringValue:0.5, symbol:1/(dsh+1)
 ```
 
-## Which conversion?
+## Which conversions?
 
 - Angles (degree, radians, etc.)
 
@@ -215,6 +209,6 @@ name:OneOver(OneDash+1), value:0.5, stringValue:0.5, symbol:1/(dsh+1)
 
 - Time (seconds, years, etc.)
 
-- Torque (newtons per meter, dyne meter)
+- Torque (newtons per meter, dyne meter, etc.)
 
 - Volume (liter, cubic meters, etc.)
