@@ -3,7 +3,7 @@
 [![Pub](https://img.shields.io/pub/v/units_converter.svg?style=flat-square&logo=dart)](https://pub.dev/packages/units_converter)
 [![license](https://img.shields.io/github/license/ferraridamiano/units_converter?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
 [<img src="https://img.shields.io/static/v1?style=for-the-badge&message=PayPal&color=00457C&logo=PayPal&logoColor=FFFFFF&label="
-    alt="Donate with Paypal">](https://www.paypal.me/DemApps)
+    alt="Donate with Paypal" height=21>](https://www.paypal.me/DemApps)
 
 `units_converter` is a package written in dart for dart & flutter developers. You should not take care of **unit conversion** when you want to **internationalize** your app, everything is already done with this package! You can also add your own **custom conversion**!
 
@@ -12,13 +12,13 @@ This documentation is structured in examples of incresing complexity. But don't 
 # Table of Contents
 - [Convert a unit to another unit](#Convert-a-unit-to-another-unit)
 - [Convert a unit to all the another units](#Convert-a-unit-to-all-the-another-units)
-- [Special type of conversion: numeral systems conversion](#Special-type-o-conversion:-numeral-systems-conversion)
+- [Special type of conversion: numeral systems conversion](#special-type-of-conversion-numeral-systems-conversion)
 - [Simple custom conversion](#Simple-custom-conversion)
 - [Custom conversion](#Custom-conversion)
-- [Which conversions?](#Which-conversions?)
+- [Which conversions?](#Which-conversions)
 
 # Convert a unit to another unit
-**Example**: convert 1 meter in inches
+**Example 1**: convert 1 meter in inches
 
 ```dart
 // We give 1 meter as input
@@ -36,7 +36,7 @@ name:LENGTH.inches, value:39.370078740157474, stringValue:39.37007874, symbol:in
 ```
 
 # Convert a unit to all the another units
-**Example**: convert 1 degree in all the other angles units. This time we want also to specify that we just want 7 significant figures and we don't want trailing zeros (e.g. 1.000000 -> 1).
+**Example 2**: convert 1 degree in all the other angles units. This time we want also to specify that we just want 7 significant figures and we don't want trailing zeros (e.g. 1.000000 -> 1).
 
 ```dart
 // Initialization of the object
@@ -63,7 +63,7 @@ As you can see in this example if you specify `removeTrailingZeros: false`, the 
 # Special type of conversion: numeral systems conversion
 *Warning! Numeral systems conversion is the only conversion that need the input as a `String`, and not as a `double` / `int` for obvious reasons*
 
-**Example**: convert '`100`' (decimal) to binary and hexadecimal
+**Example 3**: convert '`100`' (decimal) to binary and hexadecimal
 
 ```dart
 // We give '100' decimal as input
@@ -84,7 +84,7 @@ Hexadecimal: 64
 # Simple custom conversion
 *Use `SimpleCustomConversion` when you are dealing with a linear conversion between the units, i.e. when a unit is `x` times a value. In `SimpleCustomConversion` we have to define a conversionMap between a base unit, which must have a value of 1, and all the other units. In the example below we say that 1€ is 1.2271$, but also 0.9033₤, and so on and so forth.*
 
-**Example**: define the currency exchange rate with their symbols (optional) and perform the conversion between two of them.
+**Example 4**: define the currency exchange rate with their symbols (optional) and perform the conversion between two of them.
 
 ```dart
 final Map<String, double> conversionMap = {
@@ -119,7 +119,7 @@ Output:
 
 *In most cases, you will only need `SimpleCustomConversion` (see the previous section). `SimpleCustomConversion` allow you to define conversions in the for of `y=ax`. But if you need to define special relationship between units you need `CustomConversion`. This allow you to perform conversion like: `y=ax+b` and `y=a/x+b` (where `y` and x are the value of two units and `a` and `b` are two coefficient), for example the conversion between Celsius and Fahreneit use the first relation and the conversion between km/l and l/100km has to be done with the second relation. Both can't be done with `SimpleCustomConversion`.*
 
-**Example**: let's define the following imaginary units of measurement:
+**Example 5**: let's define the following imaginary units of measurement:
 
 * `KiloDash` = 1000 * `Dash`
 * `DashPlus1` = `Dash` + 1
@@ -207,6 +207,6 @@ name:OneOver(DashPlus1), value:0.5, stringValue:0.5, symbol:1/(dsh+1)
 
 - Time (seconds, years, etc.)
 
-- Torque (newtons per meter, dyne meter)
+- Torque (newtons per meter, dyne meter, etc.)
 
 - Volume (liter, cubic meters, etc.)
