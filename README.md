@@ -7,9 +7,11 @@
 
 `units_converter` is a package written in dart for dart & flutter developers. You should not take care of **unit conversion** when you want to **internationalize** your app, everything is already done with this package! You can also add your own **custom conversion**!
 
-This documentation is structured in examples of incresing complexity. But don't worry, in most cases you will only need the first examples! 
+This package is used by [Converter NOW](https://github.com/ferraridamiano/ConverterNOW)!
 
-# Table of Contents
+This documentation is structured in examples of incresing complexity. But don't worry, in most cases you will only need the first examples.
+
+## Table of Contents
 - [Convert a unit to another unit](#Convert-a-unit-to-another-unit)
 - [Convert a unit to all the another units](#Convert-a-unit-to-all-the-another-units)
 - [Special type of conversion: numeral systems conversion](#special-type-of-conversion-numeral-systems-conversion)
@@ -17,7 +19,7 @@ This documentation is structured in examples of incresing complexity. But don't 
 - [Custom conversion](#Custom-conversion)
 - [Which conversions?](#Which-conversions)
 
-# Convert a unit to another unit
+## Convert a unit to another unit
 **Example 1**: convert 1 meter in inches
 
 ```dart
@@ -35,7 +37,7 @@ Output:
 name:LENGTH.inches, value:39.370078740157474, stringValue:39.37007874, symbol:in
 ```
 
-# Convert a unit to all the another units
+## Convert a unit to all the another units
 **Example 2**: convert 1 degree in all the other angles units. This time we want also to specify that we just want 7 significant figures and we don't want trailing zeros (e.g. 1.000000 -> 1).
 
 ```dart
@@ -60,7 +62,7 @@ name:ANGLE.seconds, value:3600.0, stringValue:3600.000, symbol:''
 
 As you can see in this example if you specify `removeTrailingZeros: false`, the `stringValue` keeps all the trailing zeros (the default is `true`). You can also ask for an certain number of significant figures in the `stringValue`.
 
-# Special type of conversion: numeral systems conversion
+## Special type of conversion: numeral systems conversion
 *Warning! Numeral systems conversion is the only conversion that need the input as a `String`, and not as a `double` / `int` for obvious reasons*
 
 **Example 3**: convert '`100`' (decimal) to binary and hexadecimal
@@ -81,7 +83,7 @@ Binary: 1100100
 Hexadecimal: 64
 ```
 
-# Simple custom conversion
+## Simple custom conversion
 *Use `SimpleCustomConversion` when you are dealing with a linear conversion between the units, i.e. when a unit is `x` times a value. In `SimpleCustomConversion` we have to define a conversionMap between a base unit, which must have a value of 1, and all the other units. In the example below we say that 1€ is 1.2271$, but also 0.9033₤, and so on and so forth.*
 
 **Example 4**: define the currency exchange rate with their symbols (optional) and perform the conversion between two of them.
@@ -115,7 +117,7 @@ Output:
 1€ = 1.2271$
 ```
 
-# Custom conversion
+## Custom conversion
 
 *In most cases, you will only need `SimpleCustomConversion` (see the previous section). `SimpleCustomConversion` allow you to define conversions in the for of `y=ax`. But if you need to define special relationship between units you need `CustomConversion`. This allow you to perform conversion like: `y=ax+b` and `y=a/x+b` (where `y` and x are the value of two units and `a` and `b` are two coefficient), for example the conversion between Celsius and Fahreneit use the first relation and the conversion between km/l and l/100km has to be done with the second relation. Both can't be done with `SimpleCustomConversion`.*
 
@@ -173,7 +175,7 @@ name:DashPlus1, value:2.0, stringValue:2, symbol:dsh+1
 name:OneOver(DashPlus1), value:0.5, stringValue:0.5, symbol:1/(dsh+1)
 ```
 
-# Which conversions?
+## Which conversions?
 
 - Angles (degree, radians, etc.)
 
