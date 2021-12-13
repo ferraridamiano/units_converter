@@ -1,3 +1,6 @@
+# 1.1.1+1
+Updated `README.md`.
+
 # 1.1.1
 Fix compatibility issue of 1.1.0 with the previous release.
 
