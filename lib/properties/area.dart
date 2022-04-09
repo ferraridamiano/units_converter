@@ -118,6 +118,7 @@ class Area extends Property<AREA, double> {
   Unit get squareCentimeters => getUnit(AREA.squareCentimeters);
   Unit get squareInches => getUnit(AREA.squareInches);
   Unit get squareFeet => getUnit(AREA.squareFeet);
+  Unit get squareFeetUs => getUnit(AREA.squareFeetUs);
   Unit get squareMiles => getUnit(AREA.squareMiles);
   Unit get squareYard => getUnit(AREA.squareYard);
   Unit get squareMillimeters => getUnit(AREA.squareMillimeters);

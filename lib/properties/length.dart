@@ -153,6 +153,7 @@ class Length extends Property<LENGTH, double> {
   Unit get centimeters => getUnit(LENGTH.centimeters);
   Unit get inches => getUnit(LENGTH.inches);
   Unit get feet => getUnit(LENGTH.feet);
+  Unit get feetUs => getUnit(LENGTH.feetUs);
   Unit get nauticalMiles => getUnit(LENGTH.nauticalMiles);
   Unit get yards => getUnit(LENGTH.yards);
   Unit get miles => getUnit(LENGTH.miles);
