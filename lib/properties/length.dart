@@ -9,6 +9,7 @@ enum LENGTH {
   centimeters,
   inches,
   feet,
+  feetUs,
   nauticalMiles,
   yards,
   miles,
@@ -31,6 +32,7 @@ class Length extends Property<LENGTH, double> {
     LENGTH.centimeters: 'cm',
     LENGTH.inches: 'in',
     LENGTH.feet: 'ft',
+    LENGTH.feetUs: 'ft(US survey)',
     LENGTH.nauticalMiles: 'M',
     LENGTH.yards: 'yd',
     LENGTH.miles: 'mi',
@@ -72,6 +74,10 @@ class Length extends Property<LENGTH, double> {
           Node(
             coefficientProduct: 12.0,
             name: LENGTH.feet,
+          ),
+          Node(
+            coefficientProduct: 12.000024,
+            name: LENGTH.feetUs,
           ),
           Node(
             coefficientProduct: 1e-3,
@@ -147,6 +153,7 @@ class Length extends Property<LENGTH, double> {
   Unit get centimeters => getUnit(LENGTH.centimeters);
   Unit get inches => getUnit(LENGTH.inches);
   Unit get feet => getUnit(LENGTH.feet);
+  Unit get feetUs => getUnit(LENGTH.feetUs);
   Unit get nauticalMiles => getUnit(LENGTH.nauticalMiles);
   Unit get yards => getUnit(LENGTH.yards);
   Unit get miles => getUnit(LENGTH.miles);

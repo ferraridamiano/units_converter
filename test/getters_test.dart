@@ -29,6 +29,7 @@ void main() {
         property.squareCentimeters, property.getUnit(AREA.squareCentimeters));
     runGetterTest(property.squareInches, property.getUnit(AREA.squareInches));
     runGetterTest(property.squareFeet, property.getUnit(AREA.squareFeet));
+    runGetterTest(property.squareFeetUs, property.getUnit(AREA.squareFeetUs));
     runGetterTest(property.squareMiles, property.getUnit(AREA.squareMiles));
     runGetterTest(property.squareYard, property.getUnit(AREA.squareYard));
     runGetterTest(
@@ -116,6 +117,7 @@ void main() {
     runGetterTest(property.centimeters, property.getUnit(LENGTH.centimeters));
     runGetterTest(property.inches, property.getUnit(LENGTH.inches));
     runGetterTest(property.feet, property.getUnit(LENGTH.feet));
+    runGetterTest(property.feetUs, property.getUnit(LENGTH.feetUs));
     runGetterTest(
         property.nauticalMiles, property.getUnit(LENGTH.nauticalMiles));
     runGetterTest(property.yards, property.getUnit(LENGTH.yards));

@@ -9,6 +9,7 @@ enum AREA {
   squareCentimeters,
   squareInches,
   squareFeet,
+  squareFeetUs,
   squareMiles,
   squareYard,
   squareMillimeters,
@@ -25,11 +26,12 @@ class Area extends Property<AREA, double> {
     AREA.squareCentimeters: 'cm²',
     AREA.squareInches: 'in²',
     AREA.squareFeet: 'ft²',
+    AREA.squareFeetUs: 'ft² (US survey)',
     AREA.squareMiles: 'mi²',
     AREA.squareYard: 'yd²',
     AREA.squareMillimeters: 'mm²',
     AREA.squareKilometers: 'km²',
-    AREA.hectares: 'he',
+    AREA.hectares: 'ha',
     AREA.acres: 'ac',
     AREA.are: 'a',
   };
@@ -60,6 +62,10 @@ class Area extends Property<AREA, double> {
           Node(
             coefficientProduct: 144.0,
             name: AREA.squareFeet,
+          ),
+          Node(
+            coefficientProduct: 12.000024 * 12.000024,
+            name: AREA.squareFeetUs,
           ),
         ]),
       ]),
@@ -112,6 +118,7 @@ class Area extends Property<AREA, double> {
   Unit get squareCentimeters => getUnit(AREA.squareCentimeters);
   Unit get squareInches => getUnit(AREA.squareInches);
   Unit get squareFeet => getUnit(AREA.squareFeet);
+  Unit get squareFeetUs => getUnit(AREA.squareFeetUs);
   Unit get squareMiles => getUnit(AREA.squareMiles);
   Unit get squareYard => getUnit(AREA.squareYard);
   Unit get squareMillimeters => getUnit(AREA.squareMillimeters);
