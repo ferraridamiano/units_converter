@@ -31,7 +31,7 @@ class Area extends Property<AREA, double> {
     AREA.squareYard: 'yd²',
     AREA.squareMillimeters: 'mm²',
     AREA.squareKilometers: 'km²',
-    AREA.hectares: 'he',
+    AREA.hectares: 'ha',
     AREA.acres: 'ac',
     AREA.are: 'a',
   };
