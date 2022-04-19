@@ -78,6 +78,7 @@ void main() {
     property.convert(ENERGY.joules, 1);
     runGetterTest(property.joules, property.getUnit(ENERGY.joules));
     runGetterTest(property.calories, property.getUnit(ENERGY.calories));
+    runGetterTest(property.kilocalories, property.getUnit(ENERGY.kilocalories));
     runGetterTest(
         property.kilowattHours, property.getUnit(ENERGY.kilowattHours));
     runGetterTest(
