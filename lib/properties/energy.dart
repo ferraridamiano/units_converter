@@ -48,10 +48,12 @@ class Energy extends Property<ENERGY, double> {
       Node(
         coefficientProduct: 4.1867999409,
         name: ENERGY.calories,
-      ),
-      Node(
-        coefficientProduct: 4186.7999409,
-        name: ENERGY.kilocalories,
+        leafNodes: [
+          Node(
+            coefficientProduct: 1000.0,
+            name: ENERGY.kilocalories,
+          ),
+        ],
       ),
       Node(
         coefficientProduct: 3600000.0,
