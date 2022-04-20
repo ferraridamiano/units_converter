@@ -7,6 +7,7 @@ import 'package:units_converter/models/custom_conversion.dart';
 enum ENERGY {
   joules,
   calories,
+  kilocalories,
   kilowattHours,
   electronvolts,
   energyFootPound,
@@ -17,6 +18,7 @@ class Energy extends Property<ENERGY, double> {
   static const Map<ENERGY, String?> mapSymbols = {
     ENERGY.joules: 'J',
     ENERGY.calories: 'cal',
+    ENERGY.kilocalories: 'kcal',
     ENERGY.kilowattHours: 'kwh',
     ENERGY.electronvolts: 'eV',
     ENERGY.energyFootPound: 'ft⋅lbf',
@@ -46,6 +48,12 @@ class Energy extends Property<ENERGY, double> {
       Node(
         coefficientProduct: 4.1867999409,
         name: ENERGY.calories,
+        leafNodes: [
+          Node(
+            coefficientProduct: 1000.0,
+            name: ENERGY.kilocalories,
+          ),
+        ],
       ),
       Node(
         coefficientProduct: 3600000.0,
@@ -79,6 +87,7 @@ class Energy extends Property<ENERGY, double> {
 
   Unit get joules => getUnit(ENERGY.joules);
   Unit get calories => getUnit(ENERGY.calories);
+  Unit get kilocalories => getUnit(ENERGY.kilocalories);
   Unit get kilowattHours => getUnit(ENERGY.kilowattHours);
   Unit get electronvolts => getUnit(ENERGY.electronvolts);
   Unit get energyFootPound => getUnit(ENERGY.energyFootPound);

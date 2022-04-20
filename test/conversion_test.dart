@@ -120,6 +120,7 @@ void main() {
     const Map<ENERGY, double> expectedResult = {
       ENERGY.joules: 1,
       ENERGY.calories: 0.2388459,
+      ENERGY.kilocalories: 0.0002388459,
       ENERGY.kilowattHours: 2.7777777778e-7,
       ENERGY.electronvolts: 6.2415097523028e18,
       ENERGY.energyFootPound: 1.3558179483314004,
