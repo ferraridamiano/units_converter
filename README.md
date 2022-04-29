@@ -9,7 +9,7 @@
 
 This package is used by [Converter NOW](https://github.com/ferraridamiano/ConverterNOW)!
 
-This documentation is structured in examples of incresing complexity. But don't worry, in most cases you will only need the first examples.
+The documentation is structured in examples of incresing complexity. But don't worry, in most cases you will only need the first examples.
 
 ## Table of Contents
 - [Convert a unit to another unit](#convert-a-unit-to-another-unit)
@@ -119,7 +119,7 @@ Output:
 
 ## Custom conversion
 
-*In most cases, you will only need `SimpleCustomConversion` (see the previous section). `SimpleCustomConversion` allow you to define conversions in the for of `y=ax`. But if you need to define special relationship between units you need `CustomConversion`. This allow you to perform conversion like: `y=ax+b` and `y=a/x+b` (where `y` and x are the value of two units and `a` and `b` are two coefficient), for example the conversion between Celsius and Fahreneit use the first relation and the conversion between km/l and l/100km has to be done with the second relation. Both can't be done with `SimpleCustomConversion`.*
+*In most cases, you will only need `SimpleCustomConversion` (see the previous section). `SimpleCustomConversion` allow you to define conversions in the form of `y=ax`. But if you need to define special relationship between units you need `CustomConversion`. This allow you to perform conversion like: `y=ax+b` and `y=a/x+b` (where `y` and x are the value of two units and `a` and `b` are two coefficient), for example the conversion between Celsius and Fahreneit use the first relation and the conversion between km/l and l/100km has to be done with the second relation. Both can't be done with `SimpleCustomConversion`.*
 
 **Example 5**: let's define the following imaginary units of measurement:
 
