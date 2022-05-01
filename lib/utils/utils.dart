@@ -4,7 +4,7 @@ import 'dart:math';
 /// tweaks: [significantFigures] is the number of significant figures to keep,
 /// [removeTrailingZeros] say if non important zeros should be removed.
 /// E.g. 1.000000 --> 1
-String mantissaCorrection(
+String valueToString(
   double value,
   int significantFigures,
   bool removeTrailingZeros, {
@@ -46,6 +46,7 @@ String mantissaCorrection(
 
     // xez
     if (splittedNumbers.length == 2) {
+      integerPart = splittedNumbers[0];
       exponentialPart = splittedNumbers[1];
     }
   }
@@ -65,47 +66,29 @@ String mantissaCorrection(
     }
   }
 
-  if (useScientificNotation && exponentialPart != null) {
+  if (!useScientificNotation && exponentialPart != null) {
+    // It means that the absolute value of [value] is greater or equal than 1e21
+    // (see the documentation of .toStringAsFixed() method)
+
     /**
-     *  There are many cases:
+     *  There are 2 cases:
      *  - x.ye+z
-     *  - x.ye-z
-     *  - 0.ye+z
-     *  - 0.ye-z
      *  - xe+z
-     *  - xe-z
      */
     int exponentialNumber = int.parse(exponentialPart);
-    // x.ye+z, 0.ye+z, xe+z
-    if (exponentialNumber > 0) {
-      // x.ye+z, 0.ye+z
-      if (decimalPart != null) {
-        if (decimalPart.length < exponentialNumber) {
-          decimalPart.padRight(exponentialNumber - decimalPart.length, '0');
-        }
-        // 0.ye+z
-        if (integerPart == '0') {
-          integerPart = '';
-        }
-        integerPart = integerPart + decimalPart.substring(0, exponentialNumber);
-        decimalPart = decimalPart.substring(exponentialNumber);
-        if (decimalPart == '') decimalPart = null;
+    // x.ye+z
+    if (decimalPart != null) {
+      if (decimalPart.length < exponentialNumber) {
+        decimalPart = decimalPart +
+            ''.padRight(exponentialNumber - decimalPart.length, '0');
       }
-      // xe+z
-      else {
-        integerPart.padRight(exponentialNumber, '0');
-      }
-    } else if (exponentialNumber < 0) {
-      decimalPart ??= '';
-      if (integerPart.length < -exponentialNumber) {
-        integerPart.padLeft(-exponentialNumber - integerPart.length + 1, '0');
-        // +1 because we need to leave one 0 in the integer part
-      }
-      decimalPart =
-          integerPart.substring(integerPart.length - exponentialNumber) +
-              decimalPart;
-      integerPart =
-          integerPart.substring(0, integerPart.length - exponentialNumber);
+      integerPart = integerPart + decimalPart.substring(0, exponentialNumber);
+      decimalPart = decimalPart.substring(exponentialNumber);
+      if (decimalPart == '') decimalPart = null;
+    }
+    // xe+z
+    else {
+      integerPart = integerPart + ''.padRight(exponentialNumber, '0');
     }
     exponentialPart = null;
   }
