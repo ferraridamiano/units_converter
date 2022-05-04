@@ -6,5 +6,6 @@ void main() {
   // We get the inches
   var unit = length.inches;
   // We print the Unit
-  print('name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
+  print(
+      'name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
 }

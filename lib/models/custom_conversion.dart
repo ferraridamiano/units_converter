@@ -18,7 +18,7 @@ class CustomConversion extends Property<dynamic, double> {
   /// Whether to use the scientific notation (true) for [stringValue]s or
   /// decimal notation (false)
   bool useScientificNotation;
-  
+
   final List<Unit> _unitList = [];
   late List<Node> _nodeList;
   Node conversionTree;
@@ -57,8 +57,8 @@ class CustomConversion extends Property<dynamic, double> {
     for (var i = 0; i < mapSymbols.length; i++) {
       _unitList[i].value =
           _nodeList.singleWhere((node) => node.name == _unitList[i].name).value;
-      _unitList[i].stringValue = valueToString(
-          _unitList[i].value!, significantFigures, removeTrailingZeros, useScientificNotation);
+      _unitList[i].stringValue = valueToString(_unitList[i].value!,
+          significantFigures, removeTrailingZeros, useScientificNotation);
     }
   }
 

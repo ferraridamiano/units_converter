@@ -34,10 +34,11 @@ void main() {
     mapSymbols: symbolsMap,
     name: 'Conversion of Dash',
   );
-  
+
   dash.convert('Dash', 1);
   var myUnits = dash.getAll();
   for (var unit in myUnits) {
-    print('name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
+    print(
+        'name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
   }
 }

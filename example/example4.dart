@@ -1,7 +1,6 @@
 import 'package:units_converter/units_converter.dart';
 
 void main() {
-  
   final Map<String, double> conversionMap = {
     'EUR': 1,
     'USD': 1.2271,
@@ -18,7 +17,8 @@ void main() {
     'CNY': '¥',
   };
 
-  var customConversion = SimpleCustomConversion(conversionMap, mapSymbols: mapSymbols);
+  var customConversion =
+      SimpleCustomConversion(conversionMap, mapSymbols: mapSymbols);
   customConversion.convert('EUR', 1);
   Unit usd = customConversion.getUnit('USD');
   print('1€ = ${usd.stringValue}${usd.symbol}');
