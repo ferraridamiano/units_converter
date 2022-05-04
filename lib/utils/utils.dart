@@ -4,32 +4,104 @@ import 'dart:math';
 /// tweaks: [significantFigures] is the number of significant figures to keep,
 /// [removeTrailingZeros] say if non important zeros should be removed.
 /// E.g. 1.000000 --> 1
-String mantissaCorrection(
-    double value, int significantFigures, bool removeTrailingZeros) {
+String valueToString(
+  double value,
+  int significantFigures,
+  bool removeTrailingZeros,
+  bool useScientificNotation,
+) {
   //Round to a fixed number of significant figures
-  var stringValue = value.toStringAsPrecision(significantFigures);
-  var append = '';
+  String stringValue;
+  if (useScientificNotation) {
+    stringValue = value.toStringAsPrecision(significantFigures);
+  } else {
+    stringValue = value.toStringAsFixed(significantFigures);
+  }
 
-  //if the user want to remove the trailing zeros
-  if (removeTrailingZeros) {
-    //remove exponential part and append to the end
-    if (stringValue.contains('e')) {
-      append = 'e' + stringValue.split('e')[1];
-      stringValue = stringValue.split('e')[0];
-    }
+  /**
+   * [stringValue] can be in multiple form:
+   *  - x     (an integer)
+   *  - x.y   (a decimal)
+   *  - xez   (integer with an exponential part)
+   *  - x.yez (decimal with an exponential part)
+   */
 
-    //remove trailing zeros (just fractional part)
-    if (stringValue.contains('.')) {
-      var firstZeroIndex = stringValue.length;
-      for (; firstZeroIndex > stringValue.indexOf('.'); firstZeroIndex--) {
-        var charAtIndex =
-            stringValue.substring(firstZeroIndex - 1, firstZeroIndex);
-        if (charAtIndex != '0' && charAtIndex != '.') break;
-      }
-      stringValue = stringValue.substring(0, firstZeroIndex);
+  List<String> splittedNumbers = stringValue.split('.');
+  String integerPart = splittedNumbers[0];
+  String? decimalPart, exponentialPart;
+
+  // x.y and x.yez
+  if (splittedNumbers.length == 2) {
+    splittedNumbers = splittedNumbers[1].split('e');
+    decimalPart = splittedNumbers[0];
+
+    // x.yez
+    if (splittedNumbers.length == 2) {
+      exponentialPart = splittedNumbers[1];
     }
   }
-  return stringValue + append; //append exponential part
+  // x and xez
+  else {
+    splittedNumbers = splittedNumbers[0].split('e');
+
+    // xez
+    if (splittedNumbers.length == 2) {
+      integerPart = splittedNumbers[0];
+      exponentialPart = splittedNumbers[1];
+    }
+  }
+
+  //if the user want to remove the trailing zeros
+  if (removeTrailingZeros && decimalPart != null) {
+    //remove trailing zeros (just fractional part)
+    int firstZeroIndex = decimalPart.length;
+    for (; firstZeroIndex > 0; firstZeroIndex--) {
+      String charAtIndex =
+          decimalPart.substring(firstZeroIndex - 1, firstZeroIndex);
+      if (charAtIndex != '0') break;
+    }
+    decimalPart = decimalPart.substring(0, firstZeroIndex);
+    if (decimalPart == "") {
+      decimalPart = null;
+    }
+  }
+
+  if (!useScientificNotation && exponentialPart != null) {
+    // It means that the absolute value of [value] is greater or equal than 1e21
+    // (see the documentation of .toStringAsFixed() method)
+
+    /**
+     *  There are 2 cases:
+     *  - x.ye+z
+     *  - xe+z
+     */
+    int exponentialNumber = int.parse(exponentialPart);
+    // x.ye+z
+    if (decimalPart != null) {
+      if (decimalPart.length < exponentialNumber) {
+        decimalPart = decimalPart +
+            ''.padRight(exponentialNumber - decimalPart.length, '0');
+      }
+      integerPart = integerPart + decimalPart.substring(0, exponentialNumber);
+      decimalPart = decimalPart.substring(exponentialNumber);
+      if (decimalPart == '') decimalPart = null;
+    }
+    // xe+z
+    else {
+      integerPart = integerPart + ''.padRight(exponentialNumber, '0');
+    }
+    exponentialPart = null;
+  }
+
+  //Recompose the string
+  String finalString = integerPart;
+  if (decimalPart != null) {
+    finalString = finalString + '.$decimalPart';
+  }
+  if (exponentialPart != null) {
+    finalString = finalString + 'e$exponentialPart';
+  }
+  return finalString;
 }
 
 /// Convert [stringDec], the String representation of a decimal value (e.g.

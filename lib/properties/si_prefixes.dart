@@ -62,6 +62,10 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
   /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
 
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   late CustomConversion _customConversion;
 
   ///Class for si_prefixes conversions, e.g. if you want to convert 1 base unit in milli:
@@ -71,7 +75,10 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
   ///print(SI_PREFIXES.milli);
   /// ```
   SIPrefixes(
-      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+      {this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      this.useScientificNotation = true,
+      name}) {
     this.name = name ?? PROPERTY.siPrefixes;
     size = SI_PREFIXES.values.length;
     Node conversionTree = Node(name: SI_PREFIXES.base, leafNodes: [
@@ -161,7 +168,8 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros);
+        removeTrailingZeros: removeTrailingZeros,
+        useScientificNotation: useScientificNotation);
   }
 
   ///Converts a unit with a specific name (e.g. SI_PREFIXES.milli) and value to all other units

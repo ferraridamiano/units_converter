@@ -56,6 +56,10 @@ class Length extends Property<LENGTH, double> {
   /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
 
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   late CustomConversion _customConversion;
 
   ///Class for length conversions, e.g. if you want to convert 1 meter in inches:
@@ -65,7 +69,10 @@ class Length extends Property<LENGTH, double> {
   ///print(length.inches);
   /// ```
   Length(
-      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+      {this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      this.useScientificNotation = true,
+      name}) {
     this.name = name ?? PROPERTY.length;
     size = LENGTH.values.length;
     Node conversionTree = Node(name: LENGTH.meters, leafNodes: [
@@ -137,7 +144,8 @@ class Length extends Property<LENGTH, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros);
+        removeTrailingZeros: removeTrailingZeros,
+        useScientificNotation: useScientificNotation);
   }
 
   ///Converts a unit with a specific name (e.g. LENGTH.meters) and value to all other units

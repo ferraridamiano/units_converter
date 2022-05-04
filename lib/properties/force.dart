@@ -30,6 +30,10 @@ class Force extends Property<FORCE, double> {
   /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
 
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   late CustomConversion _customConversion;
 
   ///Class for force conversions, e.g. if you want to convert 1 newton in pound force:
@@ -38,7 +42,11 @@ class Force extends Property<FORCE, double> {
   ///force.Convert(Unit(FORCE.newton, value: 1));
   ///print(FORCE.pound_force);
   /// ```
-  Force({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  Force(
+      {this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      this.useScientificNotation = true,
+      name}) {
     this.name = name ?? PROPERTY.force;
     size = FORCE.values.length;
     Node conversionTree = Node(name: FORCE.newton, leafNodes: [
@@ -64,7 +72,8 @@ class Force extends Property<FORCE, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros);
+        removeTrailingZeros: removeTrailingZeros,
+        useScientificNotation: useScientificNotation);
   }
 
   ///Converts a unit with a specific name (e.g. FORCE.newton) and value to all other units

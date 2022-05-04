@@ -6,8 +6,19 @@ import 'package:units_converter/utils/utils.dart';
 class CustomConversion extends Property<dynamic, double> {
   //Map between units and its symbol
   final Map<dynamic, String?> mapSymbols;
+
+  /// The number of significan figures to keep. E.g. 1.23456789) has 9
+  /// significant figures
   int significantFigures;
+
+  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
+  /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
+
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   final List<Unit> _unitList = [];
   late List<Node> _nodeList;
   Node conversionTree;
@@ -23,7 +34,8 @@ class CustomConversion extends Property<dynamic, double> {
       required this.mapSymbols,
       name,
       this.significantFigures = 10,
-      this.removeTrailingZeros = true}) {
+      this.removeTrailingZeros = true,
+      this.useScientificNotation = true}) {
     this.name = name;
     size = mapSymbols.length;
     mapSymbols.forEach((key, value) => _unitList.add(Unit(key, symbol: value)));
@@ -45,8 +57,8 @@ class CustomConversion extends Property<dynamic, double> {
     for (var i = 0; i < mapSymbols.length; i++) {
       _unitList[i].value =
           _nodeList.singleWhere((node) => node.name == _unitList[i].name).value;
-      _unitList[i].stringValue = mantissaCorrection(
-          _unitList[i].value!, significantFigures, removeTrailingZeros);
+      _unitList[i].stringValue = valueToString(_unitList[i].value!,
+          significantFigures, removeTrailingZeros, useScientificNotation);
     }
   }
 

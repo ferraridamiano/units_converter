@@ -40,6 +40,10 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
   /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
 
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   late CustomConversion _customConversion;
 
   ///Class for ShoeSize conversions, e.g. if you want to convert 1 centimeter in eu shoes size:
@@ -49,7 +53,10 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
   ///print(SHOE_SIZE.eu_china);
   /// ```
   ShoeSize(
-      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+      {this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      this.useScientificNotation = true,
+      name}) {
     this.name = name ?? PROPERTY.shoeSize;
     size = SHOE_SIZE.values.length;
     Node conversionTree = Node(name: SHOE_SIZE.centimeters, leafNodes: [
@@ -100,7 +107,8 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros);
+        removeTrailingZeros: removeTrailingZeros,
+        useScientificNotation: useScientificNotation);
   }
 
   ///Converts a unit with a specific name (e.g. SHOE_SIZE.uk_india_woman) and value to all other units

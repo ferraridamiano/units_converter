@@ -44,6 +44,10 @@ class Area extends Property<AREA, double> {
   /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
 
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   late CustomConversion _customConversion;
 
   ///Class for area conversions, e.g. if you want to convert 1 square meters in
@@ -53,7 +57,11 @@ class Area extends Property<AREA, double> {
   ///area.convert(Unit(AREA.square_meters, value: 1));
   ///print(AREA.acres);
   /// ```
-  Area({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  Area(
+      {this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      this.useScientificNotation = true,
+      name}) {
     this.name = name ?? PROPERTY.area;
     size = AREA.values.length;
     Node conversionTree = Node(name: AREA.squareMeters, leafNodes: [
@@ -101,7 +109,8 @@ class Area extends Property<AREA, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros);
+        removeTrailingZeros: removeTrailingZeros,
+        useScientificNotation: useScientificNotation);
   }
 
   /// Converts a unit with a specific name (e.g. AREA.hectares) and value to all

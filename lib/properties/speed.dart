@@ -32,6 +32,10 @@ class Speed extends Property<SPEED, double> {
   /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
 
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   late CustomConversion _customConversion;
 
   ///Class for speed conversions, e.g. if you want to convert 1 square meters in acres:
@@ -40,7 +44,11 @@ class Speed extends Property<SPEED, double> {
   ///speed.convert(Unit(SPEED.square_meters, value: 1));
   ///print(SPEED.acres);
   /// ```
-  Speed({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  Speed(
+      {this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      this.useScientificNotation = true,
+      name}) {
     this.name = name ?? PROPERTY.speed;
     size = SPEED.values.length;
     Node conversionTree = Node(name: SPEED.metersPerSecond, leafNodes: [
@@ -72,7 +80,8 @@ class Speed extends Property<SPEED, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros);
+        removeTrailingZeros: removeTrailingZeros,
+        useScientificNotation: useScientificNotation);
   }
 
   ///Converts a unit with a specific name (e.g. SPEED.miles_per_hour) and value to all other units

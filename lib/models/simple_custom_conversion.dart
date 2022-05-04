@@ -27,6 +27,10 @@ class SimpleCustomConversion extends Property<dynamic, double> {
   /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
 
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   late CustomConversion _customConversion;
 
   ///Class for simple custom conversions. E.g.:
@@ -54,6 +58,7 @@ class SimpleCustomConversion extends Property<dynamic, double> {
       {this.mapSymbols,
       this.significantFigures = 10,
       this.removeTrailingZeros = true,
+      this.useScientificNotation = true,
       name}) {
     assert(mapConversion.containsValue(1),
         'One conversion coefficient must be 1, this will considered the base unit');
@@ -86,6 +91,7 @@ class SimpleCustomConversion extends Property<dynamic, double> {
         mapSymbols: mapSymbols!,
         significantFigures: significantFigures,
         removeTrailingZeros: removeTrailingZeros,
+        useScientificNotation: useScientificNotation,
         name: name ?? PROPERTY.angle);
   }
 

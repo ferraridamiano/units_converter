@@ -32,6 +32,10 @@ class Energy extends Property<ENERGY, double> {
   /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
 
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   late CustomConversion _customConversion;
 
   ///Class for energy conversions, e.g. if you want to convert 1 joule in kilowatt hours:
@@ -41,7 +45,10 @@ class Energy extends Property<ENERGY, double> {
   ///print(ENERGY.kilowatt_hours);
   /// ```
   Energy(
-      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+      {this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      this.useScientificNotation = true,
+      name}) {
     this.name = name ?? PROPERTY.energy;
     size = ENERGY.values.length;
     Node conversionTree = Node(name: ENERGY.joules, leafNodes: [
@@ -73,7 +80,8 @@ class Energy extends Property<ENERGY, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros);
+        removeTrailingZeros: removeTrailingZeros,
+        useScientificNotation: useScientificNotation);
   }
 
   ///Converts a unit with a specific name (e.g. ENERGY.calories) and value to all other units

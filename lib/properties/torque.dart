@@ -30,6 +30,10 @@ class Torque extends Property<TORQUE, double> {
   /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
 
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   late CustomConversion _customConversion;
 
   ///Class for torque conversions, e.g. if you want to convert 1 square meters in acres:
@@ -39,7 +43,10 @@ class Torque extends Property<TORQUE, double> {
   ///print(TORQUE.acres);
   /// ```
   Torque(
-      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+      {this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      this.useScientificNotation = true,
+      name}) {
     this.name = name ?? PROPERTY.torque;
     size = TORQUE.values.length;
     Node conversionTree = Node(name: TORQUE.newtonMeter, leafNodes: [
@@ -65,7 +72,8 @@ class Torque extends Property<TORQUE, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros);
+        removeTrailingZeros: removeTrailingZeros,
+        useScientificNotation: useScientificNotation);
   }
 
   ///Converts a unit with a specific name (e.g. TORQUE.newton_meter) and value to all other units
