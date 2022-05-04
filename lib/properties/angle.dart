@@ -28,6 +28,10 @@ class Angle extends Property<ANGLE, double> {
   /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
 
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   late CustomConversion _customConversion;
 
   ///Class for angle conversions, e.g. if you want to convert 1 radiant in degree:
@@ -36,7 +40,11 @@ class Angle extends Property<ANGLE, double> {
   ///angle.convert(Unit(ANGLE.radians, value: 1));
   ///print(ANGLE.degree);
   /// ```
-  Angle({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  Angle(
+      {this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      this.useScientificNotation = true,
+      name}) {
     this.name = name ?? PROPERTY.angle;
     size = ANGLE.values.length;
     Node conversionTree = Node(name: ANGLE.degree, leafNodes: [
@@ -58,7 +66,8 @@ class Angle extends Property<ANGLE, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros);
+        removeTrailingZeros: removeTrailingZeros,
+        useScientificNotation: useScientificNotation);
   }
 
   /// Converts a unit with a specific name (e.g. ANGLE.degree) and value to all

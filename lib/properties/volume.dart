@@ -56,6 +56,10 @@ class Volume extends Property<VOLUME, double> {
   /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
 
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   late CustomConversion _customConversion;
 
   ///Class for volume conversions, e.g. if you want to convert 1 liter in US Gallons:
@@ -65,7 +69,10 @@ class Volume extends Property<VOLUME, double> {
   ///print(VOLUME.us_gallons);
   /// ```
   Volume(
-      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+      {this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      this.useScientificNotation = true,
+      name}) {
     this.name = name ?? PROPERTY.volume;
     size = VOLUME.values.length;
     Node conversionTree = Node(
@@ -149,7 +156,8 @@ class Volume extends Property<VOLUME, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros);
+        removeTrailingZeros: removeTrailingZeros,
+        useScientificNotation: useScientificNotation);
   }
 
   ///Converts a unit with a specific name (e.g. VOLUME.cubic_feet) and value to all other units

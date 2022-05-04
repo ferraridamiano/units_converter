@@ -28,6 +28,10 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
   /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
 
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   late CustomConversion _customConversion;
 
   ///Class for fuel_consumption conversions, e.g. if you want to convert 1 kilometers per liter in liters per 100 km:
@@ -37,7 +41,10 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
   ///print(FUEL_CONSUMPTION.liters_per_100_km);
   /// ```
   FuelConsumption(
-      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+      {this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      this.useScientificNotation = true,
+      name}) {
     this.name = name ?? PROPERTY.fuelConsumption;
     size = FUEL_CONSUMPTION.values.length;
     Node conversionTree =
@@ -61,7 +68,8 @@ class FuelConsumption extends Property<FUEL_CONSUMPTION, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros);
+        removeTrailingZeros: removeTrailingZeros,
+        useScientificNotation: useScientificNotation);
   }
 
   ///Converts a unit with a specific name (e.g. FUEL_CONSUMPTION.liters_per_100_km) and value to all other units

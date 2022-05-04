@@ -7,9 +7,9 @@ import 'dart:math';
 String valueToString(
   double value,
   int significantFigures,
-  bool removeTrailingZeros, {
-  bool useScientificNotation = true,
-}) {
+  bool removeTrailingZeros,
+  bool useScientificNotation,
+) {
   //Round to a fixed number of significant figures
   String stringValue;
   if (useScientificNotation) {

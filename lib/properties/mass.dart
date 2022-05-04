@@ -50,6 +50,10 @@ class Mass extends Property<MASS, double> {
   /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
 
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   late CustomConversion _customConversion;
 
   ///Class for mass conversions, e.g. if you want to convert 1 gram in ounces:
@@ -58,7 +62,11 @@ class Mass extends Property<MASS, double> {
   ///mass.convert(Unit(MASS.grams, value: 1));
   ///print(MASS.ounces);
   /// ```
-  Mass({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  Mass(
+      {this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      this.useScientificNotation = true,
+      name}) {
     this.name = name ?? PROPERTY.mass;
     size = MASS.values.length;
     Node conversionTree = Node(
@@ -129,7 +137,8 @@ class Mass extends Property<MASS, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros);
+        removeTrailingZeros: removeTrailingZeros,
+        useScientificNotation: useScientificNotation);
   }
 
   ///Converts a unit with a specific name (e.g. MASS.centigrams) and value to all other units

@@ -50,6 +50,10 @@ class Time extends Property<TIME, double> {
   /// significant figures and has trailing zeros. 1 has not trailing zeros.
   bool removeTrailingZeros;
 
+  /// Whether to use the scientific notation (true) for [stringValue]s or
+  /// decimal notation (false)
+  bool useScientificNotation;
+
   late CustomConversion _customConversion;
 
   ///Class for time conversions, e.g. if you want to convert 1 hour in seconds:
@@ -58,7 +62,11 @@ class Time extends Property<TIME, double> {
   ///time.convert(Unit(TIME.hours, value: 1));
   ///print(TIME.seconds);
   /// ```
-  Time({this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
+  Time(
+      {this.significantFigures = 10,
+      this.removeTrailingZeros = true,
+      this.useScientificNotation = true,
+      name}) {
     this.name = name ?? PROPERTY.time;
     size = TIME.values.length;
     Node conversionTree = Node(name: TIME.seconds, leafNodes: [
@@ -116,7 +124,8 @@ class Time extends Property<TIME, double> {
         conversionTree: conversionTree,
         mapSymbols: mapSymbols,
         significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros);
+        removeTrailingZeros: removeTrailingZeros,
+        useScientificNotation: useScientificNotation);
   }
 
   ///Converts a unit with a specific name (e.g. TIME.days) and value to all other units
