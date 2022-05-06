@@ -9,13 +9,36 @@ on:
       main
 
 jobs:
-  test:
-    name: Test
+  format:
+    name: Format
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
+
+    - name: Setup Dart
+      uses: dart-lang/setup-dart@v1.3
+
+    - name: Dart version
+      run: dart --version
+
+    - name: Download pub dependencies
+      run: dart pub get
+
+    - name: Validate formatting
+      run: |
+        dart format .
+        ./.github/workflows/scripts/validate-formatting.sh
+
+  test:
+    name: Test
+    needs: format
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
 
     - name: Setup Dart
       uses: dart-lang/setup-dart@v1.3
