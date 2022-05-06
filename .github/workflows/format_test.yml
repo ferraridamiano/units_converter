@@ -26,7 +26,7 @@ jobs:
     - name: Download pub dependencies
       run: dart pub get
 
-    - name: Check formtatting
+    - name: Validate formatting
       run: |
         dart format .
         ./.github/workflows/scripts/validate-formatting.sh
