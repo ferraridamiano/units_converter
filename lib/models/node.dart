@@ -39,7 +39,7 @@ class Node {
 
   /// This is the product coefficient of [CONVERSION_TYPE.linearConversion] and
   /// [CONVERSION_TYPE.reciprocalConversion]. It is the a coefficient.
-  double coefficientProduct;
+  double    coefficientProduct;
 
   /// This is the sum coefficient of [CONVERSION_TYPE.linearConversion] and
   /// [CONVERSION_TYPE.reciprocalConversion]. It is the b coefficient.
