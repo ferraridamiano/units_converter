@@ -27,7 +27,7 @@ jobs:
       run: dart pub get
 
     - name: Check formtatting
-      uses: |
+      run: |
         dart format .
         ./.github/workflows/scripts/validate-formatting.sh
 
