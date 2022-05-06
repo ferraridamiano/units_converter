@@ -1,0 +1,60 @@
+name: Test
+
+on:
+  push:
+    branches:
+      main
+  pull_request:
+    branches:
+      main
+
+jobs:
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup Dart
+      uses: dart-lang/setup-dart@v1.3
+
+    - name: Dart version
+      run: dart --version
+
+    - name: Download pub dependencies
+      run: dart pub get
+
+    - name: Check formtatting
+      uses: |
+        dart format .
+        ./.github/workflows/scripts/validate-formatting.sh
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup Dart
+      uses: dart-lang/setup-dart@v1.3
+
+    - name: Dart version
+      run: dart --version
+
+    - name: Download pub dependencies
+      run: dart pub get
+
+    - name: Run tests and format coverage
+      run: |
+        dart test --coverage=coverage
+        dart run coverage:format_coverage --lcov --in=coverage \
+          --out=coverage/lcov.info --packages=.packages --report-on=lib
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        verbose: true
