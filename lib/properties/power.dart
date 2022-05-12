@@ -14,32 +14,7 @@ enum POWER {
   imperialHorsePower,
 }
 
-class Power extends Property<POWER, double> {
-  /// Map between units and its symbol
-  static const Map<POWER, String?> mapSymbols = {
-    POWER.watt: 'W',
-    POWER.milliwatt: 'mW',
-    POWER.kilowatt: 'kW',
-    POWER.megawatt: 'MW',
-    POWER.gigawatt: 'GW',
-    POWER.europeanHorsePower: 'hp(M)',
-    POWER.imperialHorsePower: 'hp(I)',
-  };
-
-  /// The number of significan figures to keep. E.g. 1.23456789) has 9
-  /// significant figures
-  int significantFigures;
-
-  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
-  /// significant figures and has trailing zeros. 1 has not trailing zeros.
-  bool removeTrailingZeros;
-
-  /// Whether to use the scientific notation (true) for [stringValue]s or
-  /// decimal notation (false)
-  bool useScientificNotation;
-
-  late CustomConversion _customConversion;
-
+class Power extends CustomConversion {
   ///Class for power conversions, e.g. if you want to convert 1 kilowatt in european horse power:
   ///```dart
   ///var power = Power(removeTrailingZeros: false);
@@ -47,55 +22,48 @@ class Power extends Property<POWER, double> {
   ///print(POWER.european_horse_power);
   /// ```
   Power(
-      {this.significantFigures = 10,
-      this.removeTrailingZeros = true,
-      this.useScientificNotation = true,
-      name}) {
-    this.name = name ?? PROPERTY.power;
-    size = POWER.values.length;
-    Node conversionTree = Node(name: POWER.watt, leafNodes: [
-      Node(
-        coefficientProduct: 1e-3,
-        name: POWER.milliwatt,
-      ),
-      Node(
-        coefficientProduct: 1e3,
-        name: POWER.kilowatt,
-      ),
-      Node(
-        coefficientProduct: 1e6,
-        name: POWER.megawatt,
-      ),
-      Node(
-        coefficientProduct: 1e9,
-        name: POWER.gigawatt,
-      ),
-      Node(
-        coefficientProduct: 735.49875,
-        name: POWER.europeanHorsePower,
-      ),
-      Node(
-        coefficientProduct: 745.69987158,
-        name: POWER.imperialHorsePower,
-      ),
-    ]);
-
-    _customConversion = CustomConversion(
-        conversionTree: conversionTree,
-        mapSymbols: mapSymbols,
-        significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        useScientificNotation: useScientificNotation);
-  }
-
-  ///Converts a unit with a specific name (e.g. POWER.european_horse_power) and value to all other units
-  @override
-  void convert(POWER name, double? value) =>
-      _customConversion.convert(name, value);
-  @override
-  List<Unit> getAll() => _customConversion.getAll();
-  @override
-  Unit getUnit(name) => _customConversion.getUnit(name);
+      {super.significantFigures,
+      super.removeTrailingZeros,
+      super.useScientificNotation,
+      name})
+      : super(
+          name: name ?? PROPERTY.power,
+          mapSymbols: {
+            POWER.watt: 'W',
+            POWER.milliwatt: 'mW',
+            POWER.kilowatt: 'kW',
+            POWER.megawatt: 'MW',
+            POWER.gigawatt: 'GW',
+            POWER.europeanHorsePower: 'hp(M)',
+            POWER.imperialHorsePower: 'hp(I)',
+          },
+          conversionTree: Node(name: POWER.watt, leafNodes: [
+            Node(
+              coefficientProduct: 1e-3,
+              name: POWER.milliwatt,
+            ),
+            Node(
+              coefficientProduct: 1e3,
+              name: POWER.kilowatt,
+            ),
+            Node(
+              coefficientProduct: 1e6,
+              name: POWER.megawatt,
+            ),
+            Node(
+              coefficientProduct: 1e9,
+              name: POWER.gigawatt,
+            ),
+            Node(
+              coefficientProduct: 735.49875,
+              name: POWER.europeanHorsePower,
+            ),
+            Node(
+              coefficientProduct: 745.69987158,
+              name: POWER.imperialHorsePower,
+            ),
+          ]),
+        );
 
   Unit get watt => getUnit(POWER.watt);
   Unit get milliwatt => getUnit(POWER.milliwatt);

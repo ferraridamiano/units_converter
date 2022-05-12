@@ -34,48 +34,7 @@ enum DIGITAL_DATA {
   exbibyte,
 }
 
-class DigitalData extends Property<DIGITAL_DATA, double> {
-  /// Map between units and its symbol
-  static const Map<DIGITAL_DATA, String?> mapSymbols = {
-    DIGITAL_DATA.bit: 'b',
-    DIGITAL_DATA.nibble: null,
-    DIGITAL_DATA.kilobit: 'kb',
-    DIGITAL_DATA.megabit: 'Mb',
-    DIGITAL_DATA.gigabit: 'Gb',
-    DIGITAL_DATA.terabit: 'Tb',
-    DIGITAL_DATA.petabit: 'Pb',
-    DIGITAL_DATA.exabit: 'Eb',
-    DIGITAL_DATA.kibibit: 'Kibit',
-    DIGITAL_DATA.mebibit: 'Mibit',
-    DIGITAL_DATA.gibibit: 'Gibit',
-    DIGITAL_DATA.tebibit: 'Tibit',
-    DIGITAL_DATA.pebibit: 'Pibit',
-    DIGITAL_DATA.exbibit: 'Eibit',
-    DIGITAL_DATA.byte: 'B',
-    DIGITAL_DATA.kilobyte: 'kB',
-    DIGITAL_DATA.megabyte: 'MB',
-    DIGITAL_DATA.gigabyte: 'GB',
-    DIGITAL_DATA.terabyte: 'TB',
-    DIGITAL_DATA.petabyte: 'PB',
-    DIGITAL_DATA.exabyte: 'EB',
-    DIGITAL_DATA.kibibyte: 'KiB',
-    DIGITAL_DATA.mebibyte: 'MiB',
-    DIGITAL_DATA.gibibyte: 'GiB',
-    DIGITAL_DATA.tebibyte: 'TiB',
-    DIGITAL_DATA.pebibyte: 'PiB',
-    DIGITAL_DATA.exbibyte: 'EiB',
-  };
-
-  /// The number of significan figures to keep. E.g. 1.23456789) has 9
-  /// significant figures
-  int significantFigures;
-
-  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
-  /// significant figures and has trailing zeros. 1 has not trailing zeros.
-  bool removeTrailingZeros;
-
-  late CustomConversion _customConversion;
-
+class DigitalData extends CustomConversion {
   ///Class for digitalData conversions, e.g. if you want to convert 1 megabit in kilobyte:
   ///```dart
   ///var digitalData = DigitalData(removeTrailingZeros: false);
@@ -83,136 +42,156 @@ class DigitalData extends Property<DIGITAL_DATA, double> {
   ///print(DIGITAL_DATA.kilobyte);
   /// ```
   DigitalData(
-      {this.significantFigures = 10, this.removeTrailingZeros = true, name}) {
-    this.name = name ?? PROPERTY.digitalData;
-    size = DIGITAL_DATA.values.length;
-    Node conversionTree = Node(name: DIGITAL_DATA.bit, leafNodes: [
-      Node(
-        coefficientProduct: 4.0,
-        name: DIGITAL_DATA.nibble,
-      ),
-      Node(
-        coefficientProduct: 1e3,
-        name: DIGITAL_DATA.kilobit,
-      ),
-      Node(
-        coefficientProduct: 1e6,
-        name: DIGITAL_DATA.megabit,
-      ),
-      Node(
-        coefficientProduct: 1e9,
-        name: DIGITAL_DATA.gigabit,
-      ),
-      Node(
-        coefficientProduct: 1e12,
-        name: DIGITAL_DATA.terabit,
-      ),
-      Node(
-        coefficientProduct: 1e15,
-        name: DIGITAL_DATA.petabit,
-      ),
-      Node(
-        coefficientProduct: 1e18,
-        name: DIGITAL_DATA.exabit,
-      ),
-      Node(coefficientProduct: 1024.0, name: DIGITAL_DATA.kibibit, leafNodes: [
-        Node(
-            coefficientProduct: 1024.0,
-            name: DIGITAL_DATA.mebibit,
-            leafNodes: [
-              Node(
-                  coefficientProduct: 1024.0,
-                  name: DIGITAL_DATA.gibibit,
-                  leafNodes: [
-                    Node(
-                        coefficientProduct: 1024.0,
-                        name: DIGITAL_DATA.tebibit,
-                        leafNodes: [
-                          Node(
-                              coefficientProduct: 1024.0,
-                              name: DIGITAL_DATA.pebibit,
-                              leafNodes: [
-                                Node(
+      {super.significantFigures,
+      super.removeTrailingZeros,
+      super.useScientificNotation,
+      name})
+      : super(
+          name: name ?? PROPERTY.digitalData,
+          mapSymbols: {
+            DIGITAL_DATA.bit: 'b',
+            DIGITAL_DATA.nibble: null,
+            DIGITAL_DATA.kilobit: 'kb',
+            DIGITAL_DATA.megabit: 'Mb',
+            DIGITAL_DATA.gigabit: 'Gb',
+            DIGITAL_DATA.terabit: 'Tb',
+            DIGITAL_DATA.petabit: 'Pb',
+            DIGITAL_DATA.exabit: 'Eb',
+            DIGITAL_DATA.kibibit: 'Kibit',
+            DIGITAL_DATA.mebibit: 'Mibit',
+            DIGITAL_DATA.gibibit: 'Gibit',
+            DIGITAL_DATA.tebibit: 'Tibit',
+            DIGITAL_DATA.pebibit: 'Pibit',
+            DIGITAL_DATA.exbibit: 'Eibit',
+            DIGITAL_DATA.byte: 'B',
+            DIGITAL_DATA.kilobyte: 'kB',
+            DIGITAL_DATA.megabyte: 'MB',
+            DIGITAL_DATA.gigabyte: 'GB',
+            DIGITAL_DATA.terabyte: 'TB',
+            DIGITAL_DATA.petabyte: 'PB',
+            DIGITAL_DATA.exabyte: 'EB',
+            DIGITAL_DATA.kibibyte: 'KiB',
+            DIGITAL_DATA.mebibyte: 'MiB',
+            DIGITAL_DATA.gibibyte: 'GiB',
+            DIGITAL_DATA.tebibyte: 'TiB',
+            DIGITAL_DATA.pebibyte: 'PiB',
+            DIGITAL_DATA.exbibyte: 'EiB',
+          },
+          conversionTree: Node(name: DIGITAL_DATA.bit, leafNodes: [
+            Node(
+              coefficientProduct: 4.0,
+              name: DIGITAL_DATA.nibble,
+            ),
+            Node(
+              coefficientProduct: 1e3,
+              name: DIGITAL_DATA.kilobit,
+            ),
+            Node(
+              coefficientProduct: 1e6,
+              name: DIGITAL_DATA.megabit,
+            ),
+            Node(
+              coefficientProduct: 1e9,
+              name: DIGITAL_DATA.gigabit,
+            ),
+            Node(
+              coefficientProduct: 1e12,
+              name: DIGITAL_DATA.terabit,
+            ),
+            Node(
+              coefficientProduct: 1e15,
+              name: DIGITAL_DATA.petabit,
+            ),
+            Node(
+              coefficientProduct: 1e18,
+              name: DIGITAL_DATA.exabit,
+            ),
+            Node(
+                coefficientProduct: 1024.0,
+                name: DIGITAL_DATA.kibibit,
+                leafNodes: [
+                  Node(
+                      coefficientProduct: 1024.0,
+                      name: DIGITAL_DATA.mebibit,
+                      leafNodes: [
+                        Node(
+                            coefficientProduct: 1024.0,
+                            name: DIGITAL_DATA.gibibit,
+                            leafNodes: [
+                              Node(
                                   coefficientProduct: 1024.0,
-                                  name: DIGITAL_DATA.exbibit,
-                                )
-                              ])
-                        ])
-                  ])
-            ])
-      ]),
-      Node(coefficientProduct: 8.0, name: DIGITAL_DATA.byte, leafNodes: [
-        Node(
-          coefficientProduct: 1e3,
-          name: DIGITAL_DATA.kilobyte,
-        ),
-        Node(
-          coefficientProduct: 1e6,
-          name: DIGITAL_DATA.megabyte,
-        ),
-        Node(
-          coefficientProduct: 1e9,
-          name: DIGITAL_DATA.gigabyte,
-        ),
-        Node(
-          coefficientProduct: 1e12,
-          name: DIGITAL_DATA.terabyte,
-        ),
-        Node(
-          coefficientProduct: 1e15,
-          name: DIGITAL_DATA.petabyte,
-        ),
-        Node(
-          coefficientProduct: 1e18,
-          name: DIGITAL_DATA.exabyte,
-        ),
-        Node(
-            coefficientProduct: 1024.0,
-            name: DIGITAL_DATA.kibibyte,
-            leafNodes: [
+                                  name: DIGITAL_DATA.tebibit,
+                                  leafNodes: [
+                                    Node(
+                                        coefficientProduct: 1024.0,
+                                        name: DIGITAL_DATA.pebibit,
+                                        leafNodes: [
+                                          Node(
+                                            coefficientProduct: 1024.0,
+                                            name: DIGITAL_DATA.exbibit,
+                                          )
+                                        ])
+                                  ])
+                            ])
+                      ])
+                ]),
+            Node(coefficientProduct: 8.0, name: DIGITAL_DATA.byte, leafNodes: [
+              Node(
+                coefficientProduct: 1e3,
+                name: DIGITAL_DATA.kilobyte,
+              ),
+              Node(
+                coefficientProduct: 1e6,
+                name: DIGITAL_DATA.megabyte,
+              ),
+              Node(
+                coefficientProduct: 1e9,
+                name: DIGITAL_DATA.gigabyte,
+              ),
+              Node(
+                coefficientProduct: 1e12,
+                name: DIGITAL_DATA.terabyte,
+              ),
+              Node(
+                coefficientProduct: 1e15,
+                name: DIGITAL_DATA.petabyte,
+              ),
+              Node(
+                coefficientProduct: 1e18,
+                name: DIGITAL_DATA.exabyte,
+              ),
               Node(
                   coefficientProduct: 1024.0,
-                  name: DIGITAL_DATA.mebibyte,
+                  name: DIGITAL_DATA.kibibyte,
                   leafNodes: [
                     Node(
                         coefficientProduct: 1024.0,
-                        name: DIGITAL_DATA.gibibyte,
+                        name: DIGITAL_DATA.mebibyte,
                         leafNodes: [
                           Node(
                               coefficientProduct: 1024.0,
-                              name: DIGITAL_DATA.tebibyte,
+                              name: DIGITAL_DATA.gibibyte,
                               leafNodes: [
                                 Node(
                                     coefficientProduct: 1024.0,
-                                    name: DIGITAL_DATA.pebibyte,
+                                    name: DIGITAL_DATA.tebibyte,
                                     leafNodes: [
                                       Node(
-                                        coefficientProduct: 1024.0,
-                                        name: DIGITAL_DATA.exbibyte,
-                                      ),
+                                          coefficientProduct: 1024.0,
+                                          name: DIGITAL_DATA.pebibyte,
+                                          leafNodes: [
+                                            Node(
+                                              coefficientProduct: 1024.0,
+                                              name: DIGITAL_DATA.exbibyte,
+                                            ),
+                                          ]),
                                     ]),
                               ]),
                         ]),
                   ]),
             ]),
-      ]),
-    ]);
-
-    _customConversion = CustomConversion(
-        conversionTree: conversionTree,
-        mapSymbols: mapSymbols,
-        significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros);
-  }
-
-  ///Converts a unit with a specific name (e.g. DIGITAL_DATA.byte) and value to all other units
-  @override
-  void convert(DIGITAL_DATA name, double? value) =>
-      _customConversion.convert(name, value);
-  @override
-  List<Unit> getAll() => _customConversion.getAll();
-  @override
-  Unit getUnit(name) => _customConversion.getUnit(name);
+          ]),
+        );
 
   Unit get bit => getUnit(DIGITAL_DATA.bit);
   Unit get nibble => getUnit(DIGITAL_DATA.nibble);
