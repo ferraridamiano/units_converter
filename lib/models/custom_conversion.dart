@@ -23,11 +23,47 @@ class CustomConversion extends Property<dynamic, double> {
   late List<Node> _nodeList;
   Node conversionTree;
 
-  ///Class for angle conversions, e.g. if you want to convert 1 radiant in degree:
+  ///Class for custom conversions. E.g.:
   ///```dart
-  ///var angle = Angle(removeTrailingZeros: false);
-  ///angle.convert(Unit(ANGLE.radians, value: 1));
-  ///print(ANGLE.degree);
+  ///Node conversionTree = Node(
+  ///  name: 'Dash',    // base unit
+  ///  leafNodes: [
+  ///    Node(
+  ///      name: 'KiloDash',
+  ///      coefficientProduct: 1000, // 1 k=KiloDash is 1000 Dash
+  ///    ),
+  ///    Node(
+  ///      name: 'DashPlus1',
+  ///      coefficientSum: -1,
+  ///      leafNodes: [
+  ///        Node(
+  ///          name: 'OneOver(DashPlus1)',
+  ///          conversionType: CONVERSION_TYPE.reciprocalConversion,
+  ///        ),
+  ///      ],
+  ///    ),
+  ///  ],
+  ///);
+  ///// Symbols of each unit. Must be initialized (even with each value to null)
+  ///final Map<String, String?> symbolsMap = {
+  ///  'Dash': 'dsh',
+  ///  'KiloDash': 'kdsh',
+  ///  'DashPlus1': 'dsh+1',
+  ///  'OneOver(DashPlus1)': null,
+  ///};
+  ///
+  ///var dash = CustomConversion(
+  ///  conversionTree: conversionTree,
+  ///  mapSymbols: symbolsMap,
+  ///  name: 'Conversion of Dash',
+  ///);
+  ///
+  ///dash.convert('Dash', 1);
+  ///var myUnits = dash.getAll();
+  ///for (var unit in myUnits) {
+  ///  print(
+  ///      'name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
+  ///}
   /// ```
   CustomConversion(
       {required this.conversionTree,

@@ -39,20 +39,21 @@ class SimpleCustomConversion extends CustomConversion {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
-      mapSymbols,
+      Map<dynamic, String?>? mapSymbols,
       name})
       : assert(mapConversion.containsValue(1),
             'One conversion coefficient must be 1, this will considered the base unit'),
         assert(() {
           if (mapSymbols != null) {
             for (var val in mapConversion.keys) {
-              if (!mapSymbols!.keys.contains(val)) {
+              if (!mapSymbols.keys.contains(val)) {
                 return false;
               }
             }
           }
           return true;
-        }(), 'The key of mapConversion must be the same key of mapSymbols'),
+        }(),
+            'mapSymbols should be null or containing all the keys of mapConversion'),
         super(
           name: name ?? 'SimpleCustomConversion',
           mapSymbols: mapSymbols ?? _initializeMapSymbols(mapConversion),
