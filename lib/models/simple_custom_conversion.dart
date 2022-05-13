@@ -1,12 +1,7 @@
 import 'package:units_converter/models/node.dart';
-import 'package:units_converter/models/property.dart';
-import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
 
-class SimpleCustomConversion extends Property<dynamic, double> {
-  /// Map between units and its symbol
-  Map<dynamic, String?>? mapSymbols;
-
+class SimpleCustomConversion extends CustomConversion {
   /// The Map of the values of the conversion. In this map at least one element
   /// must have a value of 1, it will be considered the base unit. E.g.:
   /// ```dart
@@ -18,20 +13,6 @@ class SimpleCustomConversion extends Property<dynamic, double> {
   ///   'CNY': 7.9315,
   /// };
   final Map<dynamic, double> mapConversion;
-
-  /// The number of significan figures to keep. E.g. 1.23456789) has 9
-  /// significant figures
-  int significantFigures;
-
-  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
-  /// significant figures and has trailing zeros. 1 has not trailing zeros.
-  bool removeTrailingZeros;
-
-  /// Whether to use the scientific notation (true) for [stringValue]s or
-  /// decimal notation (false)
-  bool useScientificNotation;
-
-  late CustomConversion _customConversion;
 
   ///Class for simple custom conversions. E.g.:
   ///```dart
@@ -55,55 +36,48 @@ class SimpleCustomConversion extends Property<dynamic, double> {
   ///print('1€ = ${usd.stringValue}${usd.symbol}');
   /// ```
   SimpleCustomConversion(this.mapConversion,
-      {this.mapSymbols,
-      this.significantFigures = 10,
-      this.removeTrailingZeros = true,
-      this.useScientificNotation = true,
-      name}) {
-    assert(mapConversion.containsValue(1),
-        'One conversion coefficient must be 1, this will considered the base unit');
-    if (mapSymbols != null) {
-      for (var val in mapConversion.keys) {
-        assert(mapSymbols!.keys.contains(val),
-            'The key of mapConversion must be the same key of mapSymbols');
-      }
-    }
-    this.name = name;
-    size = mapConversion.length;
-    var baseUnit = mapConversion.keys.firstWhere(
-        (element) => mapConversion[element] == 1); //take the base unit
-    List<Node> leafNodes = [];
-    mapConversion.forEach((key, value) {
-      if (key != baseUnit) {
-        //I'm just interested in the relationship between the base unit and the other units.
-        leafNodes.add(Node(name: key, coefficientProduct: 1 / value));
-      }
-    });
-    if (mapSymbols == null) {
-      mapSymbols = <dynamic, String?>{};
-      for (var val in mapConversion.keys) {
-        mapSymbols![val] = null;
-      }
-    }
-    Node conversionTree = Node(name: baseUnit, leafNodes: leafNodes);
-    _customConversion = CustomConversion(
-        conversionTree: conversionTree,
-        mapSymbols: mapSymbols!,
-        significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        useScientificNotation: useScientificNotation,
-        name: name ?? PROPERTY.angle);
-  }
+      {super.significantFigures,
+      super.removeTrailingZeros,
+      super.useScientificNotation,
+      mapSymbols,
+      name})
+      : assert(mapConversion.containsValue(1),
+            'One conversion coefficient must be 1, this will considered the base unit'),
+        assert(() {
+          if (mapSymbols != null) {
+            for (var val in mapConversion.keys) {
+              if (!mapSymbols!.keys.contains(val)) {
+                return false;
+              }
+            }
+          }
+          return true;
+        }(), 'The key of mapConversion must be the same key of mapSymbols'),
+        super(
+          name: name ?? 'SimpleCustomConversion',
+          mapSymbols: mapSymbols ?? _initializeMapSymbols(mapConversion),
+          conversionTree: _convertMapToConversionTree(mapConversion),
+        );
+}
 
-  /// Converts a unit with a specific name and value to all other units
-  @override
-  void convert(var name, double? value) {
-    assert(mapConversion.keys.contains(name));
-    _customConversion.convert(name, value);
-  }
+Node _convertMapToConversionTree(Map<dynamic, double> mapConversion) {
+  var baseUnit = mapConversion.keys.firstWhere(
+      (element) => mapConversion[element] == 1); //take the base unit
+  List<Node> leafNodes = [];
+  mapConversion.forEach((key, value) {
+    if (key != baseUnit) {
+      //I'm just interested in the relationship between the base unit and the other units
+      leafNodes.add(Node(name: key, coefficientProduct: 1 / value));
+    }
+  });
+  return Node(name: baseUnit, leafNodes: leafNodes);
+}
 
-  @override
-  List<Unit> getAll() => _customConversion.getAll();
-  @override
-  Unit getUnit(name) => _customConversion.getUnit(name);
+Map<dynamic, String?> _initializeMapSymbols(
+    Map<dynamic, double> mapConversion) {
+  var mapSymbols = <dynamic, String?>{};
+  for (var val in mapConversion.keys) {
+    mapSymbols[val] = null;
+  }
+  return mapSymbols;
 }
