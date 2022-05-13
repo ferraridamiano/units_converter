@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -77,56 +77,56 @@ class DigitalData extends CustomConversion {
             DIGITAL_DATA.pebibyte: 'PiB',
             DIGITAL_DATA.exbibyte: 'EiB',
           },
-          conversionTree: Node(name: DIGITAL_DATA.bit, leafNodes: [
-            Node(
+          conversionTree: ConversionNode(name: DIGITAL_DATA.bit, leafNodes: [
+            ConversionNode(
               coefficientProduct: 4.0,
               name: DIGITAL_DATA.nibble,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e3,
               name: DIGITAL_DATA.kilobit,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e6,
               name: DIGITAL_DATA.megabit,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e9,
               name: DIGITAL_DATA.gigabit,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e12,
               name: DIGITAL_DATA.terabit,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e15,
               name: DIGITAL_DATA.petabit,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e18,
               name: DIGITAL_DATA.exabit,
             ),
-            Node(
+            ConversionNode(
                 coefficientProduct: 1024.0,
                 name: DIGITAL_DATA.kibibit,
                 leafNodes: [
-                  Node(
+                  ConversionNode(
                       coefficientProduct: 1024.0,
                       name: DIGITAL_DATA.mebibit,
                       leafNodes: [
-                        Node(
+                        ConversionNode(
                             coefficientProduct: 1024.0,
                             name: DIGITAL_DATA.gibibit,
                             leafNodes: [
-                              Node(
+                              ConversionNode(
                                   coefficientProduct: 1024.0,
                                   name: DIGITAL_DATA.tebibit,
                                   leafNodes: [
-                                    Node(
+                                    ConversionNode(
                                         coefficientProduct: 1024.0,
                                         name: DIGITAL_DATA.pebibit,
                                         leafNodes: [
-                                          Node(
+                                          ConversionNode(
                                             coefficientProduct: 1024.0,
                                             name: DIGITAL_DATA.exbibit,
                                           )
@@ -135,52 +135,52 @@ class DigitalData extends CustomConversion {
                             ])
                       ])
                 ]),
-            Node(coefficientProduct: 8.0, name: DIGITAL_DATA.byte, leafNodes: [
-              Node(
+            ConversionNode(coefficientProduct: 8.0, name: DIGITAL_DATA.byte, leafNodes: [
+              ConversionNode(
                 coefficientProduct: 1e3,
                 name: DIGITAL_DATA.kilobyte,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 1e6,
                 name: DIGITAL_DATA.megabyte,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 1e9,
                 name: DIGITAL_DATA.gigabyte,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 1e12,
                 name: DIGITAL_DATA.terabyte,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 1e15,
                 name: DIGITAL_DATA.petabyte,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 1e18,
                 name: DIGITAL_DATA.exabyte,
               ),
-              Node(
+              ConversionNode(
                   coefficientProduct: 1024.0,
                   name: DIGITAL_DATA.kibibyte,
                   leafNodes: [
-                    Node(
+                    ConversionNode(
                         coefficientProduct: 1024.0,
                         name: DIGITAL_DATA.mebibyte,
                         leafNodes: [
-                          Node(
+                          ConversionNode(
                               coefficientProduct: 1024.0,
                               name: DIGITAL_DATA.gibibyte,
                               leafNodes: [
-                                Node(
+                                ConversionNode(
                                     coefficientProduct: 1024.0,
                                     name: DIGITAL_DATA.tebibyte,
                                     leafNodes: [
-                                      Node(
+                                      ConversionNode(
                                           coefficientProduct: 1024.0,
                                           name: DIGITAL_DATA.pebibyte,
                                           leafNodes: [
-                                            Node(
+                                            ConversionNode(
                                               coefficientProduct: 1024.0,
                                               name: DIGITAL_DATA.exbibyte,
                                             ),

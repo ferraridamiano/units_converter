@@ -130,18 +130,18 @@ Output:
 As you can see all this relations can be structured like a conversion tree. Now you can take a look at the example below: it does in the code what we have just said.
 
 ```dart
-Node conversionTree = Node(
+ConversionNode conversionTree = ConversionNode(
   name: 'Dash',
   leafNodes: [
-    Node(
+    ConversionNode(
       name: 'KiloDash',
       coefficientProduct: 1000,
     ),
-    Node(
+    ConversionNode(
       name: 'DashPlus1',
       coefficientSum: -1,
       leafNodes: [
-        Node(
+        ConversionNode(
           name: 'OneOver(DashPlus1)',
           conversionType: CONVERSION_TYPE.reciprocalConversion,
         ),

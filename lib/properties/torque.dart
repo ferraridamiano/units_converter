@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -33,20 +33,20 @@ class Torque extends CustomConversion {
             TORQUE.kilogramForceMeter: 'kgf·m',
             TORQUE.poundalMeter: 'pdl·m',
           },
-          conversionTree: Node(name: TORQUE.newtonMeter, leafNodes: [
-            Node(
+          conversionTree: ConversionNode(name: TORQUE.newtonMeter, leafNodes: [
+            ConversionNode(
               coefficientProduct: 1e-5,
               name: TORQUE.dyneMeter,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1.35581794902490555,
               name: TORQUE.poundForceFeet,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 9.807,
               name: TORQUE.kilogramForceMeter,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 0.138254954376,
               name: TORQUE.poundalMeter,
             ),

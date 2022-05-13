@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -37,28 +37,28 @@ class Power extends CustomConversion {
             POWER.europeanHorsePower: 'hp(M)',
             POWER.imperialHorsePower: 'hp(I)',
           },
-          conversionTree: Node(name: POWER.watt, leafNodes: [
-            Node(
+          conversionTree: ConversionNode(name: POWER.watt, leafNodes: [
+            ConversionNode(
               coefficientProduct: 1e-3,
               name: POWER.milliwatt,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e3,
               name: POWER.kilowatt,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e6,
               name: POWER.megawatt,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e9,
               name: POWER.gigawatt,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 735.49875,
               name: POWER.europeanHorsePower,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 745.69987158,
               name: POWER.imperialHorsePower,
             ),

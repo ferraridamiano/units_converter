@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -35,26 +35,26 @@ class Speed extends CustomConversion {
             SPEED.feetsPerSecond: 'ft/s',
             SPEED.minutesPerKilometer: 'min/km',
           },
-          conversionTree: Node(name: SPEED.metersPerSecond, leafNodes: [
-            Node(
+          conversionTree: ConversionNode(name: SPEED.metersPerSecond, leafNodes: [
+            ConversionNode(
                 coefficientProduct: 1 / 3.6,
                 name: SPEED.kilometersPerHour,
                 leafNodes: [
-                  Node(
+                  ConversionNode(
                     coefficientProduct: 1.609344,
                     name: SPEED.milesPerHour,
                   ),
-                  Node(
+                  ConversionNode(
                     coefficientProduct: 1.852,
                     name: SPEED.knots,
                   ),
-                  Node(
+                  ConversionNode(
                     conversionType: CONVERSION_TYPE.reciprocalConversion,
                     coefficientProduct: 60,
                     name: SPEED.minutesPerKilometer,
                   )
                 ]),
-            Node(
+            ConversionNode(
               coefficientProduct: 0.3048,
               name: SPEED.feetsPerSecond,
             ),

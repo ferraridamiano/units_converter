@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -39,35 +39,35 @@ class Pressure extends CustomConversion {
             PRESSURE.hectoPascal: 'hPa',
             PRESSURE.inchOfMercury: 'inHg',
           },
-          conversionTree: Node(name: PRESSURE.pascal, leafNodes: [
-            Node(
+          conversionTree: ConversionNode(name: PRESSURE.pascal, leafNodes: [
+            ConversionNode(
                 coefficientProduct: 101325.0,
                 name: PRESSURE.atmosphere,
                 leafNodes: [
-                  Node(
+                  ConversionNode(
                       coefficientProduct: 0.987,
                       name: PRESSURE.bar,
                       leafNodes: [
-                        Node(
+                        ConversionNode(
                           coefficientProduct: 1e-3,
                           name: PRESSURE.millibar,
                         ),
                       ]),
                 ]),
-            Node(
+            ConversionNode(
               coefficientProduct: 6894.757293168,
               name: PRESSURE.psi,
             ),
-            Node(
+            ConversionNode(
                 coefficientProduct: 133.322368421,
                 name: PRESSURE.torr,
                 leafNodes: [
-                  Node(
+                  ConversionNode(
                     coefficientProduct: 25.4,
                     name: PRESSURE.inchOfMercury,
                   )
                 ]),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e2,
               name: PRESSURE.hectoPascal,
             )

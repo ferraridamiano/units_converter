@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/custom_conversion.dart';
 
 class SimpleCustomConversion extends CustomConversion {
@@ -61,17 +61,17 @@ class SimpleCustomConversion extends CustomConversion {
         );
 }
 
-Node _convertMapToConversionTree(Map<dynamic, double> mapConversion) {
+ConversionNode _convertMapToConversionTree(Map<dynamic, double> mapConversion) {
   var baseUnit = mapConversion.keys.firstWhere(
       (element) => mapConversion[element] == 1); //take the base unit
-  List<Node> leafNodes = [];
+  List<ConversionNode> leafNodes = [];
   mapConversion.forEach((key, value) {
     if (key != baseUnit) {
       //I'm just interested in the relationship between the base unit and the other units
-      leafNodes.add(Node(name: key, coefficientProduct: 1 / value));
+      leafNodes.add(ConversionNode(name: key, coefficientProduct: 1 / value));
     }
   });
-  return Node(name: baseUnit, leafNodes: leafNodes);
+  return ConversionNode(name: baseUnit, leafNodes: leafNodes);
 }
 
 Map<dynamic, String?> _initializeMapSymbols(

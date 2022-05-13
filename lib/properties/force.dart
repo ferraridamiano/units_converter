@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -33,20 +33,20 @@ class Force extends CustomConversion {
               FORCE.kilogramForce: 'kgf',
               FORCE.poundal: 'pdl',
             },
-            conversionTree: Node(name: FORCE.newton, leafNodes: [
-              Node(
+            conversionTree: ConversionNode(name: FORCE.newton, leafNodes: [
+              ConversionNode(
                 coefficientProduct: 1e-5,
                 name: FORCE.dyne,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 4.4482216152605,
                 name: FORCE.poundForce,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 9.80665,
                 name: FORCE.kilogramForce,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 0.138254954376,
                 name: FORCE.poundal,
               ),

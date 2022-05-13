@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -32,17 +32,17 @@ class FuelConsumption extends CustomConversion {
               FUEL_CONSUMPTION.milesPerImperialGallon: 'mpg',
             },
             conversionTree:
-                Node(name: FUEL_CONSUMPTION.kilometersPerLiter, leafNodes: [
-              Node(
+                ConversionNode(name: FUEL_CONSUMPTION.kilometersPerLiter, leafNodes: [
+              ConversionNode(
                 conversionType: CONVERSION_TYPE.reciprocalConversion,
                 coefficientProduct: 100.0,
                 name: FUEL_CONSUMPTION.litersPer100km,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 0.4251437074,
                 name: FUEL_CONSUMPTION.milesPerUsGallon,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 0.3540061899,
                 name: FUEL_CONSUMPTION.milesPerImperialGallon,
               ),

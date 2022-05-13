@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 
@@ -20,8 +20,8 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   };
 
   final List<Unit> _unitList = [];
-  late List<Node> _nodeList;
-  late Node _conversionTree;
+  late List<ConversionNode> _nodeList;
+  late ConversionNode _conversionTree;
 
   ///Class for numeralSystems conversions, e.g. if you want to convert 10 (decimal) in binary:
   ///```dart
@@ -32,18 +32,18 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   NumeralSystems({name}) {
     this.name = name ?? PROPERTY.numeralSystems;
     size = NUMERAL_SYSTEMS.values.length;
-    _conversionTree = Node(name: NUMERAL_SYSTEMS.decimal, base: 10, leafNodes: [
-      Node(
+    _conversionTree = ConversionNode(name: NUMERAL_SYSTEMS.decimal, base: 10, leafNodes: [
+      ConversionNode(
         conversionType: CONVERSION_TYPE.baseConversion,
         base: 16,
         name: NUMERAL_SYSTEMS.hexadecimal,
       ),
-      Node(
+      ConversionNode(
         conversionType: CONVERSION_TYPE.baseConversion,
         base: 8,
         name: NUMERAL_SYSTEMS.octal,
       ),
-      Node(
+      ConversionNode(
         conversionType: CONVERSION_TYPE.baseConversion,
         base: 2,
         name: NUMERAL_SYSTEMS.binary,

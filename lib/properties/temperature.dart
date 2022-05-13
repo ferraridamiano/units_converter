@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -37,32 +37,32 @@ class Temperature extends CustomConversion {
             TEMPERATURE.delisle: '°De',
             TEMPERATURE.rankine: '°R',
           },
-          conversionTree: Node(name: TEMPERATURE.fahrenheit, leafNodes: [
-            Node(
+          conversionTree: ConversionNode(name: TEMPERATURE.fahrenheit, leafNodes: [
+            ConversionNode(
                 coefficientProduct: 1.8,
                 coefficientSum: 32.0,
                 name: TEMPERATURE.celsius,
                 leafNodes: [
-                  Node(
+                  ConversionNode(
                     coefficientSum: -273.15,
                     name: TEMPERATURE.kelvin,
                   ),
-                  Node(
+                  ConversionNode(
                     coefficientProduct: 5 / 4,
                     name: TEMPERATURE.reamur,
                   ),
-                  Node(
+                  ConversionNode(
                     coefficientProduct: 40 / 21,
                     coefficientSum: -100 / 7,
                     name: TEMPERATURE.romer,
                   ),
-                  Node(
+                  ConversionNode(
                     coefficientProduct: -2 / 3,
                     coefficientSum: 100,
                     name: TEMPERATURE.delisle,
                   ),
                 ]),
-            Node(
+            ConversionNode(
               coefficientSum: -459.67,
               name: TEMPERATURE.rankine,
             ),

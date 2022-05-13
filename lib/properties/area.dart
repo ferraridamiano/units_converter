@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -48,52 +48,52 @@ class Area extends CustomConversion {
             AREA.acres: 'ac',
             AREA.are: 'a',
           },
-          conversionTree: Node(name: AREA.squareMeters, leafNodes: [
-            Node(
+          conversionTree: ConversionNode(name: AREA.squareMeters, leafNodes: [
+            ConversionNode(
                 coefficientProduct: 1e-4,
                 name: AREA.squareCentimeters,
                 leafNodes: [
-                  Node(
+                  ConversionNode(
                       coefficientProduct: 6.4516,
                       name: AREA.squareInches,
                       leafNodes: [
-                        Node(
+                        ConversionNode(
                           coefficientProduct: 144.0,
                           name: AREA.squareFeet,
                         ),
-                        Node(
+                        ConversionNode(
                           coefficientProduct: 12.000024 * 12.000024,
                           name: AREA.squareFeetUs,
                         ),
                       ]),
                 ]),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-6,
               name: AREA.squareMillimeters,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 10000.0,
               name: AREA.hectares,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1000000.0,
               name: AREA.squareKilometers,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 0.83612736,
               name: AREA.squareYard,
               leafNodes: [
-                Node(
+                ConversionNode(
                   coefficientProduct: 3097600.0,
                   name: AREA.squareMiles,
                 ),
-                Node(
+                ConversionNode(
                   coefficientProduct: 4840.0,
                   name: AREA.acres,
                 ),
               ],
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 100.0,
               name: AREA.are,
             )

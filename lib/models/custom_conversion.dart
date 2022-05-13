@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/utils/utils.dart';
@@ -20,23 +20,23 @@ class CustomConversion extends Property<dynamic, double> {
   bool useScientificNotation;
 
   final List<Unit> _unitList = [];
-  late List<Node> _nodeList;
-  Node conversionTree;
+  late List<ConversionNode> _nodeList;
+  ConversionNode conversionTree;
 
   ///Class for custom conversions. E.g.:
   ///```dart
-  ///Node conversionTree = Node(
+  ///ConversionNode conversionTree = ConversionNode(
   ///  name: 'Dash',    // base unit
   ///  leafNodes: [
-  ///    Node(
+  ///    ConversionNode(
   ///      name: 'KiloDash',
   ///      coefficientProduct: 1000, // 1 k=KiloDash is 1000 Dash
   ///    ),
-  ///    Node(
+  ///    ConversionNode(
   ///      name: 'DashPlus1',
   ///      coefficientSum: -1,
   ///      leafNodes: [
-  ///        Node(
+  ///        ConversionNode(
   ///          name: 'OneOver(DashPlus1)',
   ///          conversionType: CONVERSION_TYPE.reciprocalConversion,
   ///        ),

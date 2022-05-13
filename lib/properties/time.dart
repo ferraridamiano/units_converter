@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -53,51 +53,51 @@ class Time extends CustomConversion {
             TIME.centuries: 'c.',
             TIME.millennium: null,
           },
-          conversionTree: Node(name: TIME.seconds, leafNodes: [
-            Node(
+          conversionTree: ConversionNode(name: TIME.seconds, leafNodes: [
+            ConversionNode(
               coefficientProduct: 1e-1,
               name: TIME.deciseconds,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-2,
               name: TIME.centiseconds,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-3,
               name: TIME.milliseconds,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-6,
               name: TIME.microseconds,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-9,
               name: TIME.nanoseconds,
             ),
-            Node(coefficientProduct: 60.0, name: TIME.minutes, leafNodes: [
-              Node(coefficientProduct: 60.0, name: TIME.hours, leafNodes: [
-                Node(coefficientProduct: 24.0, name: TIME.days, leafNodes: [
-                  Node(
+            ConversionNode(coefficientProduct: 60.0, name: TIME.minutes, leafNodes: [
+              ConversionNode(coefficientProduct: 60.0, name: TIME.hours, leafNodes: [
+                ConversionNode(coefficientProduct: 24.0, name: TIME.days, leafNodes: [
+                  ConversionNode(
                     coefficientProduct: 7.0,
                     name: TIME.weeks,
                   ),
-                  Node(
+                  ConversionNode(
                       coefficientProduct: 365.0,
                       name: TIME.years365,
                       leafNodes: [
-                        Node(
+                        ConversionNode(
                           coefficientProduct: 5.0,
                           name: TIME.lustrum,
                         ),
-                        Node(
+                        ConversionNode(
                           coefficientProduct: 10.0,
                           name: TIME.decades,
                         ),
-                        Node(
+                        ConversionNode(
                           coefficientProduct: 100.0,
                           name: TIME.centuries,
                         ),
-                        Node(
+                        ConversionNode(
                           coefficientProduct: 1000.0,
                           name: TIME.millennium,
                         ),

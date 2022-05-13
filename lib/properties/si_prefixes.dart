@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -65,84 +65,84 @@ class SIPrefixes extends CustomConversion {
             SI_PREFIXES.zepto: 'z-',
             SI_PREFIXES.yocto: 'y-',
           },
-          conversionTree: Node(name: SI_PREFIXES.base, leafNodes: [
-            Node(
+          conversionTree: ConversionNode(name: SI_PREFIXES.base, leafNodes: [
+            ConversionNode(
               coefficientProduct: 1e1,
               name: SI_PREFIXES.deca,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e2,
               name: SI_PREFIXES.hecto,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e3,
               name: SI_PREFIXES.kilo,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e6,
               name: SI_PREFIXES.mega,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e9,
               name: SI_PREFIXES.giga,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e12,
               name: SI_PREFIXES.tera,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e15,
               name: SI_PREFIXES.peta,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e18,
               name: SI_PREFIXES.exa,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e21,
               name: SI_PREFIXES.zetta,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e24,
               name: SI_PREFIXES.yotta,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-1,
               name: SI_PREFIXES.deci,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-2,
               name: SI_PREFIXES.centi,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-3,
               name: SI_PREFIXES.milli,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-6,
               name: SI_PREFIXES.micro,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-9,
               name: SI_PREFIXES.nano,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-12,
               name: SI_PREFIXES.pico,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-15,
               name: SI_PREFIXES.femto,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-18,
               name: SI_PREFIXES.atto,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-21,
               name: SI_PREFIXES.zepto,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-24,
               name: SI_PREFIXES.yocto,
             ),

@@ -1,19 +1,19 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/units_converter.dart';
 
 void main() {
-  Node conversionTree = Node(
+  ConversionNode conversionTree = ConversionNode(
     name: 'Dash',
     leafNodes: [
-      Node(
+      ConversionNode(
         name: 'KiloDash',
         coefficientProduct: 1000,
       ),
-      Node(
+      ConversionNode(
         name: 'DashPlus1',
         coefficientSum: -1,
         leafNodes: [
-          Node(
+          ConversionNode(
             name: 'OneOver(DashPlus1)',
             conversionType: CONVERSION_TYPE.reciprocalConversion,
           ),

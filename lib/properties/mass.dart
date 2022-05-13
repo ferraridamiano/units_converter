@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -53,24 +53,24 @@ class Mass extends CustomConversion {
             MASS.troyOunces: 'oz t',
             MASS.stones: 'st.',
           },
-          conversionTree: Node(name: MASS.grams, leafNodes: [
-            Node(
+          conversionTree: ConversionNode(name: MASS.grams, leafNodes: [
+            ConversionNode(
               coefficientProduct: 100.0,
               name: MASS.ettograms,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1000.0,
               name: MASS.kilograms,
               leafNodes: [
-                Node(
+                ConversionNode(
                   coefficientProduct: 0.45359237,
                   name: MASS.pounds,
                   leafNodes: [
-                    Node(
+                    ConversionNode(
                       coefficientProduct: 1 / 16,
                       name: MASS.ounces,
                     ),
-                    Node(
+                    ConversionNode(
                       coefficientProduct: 14,
                       name: MASS.stones,
                     ),
@@ -78,35 +78,35 @@ class Mass extends CustomConversion {
                 ),
               ],
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 100000.0,
               name: MASS.quintals,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1000000.0,
               name: MASS.tons,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-2,
               name: MASS.centigrams,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1e-3,
               name: MASS.milligrams,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1.660539e-24,
               name: MASS.uma,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 0.2,
               name: MASS.carats,
             ),
-            Node(
+            ConversionNode(
                 coefficientProduct: 1.55517384,
                 name: MASS.pennyweights,
                 leafNodes: [
-                  Node(
+                  ConversionNode(
                     coefficientProduct: 20,
                     name: MASS.troyOunces,
                   ),

@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -35,26 +35,26 @@ class Energy extends CustomConversion {
               ENERGY.electronvolts: 'eV',
               ENERGY.energyFootPound: 'ft⋅lbf',
             },
-            conversionTree: Node(name: ENERGY.joules, leafNodes: [
-              Node(
+            conversionTree: ConversionNode(name: ENERGY.joules, leafNodes: [
+              ConversionNode(
                 coefficientProduct: 4.1867999409,
                 name: ENERGY.calories,
                 leafNodes: [
-                  Node(
+                  ConversionNode(
                     coefficientProduct: 1000.0,
                     name: ENERGY.kilocalories,
                   ),
                 ],
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 3600000.0,
                 name: ENERGY.kilowattHours,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 1.60217646e-19,
                 name: ENERGY.electronvolts,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 1 / 1.3558179483314004,
                 name: ENERGY.energyFootPound,
               ),

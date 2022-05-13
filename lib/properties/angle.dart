@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -31,16 +31,16 @@ class Angle extends CustomConversion {
             ANGLE.seconds: "''",
             ANGLE.radians: 'rad',
           },
-          conversionTree: Node(name: ANGLE.degree, leafNodes: [
-            Node(
+          conversionTree: ConversionNode(name: ANGLE.degree, leafNodes: [
+            ConversionNode(
               coefficientProduct: 1 / 60,
               name: ANGLE.minutes,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 1 / 3600,
               name: ANGLE.seconds,
             ),
-            Node(
+            ConversionNode(
               coefficientProduct: 57.295779513,
               name: ANGLE.radians,
             ),

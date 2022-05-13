@@ -1,4 +1,4 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
@@ -59,72 +59,72 @@ class Length extends CustomConversion {
               LENGTH.parsec: 'pc',
               LENGTH.mils: null,
             },
-            conversionTree: Node(name: LENGTH.meters, leafNodes: [
-              Node(
+            conversionTree: ConversionNode(name: LENGTH.meters, leafNodes: [
+              ConversionNode(
                   coefficientProduct: 0.01,
                   name: LENGTH.centimeters,
                   leafNodes: [
-                    Node(
+                    ConversionNode(
                         coefficientProduct: 2.54,
                         name: LENGTH.inches,
                         leafNodes: [
-                          Node(
+                          ConversionNode(
                             coefficientProduct: 12.0,
                             name: LENGTH.feet,
                           ),
-                          Node(
+                          ConversionNode(
                             coefficientProduct: 12.000024,
                             name: LENGTH.feetUs,
                           ),
-                          Node(
+                          ConversionNode(
                             coefficientProduct: 1e-3,
                             name: LENGTH.mils,
                           ),
                         ]),
                   ]),
-              Node(
+              ConversionNode(
                 coefficientProduct: 1852.0,
                 name: LENGTH.nauticalMiles,
               ),
-              Node(coefficientProduct: 0.9144, name: LENGTH.yards, leafNodes: [
-                Node(
+              ConversionNode(coefficientProduct: 0.9144, name: LENGTH.yards, leafNodes: [
+                ConversionNode(
                   coefficientProduct: 1760.0,
                   name: LENGTH.miles,
                 ),
               ]),
-              Node(
+              ConversionNode(
                 coefficientProduct: 1e-3,
                 name: LENGTH.millimeters,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 1e-6,
                 name: LENGTH.micrometers,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 1e-9,
                 name: LENGTH.nanometers,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 1e-10,
                 name: LENGTH.angstroms,
               ),
-              Node(
+              ConversionNode(
                 coefficientProduct: 1e-12,
                 name: LENGTH.picometers,
               ),
-              Node(
+              ConversionNode(
                   coefficientProduct: 1000.0,
                   name: LENGTH.kilometers,
                   leafNodes: [
-                    Node(
+                    ConversionNode(
                         coefficientProduct: 149597870.7,
                         name: LENGTH.astronomicalUnits,
                         leafNodes: [
-                          Node(
+                          ConversionNode(
                               coefficientProduct: 63241.1,
                               name: LENGTH.lightYears,
                               leafNodes: [
-                                Node(
+                                ConversionNode(
                                   coefficientProduct: 3.26,
                                   name: LENGTH.parsec,
                                 ),
