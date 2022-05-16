@@ -31,22 +31,23 @@ class FuelConsumption extends CustomConversion {
               FUEL_CONSUMPTION.milesPerUsGallon: 'mpg',
               FUEL_CONSUMPTION.milesPerImperialGallon: 'mpg',
             },
-            conversionTree:
-                ConversionNode(name: FUEL_CONSUMPTION.kilometersPerLiter, leafNodes: [
-              ConversionNode(
-                conversionType: CONVERSION_TYPE.reciprocalConversion,
-                coefficientProduct: 100.0,
-                name: FUEL_CONSUMPTION.litersPer100km,
-              ),
-              ConversionNode(
-                coefficientProduct: 0.4251437074,
-                name: FUEL_CONSUMPTION.milesPerUsGallon,
-              ),
-              ConversionNode(
-                coefficientProduct: 0.3540061899,
-                name: FUEL_CONSUMPTION.milesPerImperialGallon,
-              ),
-            ]));
+            conversionTree: ConversionNode(
+                name: FUEL_CONSUMPTION.kilometersPerLiter,
+                leafNodes: [
+                  ConversionNode(
+                    conversionType: CONVERSION_TYPE.reciprocalConversion,
+                    coefficientProduct: 100.0,
+                    name: FUEL_CONSUMPTION.litersPer100km,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 0.4251437074,
+                    name: FUEL_CONSUMPTION.milesPerUsGallon,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 0.3540061899,
+                    name: FUEL_CONSUMPTION.milesPerImperialGallon,
+                  ),
+                ]));
 
   Unit get kilometersPerLiter => getUnit(FUEL_CONSUMPTION.kilometersPerLiter);
   Unit get litersPer100km => getUnit(FUEL_CONSUMPTION.litersPer100km);

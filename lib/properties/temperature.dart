@@ -37,7 +37,8 @@ class Temperature extends CustomConversion {
             TEMPERATURE.delisle: '°De',
             TEMPERATURE.rankine: '°R',
           },
-          conversionTree: ConversionNode(name: TEMPERATURE.fahrenheit, leafNodes: [
+          conversionTree:
+              ConversionNode(name: TEMPERATURE.fahrenheit, leafNodes: [
             ConversionNode(
                 coefficientProduct: 1.8,
                 coefficientSum: 32.0,

@@ -35,7 +35,8 @@ class Speed extends CustomConversion {
             SPEED.feetsPerSecond: 'ft/s',
             SPEED.minutesPerKilometer: 'min/km',
           },
-          conversionTree: ConversionNode(name: SPEED.metersPerSecond, leafNodes: [
+          conversionTree:
+              ConversionNode(name: SPEED.metersPerSecond, leafNodes: [
             ConversionNode(
                 coefficientProduct: 1 / 3.6,
                 name: SPEED.kilometersPerHour,

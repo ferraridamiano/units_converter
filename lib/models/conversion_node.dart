@@ -76,7 +76,8 @@ class ConversionNode {
   void convert(dynamic name, dynamic value) {
     assert(value is String || value is double);
 
-    List<ConversionNode> pathToConvertedNode = _getNodesPathAndSelectNode(name, value);
+    List<ConversionNode> pathToConvertedNode =
+        _getNodesPathAndSelectNode(name, value);
     for (int i = pathToConvertedNode.length - 2; i >= 0; i--) {
       _convertTwoNodes(
           parent: pathToConvertedNode[i],
@@ -153,7 +154,8 @@ class ConversionNode {
   /// to name as converted [isConverted]=true. All the other nodes are marked as
   /// not converted.
   List<ConversionNode> _getNodesPathAndSelectNode(dynamic name, dynamic value) {
-    Queue<ConversionNode> stack = Queue.from([this]); // we will use a queue as a stack
+    Queue<ConversionNode> stack =
+        Queue.from([this]); // we will use a queue as a stack
     Queue<List<ConversionNode>> breadcrumbListQueue = Queue.from([
       [this]
     ]);

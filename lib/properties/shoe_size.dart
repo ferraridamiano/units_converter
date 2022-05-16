@@ -43,44 +43,48 @@ class ShoeSize extends CustomConversion {
             SHOE_SIZE.usaCanadaWoman: null,
             SHOE_SIZE.japan: null,
           },
-          conversionTree: ConversionNode(name: SHOE_SIZE.centimeters, leafNodes: [
+          conversionTree:
+              ConversionNode(name: SHOE_SIZE.centimeters, leafNodes: [
             ConversionNode(
               coefficientProduct: 1 / 1.5,
               coefficientSum: -1.5,
               name: SHOE_SIZE.euChina,
             ),
-            ConversionNode(coefficientProduct: 2.54, name: SHOE_SIZE.inches, leafNodes: [
-              ConversionNode(
-                coefficientProduct: 1 / 3,
-                coefficientSum: 10 / 3,
-                name: SHOE_SIZE.ukIndiaChild,
-              ),
-              ConversionNode(
-                coefficientProduct: 1 / 3,
-                coefficientSum: 23 / 3,
-                name: SHOE_SIZE.ukIndiaMan,
-              ),
-              ConversionNode(
-                coefficientProduct: 1 / 3,
-                coefficientSum: 23.5 / 3,
-                name: SHOE_SIZE.ukIndiaWoman,
-              ),
-              ConversionNode(
-                coefficientProduct: 1 / 3,
-                coefficientSum: 49 / 9,
-                name: SHOE_SIZE.usaCanadaChild,
-              ),
-              ConversionNode(
-                coefficientProduct: 1 / 3,
-                coefficientSum: 22 / 3,
-                name: SHOE_SIZE.usaCanadaMan,
-              ),
-              ConversionNode(
-                coefficientProduct: 1 / 3,
-                coefficientSum: 21 / 3,
-                name: SHOE_SIZE.usaCanadaWoman,
-              ),
-            ]),
+            ConversionNode(
+                coefficientProduct: 2.54,
+                name: SHOE_SIZE.inches,
+                leafNodes: [
+                  ConversionNode(
+                    coefficientProduct: 1 / 3,
+                    coefficientSum: 10 / 3,
+                    name: SHOE_SIZE.ukIndiaChild,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1 / 3,
+                    coefficientSum: 23 / 3,
+                    name: SHOE_SIZE.ukIndiaMan,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1 / 3,
+                    coefficientSum: 23.5 / 3,
+                    name: SHOE_SIZE.ukIndiaWoman,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1 / 3,
+                    coefficientSum: 49 / 9,
+                    name: SHOE_SIZE.usaCanadaChild,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1 / 3,
+                    coefficientSum: 22 / 3,
+                    name: SHOE_SIZE.usaCanadaMan,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1 / 3,
+                    coefficientSum: 21 / 3,
+                    name: SHOE_SIZE.usaCanadaWoman,
+                  ),
+                ]),
             ConversionNode(
               coefficientSum: -1.5,
               name: SHOE_SIZE.japan,

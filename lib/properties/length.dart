@@ -86,12 +86,15 @@ class Length extends CustomConversion {
                 coefficientProduct: 1852.0,
                 name: LENGTH.nauticalMiles,
               ),
-              ConversionNode(coefficientProduct: 0.9144, name: LENGTH.yards, leafNodes: [
-                ConversionNode(
-                  coefficientProduct: 1760.0,
-                  name: LENGTH.miles,
-                ),
-              ]),
+              ConversionNode(
+                  coefficientProduct: 0.9144,
+                  name: LENGTH.yards,
+                  leafNodes: [
+                    ConversionNode(
+                      coefficientProduct: 1760.0,
+                      name: LENGTH.miles,
+                    ),
+                  ]),
               ConversionNode(
                 coefficientProduct: 1e-3,
                 name: LENGTH.millimeters,

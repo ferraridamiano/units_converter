@@ -60,62 +60,66 @@ class Volume extends CustomConversion {
             VOLUME.usGill: 'US. liq. gi',
           },
           conversionTree: ConversionNode(name: VOLUME.cubicMeters, leafNodes: [
-            ConversionNode(coefficientProduct: 1e-3, name: VOLUME.liters, leafNodes: [
-              ConversionNode(
-                coefficientProduct: 4.54609,
-                name: VOLUME.imperialGallons,
-              ),
-              ConversionNode(
-                coefficientProduct: 3.785411784,
-                name: VOLUME.usGallons,
-              ),
-              ConversionNode(
-                coefficientProduct: 0.56826125,
-                name: VOLUME.imperialPints,
+            ConversionNode(
+                coefficientProduct: 1e-3,
+                name: VOLUME.liters,
                 leafNodes: [
                   ConversionNode(
-                    coefficientProduct: 1 / 20,
-                    name: VOLUME.imperialFluidOunces,
-                    leafNodes: [
-                      ConversionNode(coefficientProduct: 5, name: VOLUME.imperialGill),
-                    ],
+                    coefficientProduct: 4.54609,
+                    name: VOLUME.imperialGallons,
                   ),
-                ],
-              ),
-              ConversionNode(
-                coefficientProduct: 0.473176473,
-                name: VOLUME.usPints,
-                leafNodes: [
                   ConversionNode(
-                    coefficientProduct: 1 / 16,
-                    name: VOLUME.usFluidOunces,
+                    coefficientProduct: 3.785411784,
+                    name: VOLUME.usGallons,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 0.56826125,
+                    name: VOLUME.imperialPints,
                     leafNodes: [
                       ConversionNode(
-                        coefficientProduct: 4,
-                        name: VOLUME.usGill,
+                        coefficientProduct: 1 / 20,
+                        name: VOLUME.imperialFluidOunces,
+                        leafNodes: [
+                          ConversionNode(
+                              coefficientProduct: 5, name: VOLUME.imperialGill),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
-              ConversionNode(
-                  coefficientProduct: 1e-3,
-                  name: VOLUME.milliliters,
-                  leafNodes: [
-                    ConversionNode(
-                      coefficientProduct: 14.8,
-                      name: VOLUME.tablespoonsUs,
-                    ),
-                    ConversionNode(
-                      coefficientProduct: 20.0,
-                      name: VOLUME.australianTablespoons,
-                    ),
-                    ConversionNode(
-                      coefficientProduct: 240.0,
-                      name: VOLUME.cups,
-                    ),
-                  ]),
-            ]),
+                  ConversionNode(
+                    coefficientProduct: 0.473176473,
+                    name: VOLUME.usPints,
+                    leafNodes: [
+                      ConversionNode(
+                        coefficientProduct: 1 / 16,
+                        name: VOLUME.usFluidOunces,
+                        leafNodes: [
+                          ConversionNode(
+                            coefficientProduct: 4,
+                            name: VOLUME.usGill,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  ConversionNode(
+                      coefficientProduct: 1e-3,
+                      name: VOLUME.milliliters,
+                      leafNodes: [
+                        ConversionNode(
+                          coefficientProduct: 14.8,
+                          name: VOLUME.tablespoonsUs,
+                        ),
+                        ConversionNode(
+                          coefficientProduct: 20.0,
+                          name: VOLUME.australianTablespoons,
+                        ),
+                        ConversionNode(
+                          coefficientProduct: 240.0,
+                          name: VOLUME.cups,
+                        ),
+                      ]),
+                ]),
             ConversionNode(
                 coefficientProduct: 1e-6,
                 name: VOLUME.cubicCentimeters,

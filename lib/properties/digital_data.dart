@@ -135,61 +135,64 @@ class DigitalData extends CustomConversion {
                             ])
                       ])
                 ]),
-            ConversionNode(coefficientProduct: 8.0, name: DIGITAL_DATA.byte, leafNodes: [
-              ConversionNode(
-                coefficientProduct: 1e3,
-                name: DIGITAL_DATA.kilobyte,
-              ),
-              ConversionNode(
-                coefficientProduct: 1e6,
-                name: DIGITAL_DATA.megabyte,
-              ),
-              ConversionNode(
-                coefficientProduct: 1e9,
-                name: DIGITAL_DATA.gigabyte,
-              ),
-              ConversionNode(
-                coefficientProduct: 1e12,
-                name: DIGITAL_DATA.terabyte,
-              ),
-              ConversionNode(
-                coefficientProduct: 1e15,
-                name: DIGITAL_DATA.petabyte,
-              ),
-              ConversionNode(
-                coefficientProduct: 1e18,
-                name: DIGITAL_DATA.exabyte,
-              ),
-              ConversionNode(
-                  coefficientProduct: 1024.0,
-                  name: DIGITAL_DATA.kibibyte,
-                  leafNodes: [
-                    ConversionNode(
-                        coefficientProduct: 1024.0,
-                        name: DIGITAL_DATA.mebibyte,
-                        leafNodes: [
-                          ConversionNode(
-                              coefficientProduct: 1024.0,
-                              name: DIGITAL_DATA.gibibyte,
-                              leafNodes: [
-                                ConversionNode(
-                                    coefficientProduct: 1024.0,
-                                    name: DIGITAL_DATA.tebibyte,
-                                    leafNodes: [
-                                      ConversionNode(
-                                          coefficientProduct: 1024.0,
-                                          name: DIGITAL_DATA.pebibyte,
-                                          leafNodes: [
-                                            ConversionNode(
+            ConversionNode(
+                coefficientProduct: 8.0,
+                name: DIGITAL_DATA.byte,
+                leafNodes: [
+                  ConversionNode(
+                    coefficientProduct: 1e3,
+                    name: DIGITAL_DATA.kilobyte,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1e6,
+                    name: DIGITAL_DATA.megabyte,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1e9,
+                    name: DIGITAL_DATA.gigabyte,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1e12,
+                    name: DIGITAL_DATA.terabyte,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1e15,
+                    name: DIGITAL_DATA.petabyte,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1e18,
+                    name: DIGITAL_DATA.exabyte,
+                  ),
+                  ConversionNode(
+                      coefficientProduct: 1024.0,
+                      name: DIGITAL_DATA.kibibyte,
+                      leafNodes: [
+                        ConversionNode(
+                            coefficientProduct: 1024.0,
+                            name: DIGITAL_DATA.mebibyte,
+                            leafNodes: [
+                              ConversionNode(
+                                  coefficientProduct: 1024.0,
+                                  name: DIGITAL_DATA.gibibyte,
+                                  leafNodes: [
+                                    ConversionNode(
+                                        coefficientProduct: 1024.0,
+                                        name: DIGITAL_DATA.tebibyte,
+                                        leafNodes: [
+                                          ConversionNode(
                                               coefficientProduct: 1024.0,
-                                              name: DIGITAL_DATA.exbibyte,
-                                            ),
-                                          ]),
-                                    ]),
-                              ]),
-                        ]),
-                  ]),
-            ]),
+                                              name: DIGITAL_DATA.pebibyte,
+                                              leafNodes: [
+                                                ConversionNode(
+                                                  coefficientProduct: 1024.0,
+                                                  name: DIGITAL_DATA.exbibyte,
+                                                ),
+                                              ]),
+                                        ]),
+                                  ]),
+                            ]),
+                      ]),
+                ]),
           ]),
         );
 
