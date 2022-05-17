@@ -3,7 +3,7 @@ import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/utils/utils.dart';
 
-class CustomConversion extends Property<dynamic, double> {
+class CustomProperty extends Property<dynamic, double> {
   //Map between units and its symbol
   Map<dynamic, String?> mapSymbols;
 
@@ -52,7 +52,7 @@ class CustomConversion extends Property<dynamic, double> {
   ///  'OneOver(DashPlus1)': null,
   ///};
   ///
-  ///var dash = CustomConversion(
+  ///var dash = CustomProperty(
   ///  conversionTree: conversionTree,
   ///  mapSymbols: symbolsMap,
   ///  name: 'Conversion of Dash',
@@ -65,7 +65,7 @@ class CustomConversion extends Property<dynamic, double> {
   ///      'name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
   ///}
   /// ```
-  CustomConversion(
+  CustomProperty(
       {required this.conversionTree,
       required this.mapSymbols,
       name,

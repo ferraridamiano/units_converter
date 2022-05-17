@@ -1,7 +1,7 @@
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/models/custom_conversion.dart';
+import 'package:units_converter/models/custom_property.dart';
 
 //Available SI_PREFIXES units
 // ignore: camel_case_types
@@ -29,7 +29,7 @@ enum SI_PREFIXES {
   yocto,
 }
 
-class SIPrefixes extends CustomConversion {
+class SIPrefixes extends CustomProperty {
   ///Class for si_prefixes conversions, e.g. if you want to convert 1 base unit in milli:
   ///```dart
   ///var si_prefixes = Si_Prefixes(removeTrailingZeros: false);

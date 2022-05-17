@@ -412,9 +412,9 @@ void main() {
       'GBP': '£',
     };
     runConversionTest(expectedResult,
-        SimpleCustomConversion(expectedResult, mapSymbols: mapSymbol));
+        SimpleCustomProperty(expectedResult, mapSymbols: mapSymbol));
     // We use it with null symbols
-    var conversion = SimpleCustomConversion(expectedResult)..convert('EUR', 1);
+    var conversion = SimpleCustomProperty(expectedResult)..convert('EUR', 1);
     // test single units
     expectedResult.forEach((key, value) {
       test(

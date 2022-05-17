@@ -29,7 +29,7 @@ void main() {
     'OneOver(DashPlus1)': '1/(dsh+1)',
   };
 
-  var dash = CustomConversion(
+  var dash = CustomProperty(
     conversionTree: conversionTree,
     mapSymbols: symbolsMap,
     name: 'Conversion of Dash',

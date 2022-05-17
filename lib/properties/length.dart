@@ -1,7 +1,7 @@
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/models/custom_conversion.dart';
+import 'package:units_converter/models/custom_property.dart';
 
 //Available length units
 enum LENGTH {
@@ -25,7 +25,7 @@ enum LENGTH {
   mils,
 }
 
-class Length extends CustomConversion {
+class Length extends CustomProperty {
   ///Class for length conversions, e.g. if you want to convert 1 meter in inches:
   ///```dart
   ///var length = Length(removeTrailingZeros: false);

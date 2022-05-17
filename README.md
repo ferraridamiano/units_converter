@@ -118,7 +118,7 @@ Hexadecimal: 64
 ```
 
 ## Simple custom conversion
-*Use `SimpleCustomConversion` when you are dealing with a linear conversion between the units, i.e. when a unit is `x` times a value. In `SimpleCustomConversion` we have to define a conversionMap between a base unit, which must have a value of 1, and all the other units. In the example below we say that 1€ is 1.2271$, but also 0.9033₤, and so on and so forth.*
+*Use `SimpleCustomProperty` when you are dealing with a linear conversion between the units, i.e. when a unit is `x` times a value. In `SimpleCustomProperty` we have to define a conversionMap between a base unit, which must have a value of 1, and all the other units. In the example below we say that 1€ is 1.2271$, but also 0.9033₤, and so on and so forth.*
 
 **Example 5**: define the currency exchange rate with their symbols (optional) and perform the conversion between two of them.
 
@@ -139,7 +139,7 @@ final Map<String, String> mapSymbols = {
   'CNY': '¥',
 };
 
-var customConversion = SimpleCustomConversion(conversionMap, mapSymbols: mapSymbols);
+var customConversion = SimpleCustomProperty(conversionMap, mapSymbols: mapSymbols);
 customConversion.convert('EUR', 1);
 Unit usd = customConversion.getUnit('USD');
 print('1€ = ${usd.stringValue}${usd.symbol}');
@@ -153,7 +153,7 @@ Output:
 
 ## Custom conversion
 
-*In most cases, you will only need `SimpleCustomConversion` (see the previous section). `SimpleCustomConversion` allow you to define conversions in the form of `y=ax`. But if you need to define special relationship between units you need `CustomConversion`. This allow you to perform conversion like: `y=ax+b` and `y=a/x+b` (where `y` and x are the value of two units and `a` and `b` are two coefficient), for example the conversion between Celsius and Fahreneit use the first relation and the conversion between km/l and l/100km has to be done with the second relation. Both can't be done with `SimpleCustomConversion`.*
+*In most cases, you will only need `SimpleCustomProperty` (see the previous section). `SimpleCustomProperty` allow you to define conversions in the form of `y=ax`. But if you need to define special relationship between units you need `CustomProperty`. This allow you to perform conversion like: `y=ax+b` and `y=a/x+b` (where `y` and x are the value of two units and `a` and `b` are two coefficient), for example the conversion between Celsius and Fahreneit use the first relation and the conversion between km/l and l/100km has to be done with the second relation. Both can't be done with `SimpleCustomProperty`.*
 
 **Example 6**: let's define the following imaginary units of measurement:
 
@@ -189,7 +189,7 @@ final Map<String, String> symbolsMap = {
   'DashPlus1': 'dsh+1',
   'OneOver(DashPlus1)': '1/(dsh+1)',
 };
-var dash = CustomConversion(
+var dash = CustomProperty(
   conversionTree: conversionTree,
   mapSymbols: symbolsMap,
   name: 'Conversion of Dash',

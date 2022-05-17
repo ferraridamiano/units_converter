@@ -64,7 +64,7 @@ void main() {
   };
 
   var customConversion =
-      SimpleCustomConversion(conversionMap, mapSymbols: mapSymbols);
+      SimpleCustomProperty(conversionMap, mapSymbols: mapSymbols);
   customConversion.convert('EUR', 1);
   Unit usd = customConversion.getUnit('USD');
   print('1€ = ${usd.stringValue}${usd.symbol}');
@@ -98,7 +98,7 @@ void main() {
     'Dash+1': 'dsh+1',
     'OneOver(OneDash+1)': '1/(dsh+1)',
   };
-  var dash = CustomConversion(
+  var dash = CustomProperty(
     conversionTree: conversionTree,
     mapSymbols: symbolsMap,
     name: 'Conversion of Dash',

@@ -18,7 +18,7 @@ void main() {
   };
 
   var customConversion =
-      SimpleCustomConversion(conversionMap, mapSymbols: mapSymbols);
+      SimpleCustomProperty(conversionMap, mapSymbols: mapSymbols);
   customConversion.convert('EUR', 1);
   Unit usd = customConversion.getUnit('USD');
   print('1€ = ${usd.stringValue}${usd.symbol}');

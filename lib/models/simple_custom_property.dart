@@ -1,7 +1,7 @@
 import 'package:units_converter/models/conversion_node.dart';
-import 'package:units_converter/models/custom_conversion.dart';
+import 'package:units_converter/models/custom_property.dart';
 
-class SimpleCustomConversion extends CustomConversion {
+class SimpleCustomProperty extends CustomProperty {
   /// The Map of the values of the conversion. In this map at least one element
   /// must have a value of 1, it will be considered the base unit. E.g.:
   /// ```dart
@@ -30,12 +30,12 @@ class SimpleCustomConversion extends CustomConversion {
   ///  'JPY': '¥',
   ///  'CNY': '¥',
   ///};
-  ///var customConversion = SimpleCustomConversion(conversionMap, mapSymbols: mapSymbols);
+  ///var customConversion = SimpleCustomProperty(conversionMap, mapSymbols: mapSymbols);
   ///customConversion.convert('EUR', 1);
   ///Unit usd = customConversion.getUnit('USD');
   ///print('1€ = ${usd.stringValue}${usd.symbol}');
   /// ```
-  SimpleCustomConversion(this.mapConversion,
+  SimpleCustomProperty(this.mapConversion,
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
@@ -55,7 +55,7 @@ class SimpleCustomConversion extends CustomConversion {
         }(),
             'mapSymbols should be null or containing all the keys of mapConversion'),
         super(
-          name: name ?? 'SimpleCustomConversion',
+          name: name ?? 'SimpleCustomProperty',
           mapSymbols: mapSymbols ?? _initializeMapSymbols(mapConversion),
           conversionTree: _convertMapToConversionTree(mapConversion),
         );
