@@ -1,44 +1,25 @@
-import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/units_converter.dart';
 
 void main() {
-  ConversionNode conversionTree = ConversionNode(
-    name: 'Dash',
-    leafNodes: [
-      ConversionNode(
-        name: 'KiloDash',
-        coefficientProduct: 1000,
-      ),
-      ConversionNode(
-        name: 'DashPlus1',
-        coefficientSum: -1,
-        leafNodes: [
-          ConversionNode(
-            name: 'OneOver(DashPlus1)',
-            conversionType: CONVERSION_TYPE.reciprocalConversion,
-          ),
-        ],
-      ),
-    ],
-  );
-
-  final Map<String, String> symbolsMap = {
-    'Dash': 'dsh',
-    'KiloDash': 'kdsh',
-    'DashPlus1': 'dsh+1',
-    'OneOver(DashPlus1)': '1/(dsh+1)',
+  final Map<String, double> conversionMap = {
+    'EUR': 1,
+    'USD': 1.2271,
+    'GBP': 0.9033,
+    'JPY': 126.25,
+    'CNY': 7.9315,
+  };
+  // The map of the symbols is optional but nice
+  final Map<String, String> mapSymbols = {
+    'EUR': '€',
+    'USD': '\$',
+    'GBP': '₤',
+    'JPY': '¥',
+    'CNY': '¥',
   };
 
-  var dash = CustomConversion(
-    conversionTree: conversionTree,
-    mapSymbols: symbolsMap,
-    name: 'Conversion of Dash',
-  );
-
-  dash.convert('Dash', 1);
-  var myUnits = dash.getAll();
-  for (var unit in myUnits) {
-    print(
-        'name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
-  }
+  var customConversion =
+      SimpleCustomConversion(conversionMap, mapSymbols: mapSymbols);
+  customConversion.convert('EUR', 1);
+  Unit usd = customConversion.getUnit('USD');
+  print('1€ = ${usd.stringValue}${usd.symbol}');
 }
