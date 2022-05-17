@@ -7,6 +7,7 @@ void main() {
   print(inches);
 
   // Convert 8B hexadecimal to octal
-  var octal = '8B'.convertFromTo(NUMERAL_SYSTEMS.hexadecimal, NUMERAL_SYSTEMS.octal);
+  var octal =
+      '8B'.convertFromTo(NUMERAL_SYSTEMS.hexadecimal, NUMERAL_SYSTEMS.octal);
   print(octal);
 }

@@ -33,7 +33,6 @@ jobs:
 
   test:
     name: Test
-    needs: format
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
