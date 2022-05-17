@@ -38,7 +38,7 @@ class CustomConversion extends Property<dynamic, double> {
   ///      leafNodes: [
   ///        ConversionNode(
   ///          name: 'OneOver(DashPlus1)',
-  ///          conversionType: CONVERSION_TYPE.reciprocalConversion,
+  ///          conversionType: ConversionType.reciprocalConversion,
   ///        ),
   ///      ],
   ///    ),

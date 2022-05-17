@@ -2,7 +2,7 @@ import 'dart:collection';
 import 'package:units_converter/utils/utils.dart';
 
 /// Defines the type of the conversion between two nodes.
-enum CONVERSION_TYPE {
+enum ConversionType {
   /// The conversion is expressed in a form like: y=ax+b. Where a is
   /// [coefficientProduct] and b is [coefficientSum].
   linearConversion,
@@ -28,7 +28,7 @@ class ConversionNode {
     this.name,
     this.value,
     this.stringValue,
-    this.conversionType = CONVERSION_TYPE.linearConversion,
+    this.conversionType = ConversionType.linearConversion,
     this.base,
     this.isConverted = false,
   });
@@ -37,12 +37,12 @@ class ConversionNode {
   /// children of this parent node.
   List<ConversionNode> leafNodes;
 
-  /// This is the product coefficient of [CONVERSION_TYPE.linearConversion] and
-  /// [CONVERSION_TYPE.reciprocalConversion]. It is the a coefficient.
+  /// This is the product coefficient of [ConversionType.linearConversion] and
+  /// [ConversionType.reciprocalConversion]. It is the a coefficient.
   double coefficientProduct;
 
-  /// This is the sum coefficient of [CONVERSION_TYPE.linearConversion] and
-  /// [CONVERSION_TYPE.reciprocalConversion]. It is the b coefficient.
+  /// This is the sum coefficient of [ConversionType.linearConversion] and
+  /// [ConversionType.reciprocalConversion]. It is the b coefficient.
   double coefficientSum;
 
   /// This the value that has the unit of measurement of this node. This is
@@ -57,9 +57,9 @@ class ConversionNode {
   dynamic name;
 
   /// This define the conversion type between this node and its parent. The
-  /// default is [CONVERSION_TYPE.linearConversion]. This is useless for the
+  /// default is [ConversionType.linearConversion]. This is useless for the
   /// root node (because it has no parent node).
-  CONVERSION_TYPE conversionType;
+  ConversionType conversionType;
 
   /// This is defined just for numeral system conversion. It defines the base of
   /// this number. E.g. 16 for hexadecimal, 10 for decimal, 10 for binary, etc.
@@ -113,7 +113,7 @@ class ConversionNode {
     bool fromParentToChild = true,
   }) {
     switch (child.conversionType) {
-      case CONVERSION_TYPE.linearConversion:
+      case ConversionType.linearConversion:
         if (fromParentToChild) {
           child.value =
               (parent.value! - child.coefficientSum) / child.coefficientProduct;
@@ -122,7 +122,7 @@ class ConversionNode {
               child.value! * child.coefficientProduct + child.coefficientSum;
         }
         break;
-      case CONVERSION_TYPE.reciprocalConversion:
+      case ConversionType.reciprocalConversion:
         if (fromParentToChild) {
           child.value =
               child.coefficientProduct / (parent.value! - child.coefficientSum);
@@ -131,7 +131,7 @@ class ConversionNode {
               child.coefficientProduct / child.value! + child.coefficientSum;
         }
         break;
-      case CONVERSION_TYPE.baseConversion:
+      case ConversionType.baseConversion:
         // Note: in this case the parent is always the decimal
         assert(parent.base != null && child.base != null);
         if (fromParentToChild) {

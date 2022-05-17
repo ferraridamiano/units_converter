@@ -50,7 +50,7 @@ class Speed extends CustomConversion {
                     name: SPEED.knots,
                   ),
                   ConversionNode(
-                    conversionType: CONVERSION_TYPE.reciprocalConversion,
+                    conversionType: ConversionType.reciprocalConversion,
                     coefficientProduct: 60,
                     name: SPEED.minutesPerKilometer,
                   )

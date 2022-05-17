@@ -2,7 +2,6 @@ import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/units_converter.dart';
 
 void main() {
-
   // example 1: convert 1 meter in inches (the easy way)
   var inches = 1.convertFromTo(LENGTH.meters, LENGTH.inches);
   // Print it
@@ -86,7 +85,7 @@ void main() {
         leafNodes: [
           ConversionNode(
             name: 'OneOver(OneDash+1)',
-            conversionType: CONVERSION_TYPE.reciprocalConversion,
+            conversionType: ConversionType.reciprocalConversion,
           ),
         ],
       ),

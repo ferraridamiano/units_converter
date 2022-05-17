@@ -3,6 +3,7 @@ import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 
 //Available NUMERAL_SYSTEMS units
+// ignore: camel_case_types
 enum NUMERAL_SYSTEMS {
   decimal,
   hexadecimal,
@@ -35,17 +36,17 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
     _conversionTree =
         ConversionNode(name: NUMERAL_SYSTEMS.decimal, base: 10, leafNodes: [
       ConversionNode(
-        conversionType: CONVERSION_TYPE.baseConversion,
+        conversionType: ConversionType.baseConversion,
         base: 16,
         name: NUMERAL_SYSTEMS.hexadecimal,
       ),
       ConversionNode(
-        conversionType: CONVERSION_TYPE.baseConversion,
+        conversionType: ConversionType.baseConversion,
         base: 8,
         name: NUMERAL_SYSTEMS.octal,
       ),
       ConversionNode(
-        conversionType: CONVERSION_TYPE.baseConversion,
+        conversionType: ConversionType.baseConversion,
         base: 2,
         name: NUMERAL_SYSTEMS.binary,
       ),

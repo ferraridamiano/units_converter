@@ -4,6 +4,7 @@ import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
 
 //Available FUEL_CONSUMPTION units
+// ignore: camel_case_types
 enum FUEL_CONSUMPTION {
   kilometersPerLiter,
   litersPer100km,
@@ -35,7 +36,7 @@ class FuelConsumption extends CustomConversion {
                 name: FUEL_CONSUMPTION.kilometersPerLiter,
                 leafNodes: [
                   ConversionNode(
-                    conversionType: CONVERSION_TYPE.reciprocalConversion,
+                    conversionType: ConversionType.reciprocalConversion,
                     coefficientProduct: 100.0,
                     name: FUEL_CONSUMPTION.litersPer100km,
                   ),

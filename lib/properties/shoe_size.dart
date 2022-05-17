@@ -4,6 +4,7 @@ import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
 
 //Available SHOE_SIZE units
+// ignore: camel_case_types
 enum SHOE_SIZE {
   centimeters,
   inches,

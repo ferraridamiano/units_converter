@@ -4,6 +4,7 @@ import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_conversion.dart';
 
 //Available SI_PREFIXES units
+// ignore: camel_case_types
 enum SI_PREFIXES {
   base,
   deca,
