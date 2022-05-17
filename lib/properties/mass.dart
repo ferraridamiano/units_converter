@@ -1,7 +1,7 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/models/custom_conversion.dart';
+import 'package:units_converter/models/custom_property.dart';
 
 //Available MASS units
 enum MASS {
@@ -23,39 +23,7 @@ enum MASS {
   stones,
 }
 
-class Mass extends Property<MASS, double> {
-  ///Map between units and its symbol
-  static const Map<MASS, String?> mapSymbols = {
-    MASS.grams: 'g',
-    MASS.ettograms: 'hg',
-    MASS.kilograms: 'kg',
-    MASS.pounds: 'lb',
-    MASS.ounces: 'oz',
-    MASS.quintals: null,
-    MASS.tons: 't',
-    MASS.milligrams: 'mg',
-    MASS.uma: 'u',
-    MASS.carats: 'ct',
-    MASS.centigrams: 'cg',
-    MASS.pennyweights: 'dwt',
-    MASS.troyOunces: 'oz t',
-    MASS.stones: 'st.',
-  };
-
-  /// The number of significan figures to keep. E.g. 1.23456789) has 9
-  /// significant figures
-  int significantFigures;
-
-  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
-  /// significant figures and has trailing zeros. 1 has not trailing zeros.
-  bool removeTrailingZeros;
-
-  /// Whether to use the scientific notation (true) for [stringValue]s or
-  /// decimal notation (false)
-  bool useScientificNotation;
-
-  late CustomConversion _customConversion;
-
+class Mass extends CustomProperty {
   ///Class for mass conversions, e.g. if you want to convert 1 gram in ounces:
   ///```dart
   ///var mass = Mass(removeTrailingZeros: false);
@@ -63,92 +31,88 @@ class Mass extends Property<MASS, double> {
   ///print(MASS.ounces);
   /// ```
   Mass(
-      {this.significantFigures = 10,
-      this.removeTrailingZeros = true,
-      this.useScientificNotation = true,
-      name}) {
-    this.name = name ?? PROPERTY.mass;
-    size = MASS.values.length;
-    Node conversionTree = Node(
-      name: MASS.grams,
-      leafNodes: [
-        Node(
-          coefficientProduct: 100.0,
-          name: MASS.ettograms,
-        ),
-        Node(
-          coefficientProduct: 1000.0,
-          name: MASS.kilograms,
-          leafNodes: [
-            Node(
-              coefficientProduct: 0.45359237,
-              name: MASS.pounds,
+      {super.significantFigures,
+      super.removeTrailingZeros,
+      super.useScientificNotation,
+      name})
+      : super(
+          name: name ?? PROPERTY.mass,
+          mapSymbols: {
+            MASS.grams: 'g',
+            MASS.ettograms: 'hg',
+            MASS.kilograms: 'kg',
+            MASS.pounds: 'lb',
+            MASS.ounces: 'oz',
+            MASS.quintals: null,
+            MASS.tons: 't',
+            MASS.milligrams: 'mg',
+            MASS.uma: 'u',
+            MASS.carats: 'ct',
+            MASS.centigrams: 'cg',
+            MASS.pennyweights: 'dwt',
+            MASS.troyOunces: 'oz t',
+            MASS.stones: 'st.',
+          },
+          conversionTree: ConversionNode(name: MASS.grams, leafNodes: [
+            ConversionNode(
+              coefficientProduct: 100.0,
+              name: MASS.ettograms,
+            ),
+            ConversionNode(
+              coefficientProduct: 1000.0,
+              name: MASS.kilograms,
               leafNodes: [
-                Node(
-                  coefficientProduct: 1 / 16,
-                  name: MASS.ounces,
-                ),
-                Node(
-                  coefficientProduct: 14,
-                  name: MASS.stones,
+                ConversionNode(
+                  coefficientProduct: 0.45359237,
+                  name: MASS.pounds,
+                  leafNodes: [
+                    ConversionNode(
+                      coefficientProduct: 1 / 16,
+                      name: MASS.ounces,
+                    ),
+                    ConversionNode(
+                      coefficientProduct: 14,
+                      name: MASS.stones,
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-        Node(
-          coefficientProduct: 100000.0,
-          name: MASS.quintals,
-        ),
-        Node(
-          coefficientProduct: 1000000.0,
-          name: MASS.tons,
-        ),
-        Node(
-          coefficientProduct: 1e-2,
-          name: MASS.centigrams,
-        ),
-        Node(
-          coefficientProduct: 1e-3,
-          name: MASS.milligrams,
-        ),
-        Node(
-          coefficientProduct: 1.660539e-24,
-          name: MASS.uma,
-        ),
-        Node(
-          coefficientProduct: 0.2,
-          name: MASS.carats,
-        ),
-        Node(
-          coefficientProduct: 1.55517384,
-          name: MASS.pennyweights,
-          leafNodes: [
-            Node(
-              coefficientProduct: 20,
-              name: MASS.troyOunces,
+            ConversionNode(
+              coefficientProduct: 100000.0,
+              name: MASS.quintals,
             ),
-          ],
-        ),
-      ],
-    );
-
-    _customConversion = CustomConversion(
-        conversionTree: conversionTree,
-        mapSymbols: mapSymbols,
-        significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        useScientificNotation: useScientificNotation);
-  }
-
-  ///Converts a unit with a specific name (e.g. MASS.centigrams) and value to all other units
-  @override
-  void convert(MASS name, double? value) =>
-      _customConversion.convert(name, value);
-  @override
-  List<Unit> getAll() => _customConversion.getAll();
-  @override
-  Unit getUnit(name) => _customConversion.getUnit(name);
+            ConversionNode(
+              coefficientProduct: 1000000.0,
+              name: MASS.tons,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-2,
+              name: MASS.centigrams,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-3,
+              name: MASS.milligrams,
+            ),
+            ConversionNode(
+              coefficientProduct: 1.660539e-24,
+              name: MASS.uma,
+            ),
+            ConversionNode(
+              coefficientProduct: 0.2,
+              name: MASS.carats,
+            ),
+            ConversionNode(
+                coefficientProduct: 1.55517384,
+                name: MASS.pennyweights,
+                leafNodes: [
+                  ConversionNode(
+                    coefficientProduct: 20,
+                    name: MASS.troyOunces,
+                  ),
+                ]),
+          ]),
+        );
 
   Unit get grams => getUnit(MASS.grams);
   Unit get ettograms => getUnit(MASS.ettograms);

@@ -1,7 +1,7 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/models/custom_conversion.dart';
+import 'package:units_converter/models/custom_property.dart';
 
 //Available TIME units
 enum TIME {
@@ -22,40 +22,7 @@ enum TIME {
   millennium,
 }
 
-class Time extends Property<TIME, double> {
-  /// Map between units and its symbol
-  static const Map<TIME, String?> mapSymbols = {
-    TIME.seconds: 's',
-    TIME.deciseconds: 'ds',
-    TIME.centiseconds: 'cs',
-    TIME.milliseconds: 'ms',
-    TIME.microseconds: 'µs',
-    TIME.nanoseconds: 'ns',
-    TIME.minutes: 'min',
-    TIME.hours: 'h',
-    TIME.days: 'd',
-    TIME.weeks: null,
-    TIME.years365: 'a',
-    TIME.lustrum: null,
-    TIME.decades: null,
-    TIME.centuries: 'c.',
-    TIME.millennium: null,
-  };
-
-  /// The number of significan figures to keep. E.g. 1.23456789) has 9
-  /// significant figures
-  int significantFigures;
-
-  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
-  /// significant figures and has trailing zeros. 1 has not trailing zeros.
-  bool removeTrailingZeros;
-
-  /// Whether to use the scientific notation (true) for [stringValue]s or
-  /// decimal notation (false)
-  bool useScientificNotation;
-
-  late CustomConversion _customConversion;
-
+class Time extends CustomProperty {
   ///Class for time conversions, e.g. if you want to convert 1 hour in seconds:
   ///```dart
   ///var time = Time(removeTrailingZeros: false);
@@ -63,79 +30,92 @@ class Time extends Property<TIME, double> {
   ///print(TIME.seconds);
   /// ```
   Time(
-      {this.significantFigures = 10,
-      this.removeTrailingZeros = true,
-      this.useScientificNotation = true,
-      name}) {
-    this.name = name ?? PROPERTY.time;
-    size = TIME.values.length;
-    Node conversionTree = Node(name: TIME.seconds, leafNodes: [
-      Node(
-        coefficientProduct: 1e-1,
-        name: TIME.deciseconds,
-      ),
-      Node(
-        coefficientProduct: 1e-2,
-        name: TIME.centiseconds,
-      ),
-      Node(
-        coefficientProduct: 1e-3,
-        name: TIME.milliseconds,
-      ),
-      Node(
-        coefficientProduct: 1e-6,
-        name: TIME.microseconds,
-      ),
-      Node(
-        coefficientProduct: 1e-9,
-        name: TIME.nanoseconds,
-      ),
-      Node(coefficientProduct: 60.0, name: TIME.minutes, leafNodes: [
-        Node(coefficientProduct: 60.0, name: TIME.hours, leafNodes: [
-          Node(coefficientProduct: 24.0, name: TIME.days, leafNodes: [
-            Node(
-              coefficientProduct: 7.0,
-              name: TIME.weeks,
+      {super.significantFigures,
+      super.removeTrailingZeros,
+      super.useScientificNotation,
+      name})
+      : super(
+          name: name ?? PROPERTY.time,
+          mapSymbols: {
+            TIME.seconds: 's',
+            TIME.deciseconds: 'ds',
+            TIME.centiseconds: 'cs',
+            TIME.milliseconds: 'ms',
+            TIME.microseconds: 'µs',
+            TIME.nanoseconds: 'ns',
+            TIME.minutes: 'min',
+            TIME.hours: 'h',
+            TIME.days: 'd',
+            TIME.weeks: null,
+            TIME.years365: 'a',
+            TIME.lustrum: null,
+            TIME.decades: null,
+            TIME.centuries: 'c.',
+            TIME.millennium: null,
+          },
+          conversionTree: ConversionNode(name: TIME.seconds, leafNodes: [
+            ConversionNode(
+              coefficientProduct: 1e-1,
+              name: TIME.deciseconds,
             ),
-            Node(coefficientProduct: 365.0, name: TIME.years365, leafNodes: [
-              Node(
-                coefficientProduct: 5.0,
-                name: TIME.lustrum,
-              ),
-              Node(
-                coefficientProduct: 10.0,
-                name: TIME.decades,
-              ),
-              Node(
-                coefficientProduct: 100.0,
-                name: TIME.centuries,
-              ),
-              Node(
-                coefficientProduct: 1000.0,
-                name: TIME.millennium,
-              ),
-            ]),
+            ConversionNode(
+              coefficientProduct: 1e-2,
+              name: TIME.centiseconds,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-3,
+              name: TIME.milliseconds,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-6,
+              name: TIME.microseconds,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-9,
+              name: TIME.nanoseconds,
+            ),
+            ConversionNode(
+                coefficientProduct: 60.0,
+                name: TIME.minutes,
+                leafNodes: [
+                  ConversionNode(
+                      coefficientProduct: 60.0,
+                      name: TIME.hours,
+                      leafNodes: [
+                        ConversionNode(
+                            coefficientProduct: 24.0,
+                            name: TIME.days,
+                            leafNodes: [
+                              ConversionNode(
+                                coefficientProduct: 7.0,
+                                name: TIME.weeks,
+                              ),
+                              ConversionNode(
+                                  coefficientProduct: 365.0,
+                                  name: TIME.years365,
+                                  leafNodes: [
+                                    ConversionNode(
+                                      coefficientProduct: 5.0,
+                                      name: TIME.lustrum,
+                                    ),
+                                    ConversionNode(
+                                      coefficientProduct: 10.0,
+                                      name: TIME.decades,
+                                    ),
+                                    ConversionNode(
+                                      coefficientProduct: 100.0,
+                                      name: TIME.centuries,
+                                    ),
+                                    ConversionNode(
+                                      coefficientProduct: 1000.0,
+                                      name: TIME.millennium,
+                                    ),
+                                  ]),
+                            ]),
+                      ]),
+                ]),
           ]),
-        ]),
-      ]),
-    ]);
-
-    _customConversion = CustomConversion(
-        conversionTree: conversionTree,
-        mapSymbols: mapSymbols,
-        significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        useScientificNotation: useScientificNotation);
-  }
-
-  ///Converts a unit with a specific name (e.g. TIME.days) and value to all other units
-  @override
-  void convert(TIME name, double? value) =>
-      _customConversion.convert(name, value);
-  @override
-  List<Unit> getAll() => _customConversion.getAll();
-  @override
-  Unit getUnit(name) => _customConversion.getUnit(name);
+        );
 
   Unit get seconds => getUnit(TIME.seconds);
   Unit get deciseconds => getUnit(TIME.deciseconds);

@@ -1,9 +1,10 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/models/custom_conversion.dart';
+import 'package:units_converter/models/custom_property.dart';
 
 //Available SHOE_SIZE units
+// ignore: camel_case_types
 enum SHOE_SIZE {
   centimeters,
   inches,
@@ -17,35 +18,7 @@ enum SHOE_SIZE {
   japan,
 }
 
-class ShoeSize extends Property<SHOE_SIZE, double> {
-  /// Map between units and its symbol
-  static const Map<SHOE_SIZE, String?> mapSymbols = {
-    SHOE_SIZE.centimeters: 'cm',
-    SHOE_SIZE.inches: 'in',
-    SHOE_SIZE.euChina: null,
-    SHOE_SIZE.ukIndiaChild: null,
-    SHOE_SIZE.ukIndiaMan: null,
-    SHOE_SIZE.ukIndiaWoman: null,
-    SHOE_SIZE.usaCanadaChild: null,
-    SHOE_SIZE.usaCanadaMan: null,
-    SHOE_SIZE.usaCanadaWoman: null,
-    SHOE_SIZE.japan: null,
-  };
-
-  /// The number of significan figures to keep. E.g. 1.23456789) has 9
-  /// significant figures
-  int significantFigures;
-
-  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
-  /// significant figures and has trailing zeros. 1 has not trailing zeros.
-  bool removeTrailingZeros;
-
-  /// Whether to use the scientific notation (true) for [stringValue]s or
-  /// decimal notation (false)
-  bool useScientificNotation;
-
-  late CustomConversion _customConversion;
-
+class ShoeSize extends CustomProperty {
   ///Class for ShoeSize conversions, e.g. if you want to convert 1 centimeter in eu shoes size:
   ///```dart
   ///var ShoeSize = ShoeSize(removeTrailingZeros: false);
@@ -53,72 +26,72 @@ class ShoeSize extends Property<SHOE_SIZE, double> {
   ///print(SHOE_SIZE.eu_china);
   /// ```
   ShoeSize(
-      {this.significantFigures = 10,
-      this.removeTrailingZeros = true,
-      this.useScientificNotation = true,
-      name}) {
-    this.name = name ?? PROPERTY.shoeSize;
-    size = SHOE_SIZE.values.length;
-    Node conversionTree = Node(name: SHOE_SIZE.centimeters, leafNodes: [
-      Node(
-        coefficientProduct: 1 / 1.5,
-        coefficientSum: -1.5,
-        name: SHOE_SIZE.euChina,
-      ),
-      Node(coefficientProduct: 2.54, name: SHOE_SIZE.inches, leafNodes: [
-        Node(
-          coefficientProduct: 1 / 3,
-          coefficientSum: 10 / 3,
-          name: SHOE_SIZE.ukIndiaChild,
-        ),
-        Node(
-          coefficientProduct: 1 / 3,
-          coefficientSum: 23 / 3,
-          name: SHOE_SIZE.ukIndiaMan,
-        ),
-        Node(
-          coefficientProduct: 1 / 3,
-          coefficientSum: 23.5 / 3,
-          name: SHOE_SIZE.ukIndiaWoman,
-        ),
-        Node(
-          coefficientProduct: 1 / 3,
-          coefficientSum: 49 / 9,
-          name: SHOE_SIZE.usaCanadaChild,
-        ),
-        Node(
-          coefficientProduct: 1 / 3,
-          coefficientSum: 22 / 3,
-          name: SHOE_SIZE.usaCanadaMan,
-        ),
-        Node(
-          coefficientProduct: 1 / 3,
-          coefficientSum: 21 / 3,
-          name: SHOE_SIZE.usaCanadaWoman,
-        ),
-      ]),
-      Node(
-        coefficientSum: -1.5,
-        name: SHOE_SIZE.japan,
-      ),
-    ]);
-
-    _customConversion = CustomConversion(
-        conversionTree: conversionTree,
-        mapSymbols: mapSymbols,
-        significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        useScientificNotation: useScientificNotation);
-  }
-
-  ///Converts a unit with a specific name (e.g. SHOE_SIZE.uk_india_woman) and value to all other units
-  @override
-  void convert(SHOE_SIZE name, double? value) =>
-      _customConversion.convert(name, value);
-  @override
-  List<Unit> getAll() => _customConversion.getAll();
-  @override
-  Unit getUnit(name) => _customConversion.getUnit(name);
+      {super.significantFigures,
+      super.removeTrailingZeros,
+      super.useScientificNotation,
+      name})
+      : super(
+          name: name ?? PROPERTY.shoeSize,
+          mapSymbols: {
+            SHOE_SIZE.centimeters: 'cm',
+            SHOE_SIZE.inches: 'in',
+            SHOE_SIZE.euChina: null,
+            SHOE_SIZE.ukIndiaChild: null,
+            SHOE_SIZE.ukIndiaMan: null,
+            SHOE_SIZE.ukIndiaWoman: null,
+            SHOE_SIZE.usaCanadaChild: null,
+            SHOE_SIZE.usaCanadaMan: null,
+            SHOE_SIZE.usaCanadaWoman: null,
+            SHOE_SIZE.japan: null,
+          },
+          conversionTree:
+              ConversionNode(name: SHOE_SIZE.centimeters, leafNodes: [
+            ConversionNode(
+              coefficientProduct: 1 / 1.5,
+              coefficientSum: -1.5,
+              name: SHOE_SIZE.euChina,
+            ),
+            ConversionNode(
+                coefficientProduct: 2.54,
+                name: SHOE_SIZE.inches,
+                leafNodes: [
+                  ConversionNode(
+                    coefficientProduct: 1 / 3,
+                    coefficientSum: 10 / 3,
+                    name: SHOE_SIZE.ukIndiaChild,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1 / 3,
+                    coefficientSum: 23 / 3,
+                    name: SHOE_SIZE.ukIndiaMan,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1 / 3,
+                    coefficientSum: 23.5 / 3,
+                    name: SHOE_SIZE.ukIndiaWoman,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1 / 3,
+                    coefficientSum: 49 / 9,
+                    name: SHOE_SIZE.usaCanadaChild,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1 / 3,
+                    coefficientSum: 22 / 3,
+                    name: SHOE_SIZE.usaCanadaMan,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1 / 3,
+                    coefficientSum: 21 / 3,
+                    name: SHOE_SIZE.usaCanadaWoman,
+                  ),
+                ]),
+            ConversionNode(
+              coefficientSum: -1.5,
+              name: SHOE_SIZE.japan,
+            ),
+          ]),
+        );
 
   Unit get centimeters => getUnit(SHOE_SIZE.centimeters);
   Unit get inches => getUnit(SHOE_SIZE.inches);

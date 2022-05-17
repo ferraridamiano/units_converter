@@ -1,7 +1,7 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/models/custom_conversion.dart';
+import 'package:units_converter/models/custom_property.dart';
 
 //Available VOLUME units
 enum VOLUME {
@@ -25,43 +25,7 @@ enum VOLUME {
   usGill,
 }
 
-class Volume extends Property<VOLUME, double> {
-  /// Map between units and its symbol
-  static const Map<VOLUME, String?> mapSymbols = {
-    VOLUME.cubicMeters: 'm³',
-    VOLUME.liters: 'l',
-    VOLUME.imperialGallons: 'imp gal',
-    VOLUME.usGallons: 'US gal',
-    VOLUME.imperialPints: 'imp pt',
-    VOLUME.usPints: 'US pt',
-    VOLUME.milliliters: 'ml',
-    VOLUME.tablespoonsUs: 'tbsp.',
-    VOLUME.australianTablespoons: 'tbsp.',
-    VOLUME.cups: 'cup',
-    VOLUME.cubicCentimeters: 'cm³',
-    VOLUME.cubicFeet: 'ft³',
-    VOLUME.cubicInches: 'in³',
-    VOLUME.cubicMillimeters: 'mm³',
-    VOLUME.imperialFluidOunces: 'imp fl oz',
-    VOLUME.usFluidOunces: 'US fl oz',
-    VOLUME.imperialGill: 'Imp. gi.',
-    VOLUME.usGill: 'US. liq. gi',
-  };
-
-  /// The number of significan figures to keep. E.g. 1.23456789) has 9
-  /// significant figures
-  int significantFigures;
-
-  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
-  /// significant figures and has trailing zeros. 1 has not trailing zeros.
-  bool removeTrailingZeros;
-
-  /// Whether to use the scientific notation (true) for [stringValue]s or
-  /// decimal notation (false)
-  bool useScientificNotation;
-
-  late CustomConversion _customConversion;
-
+class Volume extends CustomProperty {
   ///Class for volume conversions, e.g. if you want to convert 1 liter in US Gallons:
   ///```dart
   ///var volume = Volume(removeTrailingZeros: false);
@@ -69,105 +33,113 @@ class Volume extends Property<VOLUME, double> {
   ///print(VOLUME.us_gallons);
   /// ```
   Volume(
-      {this.significantFigures = 10,
-      this.removeTrailingZeros = true,
-      this.useScientificNotation = true,
-      name}) {
-    this.name = name ?? PROPERTY.volume;
-    size = VOLUME.values.length;
-    Node conversionTree = Node(
-      name: VOLUME.cubicMeters,
-      leafNodes: [
-        Node(coefficientProduct: 1e-3, name: VOLUME.liters, leafNodes: [
-          Node(
-            coefficientProduct: 4.54609,
-            name: VOLUME.imperialGallons,
-          ),
-          Node(
-            coefficientProduct: 3.785411784,
-            name: VOLUME.usGallons,
-          ),
-          Node(
-            coefficientProduct: 0.56826125,
-            name: VOLUME.imperialPints,
-            leafNodes: [
-              Node(
-                coefficientProduct: 1 / 20,
-                name: VOLUME.imperialFluidOunces,
+      {super.significantFigures,
+      super.removeTrailingZeros,
+      super.useScientificNotation,
+      name})
+      : super(
+          name: name ?? PROPERTY.volume,
+          mapSymbols: {
+            VOLUME.cubicMeters: 'm³',
+            VOLUME.liters: 'l',
+            VOLUME.imperialGallons: 'imp gal',
+            VOLUME.usGallons: 'US gal',
+            VOLUME.imperialPints: 'imp pt',
+            VOLUME.usPints: 'US pt',
+            VOLUME.milliliters: 'ml',
+            VOLUME.tablespoonsUs: 'tbsp.',
+            VOLUME.australianTablespoons: 'tbsp.',
+            VOLUME.cups: 'cup',
+            VOLUME.cubicCentimeters: 'cm³',
+            VOLUME.cubicFeet: 'ft³',
+            VOLUME.cubicInches: 'in³',
+            VOLUME.cubicMillimeters: 'mm³',
+            VOLUME.imperialFluidOunces: 'imp fl oz',
+            VOLUME.usFluidOunces: 'US fl oz',
+            VOLUME.imperialGill: 'Imp. gi.',
+            VOLUME.usGill: 'US. liq. gi',
+          },
+          conversionTree: ConversionNode(name: VOLUME.cubicMeters, leafNodes: [
+            ConversionNode(
+                coefficientProduct: 1e-3,
+                name: VOLUME.liters,
                 leafNodes: [
-                  Node(coefficientProduct: 5, name: VOLUME.imperialGill),
-                ],
-              ),
-            ],
-          ),
-          Node(
-            coefficientProduct: 0.473176473,
-            name: VOLUME.usPints,
-            leafNodes: [
-              Node(
-                coefficientProduct: 1 / 16,
-                name: VOLUME.usFluidOunces,
-                leafNodes: [
-                  Node(
-                    coefficientProduct: 4,
-                    name: VOLUME.usGill,
+                  ConversionNode(
+                    coefficientProduct: 4.54609,
+                    name: VOLUME.imperialGallons,
                   ),
-                ],
-              ),
-            ],
-          ),
-          Node(coefficientProduct: 1e-3, name: VOLUME.milliliters, leafNodes: [
-            Node(
-              coefficientProduct: 14.8,
-              name: VOLUME.tablespoonsUs,
-            ),
-            Node(
-              coefficientProduct: 20.0,
-              name: VOLUME.australianTablespoons,
-            ),
-            Node(
-              coefficientProduct: 240.0,
-              name: VOLUME.cups,
+                  ConversionNode(
+                    coefficientProduct: 3.785411784,
+                    name: VOLUME.usGallons,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 0.56826125,
+                    name: VOLUME.imperialPints,
+                    leafNodes: [
+                      ConversionNode(
+                        coefficientProduct: 1 / 20,
+                        name: VOLUME.imperialFluidOunces,
+                        leafNodes: [
+                          ConversionNode(
+                              coefficientProduct: 5, name: VOLUME.imperialGill),
+                        ],
+                      ),
+                    ],
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 0.473176473,
+                    name: VOLUME.usPints,
+                    leafNodes: [
+                      ConversionNode(
+                        coefficientProduct: 1 / 16,
+                        name: VOLUME.usFluidOunces,
+                        leafNodes: [
+                          ConversionNode(
+                            coefficientProduct: 4,
+                            name: VOLUME.usGill,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  ConversionNode(
+                      coefficientProduct: 1e-3,
+                      name: VOLUME.milliliters,
+                      leafNodes: [
+                        ConversionNode(
+                          coefficientProduct: 14.8,
+                          name: VOLUME.tablespoonsUs,
+                        ),
+                        ConversionNode(
+                          coefficientProduct: 20.0,
+                          name: VOLUME.australianTablespoons,
+                        ),
+                        ConversionNode(
+                          coefficientProduct: 240.0,
+                          name: VOLUME.cups,
+                        ),
+                      ]),
+                ]),
+            ConversionNode(
+                coefficientProduct: 1e-6,
+                name: VOLUME.cubicCentimeters,
+                leafNodes: [
+                  ConversionNode(
+                      coefficientProduct: 16.387064,
+                      name: VOLUME.cubicInches,
+                      leafNodes: [
+                        ConversionNode(
+                          coefficientProduct: 1728.0,
+                          name: VOLUME.cubicFeet,
+                        ),
+                      ]),
+                ]),
+            ConversionNode(
+              coefficientProduct: 1e-9,
+              name: VOLUME.cubicMillimeters,
             ),
           ]),
-        ]),
-        Node(
-            coefficientProduct: 1e-6,
-            name: VOLUME.cubicCentimeters,
-            leafNodes: [
-              Node(
-                  coefficientProduct: 16.387064,
-                  name: VOLUME.cubicInches,
-                  leafNodes: [
-                    Node(
-                      coefficientProduct: 1728.0,
-                      name: VOLUME.cubicFeet,
-                    ),
-                  ]),
-            ]),
-        Node(
-          coefficientProduct: 1e-9,
-          name: VOLUME.cubicMillimeters,
-        ),
-      ],
-    );
-
-    _customConversion = CustomConversion(
-        conversionTree: conversionTree,
-        mapSymbols: mapSymbols,
-        significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        useScientificNotation: useScientificNotation);
-  }
-
-  ///Converts a unit with a specific name (e.g. VOLUME.cubic_feet) and value to all other units
-  @override
-  void convert(VOLUME name, double? value) =>
-      _customConversion.convert(name, value);
-  @override
-  List<Unit> getAll() => _customConversion.getAll();
-  @override
-  Unit getUnit(name) => _customConversion.getUnit(name);
+        );
 
   Unit get cubicMeters => getUnit(VOLUME.cubicMeters);
   Unit get liters => getUnit(VOLUME.liters);

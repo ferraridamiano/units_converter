@@ -1,16 +1,23 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/units_converter.dart';
 
 void main() {
-  //example 1: convert 1 meter in inches
+  // example 1: convert 1 meter in inches (the easy way)
+  var inches = 1.convertFromTo(LENGTH.meters, LENGTH.inches);
+  // Print it
+  print(inches);
+
+  //----------------------------------------------------------------------------
+
+  //example 2: convert 1 meter in inches
   var length = Length()..convert(LENGTH.meters, 1); //We give 1 meter as input
   var unit = length.inches; //We get all ther others units
   print(
       'name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
 
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
 
-  //example 2: convert 1 degree in all ther other angle units
+  //example 3: convert 1 degree in all ther other angle units
   var angle = Angle(
       significantFigures: 7,
       removeTrailingZeros:
@@ -23,9 +30,9 @@ void main() {
         'name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
   }
 
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
 
-  //example 3: convert 100 (decimal) in binary and hexadecimal
+  //example 4: convert 100 (decimal) in binary and hexadecimal
   var numeralSystems = NumeralSystems(); //initialize NumeralSystems object
   numeralSystems.convert(
       NUMERAL_SYSTEMS.decimal, '100'); //We give 100 decimal as input
@@ -35,9 +42,9 @@ void main() {
       'Hexadecimal: ${numeralSystems.hexadecimal.stringValue}'); //We get the hexadecimal value
   //Warning! Numeral systems conversion is the only conversion that need the input as a string, and not as a double/int for obvous reasons
 
-  //------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
 
-  //example 4: given a list of coefficient converts units
+  //example 5: given a list of coefficient converts units
   //Define the relation between a units and the others. One of the units MUST have a value of 1
   //(it will be considered the base unit from where to start the conversion)
   final Map<String, double> conversionMap = {
@@ -57,28 +64,28 @@ void main() {
   };
 
   var customConversion =
-      SimpleCustomConversion(conversionMap, mapSymbols: mapSymbols);
+      SimpleCustomProperty(conversionMap, mapSymbols: mapSymbols);
   customConversion.convert('EUR', 1);
   Unit usd = customConversion.getUnit('USD');
   print('1€ = ${usd.stringValue}${usd.symbol}');
 
   //----------------------------------------------------------------------------
 
-  //Example 5:
-  Node conversionTree = Node(
+  //Example 6:
+  ConversionNode conversionTree = ConversionNode(
     name: 'Dash',
     leafNodes: [
-      Node(
+      ConversionNode(
         name: 'KiloDash',
         coefficientProduct: 1000,
       ),
-      Node(
+      ConversionNode(
         name: 'Dash+1',
         coefficientSum: -1,
         leafNodes: [
-          Node(
+          ConversionNode(
             name: 'OneOver(OneDash+1)',
-            conversionType: CONVERSION_TYPE.reciprocalConversion,
+            conversionType: ConversionType.reciprocalConversion,
           ),
         ],
       ),
@@ -91,7 +98,7 @@ void main() {
     'Dash+1': 'dsh+1',
     'OneOver(OneDash+1)': '1/(dsh+1)',
   };
-  var dash = CustomConversion(
+  var dash = CustomProperty(
     conversionTree: conversionTree,
     mapSymbols: symbolsMap,
     name: 'Conversion of Dash',

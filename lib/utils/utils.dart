@@ -96,10 +96,10 @@ String valueToString(
   //Recompose the string
   String finalString = integerPart;
   if (decimalPart != null) {
-    finalString = finalString + '.$decimalPart';
+    finalString = '$finalString.$decimalPart';
   }
   if (exponentialPart != null) {
-    finalString = finalString + 'e$exponentialPart';
+    finalString = '${finalString}e$exponentialPart';
   }
   return finalString;
 }

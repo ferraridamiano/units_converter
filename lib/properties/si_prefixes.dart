@@ -1,9 +1,10 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/models/custom_conversion.dart';
+import 'package:units_converter/models/custom_property.dart';
 
 //Available SI_PREFIXES units
+// ignore: camel_case_types
 enum SI_PREFIXES {
   base,
   deca,
@@ -28,46 +29,7 @@ enum SI_PREFIXES {
   yocto,
 }
 
-class SIPrefixes extends Property<SI_PREFIXES, double> {
-  /// Map between units and its symbol
-  static const Map<SI_PREFIXES, String?> mapSymbols = {
-    SI_PREFIXES.base: null,
-    SI_PREFIXES.deca: 'da-',
-    SI_PREFIXES.hecto: 'h-',
-    SI_PREFIXES.kilo: 'k-',
-    SI_PREFIXES.mega: 'M-',
-    SI_PREFIXES.giga: 'G-',
-    SI_PREFIXES.tera: 'T-',
-    SI_PREFIXES.peta: 'P-',
-    SI_PREFIXES.exa: 'E-',
-    SI_PREFIXES.zetta: 'Z-',
-    SI_PREFIXES.yotta: 'Y-',
-    SI_PREFIXES.deci: 'd-',
-    SI_PREFIXES.centi: 'c-',
-    SI_PREFIXES.milli: 'm-',
-    SI_PREFIXES.micro: 'µ-',
-    SI_PREFIXES.nano: 'n-',
-    SI_PREFIXES.pico: 'p-',
-    SI_PREFIXES.femto: 'f-',
-    SI_PREFIXES.atto: 'a-',
-    SI_PREFIXES.zepto: 'z-',
-    SI_PREFIXES.yocto: 'y-',
-  };
-
-  /// The number of significan figures to keep. E.g. 1.23456789) has 9
-  /// significant figures
-  int significantFigures;
-
-  /// Whether to remove the trailing zeros or not. E.g 1.00000000 has 9
-  /// significant figures and has trailing zeros. 1 has not trailing zeros.
-  bool removeTrailingZeros;
-
-  /// Whether to use the scientific notation (true) for [stringValue]s or
-  /// decimal notation (false)
-  bool useScientificNotation;
-
-  late CustomConversion _customConversion;
-
+class SIPrefixes extends CustomProperty {
   ///Class for si_prefixes conversions, e.g. if you want to convert 1 base unit in milli:
   ///```dart
   ///var si_prefixes = Si_Prefixes(removeTrailingZeros: false);
@@ -75,111 +37,118 @@ class SIPrefixes extends Property<SI_PREFIXES, double> {
   ///print(SI_PREFIXES.milli);
   /// ```
   SIPrefixes(
-      {this.significantFigures = 10,
-      this.removeTrailingZeros = true,
-      this.useScientificNotation = true,
-      name}) {
-    this.name = name ?? PROPERTY.siPrefixes;
-    size = SI_PREFIXES.values.length;
-    Node conversionTree = Node(name: SI_PREFIXES.base, leafNodes: [
-      Node(
-        coefficientProduct: 1e1,
-        name: SI_PREFIXES.deca,
-      ),
-      Node(
-        coefficientProduct: 1e2,
-        name: SI_PREFIXES.hecto,
-      ),
-      Node(
-        coefficientProduct: 1e3,
-        name: SI_PREFIXES.kilo,
-      ),
-      Node(
-        coefficientProduct: 1e6,
-        name: SI_PREFIXES.mega,
-      ),
-      Node(
-        coefficientProduct: 1e9,
-        name: SI_PREFIXES.giga,
-      ),
-      Node(
-        coefficientProduct: 1e12,
-        name: SI_PREFIXES.tera,
-      ),
-      Node(
-        coefficientProduct: 1e15,
-        name: SI_PREFIXES.peta,
-      ),
-      Node(
-        coefficientProduct: 1e18,
-        name: SI_PREFIXES.exa,
-      ),
-      Node(
-        coefficientProduct: 1e21,
-        name: SI_PREFIXES.zetta,
-      ),
-      Node(
-        coefficientProduct: 1e24,
-        name: SI_PREFIXES.yotta,
-      ),
-      Node(
-        coefficientProduct: 1e-1,
-        name: SI_PREFIXES.deci,
-      ),
-      Node(
-        coefficientProduct: 1e-2,
-        name: SI_PREFIXES.centi,
-      ),
-      Node(
-        coefficientProduct: 1e-3,
-        name: SI_PREFIXES.milli,
-      ),
-      Node(
-        coefficientProduct: 1e-6,
-        name: SI_PREFIXES.micro,
-      ),
-      Node(
-        coefficientProduct: 1e-9,
-        name: SI_PREFIXES.nano,
-      ),
-      Node(
-        coefficientProduct: 1e-12,
-        name: SI_PREFIXES.pico,
-      ),
-      Node(
-        coefficientProduct: 1e-15,
-        name: SI_PREFIXES.femto,
-      ),
-      Node(
-        coefficientProduct: 1e-18,
-        name: SI_PREFIXES.atto,
-      ),
-      Node(
-        coefficientProduct: 1e-21,
-        name: SI_PREFIXES.zepto,
-      ),
-      Node(
-        coefficientProduct: 1e-24,
-        name: SI_PREFIXES.yocto,
-      ),
-    ]);
-
-    _customConversion = CustomConversion(
-        conversionTree: conversionTree,
-        mapSymbols: mapSymbols,
-        significantFigures: significantFigures,
-        removeTrailingZeros: removeTrailingZeros,
-        useScientificNotation: useScientificNotation);
-  }
-
-  ///Converts a unit with a specific name (e.g. SI_PREFIXES.milli) and value to all other units
-  @override
-  void convert(SI_PREFIXES name, double? value) =>
-      _customConversion.convert(name, value);
-  @override
-  List<Unit> getAll() => _customConversion.getAll();
-  @override
-  Unit getUnit(name) => _customConversion.getUnit(name);
+      {super.significantFigures,
+      super.removeTrailingZeros,
+      super.useScientificNotation,
+      name})
+      : super(
+          name: name ?? PROPERTY.siPrefixes,
+          mapSymbols: {
+            SI_PREFIXES.base: null,
+            SI_PREFIXES.deca: 'da-',
+            SI_PREFIXES.hecto: 'h-',
+            SI_PREFIXES.kilo: 'k-',
+            SI_PREFIXES.mega: 'M-',
+            SI_PREFIXES.giga: 'G-',
+            SI_PREFIXES.tera: 'T-',
+            SI_PREFIXES.peta: 'P-',
+            SI_PREFIXES.exa: 'E-',
+            SI_PREFIXES.zetta: 'Z-',
+            SI_PREFIXES.yotta: 'Y-',
+            SI_PREFIXES.deci: 'd-',
+            SI_PREFIXES.centi: 'c-',
+            SI_PREFIXES.milli: 'm-',
+            SI_PREFIXES.micro: 'µ-',
+            SI_PREFIXES.nano: 'n-',
+            SI_PREFIXES.pico: 'p-',
+            SI_PREFIXES.femto: 'f-',
+            SI_PREFIXES.atto: 'a-',
+            SI_PREFIXES.zepto: 'z-',
+            SI_PREFIXES.yocto: 'y-',
+          },
+          conversionTree: ConversionNode(name: SI_PREFIXES.base, leafNodes: [
+            ConversionNode(
+              coefficientProduct: 1e1,
+              name: SI_PREFIXES.deca,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e2,
+              name: SI_PREFIXES.hecto,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e3,
+              name: SI_PREFIXES.kilo,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e6,
+              name: SI_PREFIXES.mega,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e9,
+              name: SI_PREFIXES.giga,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e12,
+              name: SI_PREFIXES.tera,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e15,
+              name: SI_PREFIXES.peta,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e18,
+              name: SI_PREFIXES.exa,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e21,
+              name: SI_PREFIXES.zetta,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e24,
+              name: SI_PREFIXES.yotta,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-1,
+              name: SI_PREFIXES.deci,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-2,
+              name: SI_PREFIXES.centi,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-3,
+              name: SI_PREFIXES.milli,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-6,
+              name: SI_PREFIXES.micro,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-9,
+              name: SI_PREFIXES.nano,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-12,
+              name: SI_PREFIXES.pico,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-15,
+              name: SI_PREFIXES.femto,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-18,
+              name: SI_PREFIXES.atto,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-21,
+              name: SI_PREFIXES.zepto,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-24,
+              name: SI_PREFIXES.yocto,
+            ),
+          ]),
+        );
 
   Unit get base => getUnit(SI_PREFIXES.base);
   Unit get deca => getUnit(SI_PREFIXES.deca);

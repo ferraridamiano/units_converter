@@ -1,7 +1,8 @@
 export 'package:units_converter/models/unit.dart';
 export 'package:units_converter/models/property.dart';
-export 'package:units_converter/models/simple_custom_conversion.dart';
-export 'package:units_converter/models/custom_conversion.dart';
+export 'package:units_converter/models/simple_custom_property.dart';
+export 'package:units_converter/models/custom_property.dart';
+export 'package:units_converter/models/extension_converter.dart';
 export 'package:units_converter/properties/length.dart';
 export 'package:units_converter/properties/area.dart';
 export 'package:units_converter/properties/volume.dart';

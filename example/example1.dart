@@ -1,11 +1,13 @@
 import 'package:units_converter/units_converter.dart';
 
 void main() {
-  // We give 1 meter as input
-  var length = Length()..convert(LENGTH.meters, 1);
-  // We get the inches
-  var unit = length.inches;
-  // We print the Unit
-  print(
-      'name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
+  // Convert 1 meter in inches
+  var inches = 1.convertFromTo(LENGTH.meters, LENGTH.inches);
+  // Print it
+  print(inches);
+
+  // Convert 8B hexadecimal to octal
+  var octal =
+      '8B'.convertFromTo(NUMERAL_SYSTEMS.hexadecimal, NUMERAL_SYSTEMS.octal);
+  print(octal);
 }

@@ -1,11 +1,11 @@
-import 'package:units_converter/models/node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/utils/utils.dart';
 
-class CustomConversion extends Property<dynamic, double> {
+class CustomProperty extends Property<dynamic, double> {
   //Map between units and its symbol
-  final Map<dynamic, String?> mapSymbols;
+  Map<dynamic, String?> mapSymbols;
 
   /// The number of significan figures to keep. E.g. 1.23456789) has 9
   /// significant figures
@@ -20,16 +20,52 @@ class CustomConversion extends Property<dynamic, double> {
   bool useScientificNotation;
 
   final List<Unit> _unitList = [];
-  late List<Node> _nodeList;
-  Node conversionTree;
+  late List<ConversionNode> _nodeList;
+  ConversionNode conversionTree;
 
-  ///Class for angle conversions, e.g. if you want to convert 1 radiant in degree:
+  ///Class for custom conversions. E.g.:
   ///```dart
-  ///var angle = Angle(removeTrailingZeros: false);
-  ///angle.convert(Unit(ANGLE.radians, value: 1));
-  ///print(ANGLE.degree);
+  ///ConversionNode conversionTree = ConversionNode(
+  ///  name: 'Dash',    // base unit
+  ///  leafNodes: [
+  ///    ConversionNode(
+  ///      name: 'KiloDash',
+  ///      coefficientProduct: 1000, // 1 k=KiloDash is 1000 Dash
+  ///    ),
+  ///    ConversionNode(
+  ///      name: 'DashPlus1',
+  ///      coefficientSum: -1,
+  ///      leafNodes: [
+  ///        ConversionNode(
+  ///          name: 'OneOver(DashPlus1)',
+  ///          conversionType: ConversionType.reciprocalConversion,
+  ///        ),
+  ///      ],
+  ///    ),
+  ///  ],
+  ///);
+  ///// Symbols of each unit. Must be initialized (even with each value to null)
+  ///final Map<String, String?> symbolsMap = {
+  ///  'Dash': 'dsh',
+  ///  'KiloDash': 'kdsh',
+  ///  'DashPlus1': 'dsh+1',
+  ///  'OneOver(DashPlus1)': null,
+  ///};
+  ///
+  ///var dash = CustomProperty(
+  ///  conversionTree: conversionTree,
+  ///  mapSymbols: symbolsMap,
+  ///  name: 'Conversion of Dash',
+  ///);
+  ///
+  ///dash.convert('Dash', 1);
+  ///var myUnits = dash.getAll();
+  ///for (var unit in myUnits) {
+  ///  print(
+  ///      'name:${unit.name}, value:${unit.value}, stringValue:${unit.stringValue}, symbol:${unit.symbol}');
+  ///}
   /// ```
-  CustomConversion(
+  CustomProperty(
       {required this.conversionTree,
       required this.mapSymbols,
       name,
