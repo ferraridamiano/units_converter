@@ -55,7 +55,7 @@ class Energy extends CustomProperty {
                 name: ENERGY.electronvolts,
               ),
               ConversionNode(
-                coefficientProduct: 1 / 1.3558179483314004,
+                coefficientProduct: 1.3558179483314004,
                 name: ENERGY.energyFootPound,
               ),
             ]));

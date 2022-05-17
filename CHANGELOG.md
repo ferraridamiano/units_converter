@@ -1,13 +1,14 @@
 # 2.0.0
-In this release we finally introduce extensions on `num` and `String`. Now you
-can easily convert in this way: 
+- We finally introduce extensions on `num` and `String`. Checkout the
+documentation for more details. Now you can easily convert in this way: 
 ```dart
 1.convertFromTo(LENGTH.meters, LENGTH.inches)
 ```
-Checkout the documnetation for more details.
 
-We also refactor a little bit the code: now all the properties inherit from `CustomProperty`, this change leads to
-a reduction of ~500 lines of code.
+- We also refactor a little bit the code: now all the properties inherit from
+`CustomProperty`, this change leads to a reduction of ~500 lines of code.
+
+- We fixed a wrong conversion (energy foot pound)
 
 **Breaking**:
 - `Node` becomes `ConversionNode`

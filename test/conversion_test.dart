@@ -123,7 +123,7 @@ void main() {
       ENERGY.kilocalories: 0.0002388459,
       ENERGY.kilowattHours: 2.7777777778e-7,
       ENERGY.electronvolts: 6.2415097523028e18,
-      ENERGY.energyFootPound: 1.3558179483314004,
+      ENERGY.energyFootPound: 0.7375621493,
     };
     runConversionTest(expectedResult, Energy());
   });
