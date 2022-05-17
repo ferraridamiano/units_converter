@@ -1,3 +1,21 @@
+# 2.0.0
+In this release we finally introduce extensions on `num` and `String`. Now you
+can easily convert in this way: 
+```dart
+1.convertFromTo(LENGTH.meters, LENGTH.inches)
+```
+Checkout the documnetation for more details.
+
+We also refactor a little bit the code: now all the properties inherit from `CustomProperty`, this change leads to
+a reduction of ~500 lines of code.
+
+**Breaking**:
+- `Node` becomes `ConversionNode`
+- `SimpleCustomConversion` becomes
+`SimpleCustomProperty`
+- `CustomConversion` becomes `CustomProperty`
+
+
 # 1.2.0
 Improved the formatting of the string representation of the number
 (`stringValue`): now it is also possibile to choose between decimal or
