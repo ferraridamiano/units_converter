@@ -94,7 +94,7 @@ extension ConvertUnitNum on num {
 
       default:
         {
-          assert(false, "from and true don't have a valid type");
+          assert(false, "from and to don't have a valid type");
           return null;
         }
     }

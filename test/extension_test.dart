@@ -24,6 +24,9 @@ void main() {
     expect(1.convertFromTo(TIME.hours, TIME.minutes), 60);
     expect(1.convertFromTo(TORQUE.dyneMeter, TORQUE.newtonMeter), 1e-5);
     expect(1.convertFromTo(VOLUME.cubicMeters, VOLUME.liters), 1e3);
+    expect(() {
+      1.convertFromTo('This unit does not exists', 'another unit');
+    }, throwsA(isA<AssertionError>()));
   });
 
   test('Extension on String', () {
