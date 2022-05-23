@@ -1,3 +1,4 @@
+import 'conversion_node.dart';
 import 'unit.dart';
 
 enum PROPERTY {
@@ -25,6 +26,13 @@ abstract class Property<K, V> {
   /// The name of the [Property]. If it is not a custom [Property] is one of the
   /// values of [PROPERTY].
   late dynamic name;
+
+  /// The tree hierarchy that describe the relation between the units in terms
+  /// of products, sums, or even complex relations like in numeral systems
+  late ConversionNode conversionTree;
+
+  /// Map between units and its symbol
+  late Map<K, String?> mapSymbols;
 
   /// The size of the [Property], i.e. the number of the [Unit]s that belong to
   /// that [Property].

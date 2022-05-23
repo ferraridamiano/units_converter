@@ -4,9 +4,6 @@ import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/utils/utils.dart';
 
 class CustomProperty extends Property<dynamic, double> {
-  //Map between units and its symbol
-  Map<dynamic, String?> mapSymbols;
-
   /// The number of significan figures to keep. E.g. 1.23456789) has 9
   /// significant figures
   int significantFigures;
@@ -21,7 +18,6 @@ class CustomProperty extends Property<dynamic, double> {
 
   final List<Unit> _unitList = [];
   late List<ConversionNode> _nodeList;
-  ConversionNode conversionTree;
 
   ///Class for custom conversions. E.g.:
   ///```dart
@@ -66,13 +62,15 @@ class CustomProperty extends Property<dynamic, double> {
   ///}
   /// ```
   CustomProperty(
-      {required this.conversionTree,
-      required this.mapSymbols,
+      {required ConversionNode conversionTree,
+      required Map<dynamic, String?> mapSymbols,
       name,
       this.significantFigures = 10,
       this.removeTrailingZeros = true,
       this.useScientificNotation = true}) {
     this.name = name;
+    this.conversionTree = conversionTree;
+    this.mapSymbols = mapSymbols;
     size = mapSymbols.length;
     mapSymbols.forEach((key, value) => _unitList.add(Unit(key, symbol: value)));
     _nodeList = conversionTree.getTreeAsList();
@@ -96,6 +94,21 @@ class CustomProperty extends Property<dynamic, double> {
       _unitList[i].stringValue = valueToString(_unitList[i].value!,
           significantFigures, removeTrailingZeros, useScientificNotation);
     }
+  }
+
+  CustomProperty copyWith({
+    ConversionNode? conversionTree,
+    Map<dynamic, String?>? mapSymbols,
+    dynamic name,
+  }) {
+    return CustomProperty(
+      conversionTree: conversionTree ?? this.conversionTree,
+      mapSymbols: mapSymbols ?? this.mapSymbols,
+      name: name ?? this.name,
+      significantFigures: significantFigures,
+      removeTrailingZeros: removeTrailingZeros,
+      useScientificNotation: useScientificNotation,
+    );
   }
 
   ///Returns all the units converted with prefixes
