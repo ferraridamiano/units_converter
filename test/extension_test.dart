@@ -15,7 +15,7 @@ void main() {
     expect(1.convertFromTo(LENGTH.feet, LENGTH.meters), 0.3048);
     expect(1.convertFromTo(MASS.kilograms, MASS.grams), 1e3);
     expect(1.convertFromTo(POWER.kilowatt, POWER.watt), 1e3);
-    expect(1.convertFromTo(PRESSURE.bar, PRESSURE.pascal), 100007.775);
+    expect(1.convertFromTo(PRESSURE.bar, PRESSURE.pascal), 1e5);
     expect(1.convertFromTo(SHOE_SIZE.inches, SHOE_SIZE.centimeters), 2.54);
     expect(1.convertFromTo(SI_PREFIXES.kilo, SI_PREFIXES.base), 1e3);
     expect(1.convertFromTo(SPEED.kilometersPerHour, SPEED.minutesPerKilometer),
