@@ -267,7 +267,7 @@ void main() {
       PRESSURE.hectoPascal: 1e-2,
       PRESSURE.inchOfMercury: 0.00029529987508,
     };
-    runConversionTest(expectedResult, Pressure(), sensibility: 1e4);
+    runConversionTest(expectedResult, Pressure());
   });
 
   group('Shoe size', () {

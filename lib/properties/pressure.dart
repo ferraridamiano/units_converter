@@ -41,19 +41,18 @@ class Pressure extends CustomProperty {
           },
           conversionTree: ConversionNode(name: PRESSURE.pascal, leafNodes: [
             ConversionNode(
-                coefficientProduct: 101325.0,
-                name: PRESSURE.atmosphere,
+                coefficientProduct: 1e5,
+                name: PRESSURE.bar,
                 leafNodes: [
                   ConversionNode(
-                      coefficientProduct: 0.987,
-                      name: PRESSURE.bar,
-                      leafNodes: [
-                        ConversionNode(
-                          coefficientProduct: 1e-3,
-                          name: PRESSURE.millibar,
-                        ),
-                      ]),
+                    coefficientProduct: 1e-3,
+                    name: PRESSURE.millibar,
+                  ),
                 ]),
+            ConversionNode(
+              coefficientProduct: 101325.0,
+              name: PRESSURE.atmosphere,
+            ),
             ConversionNode(
               coefficientProduct: 6894.757293168,
               name: PRESSURE.psi,
