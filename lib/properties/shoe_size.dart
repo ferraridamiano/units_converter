@@ -35,14 +35,6 @@ class ShoeSize extends CustomProperty {
           mapSymbols: {
             SHOE_SIZE.centimeters: 'cm',
             SHOE_SIZE.inches: 'in',
-            SHOE_SIZE.euChina: null,
-            SHOE_SIZE.ukIndiaChild: null,
-            SHOE_SIZE.ukIndiaMan: null,
-            SHOE_SIZE.ukIndiaWoman: null,
-            SHOE_SIZE.usaCanadaChild: null,
-            SHOE_SIZE.usaCanadaMan: null,
-            SHOE_SIZE.usaCanadaWoman: null,
-            SHOE_SIZE.japan: null,
           },
           conversionTree:
               ConversionNode(name: SHOE_SIZE.centimeters, leafNodes: [

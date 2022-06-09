@@ -5,7 +5,7 @@ import 'package:units_converter/utils/utils.dart';
 
 class CustomProperty extends Property<dynamic, double> {
   //Map between units and its symbol
-  Map<dynamic, String?>? mapSymbols;
+  Map<dynamic, String>? mapSymbols;
 
   /// The number of significan figures to keep. E.g. 1.23456789) has 9
   /// significant figures
@@ -76,7 +76,8 @@ class CustomProperty extends Property<dynamic, double> {
     _nodeList = conversionTree.getTreeAsList();
     size = _nodeList.length;
     for (var conversionNode in _nodeList) {
-      _unitList.add(Unit(conversionNode.name, symbol: mapSymbols?[conversionNode.name]));
+      _unitList.add(
+          Unit(conversionNode.name, symbol: mapSymbols?[conversionNode.name]));
     }
   }
 

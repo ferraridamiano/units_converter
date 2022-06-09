@@ -46,12 +46,8 @@ class Time extends CustomProperty {
             TIME.minutes: 'min',
             TIME.hours: 'h',
             TIME.days: 'd',
-            TIME.weeks: null,
             TIME.years365: 'a',
-            TIME.lustrum: null,
-            TIME.decades: null,
             TIME.centuries: 'c.',
-            TIME.millennium: null,
           },
           conversionTree: ConversionNode(name: TIME.seconds, leafNodes: [
             ConversionNode(
