@@ -39,7 +39,7 @@ class SimpleCustomProperty extends CustomProperty {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
-      Map<dynamic, String?>? mapSymbols,
+      Map<dynamic, String>? mapSymbols,
       name})
       : assert(mapConversion.containsValue(1),
             'One conversion coefficient must be 1, this will considered the base unit'),
@@ -56,7 +56,7 @@ class SimpleCustomProperty extends CustomProperty {
             'mapSymbols should be null or containing all the keys of mapConversion'),
         super(
           name: name ?? 'SimpleCustomProperty',
-          mapSymbols: mapSymbols ?? _initializeMapSymbols(mapConversion),
+          mapSymbols: mapSymbols,
           conversionTree: _convertMapToConversionTree(mapConversion),
         );
 }
@@ -72,13 +72,4 @@ ConversionNode _convertMapToConversionTree(Map<dynamic, double> mapConversion) {
     }
   });
   return ConversionNode(name: baseUnit, leafNodes: leafNodes);
-}
-
-Map<dynamic, String?> _initializeMapSymbols(
-    Map<dynamic, double> mapConversion) {
-  var mapSymbols = <dynamic, String?>{};
-  for (var val in mapConversion.keys) {
-    mapSymbols[val] = null;
-  }
-  return mapSymbols;
 }

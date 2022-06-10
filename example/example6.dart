@@ -25,8 +25,6 @@ void main() {
   final Map<String, String> symbolsMap = {
     'Dash': 'dsh',
     'KiloDash': 'kdsh',
-    'DashPlus1': 'dsh+1',
-    'OneOver(DashPlus1)': '1/(dsh+1)',
   };
 
   var dash = CustomProperty(

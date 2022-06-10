@@ -44,7 +44,6 @@ class SIPrefixes extends CustomProperty {
       : super(
           name: name ?? PROPERTY.siPrefixes,
           mapSymbols: {
-            SI_PREFIXES.base: null,
             SI_PREFIXES.deca: 'da-',
             SI_PREFIXES.hecto: 'h-',
             SI_PREFIXES.kilo: 'k-',

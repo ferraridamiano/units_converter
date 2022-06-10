@@ -5,7 +5,7 @@ import 'package:units_converter/utils/utils.dart';
 
 class CustomProperty extends Property<dynamic, double> {
   //Map between units and its symbol
-  Map<dynamic, String?> mapSymbols;
+  Map<dynamic, String>? mapSymbols;
 
   /// The number of significan figures to keep. E.g. 1.23456789) has 9
   /// significant figures
@@ -67,15 +67,18 @@ class CustomProperty extends Property<dynamic, double> {
   /// ```
   CustomProperty(
       {required this.conversionTree,
-      required this.mapSymbols,
+      this.mapSymbols,
       name,
       this.significantFigures = 10,
       this.removeTrailingZeros = true,
       this.useScientificNotation = true}) {
     this.name = name;
-    size = mapSymbols.length;
-    mapSymbols.forEach((key, value) => _unitList.add(Unit(key, symbol: value)));
     _nodeList = conversionTree.getTreeAsList();
+    size = _nodeList.length;
+    for (var conversionNode in _nodeList) {
+      _unitList.add(
+          Unit(conversionNode.name, symbol: mapSymbols?[conversionNode.name]));
+    }
   }
 
   /// Converts a unit with a specific name (e.g. ANGLE.degree) and value to all
@@ -90,7 +93,7 @@ class CustomProperty extends Property<dynamic, double> {
       return;
     }
     conversionTree.convert(name, value);
-    for (var i = 0; i < mapSymbols.length; i++) {
+    for (var i = 0; i < size; i++) {
       _unitList[i].value =
           _nodeList.singleWhere((node) => node.name == _unitList[i].name).value;
       _unitList[i].stringValue = valueToString(_unitList[i].value!,

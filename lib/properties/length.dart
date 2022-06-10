@@ -57,7 +57,6 @@ class Length extends CustomProperty {
               LENGTH.astronomicalUnits: 'au',
               LENGTH.lightYears: 'ly',
               LENGTH.parsec: 'pc',
-              LENGTH.mils: null,
             },
             conversionTree: ConversionNode(name: LENGTH.meters, leafNodes: [
               ConversionNode(

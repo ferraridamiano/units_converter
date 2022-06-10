@@ -51,7 +51,6 @@ class DigitalData extends CustomProperty {
           name: name ?? PROPERTY.digitalData,
           mapSymbols: {
             DIGITAL_DATA.bit: 'b',
-            DIGITAL_DATA.nibble: null,
             DIGITAL_DATA.kilobit: 'kb',
             DIGITAL_DATA.megabit: 'Mb',
             DIGITAL_DATA.gigabit: 'Gb',

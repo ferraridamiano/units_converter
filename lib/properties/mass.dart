@@ -43,7 +43,6 @@ class Mass extends CustomProperty {
             MASS.kilograms: 'kg',
             MASS.pounds: 'lb',
             MASS.ounces: 'oz',
-            MASS.quintals: null,
             MASS.tons: 't',
             MASS.milligrams: 'mg',
             MASS.uma: 'u',
