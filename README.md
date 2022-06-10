@@ -186,8 +186,6 @@ ConversionNode conversionTree = ConversionNode(
 final Map<String, String> symbolsMap = {
   'Dash': 'dsh',
   'KiloDash': 'kdsh',
-  'DashPlus1': 'dsh+1',
-  'OneOver(DashPlus1)': '1/(dsh+1)',
 };
 var dash = CustomProperty(
   conversionTree: conversionTree,
@@ -205,8 +203,8 @@ Output:
 ```
 name:Dash, value:1.0, stringValue:1, symbol:dsh
 name:KiloDash, value:0.001, stringValue:0.001, symbol:kdsh
-name:DashPlus1, value:2.0, stringValue:2, symbol:dsh+1
-name:OneOver(DashPlus1), value:0.5, stringValue:0.5, symbol:1/(dsh+1)
+name:DashPlus1, value:2.0, stringValue:2, symbol:null
+name:OneOver(DashPlus1), value:0.5, stringValue:0.5, symbol:null
 ```
 
 ## Which conversions?
