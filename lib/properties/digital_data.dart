@@ -1,3 +1,4 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
@@ -79,55 +80,55 @@ class DigitalData extends CustomProperty {
           },
           conversionTree: ConversionNode(name: DIGITAL_DATA.bit, leafNodes: [
             ConversionNode(
-              coefficientProduct: 4.0,
+              coefficientProduct: Rational.fromInt(4),
               name: DIGITAL_DATA.nibble,
             ),
             ConversionNode(
-              coefficientProduct: 1e3,
+              coefficientProduct: Rational.fromInt(1000),
               name: DIGITAL_DATA.kilobit,
             ),
             ConversionNode(
-              coefficientProduct: 1e6,
+              coefficientProduct: Rational.fromInt(1000000),
               name: DIGITAL_DATA.megabit,
             ),
             ConversionNode(
-              coefficientProduct: 1e9,
+              coefficientProduct: Rational.fromInt(1000000000),
               name: DIGITAL_DATA.gigabit,
             ),
             ConversionNode(
-              coefficientProduct: 1e12,
+              coefficientProduct: Rational.fromInt(1000000000000),
               name: DIGITAL_DATA.terabit,
             ),
             ConversionNode(
-              coefficientProduct: 1e15,
+              coefficientProduct: Rational.fromInt(1000000000000000),
               name: DIGITAL_DATA.petabit,
             ),
             ConversionNode(
-              coefficientProduct: 1e18,
+              coefficientProduct: Rational.fromInt(1000000000000000000),
               name: DIGITAL_DATA.exabit,
             ),
             ConversionNode(
-                coefficientProduct: 1024.0,
+                coefficientProduct: Rational.fromInt(1024),
                 name: DIGITAL_DATA.kibibit,
                 leafNodes: [
                   ConversionNode(
-                      coefficientProduct: 1024.0,
+                      coefficientProduct: Rational.fromInt(1024),
                       name: DIGITAL_DATA.mebibit,
                       leafNodes: [
                         ConversionNode(
-                            coefficientProduct: 1024.0,
+                            coefficientProduct: Rational.fromInt(1024),
                             name: DIGITAL_DATA.gibibit,
                             leafNodes: [
                               ConversionNode(
-                                  coefficientProduct: 1024.0,
+                                  coefficientProduct: Rational.fromInt(1024),
                                   name: DIGITAL_DATA.tebibit,
                                   leafNodes: [
                                     ConversionNode(
-                                        coefficientProduct: 1024.0,
+                                        coefficientProduct: Rational.fromInt(1024),
                                         name: DIGITAL_DATA.pebibit,
                                         leafNodes: [
                                           ConversionNode(
-                                            coefficientProduct: 1024.0,
+                                            coefficientProduct: Rational.fromInt(1024),
                                             name: DIGITAL_DATA.exbibit,
                                           )
                                         ])
@@ -136,55 +137,55 @@ class DigitalData extends CustomProperty {
                       ])
                 ]),
             ConversionNode(
-                coefficientProduct: 8.0,
+                coefficientProduct: Rational.fromInt(8),
                 name: DIGITAL_DATA.byte,
                 leafNodes: [
                   ConversionNode(
-                    coefficientProduct: 1e3,
+                    coefficientProduct: Rational.fromInt(1000),
                     name: DIGITAL_DATA.kilobyte,
                   ),
                   ConversionNode(
-                    coefficientProduct: 1e6,
+                    coefficientProduct: Rational.fromInt(1000000),
                     name: DIGITAL_DATA.megabyte,
                   ),
                   ConversionNode(
-                    coefficientProduct: 1e9,
+                    coefficientProduct: Rational.fromInt(1000000000),
                     name: DIGITAL_DATA.gigabyte,
                   ),
                   ConversionNode(
-                    coefficientProduct: 1e12,
+                    coefficientProduct: Rational.fromInt(1000000000000),
                     name: DIGITAL_DATA.terabyte,
                   ),
                   ConversionNode(
-                    coefficientProduct: 1e15,
+                    coefficientProduct: Rational.fromInt(1000000000000000),
                     name: DIGITAL_DATA.petabyte,
                   ),
                   ConversionNode(
-                    coefficientProduct: 1e18,
+                    coefficientProduct: Rational.fromInt(1000000000000000000),
                     name: DIGITAL_DATA.exabyte,
                   ),
                   ConversionNode(
-                      coefficientProduct: 1024.0,
+                      coefficientProduct: Rational.fromInt(1024),
                       name: DIGITAL_DATA.kibibyte,
                       leafNodes: [
                         ConversionNode(
-                            coefficientProduct: 1024.0,
+                            coefficientProduct: Rational.fromInt(1024),
                             name: DIGITAL_DATA.mebibyte,
                             leafNodes: [
                               ConversionNode(
-                                  coefficientProduct: 1024.0,
+                                  coefficientProduct: Rational.fromInt(1024),
                                   name: DIGITAL_DATA.gibibyte,
                                   leafNodes: [
                                     ConversionNode(
-                                        coefficientProduct: 1024.0,
+                                        coefficientProduct: Rational.fromInt(1024),
                                         name: DIGITAL_DATA.tebibyte,
                                         leafNodes: [
                                           ConversionNode(
-                                              coefficientProduct: 1024.0,
+                                              coefficientProduct: Rational.fromInt(1024),
                                               name: DIGITAL_DATA.pebibyte,
                                               leafNodes: [
                                                 ConversionNode(
-                                                  coefficientProduct: 1024.0,
+                                                  coefficientProduct: Rational.fromInt(1024),
                                                   name: DIGITAL_DATA.exbibyte,
                                                 ),
                                               ]),

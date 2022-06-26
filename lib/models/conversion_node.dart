@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'package:rational/rational.dart';
 import 'package:units_converter/utils/utils.dart';
 
 /// Defines the type of the conversion between two nodes.
@@ -23,15 +24,20 @@ enum ConversionType {
 class ConversionNode {
   ConversionNode({
     this.leafNodes = const [],
-    this.coefficientProduct = 1.0,
-    this.coefficientSum = 0.0,
+    Rational? coefficientProduct,
+    Rational? coefficientSum,
     this.name,
     this.value,
     this.stringValue,
     this.conversionType = ConversionType.linearConversion,
     this.base,
     this.isConverted = false,
-  });
+  }) {
+    assert(coefficientProduct != null && coefficientSum != null);
+
+    this.coefficientProduct = coefficientProduct ?? Rational.one;
+    this.coefficientSum = coefficientSum ?? Rational.zero;
+  }
 
   /// This are the list of the [ConversionNode]s that depend by this node. These are the
   /// children of this parent node.
@@ -39,15 +45,15 @@ class ConversionNode {
 
   /// This is the product coefficient of [ConversionType.linearConversion] and
   /// [ConversionType.reciprocalConversion]. It is the a coefficient.
-  double coefficientProduct;
+  late Rational coefficientProduct;
 
   /// This is the sum coefficient of [ConversionType.linearConversion] and
   /// [ConversionType.reciprocalConversion]. It is the b coefficient.
-  double coefficientSum;
+  late Rational coefficientSum;
 
   /// This the value that has the unit of measurement of this node. This is
   /// valid for the most cases. But not for numeral systems conversion.
-  double? value;
+  Rational? value;
 
   /// This the value that has the unit of measurement of this node. This is
   /// just for numeral systems conversion. In all the other cases use [value].
@@ -168,7 +174,7 @@ class ConversionNode {
       // not converted
       if (node.name == name) {
         if (value is double) {
-          node.value = value;
+          node.value = Rational.parse(value.toStringAsFixed(15));
         } else {
           // value is String
           node.stringValue = value;

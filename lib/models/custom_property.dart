@@ -94,8 +94,10 @@ class CustomProperty extends Property<dynamic, double> {
     }
     conversionTree.convert(name, value);
     for (var i = 0; i < size; i++) {
-      _unitList[i].value =
-          _nodeList.singleWhere((node) => node.name == _unitList[i].name).value;
+      _unitList[i].value = _nodeList
+          .singleWhere((node) => node.name == _unitList[i].name)
+          .value
+          ?.toDouble();
       _unitList[i].stringValue = valueToString(_unitList[i].value!,
           significantFigures, removeTrailingZeros, useScientificNotation);
     }

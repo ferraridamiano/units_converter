@@ -1,3 +1,4 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
@@ -67,83 +68,83 @@ class SIPrefixes extends CustomProperty {
           },
           conversionTree: ConversionNode(name: SI_PREFIXES.base, leafNodes: [
             ConversionNode(
-              coefficientProduct: 1e1,
+              coefficientProduct: Rational.fromInt(10),
               name: SI_PREFIXES.deca,
             ),
             ConversionNode(
-              coefficientProduct: 1e2,
+              coefficientProduct: Rational.fromInt(100),
               name: SI_PREFIXES.hecto,
             ),
             ConversionNode(
-              coefficientProduct: 1e3,
+              coefficientProduct: Rational.fromInt(1000),
               name: SI_PREFIXES.kilo,
             ),
             ConversionNode(
-              coefficientProduct: 1e6,
+              coefficientProduct: Rational.fromInt(1000000),
               name: SI_PREFIXES.mega,
             ),
             ConversionNode(
-              coefficientProduct: 1e9,
+              coefficientProduct: Rational.fromInt(1000000000),
               name: SI_PREFIXES.giga,
             ),
             ConversionNode(
-              coefficientProduct: 1e12,
+              coefficientProduct: Rational(BigInt.from(10).pow(12)),
               name: SI_PREFIXES.tera,
             ),
             ConversionNode(
-              coefficientProduct: 1e15,
+              coefficientProduct: Rational(BigInt.from(10).pow(15)),
               name: SI_PREFIXES.peta,
             ),
             ConversionNode(
-              coefficientProduct: 1e18,
+              coefficientProduct: Rational(BigInt.from(10).pow(18)),
               name: SI_PREFIXES.exa,
             ),
             ConversionNode(
-              coefficientProduct: 1e21,
+              coefficientProduct: Rational(BigInt.from(10).pow(21)),
               name: SI_PREFIXES.zetta,
             ),
             ConversionNode(
-              coefficientProduct: 1e24,
+              coefficientProduct: Rational(BigInt.from(10).pow(24)),
               name: SI_PREFIXES.yotta,
             ),
             ConversionNode(
-              coefficientProduct: 1e-1,
+              coefficientProduct: Rational.parse('1e-1'),
               name: SI_PREFIXES.deci,
             ),
             ConversionNode(
-              coefficientProduct: 1e-2,
+              coefficientProduct: Rational.parse('1e-2'),
               name: SI_PREFIXES.centi,
             ),
             ConversionNode(
-              coefficientProduct: 1e-3,
+              coefficientProduct: Rational.parse('1e-3'),
               name: SI_PREFIXES.milli,
             ),
             ConversionNode(
-              coefficientProduct: 1e-6,
+              coefficientProduct: Rational.parse('1e-6'),
               name: SI_PREFIXES.micro,
             ),
             ConversionNode(
-              coefficientProduct: 1e-9,
+              coefficientProduct: Rational.parse('1e-9'),
               name: SI_PREFIXES.nano,
             ),
             ConversionNode(
-              coefficientProduct: 1e-12,
+              coefficientProduct: Rational.parse('1e-12'),
               name: SI_PREFIXES.pico,
             ),
             ConversionNode(
-              coefficientProduct: 1e-15,
+              coefficientProduct: Rational.parse('1e-15'),
               name: SI_PREFIXES.femto,
             ),
             ConversionNode(
-              coefficientProduct: 1e-18,
+              coefficientProduct: Rational.parse('1e-18'),
               name: SI_PREFIXES.atto,
             ),
             ConversionNode(
-              coefficientProduct: 1e-21,
+              coefficientProduct: Rational.parse('1e-21'),
               name: SI_PREFIXES.zepto,
             ),
             ConversionNode(
-              coefficientProduct: 1e-24,
+              coefficientProduct: Rational.parse('1e-24'),
               name: SI_PREFIXES.yocto,
             ),
           ]),

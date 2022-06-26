@@ -1,3 +1,4 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
@@ -37,25 +38,25 @@ class Energy extends CustomProperty {
             },
             conversionTree: ConversionNode(name: ENERGY.joules, leafNodes: [
               ConversionNode(
-                coefficientProduct: 4.1867999409,
+                coefficientProduct: Rational.parse('4.1867999409'),
                 name: ENERGY.calories,
                 leafNodes: [
                   ConversionNode(
-                    coefficientProduct: 1000.0,
+                    coefficientProduct: Rational.fromInt(1000),
                     name: ENERGY.kilocalories,
                   ),
                 ],
               ),
               ConversionNode(
-                coefficientProduct: 3600000.0,
+                coefficientProduct: Rational.fromInt(3600000),
                 name: ENERGY.kilowattHours,
               ),
               ConversionNode(
-                coefficientProduct: 1.60217646e-19,
+                coefficientProduct: Rational.parse('1.60217646e-19'),
                 name: ENERGY.electronvolts,
               ),
               ConversionNode(
-                coefficientProduct: 1.3558179483314004,
+                coefficientProduct: Rational.parse('1.3558179483314004'),
                 name: ENERGY.energyFootPound,
               ),
             ]));

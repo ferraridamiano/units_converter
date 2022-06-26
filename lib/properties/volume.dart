@@ -1,7 +1,9 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_property.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available VOLUME units
 enum VOLUME {
@@ -61,41 +63,43 @@ class Volume extends CustomProperty {
           },
           conversionTree: ConversionNode(name: VOLUME.cubicMeters, leafNodes: [
             ConversionNode(
-                coefficientProduct: 1e-3,
+                coefficientProduct: Rational.parse('1e-3'),
                 name: VOLUME.liters,
                 leafNodes: [
                   ConversionNode(
-                    coefficientProduct: 4.54609,
+                    coefficientProduct: Rational.parse('4.54609'),
                     name: VOLUME.imperialGallons,
                   ),
                   ConversionNode(
-                    coefficientProduct: 3.785411784,
+                    coefficientProduct: Rational.parse('3.785411784'),
                     name: VOLUME.usGallons,
                   ),
                   ConversionNode(
-                    coefficientProduct: 0.56826125,
+                    coefficientProduct: Rational.parse('0.56826125'),
                     name: VOLUME.imperialPints,
                     leafNodes: [
                       ConversionNode(
-                        coefficientProduct: 1 / 20,
+                        coefficientProduct: fraction(1, 20),
                         name: VOLUME.imperialFluidOunces,
                         leafNodes: [
                           ConversionNode(
-                              coefficientProduct: 5, name: VOLUME.imperialGill),
+                            coefficientProduct: Rational.fromInt(5),
+                            name: VOLUME.imperialGill,
+                          ),
                         ],
                       ),
                     ],
                   ),
                   ConversionNode(
-                    coefficientProduct: 0.473176473,
+                    coefficientProduct: Rational.parse('0.473176473'),
                     name: VOLUME.usPints,
                     leafNodes: [
                       ConversionNode(
-                        coefficientProduct: 1 / 16,
+                        coefficientProduct: fraction(1, 16),
                         name: VOLUME.usFluidOunces,
                         leafNodes: [
                           ConversionNode(
-                            coefficientProduct: 4,
+                            coefficientProduct: Rational.fromInt(4),
                             name: VOLUME.usGill,
                           ),
                         ],
@@ -103,39 +107,39 @@ class Volume extends CustomProperty {
                     ],
                   ),
                   ConversionNode(
-                      coefficientProduct: 1e-3,
+                      coefficientProduct: Rational.parse('1e-3'),
                       name: VOLUME.milliliters,
                       leafNodes: [
                         ConversionNode(
-                          coefficientProduct: 14.8,
+                          coefficientProduct: Rational.parse('14.8'),
                           name: VOLUME.tablespoonsUs,
                         ),
                         ConversionNode(
-                          coefficientProduct: 20.0,
+                          coefficientProduct: Rational.fromInt(20),
                           name: VOLUME.australianTablespoons,
                         ),
                         ConversionNode(
-                          coefficientProduct: 240.0,
+                          coefficientProduct: Rational.fromInt(240),
                           name: VOLUME.cups,
                         ),
                       ]),
                 ]),
             ConversionNode(
-                coefficientProduct: 1e-6,
+                coefficientProduct: Rational.parse('1e-6'),
                 name: VOLUME.cubicCentimeters,
                 leafNodes: [
                   ConversionNode(
-                      coefficientProduct: 16.387064,
+                      coefficientProduct: Rational.parse('16.387064'),
                       name: VOLUME.cubicInches,
                       leafNodes: [
                         ConversionNode(
-                          coefficientProduct: 1728.0,
+                          coefficientProduct: Rational.fromInt(1728),
                           name: VOLUME.cubicFeet,
                         ),
                       ]),
                 ]),
             ConversionNode(
-              coefficientProduct: 1e-9,
+              coefficientProduct: Rational.parse('1e-9'),
               name: VOLUME.cubicMillimeters,
             ),
           ]),

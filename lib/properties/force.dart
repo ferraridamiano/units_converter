@@ -1,3 +1,4 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
@@ -35,19 +36,19 @@ class Force extends CustomProperty {
             },
             conversionTree: ConversionNode(name: FORCE.newton, leafNodes: [
               ConversionNode(
-                coefficientProduct: 1e-5,
+                coefficientProduct: Rational.parse('1e-5'),
                 name: FORCE.dyne,
               ),
               ConversionNode(
-                coefficientProduct: 4.4482216152605,
+                coefficientProduct: Rational.parse('4.4482216152605'),
                 name: FORCE.poundForce,
               ),
               ConversionNode(
-                coefficientProduct: 9.80665,
+                coefficientProduct: Rational.parse('9.80665'),
                 name: FORCE.kilogramForce,
               ),
               ConversionNode(
-                coefficientProduct: 0.138254954376,
+                coefficientProduct: Rational.parse('0.138254954376'),
                 name: FORCE.poundal,
               ),
             ]));

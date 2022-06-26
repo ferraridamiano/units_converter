@@ -1,3 +1,4 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/custom_property.dart';
 
@@ -68,7 +69,7 @@ ConversionNode _convertMapToConversionTree(Map<dynamic, double> mapConversion) {
   mapConversion.forEach((key, value) {
     if (key != baseUnit) {
       //I'm just interested in the relationship between the base unit and the other units
-      leafNodes.add(ConversionNode(name: key, coefficientProduct: 1 / value));
+      leafNodes.add(ConversionNode(name: key, coefficientProduct: Rational.one / Rational.parse(value.toStringAsFixed(15))));
     }
   });
   return ConversionNode(name: baseUnit, leafNodes: leafNodes);

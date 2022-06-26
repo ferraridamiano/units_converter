@@ -1,7 +1,9 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_property.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available MASS units
 enum MASS {
@@ -54,23 +56,23 @@ class Mass extends CustomProperty {
           },
           conversionTree: ConversionNode(name: MASS.grams, leafNodes: [
             ConversionNode(
-              coefficientProduct: 100.0,
+              coefficientProduct: Rational.fromInt(100),
               name: MASS.ettograms,
             ),
             ConversionNode(
-              coefficientProduct: 1000.0,
+              coefficientProduct: Rational.fromInt(1000),
               name: MASS.kilograms,
               leafNodes: [
                 ConversionNode(
-                  coefficientProduct: 0.45359237,
+                  coefficientProduct: Rational.parse('0.45359237'),
                   name: MASS.pounds,
                   leafNodes: [
                     ConversionNode(
-                      coefficientProduct: 1 / 16,
+                      coefficientProduct: fraction(1, 16),
                       name: MASS.ounces,
                     ),
                     ConversionNode(
-                      coefficientProduct: 14,
+                      coefficientProduct: Rational.fromInt(14),
                       name: MASS.stones,
                     ),
                   ],
@@ -78,35 +80,35 @@ class Mass extends CustomProperty {
               ],
             ),
             ConversionNode(
-              coefficientProduct: 100000.0,
+              coefficientProduct: Rational.fromInt(100000),
               name: MASS.quintals,
             ),
             ConversionNode(
-              coefficientProduct: 1000000.0,
+              coefficientProduct: Rational.fromInt(1000000),
               name: MASS.tons,
             ),
             ConversionNode(
-              coefficientProduct: 1e-2,
+              coefficientProduct: Rational.parse('1e-2'),
               name: MASS.centigrams,
             ),
             ConversionNode(
-              coefficientProduct: 1e-3,
+              coefficientProduct: Rational.parse('1e-3'),
               name: MASS.milligrams,
             ),
             ConversionNode(
-              coefficientProduct: 1.660539e-24,
+              coefficientProduct: Rational.parse('1.660539e-24'),
               name: MASS.uma,
             ),
             ConversionNode(
-              coefficientProduct: 0.2,
+              coefficientProduct: Rational.parse('0.2'),
               name: MASS.carats,
             ),
             ConversionNode(
-                coefficientProduct: 1.55517384,
+                coefficientProduct: Rational.parse('1.55517384'),
                 name: MASS.pennyweights,
                 leafNodes: [
                   ConversionNode(
-                    coefficientProduct: 20,
+                    coefficientProduct: Rational.fromInt(20),
                     name: MASS.troyOunces,
                   ),
                 ]),

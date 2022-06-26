@@ -1,3 +1,4 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/units_converter.dart';
 
@@ -7,11 +8,11 @@ void main() {
     leafNodes: [
       ConversionNode(
         name: 'KiloDash',
-        coefficientProduct: 1000,
+        coefficientProduct: Rational.fromInt(1000),
       ),
       ConversionNode(
         name: 'DashPlus1',
-        coefficientSum: -1,
+        coefficientSum: Rational.fromInt(-1),
         leafNodes: [
           ConversionNode(
             name: 'OneOver(DashPlus1)',

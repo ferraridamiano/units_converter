@@ -1,3 +1,4 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
@@ -37,15 +38,15 @@ class FuelConsumption extends CustomProperty {
                 leafNodes: [
                   ConversionNode(
                     conversionType: ConversionType.reciprocalConversion,
-                    coefficientProduct: 100.0,
+                    coefficientProduct: Rational.fromInt(100),
                     name: FUEL_CONSUMPTION.litersPer100km,
                   ),
                   ConversionNode(
-                    coefficientProduct: 0.4251437074,
+                    coefficientProduct: Rational.parse('0.4251437074'),
                     name: FUEL_CONSUMPTION.milesPerUsGallon,
                   ),
                   ConversionNode(
-                    coefficientProduct: 0.3540061899,
+                    coefficientProduct: Rational.parse('0.3540061899'),
                     name: FUEL_CONSUMPTION.milesPerImperialGallon,
                   ),
                 ]));

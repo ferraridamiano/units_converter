@@ -1,3 +1,4 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
@@ -41,33 +42,33 @@ class Pressure extends CustomProperty {
           },
           conversionTree: ConversionNode(name: PRESSURE.pascal, leafNodes: [
             ConversionNode(
-                coefficientProduct: 1e5,
+                coefficientProduct: Rational.fromInt(100000),
                 name: PRESSURE.bar,
                 leafNodes: [
                   ConversionNode(
-                    coefficientProduct: 1e-3,
+                    coefficientProduct: Rational.parse('1e-3'),
                     name: PRESSURE.millibar,
                   ),
                 ]),
             ConversionNode(
-              coefficientProduct: 101325.0,
+              coefficientProduct: Rational.fromInt(101325),
               name: PRESSURE.atmosphere,
             ),
             ConversionNode(
-              coefficientProduct: 6894.757293168,
+              coefficientProduct: Rational.parse('6894.757293168'),
               name: PRESSURE.psi,
             ),
             ConversionNode(
-                coefficientProduct: 133.322368421,
+                coefficientProduct: Rational.parse('133.322368421'),
                 name: PRESSURE.torr,
                 leafNodes: [
                   ConversionNode(
-                    coefficientProduct: 25.4,
+                    coefficientProduct: Rational.parse('25.4'),
                     name: PRESSURE.inchOfMercury,
                   )
                 ]),
             ConversionNode(
-              coefficientProduct: 1e2,
+              coefficientProduct: Rational.fromInt(100),
               name: PRESSURE.hectoPascal,
             )
           ]),

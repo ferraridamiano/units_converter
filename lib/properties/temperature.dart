@@ -1,7 +1,9 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/models/custom_property.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available TEMPERATURE units
 enum TEMPERATURE {
@@ -40,31 +42,31 @@ class Temperature extends CustomProperty {
           conversionTree:
               ConversionNode(name: TEMPERATURE.fahrenheit, leafNodes: [
             ConversionNode(
-                coefficientProduct: 1.8,
-                coefficientSum: 32.0,
+                coefficientProduct: Rational.parse('1.8'),
+                coefficientSum: Rational.fromInt(32),
                 name: TEMPERATURE.celsius,
                 leafNodes: [
                   ConversionNode(
-                    coefficientSum: -273.15,
+                    coefficientSum: Rational.parse('-273.15'),
                     name: TEMPERATURE.kelvin,
                   ),
                   ConversionNode(
-                    coefficientProduct: 5 / 4,
+                    coefficientProduct: fraction(5, 4),
                     name: TEMPERATURE.reamur,
                   ),
                   ConversionNode(
-                    coefficientProduct: 40 / 21,
-                    coefficientSum: -100 / 7,
+                    coefficientProduct: fraction(40, 21),
+                    coefficientSum: fraction(-100, 7),
                     name: TEMPERATURE.romer,
                   ),
                   ConversionNode(
-                    coefficientProduct: -2 / 3,
-                    coefficientSum: 100,
+                    coefficientProduct: fraction(-2, 3),
+                    coefficientSum: Rational.fromInt(100),
                     name: TEMPERATURE.delisle,
                   ),
                 ]),
             ConversionNode(
-              coefficientSum: -459.67,
+              coefficientSum: Rational.parse('-459.67'),
               name: TEMPERATURE.rankine,
             ),
           ]),

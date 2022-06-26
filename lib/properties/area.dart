@@ -1,3 +1,4 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
@@ -50,51 +51,51 @@ class Area extends CustomProperty {
           },
           conversionTree: ConversionNode(name: AREA.squareMeters, leafNodes: [
             ConversionNode(
-                coefficientProduct: 1e-4,
+                coefficientProduct: Rational.parse('1e-4'),
                 name: AREA.squareCentimeters,
                 leafNodes: [
                   ConversionNode(
-                      coefficientProduct: 6.4516,
+                      coefficientProduct: Rational.parse('6.4516'),
                       name: AREA.squareInches,
                       leafNodes: [
                         ConversionNode(
-                          coefficientProduct: 144.0,
+                          coefficientProduct: Rational.fromInt(144),
                           name: AREA.squareFeet,
                         ),
                         ConversionNode(
-                          coefficientProduct: 12.000024 * 12.000024,
+                          coefficientProduct: Rational.parse('12.000024') * Rational.parse('12.000024'),
                           name: AREA.squareFeetUs,
                         ),
                       ]),
                 ]),
             ConversionNode(
-              coefficientProduct: 1e-6,
+              coefficientProduct: Rational.parse('1e-6'),
               name: AREA.squareMillimeters,
             ),
             ConversionNode(
-              coefficientProduct: 10000.0,
+              coefficientProduct: Rational.fromInt(10000),
               name: AREA.hectares,
             ),
             ConversionNode(
-              coefficientProduct: 1000000.0,
+              coefficientProduct: Rational.fromInt(1000000),
               name: AREA.squareKilometers,
             ),
             ConversionNode(
-              coefficientProduct: 0.83612736,
+              coefficientProduct: Rational.parse('0.83612736'),
               name: AREA.squareYard,
               leafNodes: [
                 ConversionNode(
-                  coefficientProduct: 3097600.0,
+                  coefficientProduct: Rational.fromInt(3097600),
                   name: AREA.squareMiles,
                 ),
                 ConversionNode(
-                  coefficientProduct: 4840.0,
+                  coefficientProduct: Rational.fromInt(4840),
                   name: AREA.acres,
                 ),
               ],
             ),
             ConversionNode(
-              coefficientProduct: 100.0,
+              coefficientProduct: Rational.fromInt(100),
               name: AREA.are,
             )
           ]),

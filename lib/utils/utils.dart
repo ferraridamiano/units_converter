@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:rational/rational.dart';
 
 /// Given a double value it returns its rapresentation as a string with few
 /// tweaks: [significantFigures] is the number of significant figures to keep,
@@ -158,6 +159,7 @@ String baseToDec(String toBeConverted, int base) {
 /// with a certain [base].
 RegExp getBaseRegExp(int base) {
   assert([2, 8, 10, 16].contains(base), 'Base not supported');
+
   switch (base) {
     case 2:
       return RegExp(r'^[0-1]+$');
@@ -170,3 +172,7 @@ RegExp getBaseRegExp(int base) {
       return RegExp(r'^[0-9]+$');
   }
 }
+
+Rational fraction(int numerator, int denominator) =>
+    Rational(BigInt.from(numerator), BigInt.from(denominator));
+

@@ -1,3 +1,4 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
@@ -51,59 +52,59 @@ class Time extends CustomProperty {
           },
           conversionTree: ConversionNode(name: TIME.seconds, leafNodes: [
             ConversionNode(
-              coefficientProduct: 1e-1,
+              coefficientProduct: Rational.parse('1e-1'),
               name: TIME.deciseconds,
             ),
             ConversionNode(
-              coefficientProduct: 1e-2,
+              coefficientProduct: Rational.parse('1e-2'),
               name: TIME.centiseconds,
             ),
             ConversionNode(
-              coefficientProduct: 1e-3,
+              coefficientProduct: Rational.parse('1e-3'),
               name: TIME.milliseconds,
             ),
             ConversionNode(
-              coefficientProduct: 1e-6,
+              coefficientProduct: Rational.parse('1e-6'),
               name: TIME.microseconds,
             ),
             ConversionNode(
-              coefficientProduct: 1e-9,
+              coefficientProduct: Rational.parse('1e-9'),
               name: TIME.nanoseconds,
             ),
             ConversionNode(
-                coefficientProduct: 60.0,
+                coefficientProduct: Rational.fromInt(60),
                 name: TIME.minutes,
                 leafNodes: [
                   ConversionNode(
-                      coefficientProduct: 60.0,
+                      coefficientProduct: Rational.fromInt(60),
                       name: TIME.hours,
                       leafNodes: [
                         ConversionNode(
-                            coefficientProduct: 24.0,
+                            coefficientProduct: Rational.fromInt(24),
                             name: TIME.days,
                             leafNodes: [
                               ConversionNode(
-                                coefficientProduct: 7.0,
+                                coefficientProduct: Rational.fromInt(7),
                                 name: TIME.weeks,
                               ),
                               ConversionNode(
-                                  coefficientProduct: 365.0,
+                                  coefficientProduct: Rational.fromInt(365),
                                   name: TIME.years365,
                                   leafNodes: [
                                     ConversionNode(
-                                      coefficientProduct: 5.0,
+                                      coefficientProduct: Rational.fromInt(5),
                                       name: TIME.lustrum,
                                     ),
                                     ConversionNode(
-                                      coefficientProduct: 10.0,
+                                      coefficientProduct: Rational.fromInt(10),
                                       name: TIME.decades,
                                     ),
                                     ConversionNode(
-                                      coefficientProduct: 100.0,
+                                      coefficientProduct: Rational.fromInt(100),
                                       name: TIME.centuries,
                                     ),
                                     ConversionNode(
-                                      coefficientProduct: 1000.0,
+                                      coefficientProduct: Rational.fromInt(1000),
                                       name: TIME.millennium,
                                     ),
                                   ]),

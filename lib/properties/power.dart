@@ -1,3 +1,4 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
@@ -39,27 +40,27 @@ class Power extends CustomProperty {
           },
           conversionTree: ConversionNode(name: POWER.watt, leafNodes: [
             ConversionNode(
-              coefficientProduct: 1e-3,
+              coefficientProduct: Rational.parse('1e-3'),
               name: POWER.milliwatt,
             ),
             ConversionNode(
-              coefficientProduct: 1e3,
+              coefficientProduct: Rational.fromInt(1000),
               name: POWER.kilowatt,
             ),
             ConversionNode(
-              coefficientProduct: 1e6,
+              coefficientProduct: Rational.fromInt(1000000),
               name: POWER.megawatt,
             ),
             ConversionNode(
-              coefficientProduct: 1e9,
+              coefficientProduct: Rational.fromInt(1000000000),
               name: POWER.gigawatt,
             ),
             ConversionNode(
-              coefficientProduct: 735.49875,
+              coefficientProduct: Rational.parse('735.49875'),
               name: POWER.europeanHorsePower,
             ),
             ConversionNode(
-              coefficientProduct: 745.69987158,
+              coefficientProduct: Rational.parse('745.69987158'),
               name: POWER.imperialHorsePower,
             ),
           ]),

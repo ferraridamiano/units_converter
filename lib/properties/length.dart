@@ -1,3 +1,4 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
@@ -60,74 +61,74 @@ class Length extends CustomProperty {
             },
             conversionTree: ConversionNode(name: LENGTH.meters, leafNodes: [
               ConversionNode(
-                  coefficientProduct: 0.01,
+                  coefficientProduct: Rational.parse('0.01'),
                   name: LENGTH.centimeters,
                   leafNodes: [
                     ConversionNode(
-                        coefficientProduct: 2.54,
+                        coefficientProduct: Rational.parse('2.54'),
                         name: LENGTH.inches,
                         leafNodes: [
                           ConversionNode(
-                            coefficientProduct: 12.0,
+                            coefficientProduct: Rational.fromInt(12),
                             name: LENGTH.feet,
                           ),
                           ConversionNode(
-                            coefficientProduct: 12.000024,
+                            coefficientProduct: Rational.parse('12.000024'),
                             name: LENGTH.feetUs,
                           ),
                           ConversionNode(
-                            coefficientProduct: 1e-3,
+                            coefficientProduct: Rational.parse('1e-3'),
                             name: LENGTH.mils,
                           ),
                         ]),
                   ]),
               ConversionNode(
-                coefficientProduct: 1852.0,
+                coefficientProduct: Rational.fromInt(1852),
                 name: LENGTH.nauticalMiles,
               ),
               ConversionNode(
-                  coefficientProduct: 0.9144,
+                  coefficientProduct: Rational.parse('0.9144'),
                   name: LENGTH.yards,
                   leafNodes: [
                     ConversionNode(
-                      coefficientProduct: 1760.0,
+                      coefficientProduct: Rational.fromInt(1760),
                       name: LENGTH.miles,
                     ),
                   ]),
               ConversionNode(
-                coefficientProduct: 1e-3,
+                coefficientProduct: Rational.parse('1e-3'),
                 name: LENGTH.millimeters,
               ),
               ConversionNode(
-                coefficientProduct: 1e-6,
+                coefficientProduct: Rational.parse('1e-6'),
                 name: LENGTH.micrometers,
               ),
               ConversionNode(
-                coefficientProduct: 1e-9,
+                coefficientProduct: Rational.parse('1e-9'),
                 name: LENGTH.nanometers,
               ),
               ConversionNode(
-                coefficientProduct: 1e-10,
+                coefficientProduct: Rational.parse('1e-10'),
                 name: LENGTH.angstroms,
               ),
               ConversionNode(
-                coefficientProduct: 1e-12,
+                coefficientProduct: Rational.parse('1e-12'),
                 name: LENGTH.picometers,
               ),
               ConversionNode(
-                  coefficientProduct: 1000.0,
+                  coefficientProduct: Rational.fromInt(1000),
                   name: LENGTH.kilometers,
                   leafNodes: [
                     ConversionNode(
-                        coefficientProduct: 149597870.7,
+                        coefficientProduct: Rational.parse('149597870.7'),
                         name: LENGTH.astronomicalUnits,
                         leafNodes: [
                           ConversionNode(
-                              coefficientProduct: 63241.1,
+                              coefficientProduct: Rational.parse('63241.1'),
                               name: LENGTH.lightYears,
                               leafNodes: [
                                 ConversionNode(
-                                  coefficientProduct: 3.26,
+                                  coefficientProduct: Rational.parse('3.26'),
                                   name: LENGTH.parsec,
                                 ),
                               ]),
