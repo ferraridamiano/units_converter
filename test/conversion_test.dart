@@ -15,27 +15,6 @@ bool isAcceptable(double? convertedValue, double? expectedValue, sensibility) {
       convertedValue <= upperConstraint;
 }
 
-/*bool areComparable(String value1, String value2){
-  assert(!value1.contains('e') && !value2.contains('e'));
-  String integer1, integer2, decimal1, decimal2;
-  if(value1.contains('.')){
-    var splittedString = value1.split('.');
-    integer1 = splittedString[0];
-    decimal1 = splittedString[1];
-  } else {
-    integer1 = value1;
-    decimal1 = '';
-  }
-  if(value2.contains('.')){
-    var splittedString = value2.split('.');
-    integer2 = splittedString[0];
-    decimal2 = splittedString[1];
-  } else {
-    integer2 = value1;
-    decimal2 = '';
-  }
-}*/
-
 void runConversionTest(Map<dynamic, double> expectedResult, Property property,
     {double sensibility = 1e10}) {
   final List listNames = expectedResult.keys.toList();
@@ -103,20 +82,6 @@ void runStringConversionTest(
           reason:
               'Error with ${name.toString()}. Expected: ${expectedResult[name]}, result: $convertedValue',
         );
-        /*if (convertedValue!.length > 8) {
-          int lenghtToKeep =
-              math.min(convertedValue.length, expectedResult[name]!.length) - 1;
-
-          String unit1 = convertedValue.substring(0, lenghtToKeep);
-          String unit2 = expectedResult[name]!.substring(0, lenghtToKeep);
-
-          expect(
-            unit1,
-            unit2,
-            reason:
-                'Error with ${name.toString()}. Expected: $unit2, result: $unit1',
-          );
-        }*/
       }
     });
   }

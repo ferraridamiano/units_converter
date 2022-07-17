@@ -13,6 +13,7 @@ class SimpleCustomProperty extends CustomProperty {
   ///   'JPY': 126.25,
   ///   'CNY': 7.9315,
   /// };
+  /// ```
   final Map<dynamic, double> mapConversion;
 
   ///Class for simple custom conversions. E.g.:
