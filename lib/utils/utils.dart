@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:decimal/decimal.dart';
 import 'package:rational/rational.dart';
 
 /// Given a double value it returns its rapresentation as a string with few
@@ -176,3 +177,18 @@ RegExp getBaseRegExp(int base) {
 Rational fraction(int numerator, int denominator) =>
     Rational(BigInt.from(numerator), BigInt.from(denominator));
 
+extension RationalExt on Rational {
+  String toStringWith({
+    int significantFigures = 10,
+    bool removeTrailingZeros = true,
+  }) {
+    String stringValue = toDecimal(scaleOnInfinitePrecision: 100).toStringAsPrecision(significantFigures);
+    if (removeTrailingZeros) {
+      while (stringValue.contains('.') &&
+          (stringValue.endsWith('0') || stringValue.endsWith('.'))) {
+        stringValue = stringValue.substring(0, stringValue.length - 1);
+      }
+    }
+    return stringValue;
+  }
+}

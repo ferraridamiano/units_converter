@@ -55,9 +55,18 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
     _nodeList = _conversionTree.getTreeAsList();
   }
 
-  ///Converts a unit with a specific name (e.g. NUMERAL_SYSTEMS.decimal) and value to all other units
+  /// Converts a unit with a specific name (e.g. NUMERAL_SYSTEMS.decimal) and
+  /// value to all other units. Same of `convert()` for this property. 
   @override
-  void convert(NUMERAL_SYSTEMS name, String? value) {
+  void convertFromString(NUMERAL_SYSTEMS name, String? value) =>
+      _convert(name, value);
+
+  /// Converts a unit with a specific name (e.g. NUMERAL_SYSTEMS.decimal) and
+  /// value to all other units. Same of `convertFromString()` for this property. 
+  @override
+  void convert(NUMERAL_SYSTEMS name, String? value) => _convert(name, value);
+
+  void _convert(NUMERAL_SYSTEMS name, String? value) {
     // if the value is null also the others units are null, this is convenient
     // in order to delete all the other units value, for example in a unit
     // converter app (such as Converter NOW)

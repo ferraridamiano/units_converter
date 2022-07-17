@@ -52,7 +52,7 @@ class Energy extends CustomProperty {
                 name: ENERGY.kilowattHours,
               ),
               ConversionNode(
-                coefficientProduct: Rational.parse('1.60217646e-19'),
+                coefficientProduct: Rational.parse('1.602176634e-19'),
                 name: ENERGY.electronvolts,
               ),
               ConversionNode(

@@ -33,8 +33,6 @@ class ConversionNode {
     this.base,
     this.isConverted = false,
   }) {
-    assert(coefficientProduct != null && coefficientSum != null);
-
     this.coefficientProduct = coefficientProduct ?? Rational.one;
     this.coefficientSum = coefficientSum ?? Rational.zero;
   }
@@ -77,13 +75,14 @@ class ConversionNode {
 
   /// **This method must be used on the root [ConversionNode] of the conversion**. It
   /// converts all the [ConversionNode] of the tree from the [ConversionNode] which name is equal to
-  /// [name] ([value] is assigned to this [ConversionNode]) to all the other [ConversionNode]s of
-  /// the tree.
-  void convert(dynamic name, dynamic value) {
-    assert(value is String || value is double);
+  /// [name] ([newValue] is assigned to this [ConversionNode]) to all the other [ConversionNode]s of
+  /// the tree. [newValue] should be String only for numeraly system. Or Rational for all the other
+  /// cases.
+  void convert(dynamic name, dynamic newValue) {
+    assert(newValue is String || newValue is Rational);
 
     List<ConversionNode> pathToConvertedNode =
-        _getNodesPathAndSelectNode(name, value);
+        _getNodesPathAndSelectNode(name, newValue);
     for (int i = pathToConvertedNode.length - 2; i >= 0; i--) {
       _convertTwoNodes(
           parent: pathToConvertedNode[i],
@@ -160,6 +159,7 @@ class ConversionNode {
   /// to name as converted [isConverted]=true. All the other nodes are marked as
   /// not converted.
   List<ConversionNode> _getNodesPathAndSelectNode(dynamic name, dynamic value) {
+    assert(value is Rational || value is String);
     Queue<ConversionNode> stack =
         Queue.from([this]); // we will use a queue as a stack
     Queue<List<ConversionNode>> breadcrumbListQueue = Queue.from([
@@ -173,8 +173,8 @@ class ConversionNode {
       // its value and we mark it as converted. All the others are marked as
       // not converted
       if (node.name == name) {
-        if (value is double) {
-          node.value = Rational.parse(value.toStringAsFixed(15));
+        if (value is Rational) {
+          node.value = value;
         } else {
           // value is String
           node.stringValue = value;

@@ -31,7 +31,12 @@ abstract class Property<K, V> {
   late int size;
 
   /// Convert the [value] of the units with name [name] to all the other units.
-  void convert(K name, V? value);
+  void convert(K name, V value);
+
+  /// Convert the [value] of the units with name [name] to all the other units.
+  /// [value] must be of type String?. Prefer this method since it has fewer
+  /// errors.
+  void convertFromString(K name, String? value);
 
   ///Returns all the units converted with prefixes
   List<Unit> getAll();

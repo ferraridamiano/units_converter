@@ -40,7 +40,7 @@ class Speed extends CustomProperty {
           conversionTree:
               ConversionNode(name: SPEED.metersPerSecond, leafNodes: [
             ConversionNode(
-                coefficientProduct: fraction(36, 10),
+                coefficientProduct: fraction(10, 36),
                 name: SPEED.kilometersPerHour,
                 leafNodes: [
                   ConversionNode(

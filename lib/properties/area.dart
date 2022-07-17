@@ -59,11 +59,28 @@ class Area extends CustomProperty {
                       name: AREA.squareInches,
                       leafNodes: [
                         ConversionNode(
-                          coefficientProduct: Rational.fromInt(144),
-                          name: AREA.squareFeet,
-                        ),
+                            coefficientProduct: Rational.fromInt(144),
+                            name: AREA.squareFeet,
+                            leafNodes: [
+                              ConversionNode(
+                                coefficientProduct: Rational.fromInt(9),
+                                name: AREA.squareYard,
+                                leafNodes: [
+                                  ConversionNode(
+                                    coefficientProduct:
+                                        Rational.fromInt(3097600),
+                                    name: AREA.squareMiles,
+                                  ),
+                                  ConversionNode(
+                                    coefficientProduct: Rational.fromInt(4840),
+                                    name: AREA.acres,
+                                  ),
+                                ],
+                              ),
+                            ]),
                         ConversionNode(
-                          coefficientProduct: Rational.parse('12.000024') * Rational.parse('12.000024'),
+                          coefficientProduct: Rational.parse('12.000024') *
+                              Rational.parse('12.000024'),
                           name: AREA.squareFeetUs,
                         ),
                       ]),
@@ -79,20 +96,6 @@ class Area extends CustomProperty {
             ConversionNode(
               coefficientProduct: Rational.fromInt(1000000),
               name: AREA.squareKilometers,
-            ),
-            ConversionNode(
-              coefficientProduct: Rational.parse('0.83612736'),
-              name: AREA.squareYard,
-              leafNodes: [
-                ConversionNode(
-                  coefficientProduct: Rational.fromInt(3097600),
-                  name: AREA.squareMiles,
-                ),
-                ConversionNode(
-                  coefficientProduct: Rational.fromInt(4840),
-                  name: AREA.acres,
-                ),
-              ],
             ),
             ConversionNode(
               coefficientProduct: Rational.fromInt(100),

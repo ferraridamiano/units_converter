@@ -1,3 +1,4 @@
+import 'package:rational/rational.dart';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
@@ -84,7 +85,13 @@ class CustomProperty extends Property<dynamic, double> {
   /// Converts a unit with a specific name (e.g. ANGLE.degree) and value to all
   /// other units
   @override
-  void convert(dynamic name, double? value) {
+  void convert(var name, double? value) => _convert(name, value);
+
+  @override
+  void convertFromString(dynamic name, String? value) => _convert(name, value);
+
+  void _convert(dynamic name, dynamic value) {
+    assert(value == null || value is double || value is String);
     if (value == null) {
       for (Unit unit in _unitList) {
         unit.value = null;
@@ -92,14 +99,20 @@ class CustomProperty extends Property<dynamic, double> {
       }
       return;
     }
-    conversionTree.convert(name, value);
+    if (value is double) {
+      conversionTree.convert(name, Rational.parse(value.toStringAsFixed(15)));
+    } else {
+      // value is String
+      conversionTree.convert(name, Rational.parse(value));
+    }
+
     for (var i = 0; i < size; i++) {
-      _unitList[i].value = _nodeList
-          .singleWhere((node) => node.name == _unitList[i].name)
-          .value
-          ?.toDouble();
-      _unitList[i].stringValue = valueToString(_unitList[i].value!,
-          significantFigures, removeTrailingZeros, useScientificNotation);
+      Rational? valueAtIndex =
+          _nodeList.singleWhere((node) => node.name == _unitList[i].name).value;
+      _unitList[i].value = valueAtIndex?.toDouble();
+      _unitList[i].stringValue = valueAtIndex?.toStringWith(
+          significantFigures: significantFigures,
+          removeTrailingZeros: removeTrailingZeros);
     }
   }
 

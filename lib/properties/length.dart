@@ -69,9 +69,20 @@ class Length extends CustomProperty {
                         name: LENGTH.inches,
                         leafNodes: [
                           ConversionNode(
-                            coefficientProduct: Rational.fromInt(12),
-                            name: LENGTH.feet,
-                          ),
+                              coefficientProduct: Rational.fromInt(12),
+                              name: LENGTH.feet,
+                              leafNodes: [
+                                ConversionNode(
+                                    coefficientProduct: Rational.fromInt(3),
+                                    name: LENGTH.yards,
+                                    leafNodes: [
+                                      ConversionNode(
+                                        coefficientProduct:
+                                            Rational.fromInt(1760),
+                                        name: LENGTH.miles,
+                                      ),
+                                    ]),
+                              ]),
                           ConversionNode(
                             coefficientProduct: Rational.parse('12.000024'),
                             name: LENGTH.feetUs,
@@ -86,15 +97,6 @@ class Length extends CustomProperty {
                 coefficientProduct: Rational.fromInt(1852),
                 name: LENGTH.nauticalMiles,
               ),
-              ConversionNode(
-                  coefficientProduct: Rational.parse('0.9144'),
-                  name: LENGTH.yards,
-                  leafNodes: [
-                    ConversionNode(
-                      coefficientProduct: Rational.fromInt(1760),
-                      name: LENGTH.miles,
-                    ),
-                  ]),
               ConversionNode(
                 coefficientProduct: Rational.parse('1e-3'),
                 name: LENGTH.millimeters,
