@@ -70,7 +70,10 @@ ConversionNode _convertMapToConversionTree(Map<dynamic, double> mapConversion) {
   mapConversion.forEach((key, value) {
     if (key != baseUnit) {
       //I'm just interested in the relationship between the base unit and the other units
-      leafNodes.add(ConversionNode(name: key, coefficientProduct: Rational.one / Rational.parse(value.toStringAsPrecision(20))));
+      leafNodes.add(ConversionNode(
+          name: key,
+          coefficientProduct:
+              Rational.one / Rational.parse(value.toStringAsPrecision(20))));
     }
   });
   return ConversionNode(name: baseUnit, leafNodes: leafNodes);

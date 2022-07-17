@@ -124,11 +124,13 @@ class DigitalData extends CustomProperty {
                                   name: DIGITAL_DATA.tebibit,
                                   leafNodes: [
                                     ConversionNode(
-                                        coefficientProduct: Rational.fromInt(1024),
+                                        coefficientProduct:
+                                            Rational.fromInt(1024),
                                         name: DIGITAL_DATA.pebibit,
                                         leafNodes: [
                                           ConversionNode(
-                                            coefficientProduct: Rational.fromInt(1024),
+                                            coefficientProduct:
+                                                Rational.fromInt(1024),
                                             name: DIGITAL_DATA.exbibit,
                                           )
                                         ])
@@ -177,15 +179,18 @@ class DigitalData extends CustomProperty {
                                   name: DIGITAL_DATA.gibibyte,
                                   leafNodes: [
                                     ConversionNode(
-                                        coefficientProduct: Rational.fromInt(1024),
+                                        coefficientProduct:
+                                            Rational.fromInt(1024),
                                         name: DIGITAL_DATA.tebibyte,
                                         leafNodes: [
                                           ConversionNode(
-                                              coefficientProduct: Rational.fromInt(1024),
+                                              coefficientProduct:
+                                                  Rational.fromInt(1024),
                                               name: DIGITAL_DATA.pebibyte,
                                               leafNodes: [
                                                 ConversionNode(
-                                                  coefficientProduct: Rational.fromInt(1024),
+                                                  coefficientProduct:
+                                                      Rational.fromInt(1024),
                                                   name: DIGITAL_DATA.exbibyte,
                                                 ),
                                               ]),

@@ -104,7 +104,8 @@ class Time extends CustomProperty {
                                       name: TIME.centuries,
                                     ),
                                     ConversionNode(
-                                      coefficientProduct: Rational.fromInt(1000),
+                                      coefficientProduct:
+                                          Rational.fromInt(1000),
                                       name: TIME.millennium,
                                     ),
                                   ]),

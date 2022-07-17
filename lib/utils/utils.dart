@@ -78,7 +78,8 @@ extension RationalExt on Rational {
     int significantFigures = 10,
     bool removeTrailingZeros = true,
   }) {
-    String stringValue = toDecimal(scaleOnInfinitePrecision: 100).toStringAsPrecision(significantFigures);
+    String stringValue = toDecimal(scaleOnInfinitePrecision: 100)
+        .toStringAsPrecision(significantFigures);
     if (removeTrailingZeros) {
       while (stringValue.contains('.') &&
           (stringValue.endsWith('0') || stringValue.endsWith('.'))) {

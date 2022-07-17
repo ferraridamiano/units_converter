@@ -100,7 +100,8 @@ class CustomProperty extends Property<dynamic, double> {
       return;
     }
     if (value is double) {
-      conversionTree.convert(name, Rational.parse(value.toStringAsPrecision(20)));
+      conversionTree.convert(
+          name, Rational.parse(value.toStringAsPrecision(20)));
     } else {
       // value is String
       conversionTree.convert(name, Rational.parse(value));
