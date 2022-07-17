@@ -257,7 +257,7 @@ void main() {
     final List listNames = expectedResult.keys.toList();
     for (var unitName in listNames) {
       test('Test from ${unitName.toString()}', () {
-        property.convert(unitName, expectedResult[unitName]);
+        property.convertFromString(unitName, expectedResult[unitName]);
         List<Unit> unitList = property.getAll();
         for (Unit unit in unitList) {
           var name = unit.name;
