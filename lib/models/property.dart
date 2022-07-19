@@ -33,9 +33,9 @@ abstract class Property<K, V> {
   /// Convert the [value] of the units with name [name] to all the other units.
   void convert(K name, V? value);
 
-  ///Returns all the units converted with prefixes
+  /// Returns all the units converted with prefixes
   List<Unit> getAll();
 
-  ///Returns the [Unit] with the corresponding name
-  Unit getUnit(var name);
+  /// Returns the [Unit] with the corresponding name
+  Unit getUnit(K name);
 }

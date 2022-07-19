@@ -1,7 +1,7 @@
 import 'package:units_converter/models/conversion_node.dart';
+import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/models/custom_property.dart';
 
 //Available SPEED units
 enum SPEED {
@@ -13,7 +13,7 @@ enum SPEED {
   minutesPerKilometer,
 }
 
-class Speed extends CustomProperty {
+class Speed extends DoubleProperty<SPEED> {
   ///Class for speed conversions, e.g. if you want to convert 1 square meters in acres:
   ///```dart
   ///var speed = Speed(removeTrailingZeros: false);

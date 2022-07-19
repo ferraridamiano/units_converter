@@ -1,7 +1,7 @@
 import 'package:units_converter/models/conversion_node.dart';
-import 'package:units_converter/models/custom_property.dart';
+import 'package:units_converter/models/double_property.dart';
 
-class SimpleCustomProperty extends CustomProperty {
+class SimpleCustomProperty extends DoubleProperty<String> {
   /// The Map of the values of the conversion. In this map at least one element
   /// must have a value of 1, it will be considered the base unit. E.g.:
   /// ```dart
@@ -12,7 +12,7 @@ class SimpleCustomProperty extends CustomProperty {
   ///   'JPY': 126.25,
   ///   'CNY': 7.9315,
   /// };
-  final Map<dynamic, double> mapConversion;
+  final Map<String, double> mapConversion;
 
   ///Class for simple custom conversions. E.g.:
   ///```dart
@@ -39,7 +39,7 @@ class SimpleCustomProperty extends CustomProperty {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
-      Map<dynamic, String>? mapSymbols,
+      Map<String, String>? mapSymbols,
       name})
       : assert(mapConversion.containsValue(1),
             'One conversion coefficient must be 1, this will considered the base unit'),
@@ -61,7 +61,7 @@ class SimpleCustomProperty extends CustomProperty {
         );
 }
 
-ConversionNode _convertMapToConversionTree(Map<dynamic, double> mapConversion) {
+ConversionNode _convertMapToConversionTree(Map<String, double> mapConversion) {
   var baseUnit = mapConversion.keys.firstWhere(
       (element) => mapConversion[element] == 1); //take the base unit
   List<ConversionNode> leafNodes = [];

@@ -1,7 +1,7 @@
 import 'package:units_converter/models/conversion_node.dart';
+import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/models/custom_property.dart';
 
 //Available VOLUME units
 enum VOLUME {
@@ -25,7 +25,7 @@ enum VOLUME {
   usGill,
 }
 
-class Volume extends CustomProperty {
+class Volume extends DoubleProperty<VOLUME> {
   ///Class for volume conversions, e.g. if you want to convert 1 liter in US Gallons:
   ///```dart
   ///var volume = Volume(removeTrailingZeros: false);

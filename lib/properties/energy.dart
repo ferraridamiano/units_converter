@@ -1,7 +1,7 @@
 import 'package:units_converter/models/conversion_node.dart';
+import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/models/custom_property.dart';
 
 //Available ENERGY units
 enum ENERGY {
@@ -13,7 +13,7 @@ enum ENERGY {
   energyFootPound,
 }
 
-class Energy extends CustomProperty {
+class Energy extends DoubleProperty<ENERGY> {
   ///Class for energy conversions, e.g. if you want to convert 1 joule in kilowatt hours:
   ///```dart
   ///var energy = Energy(removeTrailingZeros: false);

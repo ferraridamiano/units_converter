@@ -1,7 +1,7 @@
 import 'package:units_converter/models/conversion_node.dart';
+import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/models/custom_property.dart';
 
 //Available SHOE_SIZE units
 // ignore: camel_case_types
@@ -18,7 +18,7 @@ enum SHOE_SIZE {
   japan,
 }
 
-class ShoeSize extends CustomProperty {
+class ShoeSize extends DoubleProperty<SHOE_SIZE> {
   ///Class for ShoeSize conversions, e.g. if you want to convert 1 centimeter in eu shoes size:
   ///```dart
   ///var ShoeSize = ShoeSize(removeTrailingZeros: false);

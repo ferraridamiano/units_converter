@@ -1,7 +1,7 @@
 import 'package:units_converter/models/conversion_node.dart';
+import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/models/custom_property.dart';
 
 //Available DIGITAL_DATA units
 // ignore: camel_case_types
@@ -35,7 +35,7 @@ enum DIGITAL_DATA {
   exbibyte,
 }
 
-class DigitalData extends CustomProperty {
+class DigitalData extends DoubleProperty<DIGITAL_DATA> {
   ///Class for digitalData conversions, e.g. if you want to convert 1 megabit in kilobyte:
   ///```dart
   ///var digitalData = DigitalData(removeTrailingZeros: false);

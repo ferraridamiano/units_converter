@@ -1,7 +1,7 @@
 import 'package:units_converter/models/conversion_node.dart';
+import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/models/custom_property.dart';
 
 //Available FORCE units
 enum FORCE {
@@ -12,7 +12,7 @@ enum FORCE {
   poundal,
 }
 
-class Force extends CustomProperty {
+class Force extends DoubleProperty<FORCE> {
   ///Class for force conversions, e.g. if you want to convert 1 newton in pound force:
   ///```dart
   ///var force = Force(removeTrailingZeros: false);

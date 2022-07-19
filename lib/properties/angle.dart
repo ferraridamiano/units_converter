@@ -1,9 +1,9 @@
 import 'package:units_converter/models/conversion_node.dart';
+import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
-import 'package:units_converter/models/custom_property.dart';
 
-//Available ANGLE units
+// Available ANGLE units
 enum ANGLE {
   degree,
   minutes,
@@ -11,7 +11,7 @@ enum ANGLE {
   radians,
 }
 
-class Angle extends CustomProperty {
+class Angle extends DoubleProperty<ANGLE> {
   ///Class for angle conversions, e.g. if you want to convert 1 radiant in degree:
   ///```dart
   ///var angle = Angle(removeTrailingZeros: false);
