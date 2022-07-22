@@ -72,7 +72,7 @@ void main() {
   //----------------------------------------------------------------------------
 
   //Example 6:
-  ConversionNode conversionTree = ConversionNode(
+  ConversionNode<String> conversionTree = ConversionNode(
     name: 'Dash',
     leafNodes: [
       ConversionNode(

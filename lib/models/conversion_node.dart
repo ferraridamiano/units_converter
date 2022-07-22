@@ -189,9 +189,9 @@ class ConversionNode<T> {
   }
 
   /// Recursive function to get a list of the nodes of the tree
-  List<ConversionNode> getTreeAsList() {
-    List<ConversionNode> result = [this];
-    for (ConversionNode node in leafNodes) {
+  List<ConversionNode<T>> getTreeAsList() {
+    List<ConversionNode<T>> result = [this];
+    for (ConversionNode<T> node in leafNodes) {
       result = [...result, ...node.getTreeAsList()];
     }
     return result;

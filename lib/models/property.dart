@@ -56,7 +56,7 @@ abstract class Property<K, V> {
   ///   ],
   /// );
   /// ```
-  late ConversionNode conversionTree;
+  late ConversionNode<K> conversionTree;
 
   /// Convert the [value] of the units with name [name] to all the other units.
   void convert(K name, V? value);

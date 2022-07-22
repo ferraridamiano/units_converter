@@ -21,7 +21,7 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   };
 
   final List<Unit> _unitList = [];
-  late List<ConversionNode> _nodeList;
+  late List<ConversionNode<NUMERAL_SYSTEMS>> _nodeList;
 
   ///Class for numeralSystems conversions, e.g. if you want to convert 10 (decimal) in binary:
   ///```dart

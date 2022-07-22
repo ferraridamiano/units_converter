@@ -61,10 +61,10 @@ class SimpleCustomProperty extends DoubleProperty<String> {
         );
 }
 
-ConversionNode _convertMapToConversionTree(Map<String, double> mapConversion) {
+ConversionNode<String> _convertMapToConversionTree(Map<String, double> mapConversion) {
   var baseUnit = mapConversion.keys.firstWhere(
       (element) => mapConversion[element] == 1); //take the base unit
-  List<ConversionNode> leafNodes = [];
+  List<ConversionNode<String>> leafNodes = [];
   mapConversion.forEach((key, value) {
     if (key != baseUnit) {
       //I'm just interested in the relationship between the base unit and the other units

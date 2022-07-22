@@ -23,7 +23,7 @@ abstract class DoubleProperty<T> extends Property<T, double> {
   late List<ConversionNode> _nodeList;
 
   DoubleProperty(
-      {required ConversionNode conversionTree,
+      {required ConversionNode<T> conversionTree,
       this.mapSymbols,
       name,
       this.significantFigures = 10,
