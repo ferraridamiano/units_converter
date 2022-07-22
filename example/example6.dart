@@ -2,7 +2,7 @@ import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/units_converter.dart';
 
 void main() {
-  ConversionNode conversionTree = ConversionNode(
+  ConversionNode<String> conversionTree = ConversionNode(
     name: 'Dash',
     leafNodes: [
       ConversionNode(

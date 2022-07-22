@@ -22,7 +22,6 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
 
   final List<Unit> _unitList = [];
   late List<ConversionNode> _nodeList;
-  late ConversionNode _conversionTree;
 
   ///Class for numeralSystems conversions, e.g. if you want to convert 10 (decimal) in binary:
   ///```dart
@@ -33,7 +32,7 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   NumeralSystems({name}) {
     this.name = name ?? PROPERTY.numeralSystems;
     size = NUMERAL_SYSTEMS.values.length;
-    _conversionTree =
+    conversionTree =
         ConversionNode(name: NUMERAL_SYSTEMS.decimal, base: 10, leafNodes: [
       ConversionNode(
         conversionType: ConversionType.baseConversion,
@@ -52,7 +51,7 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
       ),
     ]);
     mapSymbols.forEach((key, value) => _unitList.add(Unit(key, symbol: value)));
-    _nodeList = _conversionTree.getTreeAsList();
+    _nodeList = conversionTree.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. NUMERAL_SYSTEMS.decimal) and value to all other units
@@ -69,7 +68,7 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
       return;
     }
 
-    _conversionTree.convert(name, value);
+    conversionTree.convert(name, value);
     for (var i = 0; i < NUMERAL_SYSTEMS.values.length; i++) {
       _unitList[i].stringValue = _nodeList
           .singleWhere(

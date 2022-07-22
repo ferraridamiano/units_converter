@@ -19,42 +19,17 @@ abstract class DoubleProperty<T> extends Property<T, double> {
   /// decimal notation (false)
   bool useScientificNotation;
 
-  /// Defines the relation between the units of measurement of this property.
-  /// E.g. in the following example we defined: `KiloDash = 1000 * Dash`,
-  /// `DashPlus1 = Dash + 1` and `OneOver(DashPlus1) = 1 / (DashPlus1)`:
-  /// ```dart
-  /// ConversionNode conversionTree = ConversionNode(
-  ///   name: 'Dash',
-  ///   leafNodes: [
-  ///     ConversionNode(
-  ///       name: 'KiloDash',
-  ///       coefficientProduct: 1000,
-  ///     ),
-  ///     ConversionNode(
-  ///       name: 'DashPlus1',
-  ///       coefficientSum: -1,
-  ///       leafNodes: [
-  ///         ConversionNode(
-  ///           name: 'OneOver(DashPlus1)',
-  ///           conversionType: ConversionType.reciprocalConversion,
-  ///         ),
-  ///       ],
-  ///     ),
-  ///   ],
-  /// );
-  /// ```
-  ConversionNode conversionTree;
-
   final List<Unit> _unitList = [];
   late List<ConversionNode> _nodeList;
 
   DoubleProperty(
-      {required this.conversionTree,
+      {required ConversionNode conversionTree,
       this.mapSymbols,
       name,
       this.significantFigures = 10,
       this.removeTrailingZeros = true,
       this.useScientificNotation = true}) {
+    super.conversionTree = conversionTree;
     this.name = name;
     _nodeList = conversionTree.getTreeAsList();
     size = _nodeList.length;

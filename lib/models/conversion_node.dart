@@ -20,12 +20,12 @@ enum ConversionType {
 /// to the [coefficientProduct], [coefficientSum], [conversionType] and [base]
 /// parameters you can set the relationship between this node and the parent
 /// node.
-class ConversionNode {
+class ConversionNode<T> {
   ConversionNode({
+    required this.name,
     this.leafNodes = const [],
     this.coefficientProduct = 1.0,
     this.coefficientSum = 0.0,
-    this.name,
     this.value,
     this.stringValue,
     this.conversionType = ConversionType.linearConversion,
@@ -35,7 +35,7 @@ class ConversionNode {
 
   /// This are the list of the [ConversionNode]s that depend by this node. These are the
   /// children of this parent node.
-  List<ConversionNode> leafNodes;
+  List<ConversionNode<T>> leafNodes;
 
   /// This is the product coefficient of [ConversionType.linearConversion] and
   /// [ConversionType.reciprocalConversion]. It is the a coefficient.
@@ -54,7 +54,7 @@ class ConversionNode {
   String? stringValue;
 
   /// This is the name of the unit. Can be a String or an enum.
-  dynamic name;
+  T name;
 
   /// This define the conversion type between this node and its parent. The
   /// default is [ConversionType.linearConversion]. This is useless for the
@@ -73,7 +73,7 @@ class ConversionNode {
   /// converts all the [ConversionNode] of the tree from the [ConversionNode] which name is equal to
   /// [name] ([value] is assigned to this [ConversionNode]) to all the other [ConversionNode]s of
   /// the tree.
-  void convert(dynamic name, dynamic value) {
+  void convert(T name, dynamic value) {
     assert(value is String || value is double);
 
     List<ConversionNode> pathToConvertedNode =
@@ -153,7 +153,7 @@ class ConversionNode {
   /// ConversionNode in the form of a list. Moreover, it sets the node which name is equal
   /// to name as converted [isConverted]=true. All the other nodes are marked as
   /// not converted.
-  List<ConversionNode> _getNodesPathAndSelectNode(dynamic name, dynamic value) {
+  List<ConversionNode> _getNodesPathAndSelectNode(T name, dynamic value) {
     Queue<ConversionNode> stack =
         Queue.from([this]); // we will use a queue as a stack
     Queue<List<ConversionNode>> breadcrumbListQueue = Queue.from([
