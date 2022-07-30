@@ -1,3 +1,9 @@
+# 2.0.1
+- Improved Pascal-Bar conversion
+- We forced the use of types. So that many more error will be caught at
+compile-time. E.g. ConversionNode has an associated type that is the type of the
+name (e.g. LENGTH, AREA, etc.)
+
 # 2.0.0
 - We finally introduce extensions on `num` and `String`. Checkout the
 documentation for more details. Now you can easily convert in this way: 

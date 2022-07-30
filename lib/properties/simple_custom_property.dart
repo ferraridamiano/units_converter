@@ -61,7 +61,8 @@ class SimpleCustomProperty extends DoubleProperty<String> {
         );
 }
 
-ConversionNode<String> _convertMapToConversionTree(Map<String, double> mapConversion) {
+ConversionNode<String> _convertMapToConversionTree(
+    Map<String, double> mapConversion) {
   var baseUnit = mapConversion.keys.firstWhere(
       (element) => mapConversion[element] == 1); //take the base unit
   List<ConversionNode<String>> leafNodes = [];
