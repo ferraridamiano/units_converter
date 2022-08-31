@@ -2,6 +2,8 @@ name: units_converter
 description: Simple and light units conversion package for all your needs.
 version: 2.0.1
 homepage: https://github.com/ferraridamiano/units_converter
+funding:
+ - https://www.paypal.com/paypalme/DemApps
 
 environment:
   sdk: '>=2.17.0 <3.0.0'
