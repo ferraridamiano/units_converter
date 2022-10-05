@@ -23,6 +23,13 @@ enum VOLUME {
   usFluidOunces,
   imperialGill,
   usGill,
+  usQuarts,
+  femtoliters,
+  picoliters,
+  nanoliters,
+  microliters,
+  deciliters,
+  centiliters,
 }
 
 class Volume extends DoubleProperty<VOLUME> {
@@ -58,6 +65,13 @@ class Volume extends DoubleProperty<VOLUME> {
             VOLUME.usFluidOunces: 'US fl oz',
             VOLUME.imperialGill: 'Imp. gi.',
             VOLUME.usGill: 'US. liq. gi',
+            VOLUME.usQuarts: 'US. liq. qt',
+            VOLUME.femtoliters: 'fl',
+            VOLUME.picoliters: 'pl',
+            VOLUME.nanoliters: 'nl',
+            VOLUME.microliters: 'ul',
+            VOLUME.deciliters: 'dl',
+            VOLUME.centiliters: 'cl',
           },
           conversionTree: ConversionNode(name: VOLUME.cubicMeters, leafNodes: [
             ConversionNode(
@@ -100,6 +114,10 @@ class Volume extends DoubleProperty<VOLUME> {
                           ),
                         ],
                       ),
+                      ConversionNode(
+                        coefficientProduct: 1 / 2,
+                        name: VOLUME.usQuarts,
+                      )
                     ],
                   ),
                   ConversionNode(
@@ -120,6 +138,30 @@ class Volume extends DoubleProperty<VOLUME> {
                         ),
                       ]),
                 ]),
+            ConversionNode(
+              coefficientProduct: 1e-15,
+              name: VOLUME.femtoliters,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-12,
+              name: VOLUME.picoliters,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-9,
+              name: VOLUME.nanoliters,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-6,
+              name: VOLUME.microliters,
+            ),
+            ConversionNode(
+              coefficientProduct: 0.1,
+              name: VOLUME.deciliters,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-2,
+              name: VOLUME.centiliters,
+            ),
             ConversionNode(
                 coefficientProduct: 1e-6,
                 name: VOLUME.cubicCentimeters,
@@ -159,4 +201,11 @@ class Volume extends DoubleProperty<VOLUME> {
   Unit get usFluidOunces => getUnit(VOLUME.usFluidOunces);
   Unit get imperialGill => getUnit(VOLUME.imperialGill);
   Unit get usGill => getUnit(VOLUME.usGill);
+  Unit get quart => getUnit(VOLUME.usQuarts);
+  Unit get femtoliter => getUnit(VOLUME.femtoliters);
+  Unit get picoliter => getUnit(VOLUME.picoliters);
+  Unit get nanoliter => getUnit(VOLUME.nanoliters);
+  Unit get microliter => getUnit(VOLUME.microliters);
+  Unit get deciliter => getUnit(VOLUME.deciliters);
+  Unit get centiliter => getUnit(VOLUME.centiliters);
 }
