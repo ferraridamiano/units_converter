@@ -13,6 +13,11 @@ enum MASS {
   quintals,
   tons,
   milligrams,
+  femtograms,
+  picograms,
+  nanograms,
+  micrograms,
+  decigrams,
 
   /// unified atomic mass unit
   uma,
@@ -51,6 +56,11 @@ class Mass extends DoubleProperty<MASS> {
             MASS.pennyweights: 'dwt',
             MASS.troyOunces: 'oz t',
             MASS.stones: 'st.',
+            MASS.femtograms: 'fg',
+            MASS.picograms: 'pg',
+            MASS.nanograms: 'ng',
+            MASS.micrograms: 'ug',
+            MASS.decigrams: 'dg',
           },
           conversionTree: ConversionNode(name: MASS.grams, leafNodes: [
             ConversionNode(
@@ -110,6 +120,26 @@ class Mass extends DoubleProperty<MASS> {
                     name: MASS.troyOunces,
                   ),
                 ]),
+            ConversionNode(
+              coefficientProduct: 1e-15,
+              name: MASS.femtograms,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-12,
+              name: MASS.picograms,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-9,
+              name: MASS.nanograms,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e-6,
+              name: MASS.micrograms,
+            ),
+            ConversionNode(
+              coefficientProduct: 0.1,
+              name: MASS.decigrams,
+            ),
           ]),
         );
 
@@ -127,4 +157,9 @@ class Mass extends DoubleProperty<MASS> {
   Unit get pennyweights => getUnit(MASS.pennyweights);
   Unit get troyOunces => getUnit(MASS.troyOunces);
   Unit get stones => getUnit(MASS.stones);
+  Unit get femtograms => getUnit(MASS.femtograms);
+  Unit get picograms => getUnit(MASS.picograms);
+  Unit get nanograms => getUnit(MASS.nanograms);
+  Unit get micrograms => getUnit(MASS.micrograms);
+  Unit get decigrams => getUnit(MASS.decigrams);
 }
