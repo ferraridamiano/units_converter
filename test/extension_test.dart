@@ -27,6 +27,16 @@ void main() {
     expect(() {
       1.convertFromTo('This unit does not exists', 'another unit');
     }, throwsA(isA<AssertionError>()));
+    expect(
+        500.convertUnitsAsRatioFromTo(MASS.milligrams, VOLUME.liters,
+            MASS.milligrams, VOLUME.milliliters),
+        0.5);
+    // expect(
+    //     500.convertRatioFromTo(
+    //       Ratio.milliGramsPerLiter,
+    //       Ratio.milliGramsPerMilliliter,
+    //     ),
+    //     0.5);
   });
 
   test('Extension on String', () {
