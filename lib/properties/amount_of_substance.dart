@@ -1,10 +1,12 @@
+// ignore_for_file: camel_case_types
+
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 
 //Available length units
-enum AMOUNTOFSUBSTANCE {
+enum AMOUNT_OF_SUBSTANCE {
   moles,
   femtomoles,
   picomoles,
@@ -13,13 +15,13 @@ enum AMOUNTOFSUBSTANCE {
   millimoles,
 }
 
-class AmountOfSubstance extends DoubleProperty<AMOUNTOFSUBSTANCE> {
+class AmountOfSubstance extends DoubleProperty<AMOUNT_OF_SUBSTANCE> {
   ///Class for amount of substance conversions, this is really just converting
   ///prefixes, but can often be used combined with other units
   ///e.g. if you want to convert 1 mole to millimoles:
   ///```dart
-  ///var amountOfSubstance = AMOUNTOFSUBSTANCE(removeTrailingZeros: false);
-  ///amountOfSubstance.convert(Unit(AMOUNTOFSUBSTANCE.moles, value: 1));
+  ///var amountOfSubstance = AMOUNT_OF_SUBSTANCE(removeTrailingZeros: false);
+  ///amountOfSubstance.convert(Unit(AMOUNT_OF_SUBSTANCE.moles, value: 1));
   ///print(amountOfSubstance.millimoles);
   /// ```
   AmountOfSubstance(
@@ -30,43 +32,43 @@ class AmountOfSubstance extends DoubleProperty<AMOUNTOFSUBSTANCE> {
       : super(
           name: name ?? PROPERTY.length,
           mapSymbols: {
-            AMOUNTOFSUBSTANCE.moles: 'mol',
-            AMOUNTOFSUBSTANCE.femtomoles: 'fmol',
-            AMOUNTOFSUBSTANCE.nanomoles: 'nmol',
-            AMOUNTOFSUBSTANCE.micromoles: 'umol',
-            AMOUNTOFSUBSTANCE.millimoles: 'mmol',
+            AMOUNT_OF_SUBSTANCE.moles: 'mol',
+            AMOUNT_OF_SUBSTANCE.femtomoles: 'fmol',
+            AMOUNT_OF_SUBSTANCE.nanomoles: 'nmol',
+            AMOUNT_OF_SUBSTANCE.micromoles: 'umol',
+            AMOUNT_OF_SUBSTANCE.millimoles: 'mmol',
           },
           conversionTree: ConversionNode(
-            name: AMOUNTOFSUBSTANCE.moles,
+            name: AMOUNT_OF_SUBSTANCE.moles,
             leafNodes: [
               ConversionNode(
                 coefficientProduct: 1e-3,
-                name: AMOUNTOFSUBSTANCE.millimoles,
+                name: AMOUNT_OF_SUBSTANCE.millimoles,
               ),
               ConversionNode(
                 coefficientProduct: 1e-6,
-                name: AMOUNTOFSUBSTANCE.micromoles,
+                name: AMOUNT_OF_SUBSTANCE.micromoles,
               ),
               ConversionNode(
                 coefficientProduct: 1e-9,
-                name: AMOUNTOFSUBSTANCE.nanomoles,
+                name: AMOUNT_OF_SUBSTANCE.nanomoles,
               ),
               ConversionNode(
                 coefficientProduct: 1e-12,
-                name: AMOUNTOFSUBSTANCE.picomoles,
+                name: AMOUNT_OF_SUBSTANCE.picomoles,
               ),
               ConversionNode(
                 coefficientProduct: 1e-15,
-                name: AMOUNTOFSUBSTANCE.femtomoles,
+                name: AMOUNT_OF_SUBSTANCE.femtomoles,
               ),
             ],
           ),
         );
 
-  Unit get moles => getUnit(AMOUNTOFSUBSTANCE.moles);
-  Unit get femtomoles => getUnit(AMOUNTOFSUBSTANCE.millimoles);
-  Unit get picomoles => getUnit(AMOUNTOFSUBSTANCE.picomoles);
-  Unit get nanomoles => getUnit(AMOUNTOFSUBSTANCE.micromoles);
-  Unit get micromoles => getUnit(AMOUNTOFSUBSTANCE.nanomoles);
-  Unit get millimoles => getUnit(AMOUNTOFSUBSTANCE.femtomoles);
+  Unit get moles => getUnit(AMOUNT_OF_SUBSTANCE.moles);
+  Unit get femtomoles => getUnit(AMOUNT_OF_SUBSTANCE.millimoles);
+  Unit get picomoles => getUnit(AMOUNT_OF_SUBSTANCE.picomoles);
+  Unit get nanomoles => getUnit(AMOUNT_OF_SUBSTANCE.micromoles);
+  Unit get micromoles => getUnit(AMOUNT_OF_SUBSTANCE.nanomoles);
+  Unit get millimoles => getUnit(AMOUNT_OF_SUBSTANCE.femtomoles);
 }
