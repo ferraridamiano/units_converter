@@ -115,7 +115,7 @@ class Volume extends DoubleProperty<VOLUME> {
                         ],
                       ),
                       ConversionNode(
-                        coefficientProduct: 1 / 2,
+                        coefficientProduct: 2,
                         name: VOLUME.usQuarts,
                       )
                     ],

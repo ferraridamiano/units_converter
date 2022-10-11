@@ -31,12 +31,12 @@ void main() {
         500.convertUnitsAsRatioFromTo(MASS.milligrams, VOLUME.liters,
             MASS.milligrams, VOLUME.milliliters),
         0.5);
-    // expect(
-    //     500.convertRatioFromTo(
-    //       Ratio.milliGramsPerLiter,
-    //       Ratio.milliGramsPerMilliliter,
-    //     ),
-    //     0.5);
+    expect(
+        500.convertRatioFromTo(
+          Ratio.milliGramsPerLiter,
+          Ratio.milliGramsPerMilliliter,
+        ),
+        0.5);
   });
 
   test('Extension on String', () {
