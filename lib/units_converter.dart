@@ -22,3 +22,4 @@ export 'package:units_converter/properties/fuel_consumption.dart';
 export 'package:units_converter/properties/digital_data.dart';
 export 'package:units_converter/properties/shoe_size.dart';
 export 'package:units_converter/properties/numeral_systems.dart';
+export 'package:units_converter/properties/density.dart';
