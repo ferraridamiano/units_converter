@@ -75,7 +75,7 @@ class Density extends Property<DENSITY, double> {
     }
 
     numeratorProperty.convert(name.numerator, value);
-    denominatorProperty.convert(name.denominator, 1);
+    denominatorProperty.convert(name.denominator, 1.0);
 
     for (var i = 0; i < size; i++) {
       DENSITY unit = _unitList[i].name;
