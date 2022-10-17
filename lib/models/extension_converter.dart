@@ -56,59 +56,6 @@ extension ConvertUnitNum on num {
       return property.getUnit(to).value;
     }
   }
-
-  double? convertUnitsAsRatioFromTo(
-    dynamic fromNumerator,
-    dynamic fromDenominator,
-    dynamic toNumerator,
-    dynamic toDenominator,
-  ) {
-    assert(fromNumerator.runtimeType == toNumerator.runtimeType,
-        'fromNumberator and toNumerator must be of the same type, e.g. LENGTH');
-    assert(fromDenominator.runtimeType == toDenominator.runtimeType,
-        'fromNumberator and toNumerator must be of the same type, e.g. LENGTH');
-
-    /// Get the type of unit for the input ratio numerator
-    final numeratorProperty = _type(fromNumerator);
-
-    /// Get the type of unit for the input ratio denominator
-    final denominatorProperty = _type(fromDenominator);
-
-    /// Get the conversion ready for the Numerator. The passed numerical value
-    /// is included in this just as it is for the above function
-    ///
-    /// 500 mg/L - starts with converting 500 mg
-    numeratorProperty?.convert(fromNumerator, toDouble());
-
-    /// for the Denominator, we include the unit, but assume the value is 1
-    ///
-    /// 500 mg/L = 500 mg / 1 L
-    denominatorProperty?.convert(fromDenominator, 1.0);
-
-    /// if any value is null OR the denominator is 0 (undefined by reality) we
-    /// just return 0
-    if (numeratorProperty?.getUnit(toNumerator).value == null ||
-        denominatorProperty?.getUnit(toDenominator).value == null ||
-        denominatorProperty?.getUnit(toDenominator).value == 0) {
-      return 0;
-    } else {
-      /// Otherwise we convert the top value and divde by the bottom value
-      ///
-      /// 500 mg / L => mg / mL
-      /// 500 mg = 500 mg
-      /// 1 L = 1000 mL
-      /// 500 / 1000 = 0.5
-      return numeratorProperty!.getUnit(toNumerator).value! /
-          denominatorProperty!.getUnit(toDenominator).value!;
-    }
-  }
-
-  double? convertRatioFromTo(Ratio from, Ratio to) => convertUnitsAsRatioFromTo(
-        from.numeratorUnit(),
-        from.denominatorUnit(),
-        to.numeratorUnit(),
-        to.denominatorUnit(),
-      );
 }
 
 extension ConvertUnitString on String {

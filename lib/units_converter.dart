@@ -1,6 +1,5 @@
 export 'package:units_converter/models/unit.dart';
 export 'package:units_converter/models/property.dart';
-export 'package:units_converter/models/ratio.dart';
 export 'package:units_converter/properties/simple_custom_property.dart';
 export 'package:units_converter/properties/custom_property.dart';
 export 'package:units_converter/models/extension_converter.dart';

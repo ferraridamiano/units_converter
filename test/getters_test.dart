@@ -12,6 +12,21 @@ void main() {
     });
   }
 
+  group('Amount of Substance', () {
+    var property = AmountOfSubstance();
+    property.convert(AMOUNT_OF_SUBSTANCE.moles, 1);
+    runGetterTest(
+        property.millimoles, property.getUnit(AMOUNT_OF_SUBSTANCE.millimoles));
+    runGetterTest(
+        property.micromoles, property.getUnit(AMOUNT_OF_SUBSTANCE.micromoles));
+    runGetterTest(
+        property.nanomoles, property.getUnit(AMOUNT_OF_SUBSTANCE.nanomoles));
+    runGetterTest(
+        property.picomoles, property.getUnit(AMOUNT_OF_SUBSTANCE.picomoles));
+    runGetterTest(
+        property.femtomoles, property.getUnit(AMOUNT_OF_SUBSTANCE.femtomoles));
+  });
+
   group('Angle test', () {
     var property = Angle();
     property.convert(ANGLE.degree, 1);
