@@ -75,13 +75,13 @@ extension UnitsFromRatio on Ratio {
   dynamic numeratorUnit() {
     switch (this) {
       case Ratio.nanoMolesPerMole:
-        return AMOUNTOFSUBSTANCE.nanomoles;
+        return AMOUNT_OF_SUBSTANCE.nanomoles;
 
       case Ratio.microMolesPerMole:
-        return AMOUNTOFSUBSTANCE.micromoles;
+        return AMOUNT_OF_SUBSTANCE.micromoles;
 
       case Ratio.milliMolesPerMole:
-        return AMOUNTOFSUBSTANCE.millimoles;
+        return AMOUNT_OF_SUBSTANCE.millimoles;
 
       case Ratio.microGramsPerNanoGram:
         return MASS.micrograms;
@@ -120,10 +120,10 @@ extension UnitsFromRatio on Ratio {
         return MASS.grams;
 
       case Ratio.picoMolesPerMicroMole:
-        return AMOUNTOFSUBSTANCE.picomoles;
+        return AMOUNT_OF_SUBSTANCE.picomoles;
 
       case Ratio.nanoMolesPerMilliMole:
-        return AMOUNTOFSUBSTANCE.nanomoles;
+        return AMOUNT_OF_SUBSTANCE.nanomoles;
 
       case Ratio.milliLitersPerDeciLiter:
         return VOLUME.milliliters;
@@ -134,31 +134,31 @@ extension UnitsFromRatio on Ratio {
       case Ratio.milliMolesPerSquareMeter:
 
       case Ratio.femtoMolesPerMilliGram:
-        return AMOUNTOFSUBSTANCE.femtomoles;
+        return AMOUNT_OF_SUBSTANCE.femtomoles;
 
       case Ratio.nanoMolesPerMilliGram:
-        return AMOUNTOFSUBSTANCE.nanomoles;
+        return AMOUNT_OF_SUBSTANCE.nanomoles;
 
       case Ratio.microMolesPerMilliGram:
-        return AMOUNTOFSUBSTANCE.micromoles;
+        return AMOUNT_OF_SUBSTANCE.micromoles;
 
       case Ratio.molesPerKiloGram:
-        return AMOUNTOFSUBSTANCE.moles;
+        return AMOUNT_OF_SUBSTANCE.moles;
 
       case Ratio.femtoMolesPerGram:
-        return AMOUNTOFSUBSTANCE.femtomoles;
+        return AMOUNT_OF_SUBSTANCE.femtomoles;
 
       case Ratio.nanoMolesPerGram:
-        return AMOUNTOFSUBSTANCE.nanomoles;
+        return AMOUNT_OF_SUBSTANCE.nanomoles;
 
       case Ratio.microMolesPerGram:
-        return AMOUNTOFSUBSTANCE.micromoles;
+        return AMOUNT_OF_SUBSTANCE.micromoles;
 
       case Ratio.milliMolesPerGram:
-        return AMOUNTOFSUBSTANCE.millimoles;
+        return AMOUNT_OF_SUBSTANCE.millimoles;
 
       case Ratio.milliMolesPerKiloGram:
-        return AMOUNTOFSUBSTANCE.millimoles;
+        return AMOUNT_OF_SUBSTANCE.millimoles;
 
       case Ratio.milliLitersPerKiloGram:
         return VOLUME.milliliters;
@@ -215,49 +215,49 @@ extension UnitsFromRatio on Ratio {
         return MASS.kilograms;
 
       case Ratio.femtoMolesPerMilliLiter:
-        return AMOUNTOFSUBSTANCE.femtomoles;
+        return AMOUNT_OF_SUBSTANCE.femtomoles;
 
       case Ratio.picoMolesPerMilliLiter:
-        return AMOUNTOFSUBSTANCE.picomoles;
+        return AMOUNT_OF_SUBSTANCE.picomoles;
 
       case Ratio.nanoMolesPerMilliLiter:
-        return AMOUNTOFSUBSTANCE.nanomoles;
+        return AMOUNT_OF_SUBSTANCE.nanomoles;
 
       case Ratio.microMolesPerMilliLiter:
-        return AMOUNTOFSUBSTANCE.micromoles;
+        return AMOUNT_OF_SUBSTANCE.micromoles;
 
       case Ratio.molesPerMilliLiter:
-        return AMOUNTOFSUBSTANCE.moles;
+        return AMOUNT_OF_SUBSTANCE.moles;
 
       case Ratio.picoMolesPerDeciLiter:
-        return AMOUNTOFSUBSTANCE.picomoles;
+        return AMOUNT_OF_SUBSTANCE.picomoles;
 
       case Ratio.nanoMolesPerDeciLiter:
-        return AMOUNTOFSUBSTANCE.nanomoles;
+        return AMOUNT_OF_SUBSTANCE.nanomoles;
 
       case Ratio.microMolesPerDeciLiter:
-        return AMOUNTOFSUBSTANCE.micromoles;
+        return AMOUNT_OF_SUBSTANCE.micromoles;
 
       case Ratio.milliMolesPerDeciLiter:
-        return AMOUNTOFSUBSTANCE.millimoles;
+        return AMOUNT_OF_SUBSTANCE.millimoles;
 
       case Ratio.milliMolesPerLiter:
-        return AMOUNTOFSUBSTANCE.millimoles;
+        return AMOUNT_OF_SUBSTANCE.millimoles;
 
       case Ratio.picoMolesPerLiter:
-        return AMOUNTOFSUBSTANCE.picomoles;
+        return AMOUNT_OF_SUBSTANCE.picomoles;
 
       case Ratio.nanoMolesPerLiter:
-        return AMOUNTOFSUBSTANCE.nanomoles;
+        return AMOUNT_OF_SUBSTANCE.nanomoles;
 
       case Ratio.microMolesPerLiter:
-        return AMOUNTOFSUBSTANCE.micromoles;
+        return AMOUNT_OF_SUBSTANCE.micromoles;
 
       case Ratio.molesPerLiter:
-        return AMOUNTOFSUBSTANCE.moles;
+        return AMOUNT_OF_SUBSTANCE.moles;
 
       case Ratio.molesPerCubicMeter:
-        return AMOUNTOFSUBSTANCE.moles;
+        return AMOUNT_OF_SUBSTANCE.moles;
 
       case Ratio.gramsPerMilliLiter:
         return MASS.grams;
@@ -282,13 +282,13 @@ extension UnitsFromRatio on Ratio {
   dynamic denominatorUnit() {
     switch (this) {
       case Ratio.nanoMolesPerMole:
-        return AMOUNTOFSUBSTANCE.moles;
+        return AMOUNT_OF_SUBSTANCE.moles;
 
       case Ratio.microMolesPerMole:
-        return AMOUNTOFSUBSTANCE.moles;
+        return AMOUNT_OF_SUBSTANCE.moles;
 
       case Ratio.milliMolesPerMole:
-        return AMOUNTOFSUBSTANCE.moles;
+        return AMOUNT_OF_SUBSTANCE.moles;
 
       case Ratio.microGramsPerNanoGram:
         return MASS.grams;
@@ -327,10 +327,10 @@ extension UnitsFromRatio on Ratio {
         return MASS.kilograms;
 
       case Ratio.picoMolesPerMicroMole:
-        return AMOUNTOFSUBSTANCE.micromoles;
+        return AMOUNT_OF_SUBSTANCE.micromoles;
 
       case Ratio.nanoMolesPerMilliMole:
-        return AMOUNTOFSUBSTANCE.millimoles;
+        return AMOUNT_OF_SUBSTANCE.millimoles;
 
       case Ratio.milliLitersPerDeciLiter:
         return VOLUME.deciliters;

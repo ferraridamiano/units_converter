@@ -115,7 +115,7 @@ class Volume extends DoubleProperty<VOLUME> {
                         ],
                       ),
                       ConversionNode(
-                        coefficientProduct: 1 / 2,
+                        coefficientProduct: 2,
                         name: VOLUME.usQuarts,
                       )
                     ],
@@ -139,27 +139,27 @@ class Volume extends DoubleProperty<VOLUME> {
                       ]),
                 ]),
             ConversionNode(
-              coefficientProduct: 1e-15,
+              coefficientProduct: 1e-18,
               name: VOLUME.femtoliters,
             ),
             ConversionNode(
-              coefficientProduct: 1e-12,
+              coefficientProduct: 1e-15,
               name: VOLUME.picoliters,
             ),
             ConversionNode(
-              coefficientProduct: 1e-9,
+              coefficientProduct: 1e-12,
               name: VOLUME.nanoliters,
             ),
             ConversionNode(
-              coefficientProduct: 1e-6,
+              coefficientProduct: 1e-9,
               name: VOLUME.microliters,
             ),
             ConversionNode(
-              coefficientProduct: 0.1,
+              coefficientProduct: 0.0001,
               name: VOLUME.deciliters,
             ),
             ConversionNode(
-              coefficientProduct: 1e-2,
+              coefficientProduct: 0.00001,
               name: VOLUME.centiliters,
             ),
             ConversionNode(
