@@ -201,7 +201,7 @@ class Volume extends DoubleProperty<VOLUME> {
   Unit get usFluidOunces => getUnit(VOLUME.usFluidOunces);
   Unit get imperialGill => getUnit(VOLUME.imperialGill);
   Unit get usGill => getUnit(VOLUME.usGill);
-  Unit get quart => getUnit(VOLUME.usQuarts);
+  Unit get usQuarts => getUnit(VOLUME.usQuarts);
   Unit get femtoliter => getUnit(VOLUME.femtoliters);
   Unit get picoliter => getUnit(VOLUME.picoliters);
   Unit get nanoliter => getUnit(VOLUME.nanoliters);
