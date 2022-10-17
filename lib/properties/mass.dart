@@ -59,7 +59,7 @@ class Mass extends DoubleProperty<MASS> {
             MASS.femtograms: 'fg',
             MASS.picograms: 'pg',
             MASS.nanograms: 'ng',
-            MASS.micrograms: 'ug',
+            MASS.micrograms: 'µg',
             MASS.decigrams: 'dg',
           },
           conversionTree: ConversionNode(name: MASS.grams, leafNodes: [

@@ -69,7 +69,7 @@ class Volume extends DoubleProperty<VOLUME> {
             VOLUME.femtoliters: 'fl',
             VOLUME.picoliters: 'pl',
             VOLUME.nanoliters: 'nl',
-            VOLUME.microliters: 'ul',
+            VOLUME.microliters: 'µl',
             VOLUME.deciliters: 'dl',
             VOLUME.centiliters: 'cl',
           },
@@ -137,31 +137,31 @@ class Volume extends DoubleProperty<VOLUME> {
                           name: VOLUME.cups,
                         ),
                       ]),
+                  ConversionNode(
+                    coefficientProduct: 0.1,
+                    name: VOLUME.deciliters,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 0.01,
+                    name: VOLUME.centiliters,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1e-6,
+                    name: VOLUME.microliters,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1e-9,
+                    name: VOLUME.nanoliters,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1e-12,
+                    name: VOLUME.picoliters,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 1e-15,
+                    name: VOLUME.femtoliters,
+                  ),
                 ]),
-            ConversionNode(
-              coefficientProduct: 1e-18,
-              name: VOLUME.femtoliters,
-            ),
-            ConversionNode(
-              coefficientProduct: 1e-15,
-              name: VOLUME.picoliters,
-            ),
-            ConversionNode(
-              coefficientProduct: 1e-12,
-              name: VOLUME.nanoliters,
-            ),
-            ConversionNode(
-              coefficientProduct: 1e-9,
-              name: VOLUME.microliters,
-            ),
-            ConversionNode(
-              coefficientProduct: 0.0001,
-              name: VOLUME.deciliters,
-            ),
-            ConversionNode(
-              coefficientProduct: 0.00001,
-              name: VOLUME.centiliters,
-            ),
             ConversionNode(
                 coefficientProduct: 1e-6,
                 name: VOLUME.cubicCentimeters,

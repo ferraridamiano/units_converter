@@ -15,6 +15,7 @@ void main() {
   group('Amount of Substance', () {
     var property = AmountOfSubstance();
     property.convert(AMOUNT_OF_SUBSTANCE.moles, 1);
+    runGetterTest(property.moles, property.getUnit(AMOUNT_OF_SUBSTANCE.moles));
     runGetterTest(
         property.millimoles, property.getUnit(AMOUNT_OF_SUBSTANCE.millimoles));
     runGetterTest(
@@ -348,6 +349,7 @@ void main() {
     runGetterTest(
         property.usFluidOunces, property.getUnit(VOLUME.usFluidOunces));
     runGetterTest(property.imperialGill, property.getUnit(VOLUME.imperialGill));
+    runGetterTest(property.usGill, property.getUnit(VOLUME.usGill));
     runGetterTest(property.usQuarts, property.getUnit(VOLUME.usQuarts));
     runGetterTest(property.femtoliter, property.getUnit(VOLUME.femtoliters));
     runGetterTest(property.picoliter, property.getUnit(VOLUME.picoliters));
