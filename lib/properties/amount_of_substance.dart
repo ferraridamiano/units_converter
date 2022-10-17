@@ -8,11 +8,11 @@ import 'package:units_converter/models/unit.dart';
 //Available length units
 enum AMOUNT_OF_SUBSTANCE {
   moles,
-  femtomoles,
-  picomoles,
-  nanomoles,
-  micromoles,
   millimoles,
+  micromoles,
+  nanomoles,
+  picomoles,
+  femtomoles,
 }
 
 class AmountOfSubstance extends DoubleProperty<AMOUNT_OF_SUBSTANCE> {
@@ -67,9 +67,9 @@ class AmountOfSubstance extends DoubleProperty<AMOUNT_OF_SUBSTANCE> {
         );
 
   Unit get moles => getUnit(AMOUNT_OF_SUBSTANCE.moles);
-  Unit get femtomoles => getUnit(AMOUNT_OF_SUBSTANCE.millimoles);
+  Unit get millimoles => getUnit(AMOUNT_OF_SUBSTANCE.millimoles);
+  Unit get micromoles => getUnit(AMOUNT_OF_SUBSTANCE.micromoles);
+  Unit get nanomoles => getUnit(AMOUNT_OF_SUBSTANCE.nanomoles);
   Unit get picomoles => getUnit(AMOUNT_OF_SUBSTANCE.picomoles);
-  Unit get nanomoles => getUnit(AMOUNT_OF_SUBSTANCE.micromoles);
-  Unit get micromoles => getUnit(AMOUNT_OF_SUBSTANCE.nanomoles);
-  Unit get millimoles => getUnit(AMOUNT_OF_SUBSTANCE.femtomoles);
+  Unit get femtomoles => getUnit(AMOUNT_OF_SUBSTANCE.femtomoles);
 }
