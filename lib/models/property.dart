@@ -3,6 +3,7 @@ import 'package:units_converter/models/conversion_node.dart';
 import 'unit.dart';
 
 enum PROPERTY {
+  amountOfSubstance,
   angle,
   area,
   digitalData,

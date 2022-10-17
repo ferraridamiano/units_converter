@@ -13,6 +13,7 @@ export 'package:units_converter/properties/si_prefixes.dart';
 export 'package:units_converter/properties/mass.dart';
 export 'package:units_converter/properties/pressure.dart';
 export 'package:units_converter/properties/energy.dart';
+export 'package:units_converter/properties/amount_of_substance.dart';
 export 'package:units_converter/properties/angle.dart';
 export 'package:units_converter/properties/power.dart';
 export 'package:units_converter/properties/force.dart';
