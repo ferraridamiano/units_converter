@@ -17,6 +17,14 @@ enum DENSITY {
 }
 
 class Density extends RatioProperty<DENSITY, MASS, VOLUME> {
+  // NOTE: All values of DENSITY must be reported in this variable
+  static const Map<DENSITY, String?> _mapSymbols = {
+    DENSITY.gramsPerLiter: 'g/l',
+    DENSITY.gramsPerCubicCentimeter: 'g/cm³',
+    DENSITY.kilogramsPerLiter: 'kg/l',
+    DENSITY.kilogramsPerCubicMeter: 'kg/m³',
+  };
+
   ///Class for density conversions, e.g. if you want to convert 1 gram per liter
   ///in kilograms per liter:
   ///```dart
@@ -29,18 +37,14 @@ class Density extends RatioProperty<DENSITY, MASS, VOLUME> {
       super.removeTrailingZeros,
       super.useScientificNotation,
       name})
-      : super(
-          name: name ?? PROPERTY.density,
-          numeratorProperty: getPropertyFromEnum(DENSITY.values[0].numerator)!,
-          denominatorProperty:
-              getPropertyFromEnum(DENSITY.values[0].denominator)!,
-          mapSymbols: {
-            DENSITY.gramsPerLiter: 'g/l',
-            DENSITY.gramsPerCubicCentimeter: 'g/cm³',
-            DENSITY.kilogramsPerLiter: 'kg/l',
-            DENSITY.kilogramsPerCubicMeter: 'kg/m³',
-          },
-        );
+      : assert(_mapSymbols.length == DENSITY.values.length),
+        super(
+            name: name ?? PROPERTY.density,
+            numeratorProperty:
+                getPropertyFromEnum(DENSITY.values[0].numerator)!,
+            denominatorProperty:
+                getPropertyFromEnum(DENSITY.values[0].denominator)!,
+            mapSymbols: _mapSymbols);
 
   Unit get gramsPerLiter => getUnit(DENSITY.gramsPerLiter);
   Unit get gramsPerCubicCentimeter => getUnit(DENSITY.gramsPerCubicCentimeter);
