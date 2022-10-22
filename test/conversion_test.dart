@@ -83,6 +83,16 @@ void main() {
     runConversionTest(expectedResult, Area());
   });
 
+  group('Density conversion', () {
+    const Map<DENSITY, double> expectedResult = {
+      DENSITY.gramsPerLiter: 1,
+      DENSITY.gramsPerCubicCentimeter: 0.001,
+      DENSITY.kilogramsPerLiter: 0.001,
+      DENSITY.kilogramsPerCubicMeter: 1,
+    };
+    runConversionTest(expectedResult, Density());
+  });
+
   group('Digital data conversion', () {
     const Map<DIGITAL_DATA, double> expectedResult = {
       DIGITAL_DATA.bit: 8,
