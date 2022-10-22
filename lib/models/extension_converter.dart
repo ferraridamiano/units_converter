@@ -1,105 +1,60 @@
 import 'package:units_converter/units_converter.dart';
 
 extension ConvertUnitNum on num {
-  double? convertFromTo(dynamic from, dynamic to) {
-    assert(from.runtimeType == to.runtimeType,
-        'from and to must be of the same type, e.g. LENGTH');
-    Property property;
-    switch (from.runtimeType) {
+  Property? _type(dynamic checkType) {
+    switch (checkType.runtimeType) {
       case ANGLE:
-        {
-          property = Angle();
-          break;
-        }
+        return Angle();
       case AREA:
-        {
-          property = Area();
-          break;
-        }
+        return Area();
       case DIGITAL_DATA:
-        {
-          property = DigitalData();
-          break;
-        }
+        return DigitalData();
       case ENERGY:
-        {
-          property = Energy();
-          break;
-        }
+        return Energy();
       case FORCE:
-        {
-          property = Force();
-          break;
-        }
+        return Force();
       case FUEL_CONSUMPTION:
-        {
-          property = FuelConsumption();
-          break;
-        }
+        return FuelConsumption();
       case LENGTH:
-        {
-          property = Length();
-          break;
-        }
+        return Length();
       case MASS:
-        {
-          property = Mass();
-          break;
-        }
+        return Mass();
       case POWER:
-        {
-          property = Power();
-          break;
-        }
+        return Power();
       case PRESSURE:
-        {
-          property = Pressure();
-          break;
-        }
+        return Pressure();
       case SHOE_SIZE:
-        {
-          property = ShoeSize();
-          break;
-        }
+        return ShoeSize();
       case SI_PREFIXES:
-        {
-          property = SIPrefixes();
-          break;
-        }
+        return SIPrefixes();
       case SPEED:
-        {
-          property = Speed();
-          break;
-        }
+        return Speed();
       case TEMPERATURE:
-        {
-          property = Temperature();
-          break;
-        }
+        return Temperature();
       case TIME:
-        {
-          property = Time();
-          break;
-        }
+        return Time();
       case TORQUE:
-        {
-          property = Torque();
-          break;
-        }
+        return Torque();
       case VOLUME:
-        {
-          property = Volume();
-          break;
-        }
-
+        return Volume();
       default:
         {
           assert(false, "from and to don't have a valid type");
           return null;
         }
     }
-    property.convert(from, toDouble());
-    return property.getUnit(to).value;
+  }
+
+  double? convertFromTo(dynamic from, dynamic to) {
+    assert(from.runtimeType == to.runtimeType,
+        'from and to must be of the same type, e.g. LENGTH');
+    Property? property = _type(from);
+    if (property == null) {
+      return null;
+    } else {
+      property.convert(from, toDouble());
+      return property.getUnit(to).value;
+    }
   }
 }
 

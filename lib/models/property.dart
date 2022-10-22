@@ -1,6 +1,7 @@
 import 'unit.dart';
 
 enum PROPERTY {
+  amountOfSubstance,
   angle,
   area,
   density,

@@ -199,6 +199,11 @@ void main() {
       MASS.pennyweights: 0.6430149314,
       MASS.troyOunces: 0.03215074657,
       MASS.stones: 0.0001574730444,
+      MASS.femtograms: 1e15,
+      MASS.picograms: 1e12,
+      MASS.nanograms: 1e9,
+      MASS.micrograms: 1e6,
+      MASS.decigrams: 10,
     };
     runConversionTest(expectedResult, Mass(), sensibility: 1e9);
   });
@@ -400,8 +405,27 @@ void main() {
       VOLUME.usFluidOunces: 33814.0227,
       VOLUME.imperialGill: 7039.015946,
       VOLUME.usGill: 8453.505675,
+      VOLUME.usQuarts: 1056.6882094325938,
+      VOLUME.femtoliters: 1e18,
+      VOLUME.picoliters: 1e15,
+      VOLUME.nanoliters: 1e12,
+      VOLUME.microliters: 1e9,
+      VOLUME.deciliters: 1e4,
+      VOLUME.centiliters: 1e5,
     };
     runConversionTest(expectedResult, Volume(), sensibility: 1e9);
+  });
+
+  group('Amount of Substance', () {
+    const Map<AMOUNT_OF_SUBSTANCE, double> expectedResult = {
+      AMOUNT_OF_SUBSTANCE.moles: 1,
+      AMOUNT_OF_SUBSTANCE.millimoles: 1e3,
+      AMOUNT_OF_SUBSTANCE.micromoles: 1e6,
+      AMOUNT_OF_SUBSTANCE.nanomoles: 1e9,
+      AMOUNT_OF_SUBSTANCE.picomoles: 1e12,
+      AMOUNT_OF_SUBSTANCE.femtomoles: 1e15,
+    };
+    runConversionTest(expectedResult, AmountOfSubstance());
   });
 
   group('Simple custom conversion', () {

@@ -12,6 +12,22 @@ void main() {
     });
   }
 
+  group('Amount of Substance', () {
+    var property = AmountOfSubstance();
+    property.convert(AMOUNT_OF_SUBSTANCE.moles, 1);
+    runGetterTest(property.moles, property.getUnit(AMOUNT_OF_SUBSTANCE.moles));
+    runGetterTest(
+        property.millimoles, property.getUnit(AMOUNT_OF_SUBSTANCE.millimoles));
+    runGetterTest(
+        property.micromoles, property.getUnit(AMOUNT_OF_SUBSTANCE.micromoles));
+    runGetterTest(
+        property.nanomoles, property.getUnit(AMOUNT_OF_SUBSTANCE.nanomoles));
+    runGetterTest(
+        property.picomoles, property.getUnit(AMOUNT_OF_SUBSTANCE.picomoles));
+    runGetterTest(
+        property.femtomoles, property.getUnit(AMOUNT_OF_SUBSTANCE.femtomoles));
+  });
+
   group('Angle test', () {
     var property = Angle();
     property.convert(ANGLE.degree, 1);
@@ -166,6 +182,11 @@ void main() {
     runGetterTest(property.pennyweights, property.getUnit(MASS.pennyweights));
     runGetterTest(property.troyOunces, property.getUnit(MASS.troyOunces));
     runGetterTest(property.stones, property.getUnit(MASS.stones));
+    runGetterTest(property.femtograms, property.getUnit(MASS.femtograms));
+    runGetterTest(property.picograms, property.getUnit(MASS.picograms));
+    runGetterTest(property.nanograms, property.getUnit(MASS.nanograms));
+    runGetterTest(property.micrograms, property.getUnit(MASS.micrograms));
+    runGetterTest(property.decigrams, property.getUnit(MASS.decigrams));
   });
 
   group('Numeral systems test', () {
@@ -342,5 +363,12 @@ void main() {
         property.usFluidOunces, property.getUnit(VOLUME.usFluidOunces));
     runGetterTest(property.imperialGill, property.getUnit(VOLUME.imperialGill));
     runGetterTest(property.usGill, property.getUnit(VOLUME.usGill));
+    runGetterTest(property.usQuarts, property.getUnit(VOLUME.usQuarts));
+    runGetterTest(property.femtoliter, property.getUnit(VOLUME.femtoliters));
+    runGetterTest(property.picoliter, property.getUnit(VOLUME.picoliters));
+    runGetterTest(property.nanoliter, property.getUnit(VOLUME.nanoliters));
+    runGetterTest(property.microliter, property.getUnit(VOLUME.microliters));
+    runGetterTest(property.deciliter, property.getUnit(VOLUME.deciliters));
+    runGetterTest(property.centiliter, property.getUnit(VOLUME.centiliters));
   });
 }
