@@ -17,6 +17,7 @@ import 'package:units_converter/properties/torque.dart';
 import 'package:units_converter/properties/fuel_consumption.dart';
 import 'package:units_converter/properties/digital_data.dart';
 import 'package:units_converter/properties/shoe_size.dart';
+import 'package:units_converter/properties/density.dart';
 
 Property? getPropertyFromEnum(dynamic propertyEnum) {
   switch (propertyEnum.runtimeType) {
@@ -24,6 +25,8 @@ Property? getPropertyFromEnum(dynamic propertyEnum) {
       return Angle();
     case AREA:
       return Area();
+    case DENSITY:
+      return Density();
     case DIGITAL_DATA:
       return DigitalData();
     case ENERGY:
