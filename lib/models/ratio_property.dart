@@ -2,9 +2,9 @@ import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/utils/utils.dart';
 
-abstract class RatioProperty<T, N, D> extends Property<T, double> {
-  /// Map between units and its symbol
-  Map<T, String> mapSymbols;
+abstract class RatioProperty<T extends Enum, N, D> extends Property<T, double> {
+  /// Map between units and its symbol, must be of the same size of T
+  Map<T, String?> mapSymbols;
 
   /// The number of significan figures to keep. E.g. 1.23456789) has 9
   /// significant figures
@@ -30,17 +30,12 @@ abstract class RatioProperty<T, N, D> extends Property<T, double> {
       this.significantFigures = 10,
       this.removeTrailingZeros = true,
       this.useScientificNotation = true}) {
+    size = mapSymbols.length;
     this.name = name;
     size = mapSymbols.length;
-    // TODO try to fix the following line
-    assert(size == mapSymbols.length);
     for (var unit in mapSymbols.keys) {
       _unitList.add(Unit(unit, symbol: mapSymbols[unit]));
     }
-    /*for (var conversionNode in _nodeList) {
-      _unitList.add(
-          Unit(conversionNode.name, symbol: mapSymbols?[conversionNode.name]));
-    }*/
   }
 
   /// Converts a unit with a specific name (e.g. ANGLE.degree) and value to all
