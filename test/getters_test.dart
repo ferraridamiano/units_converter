@@ -57,6 +57,19 @@ void main() {
     runGetterTest(property.are, property.getUnit(AREA.are));
   });
 
+  group('Density test', () {
+    var property = Density();
+    property.convert(DENSITY.gramsPerLiter, 1);
+    runGetterTest(
+        property.gramsPerLiter, property.getUnit(DENSITY.gramsPerLiter));
+    runGetterTest(property.gramsPerCubicCentimeter,
+        property.getUnit(DENSITY.gramsPerCubicCentimeter));
+    runGetterTest(property.kilogramsPerLiter,
+        property.getUnit(DENSITY.kilogramsPerLiter));
+    runGetterTest(property.kilogramsPerCubicMeter,
+        property.getUnit(DENSITY.kilogramsPerCubicMeter));
+  });
+
   group('Digital data test', () {
     var property = DigitalData();
     property.convert(DIGITAL_DATA.byte, 1);
