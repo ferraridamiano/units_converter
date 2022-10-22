@@ -48,6 +48,6 @@ class Density extends RatioProperty<DENSITY, MASS, VOLUME> {
 
   Unit get gramsPerLiter => getUnit(DENSITY.gramsPerLiter);
   Unit get gramsPerCubicCentimeter => getUnit(DENSITY.gramsPerCubicCentimeter);
-  Unit get kilogramsPerLiter => getUnit(DENSITY.gramsPerCubicCentimeter);
+  Unit get kilogramsPerLiter => getUnit(DENSITY.kilogramsPerLiter);
   Unit get kilogramsPerCubicMeter => getUnit(DENSITY.kilogramsPerCubicMeter);
 }
