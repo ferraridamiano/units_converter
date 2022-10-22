@@ -12,6 +12,7 @@ enum NUMERAL_SYSTEMS {
 }
 
 class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
+  late ConversionNode<NUMERAL_SYSTEMS> conversionTree;
   //Map between units and its symbol
   static const Map<NUMERAL_SYSTEMS, String> mapSymbols = {
     NUMERAL_SYSTEMS.decimal: '₁₀',

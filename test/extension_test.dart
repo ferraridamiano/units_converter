@@ -5,6 +5,8 @@ void main() {
   test('Extension on num', () {
     expect(1.convertFromTo(ANGLE.degree, ANGLE.minutes), 60);
     expect(1.convertFromTo(AREA.squareMeters, AREA.hectares), 1e-4);
+    expect(1.convertFromTo(DENSITY.kilogramsPerLiter, DENSITY.gramsPerLiter),
+        1000);
     expect(1.convertFromTo(DIGITAL_DATA.byte, DIGITAL_DATA.nibble), 2);
     expect(1.convertFromTo(ENERGY.kilocalories, ENERGY.calories), 1e3);
     expect(1.convertFromTo(FORCE.dyne, FORCE.newton), 1e-5);
