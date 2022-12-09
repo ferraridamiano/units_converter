@@ -87,12 +87,22 @@ void main() {
     const Map<DENSITY, double> expectedResult = {
       DENSITY.gramsPerLiter: 1,
       DENSITY.gramsPerCubicCentimeter: 0.001,
+      DENSITY.gramsPerMilliLiter: 0.001,
+      DENSITY.gramsPerDeciLiter: 0.1,
       DENSITY.kilogramsPerLiter: 0.001,
       DENSITY.kilogramsPerCubicMeter: 1,
-      DENSITY.nanoGramsPerMilliLiter: 1e6,
-      DENSITY.picoGramsPerMilliLiter: 1e9,
+      DENSITY.milliGramsPerLiter: 1000,
+      DENSITY.milliGramsPerDeciLiter: 100,
+      DENSITY.milliGramsPerMilliLiter: 1,
+      DENSITY.milliGramsPerCubicMeter: 1e6,
+      DENSITY.milliGramsPerCubicCentimeter: 1,
+      DENSITY.microGramsPerLiter: 1e6,
       DENSITY.microGramsPerDeciLiter: 1e5,
       DENSITY.microGramsPerMilliLiter: 1e3,
+      DENSITY.nanoGramsPerLiter: 1e9,
+      DENSITY.nanoGramsPerMilliLiter: 1e6,
+      DENSITY.picoGramsPerLiter: 1e12,
+      DENSITY.picoGramsPerMilliLiter: 1e9,
     };
     runConversionTest(expectedResult, Density());
   });

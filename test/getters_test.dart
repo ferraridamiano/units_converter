@@ -64,18 +64,38 @@ void main() {
         property.gramsPerLiter, property.getUnit(DENSITY.gramsPerLiter));
     runGetterTest(property.gramsPerCubicCentimeter,
         property.getUnit(DENSITY.gramsPerCubicCentimeter));
+    runGetterTest(property.gramsPerMilliLiter,
+        property.getUnit(DENSITY.gramsPerMilliLiter));
+    runGetterTest(property.gramsPerDeciLiter,
+        property.getUnit(DENSITY.gramsPerDeciLiter));
     runGetterTest(property.kilogramsPerLiter,
         property.getUnit(DENSITY.kilogramsPerLiter));
     runGetterTest(property.kilogramsPerCubicMeter,
         property.getUnit(DENSITY.kilogramsPerCubicMeter));
-    runGetterTest(property.nanoGramsPerMilliLiter,
-        property.getUnit(DENSITY.nanoGramsPerMilliLiter));
-    runGetterTest(property.picoGramsPerMilliLiter,
-        property.getUnit(DENSITY.picoGramsPerMilliLiter));
+    runGetterTest(property.milliGramsPerLiter,
+        property.getUnit(DENSITY.milliGramsPerLiter));
+    runGetterTest(property.milliGramsPerDeciLiter,
+        property.getUnit(DENSITY.milliGramsPerDeciLiter));
+    runGetterTest(property.milliGramsPerMilliLiter,
+        property.getUnit(DENSITY.milliGramsPerMilliLiter));
+    runGetterTest(property.milliGramsPerCubicMeter,
+        property.getUnit(DENSITY.milliGramsPerCubicMeter));
+    runGetterTest(property.milliGramsPerCubicCentimeter,
+        property.getUnit(DENSITY.milliGramsPerCubicCentimeter));
+    runGetterTest(property.microGramsPerLiter,
+        property.getUnit(DENSITY.microGramsPerLiter));
     runGetterTest(property.microGramsPerDeciLiter,
         property.getUnit(DENSITY.microGramsPerDeciLiter));
     runGetterTest(property.microGramsPerMilliLiter,
         property.getUnit(DENSITY.microGramsPerMilliLiter));
+    runGetterTest(property.nanoGramsPerLiter,
+        property.getUnit(DENSITY.nanoGramsPerLiter));
+    runGetterTest(property.nanoGramsPerMilliLiter,
+        property.getUnit(DENSITY.nanoGramsPerMilliLiter));
+    runGetterTest(property.picoGramsPerLiter,
+        property.getUnit(DENSITY.picoGramsPerLiter));
+    runGetterTest(property.picoGramsPerMilliLiter,
+        property.getUnit(DENSITY.picoGramsPerMilliLiter));
   });
 
   group('Digital data test', () {

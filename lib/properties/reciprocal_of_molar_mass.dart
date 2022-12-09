@@ -49,8 +49,8 @@ class ReciprocalOfMolarMass
   ///Class for the reciprocal of molar mass conversions, e.g. if you want to
   ///convert 1 gram per liter into kilograms per liter:
   ///```dart
-  ///var density = MolarMass(removeTrailingZeros: false);
-  ///density.convert(Unit(RECIPROCAL_OF_MOLAR_MASS.gramsPerLiter, value: 1));
+  ///var reciprocalOfMolarMass = MolarMass(removeTrailingZeros: false);
+  ///reciprocalOfMolarMass.convert(Unit(RECIPROCAL_OF_MOLAR_MASS.gramsPerLiter, value: 1));
   ///print(RECIPROCAL_OF_MOLAR_MASS.kilogramsPerLiter);
   /// ```
   ReciprocalOfMolarMass(

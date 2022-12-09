@@ -8,12 +8,23 @@ import 'package:units_converter/utils/utils.dart';
 enum DENSITY {
   gramsPerLiter(MASS.grams, VOLUME.liters),
   gramsPerCubicCentimeter(MASS.grams, VOLUME.cubicCentimeters),
+  gramsPerMilliLiter(MASS.grams, VOLUME.milliliters),
+  gramsPerDeciLiter(MASS.grams, VOLUME.deciliters),
   kilogramsPerLiter(MASS.kilograms, VOLUME.liters),
   kilogramsPerCubicMeter(MASS.kilograms, VOLUME.cubicMeters),
-  nanoGramsPerMilliLiter(MASS.nanograms, VOLUME.milliliters),
-  picoGramsPerMilliLiter(MASS.picograms, VOLUME.milliliters),
+  milliGramsPerLiter(MASS.milligrams, VOLUME.liters),
+  milliGramsPerDeciLiter(MASS.milligrams, VOLUME.deciliters),
+  milliGramsPerMilliLiter(MASS.milligrams, VOLUME.milliliters),
+  milliGramsPerCubicMeter(MASS.milligrams, VOLUME.cubicMeters),
+  milliGramsPerCubicCentimeter(MASS.milligrams, VOLUME.cubicCentimeters),
+  microGramsPerLiter(MASS.micrograms, VOLUME.liters),
   microGramsPerDeciLiter(MASS.micrograms, VOLUME.deciliters),
-  microGramsPerMilliLiter(MASS.micrograms, VOLUME.milliliters);
+  microGramsPerMilliLiter(MASS.micrograms, VOLUME.milliliters),
+  nanoGramsPerLiter(MASS.nanograms, VOLUME.liters),
+  nanoGramsPerMilliLiter(MASS.nanograms, VOLUME.milliliters),
+  picoGramsPerLiter(MASS.picograms, VOLUME.liters),
+  picoGramsPerMilliLiter(MASS.picograms, VOLUME.milliliters),
+  ;
 
   final MASS numerator;
   final VOLUME denominator;
@@ -25,12 +36,22 @@ class Density extends RatioProperty<DENSITY, MASS, VOLUME> {
   static const Map<DENSITY, String?> _mapSymbols = {
     DENSITY.gramsPerLiter: 'g/l',
     DENSITY.gramsPerCubicCentimeter: 'g/cm³',
+    DENSITY.gramsPerMilliLiter: 'g/ml',
+    DENSITY.gramsPerDeciLiter: 'g/dl',
     DENSITY.kilogramsPerLiter: 'kg/l',
     DENSITY.kilogramsPerCubicMeter: 'kg/m³',
-    DENSITY.nanoGramsPerMilliLiter: 'ng/ml',
-    DENSITY.picoGramsPerMilliLiter: 'pg/ml',
+    DENSITY.milliGramsPerLiter: 'mg/l',
+    DENSITY.milliGramsPerDeciLiter: 'mg/dl',
+    DENSITY.milliGramsPerMilliLiter: 'mg/ml',
+    DENSITY.milliGramsPerCubicMeter: 'mg/m³',
+    DENSITY.milliGramsPerCubicCentimeter: 'mg/cm³',
+    DENSITY.microGramsPerLiter: 'µg/l',
     DENSITY.microGramsPerDeciLiter: 'µg/dl',
     DENSITY.microGramsPerMilliLiter: 'µg/ml',
+    DENSITY.nanoGramsPerLiter: 'ng/l',
+    DENSITY.nanoGramsPerMilliLiter: 'ng/ml',
+    DENSITY.picoGramsPerLiter: 'pg/l',
+    DENSITY.picoGramsPerMilliLiter: 'pg/ml',
   };
 
   ///Class for density conversions, e.g. if you want to convert 1 gram per liter
@@ -56,10 +77,21 @@ class Density extends RatioProperty<DENSITY, MASS, VOLUME> {
 
   Unit get gramsPerLiter => getUnit(DENSITY.gramsPerLiter);
   Unit get gramsPerCubicCentimeter => getUnit(DENSITY.gramsPerCubicCentimeter);
+  Unit get gramsPerMilliLiter => getUnit(DENSITY.gramsPerMilliLiter);
+  Unit get gramsPerDeciLiter => getUnit(DENSITY.gramsPerDeciLiter);
   Unit get kilogramsPerLiter => getUnit(DENSITY.kilogramsPerLiter);
   Unit get kilogramsPerCubicMeter => getUnit(DENSITY.kilogramsPerCubicMeter);
-  Unit get nanoGramsPerMilliLiter => getUnit(DENSITY.nanoGramsPerMilliLiter);
-  Unit get picoGramsPerMilliLiter => getUnit(DENSITY.picoGramsPerMilliLiter);
+  Unit get milliGramsPerLiter => getUnit(DENSITY.milliGramsPerLiter);
+  Unit get milliGramsPerDeciLiter => getUnit(DENSITY.milliGramsPerDeciLiter);
+  Unit get milliGramsPerMilliLiter => getUnit(DENSITY.milliGramsPerMilliLiter);
+  Unit get milliGramsPerCubicMeter => getUnit(DENSITY.milliGramsPerCubicMeter);
+  Unit get milliGramsPerCubicCentimeter =>
+      getUnit(DENSITY.milliGramsPerCubicCentimeter);
+  Unit get microGramsPerLiter => getUnit(DENSITY.microGramsPerLiter);
   Unit get microGramsPerDeciLiter => getUnit(DENSITY.microGramsPerDeciLiter);
   Unit get microGramsPerMilliLiter => getUnit(DENSITY.microGramsPerMilliLiter);
+  Unit get nanoGramsPerLiter => getUnit(DENSITY.nanoGramsPerLiter);
+  Unit get nanoGramsPerMilliLiter => getUnit(DENSITY.nanoGramsPerMilliLiter);
+  Unit get picoGramsPerLiter => getUnit(DENSITY.picoGramsPerLiter);
+  Unit get picoGramsPerMilliLiter => getUnit(DENSITY.picoGramsPerMilliLiter);
 }
