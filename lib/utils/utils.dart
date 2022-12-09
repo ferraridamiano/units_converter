@@ -1,7 +1,10 @@
 import 'dart:math';
 import 'package:units_converter/models/property.dart';
+import 'package:units_converter/properties/amount_of_substance.dart';
 import 'package:units_converter/properties/length.dart';
 import 'package:units_converter/properties/area.dart';
+import 'package:units_converter/properties/molar_mass.dart';
+import 'package:units_converter/properties/reciprocal_of_molar_mass.dart';
 import 'package:units_converter/properties/volume.dart';
 import 'package:units_converter/properties/time.dart';
 import 'package:units_converter/properties/temperature.dart';
@@ -21,6 +24,8 @@ import 'package:units_converter/properties/density.dart';
 
 Property? getPropertyFromEnum(dynamic propertyEnum) {
   switch (propertyEnum.runtimeType) {
+    case AMOUNT_OF_SUBSTANCE:
+      return AmountOfSubstance();
     case ANGLE:
       return Angle();
     case AREA:
@@ -39,10 +44,14 @@ Property? getPropertyFromEnum(dynamic propertyEnum) {
       return Length();
     case MASS:
       return Mass();
+    case MOLAR_MASS:
+      return MolarMass();
     case POWER:
       return Power();
     case PRESSURE:
       return Pressure();
+    case RECIPROCAL_OF_MOLAR_MASS:
+      return ReciprocalOfMolarMass();
     case SHOE_SIZE:
       return ShoeSize();
     case SI_PREFIXES:
@@ -59,6 +68,8 @@ Property? getPropertyFromEnum(dynamic propertyEnum) {
       return Volume();
     default:
       {
+        print(propertyEnum);
+        print(propertyEnum.runtimeType);
         assert(false, "Not a valid enum type");
         return null;
       }
