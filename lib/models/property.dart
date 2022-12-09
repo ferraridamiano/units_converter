@@ -12,6 +12,7 @@ enum PROPERTY {
   length,
   mass,
   molarmass,
+  molarvolume,
   numeralSystems,
   power,
   pressure,

@@ -2,7 +2,7 @@ import 'package:test/test.dart';
 import 'package:units_converter/units_converter.dart';
 
 /// This function defines if a value is accettable. e.g. if we expect to have 1 but we get 1.00000000012, is this a valid result or not?
-/// The term sensbility is used improperly.
+/// The term sensibility is used improperly.
 bool isAcceptable(double? convertedValue, double? expectedValue, sensibility) {
   if ((convertedValue == null && expectedValue != null) ||
       (convertedValue != null && expectedValue == null)) {
@@ -26,6 +26,8 @@ void runConversionTest(Map<dynamic, double> expectedResult, Property property,
         var name = unit.name;
         double? convertedValue =
             unitList.where((element) => element.name == name).single.value;
+        print(convertedValue);
+        print(name);
         expect(
           isAcceptable(convertedValue, expectedResult[name]!, sensibility),
           true,
@@ -240,6 +242,27 @@ void main() {
       MOLAR_MASS.kiloGramsPerMilliMole: 1e-6,
     };
     runConversionTest(expectedResult, MolarMass());
+  });
+
+  group('Molar Volume conversion', () {
+    const Map<MOLAR_VOLUME, double> expectedResult = {
+      MOLAR_VOLUME.molesPerLiter: 1,
+      MOLAR_VOLUME.molesPerMilliLiter: 1e-3,
+      MOLAR_VOLUME.molesPerCubicMeter: 1000,
+      MOLAR_VOLUME.milliMolesPerLiter: 1000,
+      MOLAR_VOLUME.milliMolesPerDeciLiter: 100,
+      MOLAR_VOLUME.microMolesPerLiter: 1e6,
+      MOLAR_VOLUME.microMolesPerDeciLiter: 1e5,
+      MOLAR_VOLUME.microMolesPerMilliLiter: 1000,
+      MOLAR_VOLUME.nanoMolesPerLiter: 1e9,
+      MOLAR_VOLUME.nanoMolesPerDeciLiter: 1e4,
+      MOLAR_VOLUME.nanoMolesPerMilliLiter: 1e3,
+      MOLAR_VOLUME.picoMolesPerLiter: 1e12,
+      MOLAR_VOLUME.picoMolesPerDeciLiter: 1e-10,
+      MOLAR_VOLUME.picoMolesPerMilliLiter: 1e-6,
+      MOLAR_VOLUME.femtoMolesPerMilliLiter: 1e-9,
+    };
+    runConversionTest(expectedResult, MolarVolume(), sensibility: 1e50);
   });
 
   group('Numeral systems', () {

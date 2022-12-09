@@ -4,6 +4,7 @@ import 'package:units_converter/properties/amount_of_substance.dart';
 import 'package:units_converter/properties/length.dart';
 import 'package:units_converter/properties/area.dart';
 import 'package:units_converter/properties/molar_mass.dart';
+import 'package:units_converter/properties/molar_volume.dart';
 import 'package:units_converter/properties/reciprocal_of_molar_mass.dart';
 import 'package:units_converter/properties/volume.dart';
 import 'package:units_converter/properties/time.dart';
@@ -46,6 +47,8 @@ Property? getPropertyFromEnum(dynamic propertyEnum) {
       return Mass();
     case MOLAR_MASS:
       return MolarMass();
+    case MOLAR_VOLUME:
+      return MolarVolume();
     case POWER:
       return Power();
     case PRESSURE:

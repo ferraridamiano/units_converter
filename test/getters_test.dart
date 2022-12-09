@@ -250,6 +250,41 @@ void main() {
         property.getUnit(MOLAR_MASS.kiloGramsPerMilliMole));
   });
 
+  group('Molar Volume test', () {
+    var property = MolarVolume();
+    property.convert(MOLAR_VOLUME.molesPerLiter, 1);
+    runGetterTest(
+        property.molesPerLiter, property.getUnit(MOLAR_VOLUME.molesPerLiter));
+    runGetterTest(property.molesPerMilliLiter,
+        property.getUnit(MOLAR_VOLUME.molesPerMilliLiter));
+    runGetterTest(property.molesPerCubicMeter,
+        property.getUnit(MOLAR_VOLUME.molesPerCubicMeter));
+    runGetterTest(property.milliMolesPerLiter,
+        property.getUnit(MOLAR_VOLUME.milliMolesPerLiter));
+    runGetterTest(property.milliMolesPerDeciLiter,
+        property.getUnit(MOLAR_VOLUME.milliMolesPerDeciLiter));
+    runGetterTest(property.microMolesPerLiter,
+        property.getUnit(MOLAR_VOLUME.microMolesPerLiter));
+    runGetterTest(property.microMolesPerDeciLiter,
+        property.getUnit(MOLAR_VOLUME.microMolesPerDeciLiter));
+    runGetterTest(property.microMolesPerMilliLiter,
+        property.getUnit(MOLAR_VOLUME.microMolesPerMilliLiter));
+    runGetterTest(property.nanoMolesPerLiter,
+        property.getUnit(MOLAR_VOLUME.nanoMolesPerLiter));
+    runGetterTest(property.nanoMolesPerDeciLiter,
+        property.getUnit(MOLAR_VOLUME.nanoMolesPerDeciLiter));
+    runGetterTest(property.nanoMolesPerMilliLiter,
+        property.getUnit(MOLAR_VOLUME.nanoMolesPerMilliLiter));
+    runGetterTest(property.picoMolesPerLiter,
+        property.getUnit(MOLAR_VOLUME.picoMolesPerLiter));
+    runGetterTest(property.picoMolesPerDeciLiter,
+        property.getUnit(MOLAR_VOLUME.picoMolesPerDeciLiter));
+    runGetterTest(property.picoMolesPerMilliLiter,
+        property.getUnit(MOLAR_VOLUME.picoMolesPerMilliLiter));
+    runGetterTest(property.femtoMolesPerMilliLiter,
+        property.getUnit(MOLAR_VOLUME.femtoMolesPerMilliLiter));
+  });
+
   group('Numeral systems test', () {
     var property = NumeralSystems();
     property.convert(NUMERAL_SYSTEMS.decimal, '1');
