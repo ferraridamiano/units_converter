@@ -89,6 +89,10 @@ void main() {
       DENSITY.gramsPerCubicCentimeter: 0.001,
       DENSITY.kilogramsPerLiter: 0.001,
       DENSITY.kilogramsPerCubicMeter: 1,
+      DENSITY.nanoGramsPerMilliLiter: 1e6,
+      DENSITY.picoGramsPerMilliLiter: 1e9,
+      DENSITY.microGramsPerDeciLiter: 1e5,
+      DENSITY.microGramsPerMilliLiter: 1e3,
     };
     runConversionTest(expectedResult, Density());
   });

@@ -9,7 +9,11 @@ enum DENSITY {
   gramsPerLiter(MASS.grams, VOLUME.liters),
   gramsPerCubicCentimeter(MASS.grams, VOLUME.cubicCentimeters),
   kilogramsPerLiter(MASS.kilograms, VOLUME.liters),
-  kilogramsPerCubicMeter(MASS.kilograms, VOLUME.cubicMeters);
+  kilogramsPerCubicMeter(MASS.kilograms, VOLUME.cubicMeters),
+  nanoGramsPerMilliLiter(MASS.nanograms, VOLUME.milliliters),
+  picoGramsPerMilliLiter(MASS.picograms, VOLUME.milliliters),
+  microGramsPerDeciLiter(MASS.micrograms, VOLUME.deciliters),
+  microGramsPerMilliLiter(MASS.micrograms, VOLUME.milliliters);
 
   final MASS numerator;
   final VOLUME denominator;
@@ -23,6 +27,10 @@ class Density extends RatioProperty<DENSITY, MASS, VOLUME> {
     DENSITY.gramsPerCubicCentimeter: 'g/cm³',
     DENSITY.kilogramsPerLiter: 'kg/l',
     DENSITY.kilogramsPerCubicMeter: 'kg/m³',
+    DENSITY.nanoGramsPerMilliLiter: 'ng/ml',
+    DENSITY.picoGramsPerMilliLiter: 'pg/ml',
+    DENSITY.microGramsPerDeciLiter: 'µg/dl',
+    DENSITY.microGramsPerMilliLiter: 'µg/ml',
   };
 
   ///Class for density conversions, e.g. if you want to convert 1 gram per liter
@@ -50,4 +58,8 @@ class Density extends RatioProperty<DENSITY, MASS, VOLUME> {
   Unit get gramsPerCubicCentimeter => getUnit(DENSITY.gramsPerCubicCentimeter);
   Unit get kilogramsPerLiter => getUnit(DENSITY.kilogramsPerLiter);
   Unit get kilogramsPerCubicMeter => getUnit(DENSITY.kilogramsPerCubicMeter);
+  Unit get nanoGramsPerMilliLiter => getUnit(DENSITY.nanoGramsPerMilliLiter);
+  Unit get picoGramsPerMilliLiter => getUnit(DENSITY.picoGramsPerMilliLiter);
+  Unit get microGramsPerDeciLiter => getUnit(DENSITY.microGramsPerDeciLiter);
+  Unit get microGramsPerMilliLiter => getUnit(DENSITY.microGramsPerMilliLiter);
 }

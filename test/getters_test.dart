@@ -68,6 +68,14 @@ void main() {
         property.getUnit(DENSITY.kilogramsPerLiter));
     runGetterTest(property.kilogramsPerCubicMeter,
         property.getUnit(DENSITY.kilogramsPerCubicMeter));
+    runGetterTest(property.nanoGramsPerMilliLiter,
+        property.getUnit(DENSITY.nanoGramsPerMilliLiter));
+    runGetterTest(property.picoGramsPerMilliLiter,
+        property.getUnit(DENSITY.picoGramsPerMilliLiter));
+    runGetterTest(property.microGramsPerDeciLiter,
+        property.getUnit(DENSITY.microGramsPerDeciLiter));
+    runGetterTest(property.microGramsPerMilliLiter,
+        property.getUnit(DENSITY.microGramsPerMilliLiter));
   });
 
   group('Digital data test', () {
