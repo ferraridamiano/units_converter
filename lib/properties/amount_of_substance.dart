@@ -34,7 +34,7 @@ class AmountOfSubstance extends DoubleProperty<AMOUNT_OF_SUBSTANCE> {
           mapSymbols: {
             AMOUNT_OF_SUBSTANCE.moles: 'mol',
             AMOUNT_OF_SUBSTANCE.millimoles: 'mmol',
-            AMOUNT_OF_SUBSTANCE.micromoles: 'umol',
+            AMOUNT_OF_SUBSTANCE.micromoles: 'µmol',
             AMOUNT_OF_SUBSTANCE.nanomoles: 'nmol',
             AMOUNT_OF_SUBSTANCE.picomoles: 'pmol',
             AMOUNT_OF_SUBSTANCE.femtomoles: 'fmol',
