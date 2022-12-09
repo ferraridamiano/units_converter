@@ -197,6 +197,39 @@ void main() {
     runGetterTest(property.decigrams, property.getUnit(MASS.decigrams));
   });
 
+  group('Molar Mass test', () {
+    var property = MolarMass();
+    property.convert(MOLAR_MASS.gramsPerMole, 1);
+    runGetterTest(
+        property.gramsPerMole, property.getUnit(MOLAR_MASS.gramsPerMole));
+    runGetterTest(property.gramsPerMilliMole,
+        property.getUnit(MOLAR_MASS.gramsPerMilliMole));
+    runGetterTest(property.gramsPerMicroMole,
+        property.getUnit(MOLAR_MASS.gramsPerMicroMole));
+    runGetterTest(property.gramsPerNanoMole,
+        property.getUnit(MOLAR_MASS.gramsPerNanoMole));
+    runGetterTest(property.gramsPerPicoMole,
+        property.getUnit(MOLAR_MASS.gramsPerPicoMole));
+    runGetterTest(property.gramsPerFemtoMole,
+        property.getUnit(MOLAR_MASS.gramsPerFemtoMole));
+    runGetterTest(property.milliGramsPerMole,
+        property.getUnit(MOLAR_MASS.milliGramsPerMole));
+    runGetterTest(property.milliGramsPerMilliMole,
+        property.getUnit(MOLAR_MASS.milliGramsPerMilliMole));
+    runGetterTest(property.milliGramsPerMicroMole,
+        property.getUnit(MOLAR_MASS.milliGramsPerMicroMole));
+    runGetterTest(property.milliGramsPerNanoMole,
+        property.getUnit(MOLAR_MASS.milliGramsPerNanoMole));
+    runGetterTest(property.milliGramsPerPicoMole,
+        property.getUnit(MOLAR_MASS.milliGramsPerPicoMole));
+    runGetterTest(property.milliGramsPerFemtoMole,
+        property.getUnit(MOLAR_MASS.milliGramsPerFemtoMole));
+    runGetterTest(property.kiloGramsPerMole,
+        property.getUnit(MOLAR_MASS.kiloGramsPerMole));
+    runGetterTest(property.kiloGramsPerMilliMole,
+        property.getUnit(MOLAR_MASS.kiloGramsPerMilliMole));
+  });
+
   group('Numeral systems test', () {
     var property = NumeralSystems();
     property.convert(NUMERAL_SYSTEMS.decimal, '1');
@@ -233,6 +266,39 @@ void main() {
     runGetterTest(property.hectoPascal, property.getUnit(PRESSURE.hectoPascal));
     runGetterTest(
         property.inchOfMercury, property.getUnit(PRESSURE.inchOfMercury));
+  });
+
+  group('Reciprocal of Molar Mass test', () {
+    var property = ReciprocalOfMolarMass();
+    property.convert(RECIPROCAL_OF_MOLAR_MASS.molesPerGram, 1);
+    runGetterTest(property.molesPerGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.molesPerGram));
+    runGetterTest(property.milliMolesPerGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.milliMolesPerGram));
+    runGetterTest(property.microMolesPerGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.microMolesPerGram));
+    runGetterTest(property.nanoMolesPerGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.nanoMolesPerGram));
+    runGetterTest(property.picoMolesPerGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.picoMolesPerGram));
+    runGetterTest(property.femtoMolesPerGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.femtoMolesPerGram));
+    runGetterTest(property.molesPerMilliGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.molesPerMilliGram));
+    runGetterTest(property.milliMolesPerMilliGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.milliMolesPerMilliGram));
+    runGetterTest(property.microMolesPerMilliGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.microMolesPerMilliGram));
+    runGetterTest(property.nanoMolesPerMilliGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.nanoMolesPerMilliGram));
+    runGetterTest(property.picoMolesPerMilligram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.picoMolesPerMilliGram));
+    runGetterTest(property.femtoMolesPerMilliGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.femtoMolesPerMilliGram));
+    runGetterTest(property.molesPerKiloGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.molesPerKiloGram));
+    runGetterTest(property.milliMolesPerKiloGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.milliMolesPerKiloGram));
   });
 
   group('Shoe size test', () {

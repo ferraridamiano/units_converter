@@ -163,7 +163,7 @@ void main() {
     runConversionTest(expectedResult, FuelConsumption());
   });
 
-  group('Lenght', () {
+  group('Length', () {
     const Map<LENGTH, double> expectedResult = {
       LENGTH.meters: 1,
       LENGTH.centimeters: 100,
@@ -210,6 +210,26 @@ void main() {
       MASS.decigrams: 10,
     };
     runConversionTest(expectedResult, Mass(), sensibility: 1e9);
+  });
+
+  group('Molar Mass conversion', () {
+    const Map<MOLAR_MASS, double> expectedResult = {
+      MOLAR_MASS.gramsPerMole: 1,
+      MOLAR_MASS.gramsPerMilliMole: 1e-3,
+      MOLAR_MASS.gramsPerMicroMole: 1e-6,
+      MOLAR_MASS.gramsPerNanoMole: 1e-9,
+      MOLAR_MASS.gramsPerPicoMole: 1e-12,
+      MOLAR_MASS.gramsPerFemtoMole: 1e-15,
+      MOLAR_MASS.milliGramsPerMole: 1e3,
+      MOLAR_MASS.milliGramsPerMilliMole: 1,
+      MOLAR_MASS.milliGramsPerMicroMole: 1e-3,
+      MOLAR_MASS.milliGramsPerNanoMole: 1e-6,
+      MOLAR_MASS.milliGramsPerPicoMole: 1e-9,
+      MOLAR_MASS.milliGramsPerFemtoMole: 1e-12,
+      MOLAR_MASS.kiloGramsPerMole: 1e-3,
+      MOLAR_MASS.kiloGramsPerMilliMole: 1e-6,
+    };
+    runConversionTest(expectedResult, MolarMass());
   });
 
   group('Numeral systems', () {
@@ -287,6 +307,26 @@ void main() {
       PRESSURE.inchOfMercury: 0.00029529987508,
     };
     runConversionTest(expectedResult, Pressure());
+  });
+
+  group('Reciprocal OF Molar Mass conversion', () {
+    const Map<RECIPROCAL_OF_MOLAR_MASS, double> expectedResult = {
+      RECIPROCAL_OF_MOLAR_MASS.molesPerGram: 1,
+      RECIPROCAL_OF_MOLAR_MASS.milliMolesPerGram: 1e3,
+      RECIPROCAL_OF_MOLAR_MASS.microMolesPerGram: 1e6,
+      RECIPROCAL_OF_MOLAR_MASS.nanoMolesPerGram: 1e9,
+      RECIPROCAL_OF_MOLAR_MASS.picoMolesPerGram: 1e12,
+      RECIPROCAL_OF_MOLAR_MASS.femtoMolesPerGram: 1e15,
+      RECIPROCAL_OF_MOLAR_MASS.molesPerMilliGram: 1e-3,
+      RECIPROCAL_OF_MOLAR_MASS.milliMolesPerMilliGram: 1,
+      RECIPROCAL_OF_MOLAR_MASS.microMolesPerMilliGram: 1e3,
+      RECIPROCAL_OF_MOLAR_MASS.nanoMolesPerMilliGram: 1e6,
+      RECIPROCAL_OF_MOLAR_MASS.picoMolesPerMilliGram: 1e9,
+      RECIPROCAL_OF_MOLAR_MASS.femtoMolesPerMilliGram: 1e12,
+      RECIPROCAL_OF_MOLAR_MASS.molesPerKiloGram: 1e3,
+      RECIPROCAL_OF_MOLAR_MASS.milliMolesPerKiloGram: 1e6,
+    };
+    runConversionTest(expectedResult, ReciprocalOfMolarMass());
   });
 
   group('Shoe size', () {
