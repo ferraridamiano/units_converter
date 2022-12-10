@@ -26,8 +26,6 @@ void runConversionTest(Map<dynamic, double> expectedResult, Property property,
         var name = unit.name;
         double? convertedValue =
             unitList.where((element) => element.name == name).single.value;
-        print(convertedValue);
-        print(name);
         expect(
           isAcceptable(convertedValue, expectedResult[name]!, sensibility),
           true,
@@ -244,24 +242,23 @@ void main() {
     runConversionTest(expectedResult, MolarMass());
   });
 
-// TODO: not sure exactly how to approach these calculation isues
   group('Molar Volume conversion', () {
     const Map<MOLAR_VOLUME, double> expectedResult = {
       MOLAR_VOLUME.molesPerLiter: 1,
       MOLAR_VOLUME.molesPerMilliLiter: 1e-3,
-      MOLAR_VOLUME.molesPerCubicMeter: 1000,
-      MOLAR_VOLUME.milliMolesPerLiter: 1000,
-      MOLAR_VOLUME.milliMolesPerDeciLiter: 100,
+      MOLAR_VOLUME.molesPerCubicMeter: 1e3,
+      MOLAR_VOLUME.milliMolesPerLiter: 1e3,
+      MOLAR_VOLUME.milliMolesPerDeciLiter: 1e2,
       MOLAR_VOLUME.microMolesPerLiter: 1e6,
       MOLAR_VOLUME.microMolesPerDeciLiter: 1e5,
-      MOLAR_VOLUME.microMolesPerMilliLiter: 1000,
-      MOLAR_VOLUME.nanoMolesPerLiter: 999999999.9999999,
-      MOLAR_VOLUME.nanoMolesPerDeciLiter: 99999999.99999999,
-      MOLAR_VOLUME.nanoMolesPerMilliLiter: 999999.9999999999,
+      MOLAR_VOLUME.microMolesPerMilliLiter: 1e3,
+      MOLAR_VOLUME.nanoMolesPerLiter: 1e9,
+      MOLAR_VOLUME.nanoMolesPerDeciLiter: 1e8,
+      MOLAR_VOLUME.nanoMolesPerMilliLiter: 1e6,
       MOLAR_VOLUME.picoMolesPerLiter: 1e12,
       MOLAR_VOLUME.picoMolesPerDeciLiter: 1e11,
       MOLAR_VOLUME.picoMolesPerMilliLiter: 1e9,
-      MOLAR_VOLUME.femtoMolesPerMilliLiter: 999999999999.9999,
+      MOLAR_VOLUME.femtoMolesPerMilliLiter: 1e12,
     };
     runConversionTest(expectedResult, MolarVolume());
   });
