@@ -209,30 +209,21 @@ name:OneOver(DashPlus1), value:0.5, stringValue:0.5, symbol:null
 
 ## Which conversions?
 
+- Amount of substance (moles, millimoles, etc.)
 - Angles (degree, radians, etc.)
-
 - Area (hectares, acres, etc.)
-
 - Digital data (byte, gigabit, etc.)
-
+- Density (grams per liter, micrograms per milliliter, etc.)
 - Energy (Joule, kilowatt-hour, etc.)
-
 - Force (Newton, kilogram-force, etc.)
-
 - Fuel consumption (miles per hour, kilometers per hour, etc.)
-
 - Length (meter, miles, etc)
-
+- Molar mass (grams per mole, milligrams per millimole, etc.)
 - Mass (kilograms, ounces, etc.)
-
 - Numeral systems (hexadecimal, binary, etc.)
-
 - Power (kilowatt, horse power, etc.)
-
 - Pressure (bar, psi, etc.)
-
 - Shoe size (eu size, us size, etc.)
-
 - SI prefixes (giga, tera, etc.)
 
 - Speed (miles per hour, kilometers per hour, etc.)

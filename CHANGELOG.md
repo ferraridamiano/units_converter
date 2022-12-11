@@ -1,3 +1,11 @@
+# 2.1.0
+Added 5 new properties: density, amount of substance, molar volume, molar mass
+and reciprocal of molar mass. Now it is also possible to define a compound unit
+in the form of a ratio (e.g. Density units are defined as the ratio between mass
+and volume).
+
+Thanks to @Dokotela for his PRs!
+
 # 2.0.1
 - Improved Pascal-Bar conversion
 - We forced the use of types. So that many more error will be caught at
