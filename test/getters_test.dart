@@ -64,38 +64,38 @@ void main() {
         property.gramsPerLiter, property.getUnit(DENSITY.gramsPerLiter));
     runGetterTest(property.gramsPerCubicCentimeter,
         property.getUnit(DENSITY.gramsPerCubicCentimeter));
-    runGetterTest(property.gramsPerMilliLiter,
-        property.getUnit(DENSITY.gramsPerMilliLiter));
-    runGetterTest(property.gramsPerDeciLiter,
-        property.getUnit(DENSITY.gramsPerDeciLiter));
+    runGetterTest(property.gramsPerMilliliter,
+        property.getUnit(DENSITY.gramsPerMilliliter));
+    runGetterTest(property.gramsPerDeciliter,
+        property.getUnit(DENSITY.gramsPerDeciliter));
     runGetterTest(property.kilogramsPerLiter,
         property.getUnit(DENSITY.kilogramsPerLiter));
     runGetterTest(property.kilogramsPerCubicMeter,
         property.getUnit(DENSITY.kilogramsPerCubicMeter));
-    runGetterTest(property.milliGramsPerLiter,
-        property.getUnit(DENSITY.milliGramsPerLiter));
-    runGetterTest(property.milliGramsPerDeciLiter,
-        property.getUnit(DENSITY.milliGramsPerDeciLiter));
-    runGetterTest(property.milliGramsPerMilliLiter,
-        property.getUnit(DENSITY.milliGramsPerMilliLiter));
-    runGetterTest(property.milliGramsPerCubicMeter,
-        property.getUnit(DENSITY.milliGramsPerCubicMeter));
-    runGetterTest(property.milliGramsPerCubicCentimeter,
-        property.getUnit(DENSITY.milliGramsPerCubicCentimeter));
-    runGetterTest(property.microGramsPerLiter,
-        property.getUnit(DENSITY.microGramsPerLiter));
-    runGetterTest(property.microGramsPerDeciLiter,
-        property.getUnit(DENSITY.microGramsPerDeciLiter));
-    runGetterTest(property.microGramsPerMilliLiter,
-        property.getUnit(DENSITY.microGramsPerMilliLiter));
-    runGetterTest(property.nanoGramsPerLiter,
-        property.getUnit(DENSITY.nanoGramsPerLiter));
-    runGetterTest(property.nanoGramsPerMilliLiter,
-        property.getUnit(DENSITY.nanoGramsPerMilliLiter));
-    runGetterTest(property.picoGramsPerLiter,
-        property.getUnit(DENSITY.picoGramsPerLiter));
-    runGetterTest(property.picoGramsPerMilliLiter,
-        property.getUnit(DENSITY.picoGramsPerMilliLiter));
+    runGetterTest(property.milligramsPerLiter,
+        property.getUnit(DENSITY.milligramsPerLiter));
+    runGetterTest(property.milligramsPerDeciliter,
+        property.getUnit(DENSITY.milligramsPerDeciliter));
+    runGetterTest(property.milligramsPerMilliliter,
+        property.getUnit(DENSITY.milligramsPerMilliliter));
+    runGetterTest(property.milligramsPerCubicMeter,
+        property.getUnit(DENSITY.milligramsPerCubicMeter));
+    runGetterTest(property.milligramsPerCubicCentimeter,
+        property.getUnit(DENSITY.milligramsPerCubicCentimeter));
+    runGetterTest(property.microgramsPerLiter,
+        property.getUnit(DENSITY.microgramsPerLiter));
+    runGetterTest(property.microgramsPerDeciliter,
+        property.getUnit(DENSITY.microgramsPerDeciliter));
+    runGetterTest(property.microgramsPerMilliliter,
+        property.getUnit(DENSITY.microgramsPerMilliliter));
+    runGetterTest(property.nanogramsPerLiter,
+        property.getUnit(DENSITY.nanogramsPerLiter));
+    runGetterTest(property.nanogramsPerMilliliter,
+        property.getUnit(DENSITY.nanogramsPerMilliliter));
+    runGetterTest(property.picogramsPerLiter,
+        property.getUnit(DENSITY.picogramsPerLiter));
+    runGetterTest(property.picogramsPerMilliliter,
+        property.getUnit(DENSITY.picogramsPerMilliliter));
   });
 
   group('Digital data test', () {
@@ -222,32 +222,32 @@ void main() {
     property.convert(MOLAR_MASS.gramsPerMole, 1);
     runGetterTest(
         property.gramsPerMole, property.getUnit(MOLAR_MASS.gramsPerMole));
-    runGetterTest(property.gramsPerMilliMole,
-        property.getUnit(MOLAR_MASS.gramsPerMilliMole));
-    runGetterTest(property.gramsPerMicroMole,
-        property.getUnit(MOLAR_MASS.gramsPerMicroMole));
-    runGetterTest(property.gramsPerNanoMole,
-        property.getUnit(MOLAR_MASS.gramsPerNanoMole));
-    runGetterTest(property.gramsPerPicoMole,
-        property.getUnit(MOLAR_MASS.gramsPerPicoMole));
-    runGetterTest(property.gramsPerFemtoMole,
-        property.getUnit(MOLAR_MASS.gramsPerFemtoMole));
-    runGetterTest(property.milliGramsPerMole,
-        property.getUnit(MOLAR_MASS.milliGramsPerMole));
-    runGetterTest(property.milliGramsPerMilliMole,
-        property.getUnit(MOLAR_MASS.milliGramsPerMilliMole));
-    runGetterTest(property.milliGramsPerMicroMole,
-        property.getUnit(MOLAR_MASS.milliGramsPerMicroMole));
-    runGetterTest(property.milliGramsPerNanoMole,
-        property.getUnit(MOLAR_MASS.milliGramsPerNanoMole));
-    runGetterTest(property.milliGramsPerPicoMole,
-        property.getUnit(MOLAR_MASS.milliGramsPerPicoMole));
-    runGetterTest(property.milliGramsPerFemtoMole,
-        property.getUnit(MOLAR_MASS.milliGramsPerFemtoMole));
-    runGetterTest(property.kiloGramsPerMole,
-        property.getUnit(MOLAR_MASS.kiloGramsPerMole));
-    runGetterTest(property.kiloGramsPerMilliMole,
-        property.getUnit(MOLAR_MASS.kiloGramsPerMilliMole));
+    runGetterTest(property.gramsPerMillimole,
+        property.getUnit(MOLAR_MASS.gramsPerMillimole));
+    runGetterTest(property.gramsPerMicromole,
+        property.getUnit(MOLAR_MASS.gramsPerMicromole));
+    runGetterTest(property.gramsPerNanomole,
+        property.getUnit(MOLAR_MASS.gramsPerNanomole));
+    runGetterTest(property.gramsPerPicomole,
+        property.getUnit(MOLAR_MASS.gramsPerPicomole));
+    runGetterTest(property.gramsPerFemtomole,
+        property.getUnit(MOLAR_MASS.gramsPerFemtomole));
+    runGetterTest(property.milligramsPerMole,
+        property.getUnit(MOLAR_MASS.milligramsPerMole));
+    runGetterTest(property.milligramsPerMillimole,
+        property.getUnit(MOLAR_MASS.milligramsPerMillimole));
+    runGetterTest(property.milligramsPerMicromole,
+        property.getUnit(MOLAR_MASS.milligramsPerMicromole));
+    runGetterTest(property.milligramsPerNanomole,
+        property.getUnit(MOLAR_MASS.milligramsPerNanomole));
+    runGetterTest(property.milligramsPerPicomole,
+        property.getUnit(MOLAR_MASS.milligramsPerPicomole));
+    runGetterTest(property.milligramsPerFemtomole,
+        property.getUnit(MOLAR_MASS.milligramsPerFemtomole));
+    runGetterTest(property.kilogramsPerMole,
+        property.getUnit(MOLAR_MASS.kilogramsPerMole));
+    runGetterTest(property.kilogramsPerMillimole,
+        property.getUnit(MOLAR_MASS.kilogramsPerMillimole));
   });
 
   group('Molar Volume test', () {
@@ -255,34 +255,34 @@ void main() {
     property.convert(MOLAR_VOLUME.molesPerLiter, 1);
     runGetterTest(
         property.molesPerLiter, property.getUnit(MOLAR_VOLUME.molesPerLiter));
-    runGetterTest(property.molesPerMilliLiter,
-        property.getUnit(MOLAR_VOLUME.molesPerMilliLiter));
+    runGetterTest(property.molesPerMilliliter,
+        property.getUnit(MOLAR_VOLUME.molesPerMilliliter));
     runGetterTest(property.molesPerCubicMeter,
         property.getUnit(MOLAR_VOLUME.molesPerCubicMeter));
-    runGetterTest(property.milliMolesPerLiter,
-        property.getUnit(MOLAR_VOLUME.milliMolesPerLiter));
-    runGetterTest(property.milliMolesPerDeciLiter,
-        property.getUnit(MOLAR_VOLUME.milliMolesPerDeciLiter));
-    runGetterTest(property.microMolesPerLiter,
-        property.getUnit(MOLAR_VOLUME.microMolesPerLiter));
-    runGetterTest(property.microMolesPerDeciLiter,
-        property.getUnit(MOLAR_VOLUME.microMolesPerDeciLiter));
-    runGetterTest(property.microMolesPerMilliLiter,
-        property.getUnit(MOLAR_VOLUME.microMolesPerMilliLiter));
-    runGetterTest(property.nanoMolesPerLiter,
-        property.getUnit(MOLAR_VOLUME.nanoMolesPerLiter));
-    runGetterTest(property.nanoMolesPerDeciLiter,
-        property.getUnit(MOLAR_VOLUME.nanoMolesPerDeciLiter));
-    runGetterTest(property.nanoMolesPerMilliLiter,
-        property.getUnit(MOLAR_VOLUME.nanoMolesPerMilliLiter));
-    runGetterTest(property.picoMolesPerLiter,
-        property.getUnit(MOLAR_VOLUME.picoMolesPerLiter));
-    runGetterTest(property.picoMolesPerDeciLiter,
-        property.getUnit(MOLAR_VOLUME.picoMolesPerDeciLiter));
-    runGetterTest(property.picoMolesPerMilliLiter,
-        property.getUnit(MOLAR_VOLUME.picoMolesPerMilliLiter));
-    runGetterTest(property.femtoMolesPerMilliLiter,
-        property.getUnit(MOLAR_VOLUME.femtoMolesPerMilliLiter));
+    runGetterTest(property.millimolesPerLiter,
+        property.getUnit(MOLAR_VOLUME.millimolesPerLiter));
+    runGetterTest(property.millimolesPerDeciliter,
+        property.getUnit(MOLAR_VOLUME.millimolesPerDeciliter));
+    runGetterTest(property.micromolesPerLiter,
+        property.getUnit(MOLAR_VOLUME.micromolesPerLiter));
+    runGetterTest(property.micromolesPerDeciliter,
+        property.getUnit(MOLAR_VOLUME.micromolesPerDeciliter));
+    runGetterTest(property.micromolesPerMilliliter,
+        property.getUnit(MOLAR_VOLUME.micromolesPerMilliliter));
+    runGetterTest(property.nanomolesPerLiter,
+        property.getUnit(MOLAR_VOLUME.nanomolesPerLiter));
+    runGetterTest(property.nanomolesPerDeciliter,
+        property.getUnit(MOLAR_VOLUME.nanomolesPerDeciliter));
+    runGetterTest(property.nanomolesPerMilliliter,
+        property.getUnit(MOLAR_VOLUME.nanomolesPerMilliliter));
+    runGetterTest(property.picomolesPerLiter,
+        property.getUnit(MOLAR_VOLUME.picomolesPerLiter));
+    runGetterTest(property.picomolesPerDeciliter,
+        property.getUnit(MOLAR_VOLUME.picomolesPerDeciliter));
+    runGetterTest(property.picomolesPerMilliliter,
+        property.getUnit(MOLAR_VOLUME.picomolesPerMilliliter));
+    runGetterTest(property.femtomolesPerMilliliter,
+        property.getUnit(MOLAR_VOLUME.femtomolesPerMilliliter));
   });
 
   group('Numeral systems test', () {
@@ -328,32 +328,32 @@ void main() {
     property.convert(RECIPROCAL_OF_MOLAR_MASS.molesPerGram, 1);
     runGetterTest(property.molesPerGram,
         property.getUnit(RECIPROCAL_OF_MOLAR_MASS.molesPerGram));
-    runGetterTest(property.milliMolesPerGram,
-        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.milliMolesPerGram));
-    runGetterTest(property.microMolesPerGram,
-        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.microMolesPerGram));
-    runGetterTest(property.nanoMolesPerGram,
-        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.nanoMolesPerGram));
-    runGetterTest(property.picoMolesPerGram,
-        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.picoMolesPerGram));
-    runGetterTest(property.femtoMolesPerGram,
-        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.femtoMolesPerGram));
-    runGetterTest(property.molesPerMilliGram,
-        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.molesPerMilliGram));
-    runGetterTest(property.milliMolesPerMilliGram,
-        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.milliMolesPerMilliGram));
-    runGetterTest(property.microMolesPerMilliGram,
-        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.microMolesPerMilliGram));
-    runGetterTest(property.nanoMolesPerMilliGram,
-        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.nanoMolesPerMilliGram));
-    runGetterTest(property.picoMolesPerMilligram,
-        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.picoMolesPerMilliGram));
-    runGetterTest(property.femtoMolesPerMilliGram,
-        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.femtoMolesPerMilliGram));
-    runGetterTest(property.molesPerKiloGram,
-        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.molesPerKiloGram));
-    runGetterTest(property.milliMolesPerKiloGram,
-        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.milliMolesPerKiloGram));
+    runGetterTest(property.millimolesPerGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.millimolesPerGram));
+    runGetterTest(property.micromolesPerGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.micromolesPerGram));
+    runGetterTest(property.nanomolesPerGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.nanomolesPerGram));
+    runGetterTest(property.picomolesPerGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.picomolesPerGram));
+    runGetterTest(property.femtomolesPerGram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.femtomolesPerGram));
+    runGetterTest(property.molesPerMilligram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.molesPerMilligram));
+    runGetterTest(property.millimolesPerMilligram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.millimolesPerMilligram));
+    runGetterTest(property.micromolesPerMilligram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.micromolesPerMilligram));
+    runGetterTest(property.nanomolesPerMilligram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.nanomolesPerMilligram));
+    runGetterTest(property.picomolesPerMilligram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.picomolesPerMilligram));
+    runGetterTest(property.femtomolesPerMilligram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.femtomolesPerMilligram));
+    runGetterTest(property.molesPerKilogram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.molesPerKilogram));
+    runGetterTest(property.millimolesPerKilogram,
+        property.getUnit(RECIPROCAL_OF_MOLAR_MASS.millimolesPerKilogram));
   });
 
   group('Shoe size test', () {

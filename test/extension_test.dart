@@ -17,13 +17,13 @@ void main() {
     expect(1.convertFromTo(LENGTH.feet, LENGTH.meters), 0.3048);
     expect(1.convertFromTo(MASS.kilograms, MASS.grams), 1e3);
     expect(
-        1.convertFromTo(MOLAR_MASS.gramsPerMole, MOLAR_MASS.kiloGramsPerMole),
+        1.convertFromTo(MOLAR_MASS.gramsPerMole, MOLAR_MASS.kilogramsPerMole),
         1e-3);
     expect(1.convertFromTo(POWER.kilowatt, POWER.watt), 1e3);
     expect(1.convertFromTo(PRESSURE.bar, PRESSURE.pascal), 1e5);
     expect(
         1.convertFromTo(RECIPROCAL_OF_MOLAR_MASS.molesPerGram,
-            RECIPROCAL_OF_MOLAR_MASS.molesPerKiloGram),
+            RECIPROCAL_OF_MOLAR_MASS.molesPerKilogram),
         1e3);
 
     expect(1.convertFromTo(SHOE_SIZE.inches, SHOE_SIZE.centimeters), 2.54);

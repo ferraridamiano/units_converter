@@ -8,22 +8,22 @@ import 'package:units_converter/utils/utils.dart';
 enum DENSITY {
   gramsPerLiter(MASS.grams, VOLUME.liters),
   gramsPerCubicCentimeter(MASS.grams, VOLUME.cubicCentimeters),
-  gramsPerMilliLiter(MASS.grams, VOLUME.milliliters),
-  gramsPerDeciLiter(MASS.grams, VOLUME.deciliters),
+  gramsPerMilliliter(MASS.grams, VOLUME.milliliters),
+  gramsPerDeciliter(MASS.grams, VOLUME.deciliters),
   kilogramsPerLiter(MASS.kilograms, VOLUME.liters),
   kilogramsPerCubicMeter(MASS.kilograms, VOLUME.cubicMeters),
-  milliGramsPerLiter(MASS.milligrams, VOLUME.liters),
-  milliGramsPerDeciLiter(MASS.milligrams, VOLUME.deciliters),
-  milliGramsPerMilliLiter(MASS.milligrams, VOLUME.milliliters),
-  milliGramsPerCubicMeter(MASS.milligrams, VOLUME.cubicMeters),
-  milliGramsPerCubicCentimeter(MASS.milligrams, VOLUME.cubicCentimeters),
-  microGramsPerLiter(MASS.micrograms, VOLUME.liters),
-  microGramsPerDeciLiter(MASS.micrograms, VOLUME.deciliters),
-  microGramsPerMilliLiter(MASS.micrograms, VOLUME.milliliters),
-  nanoGramsPerLiter(MASS.nanograms, VOLUME.liters),
-  nanoGramsPerMilliLiter(MASS.nanograms, VOLUME.milliliters),
-  picoGramsPerLiter(MASS.picograms, VOLUME.liters),
-  picoGramsPerMilliLiter(MASS.picograms, VOLUME.milliliters),
+  milligramsPerLiter(MASS.milligrams, VOLUME.liters),
+  milligramsPerDeciliter(MASS.milligrams, VOLUME.deciliters),
+  milligramsPerMilliliter(MASS.milligrams, VOLUME.milliliters),
+  milligramsPerCubicMeter(MASS.milligrams, VOLUME.cubicMeters),
+  milligramsPerCubicCentimeter(MASS.milligrams, VOLUME.cubicCentimeters),
+  microgramsPerLiter(MASS.micrograms, VOLUME.liters),
+  microgramsPerDeciliter(MASS.micrograms, VOLUME.deciliters),
+  microgramsPerMilliliter(MASS.micrograms, VOLUME.milliliters),
+  nanogramsPerLiter(MASS.nanograms, VOLUME.liters),
+  nanogramsPerMilliliter(MASS.nanograms, VOLUME.milliliters),
+  picogramsPerLiter(MASS.picograms, VOLUME.liters),
+  picogramsPerMilliliter(MASS.picograms, VOLUME.milliliters),
   ;
 
   final MASS numerator;
@@ -36,22 +36,22 @@ class Density extends RatioProperty<DENSITY, MASS, VOLUME> {
   static const Map<DENSITY, String?> _mapSymbols = {
     DENSITY.gramsPerLiter: 'g/l',
     DENSITY.gramsPerCubicCentimeter: 'g/cm³',
-    DENSITY.gramsPerMilliLiter: 'g/ml',
-    DENSITY.gramsPerDeciLiter: 'g/dl',
+    DENSITY.gramsPerMilliliter: 'g/ml',
+    DENSITY.gramsPerDeciliter: 'g/dl',
     DENSITY.kilogramsPerLiter: 'kg/l',
     DENSITY.kilogramsPerCubicMeter: 'kg/m³',
-    DENSITY.milliGramsPerLiter: 'mg/l',
-    DENSITY.milliGramsPerDeciLiter: 'mg/dl',
-    DENSITY.milliGramsPerMilliLiter: 'mg/ml',
-    DENSITY.milliGramsPerCubicMeter: 'mg/m³',
-    DENSITY.milliGramsPerCubicCentimeter: 'mg/cm³',
-    DENSITY.microGramsPerLiter: 'µg/l',
-    DENSITY.microGramsPerDeciLiter: 'µg/dl',
-    DENSITY.microGramsPerMilliLiter: 'µg/ml',
-    DENSITY.nanoGramsPerLiter: 'ng/l',
-    DENSITY.nanoGramsPerMilliLiter: 'ng/ml',
-    DENSITY.picoGramsPerLiter: 'pg/l',
-    DENSITY.picoGramsPerMilliLiter: 'pg/ml',
+    DENSITY.milligramsPerLiter: 'mg/l',
+    DENSITY.milligramsPerDeciliter: 'mg/dl',
+    DENSITY.milligramsPerMilliliter: 'mg/ml',
+    DENSITY.milligramsPerCubicMeter: 'mg/m³',
+    DENSITY.milligramsPerCubicCentimeter: 'mg/cm³',
+    DENSITY.microgramsPerLiter: 'µg/l',
+    DENSITY.microgramsPerDeciliter: 'µg/dl',
+    DENSITY.microgramsPerMilliliter: 'µg/ml',
+    DENSITY.nanogramsPerLiter: 'ng/l',
+    DENSITY.nanogramsPerMilliliter: 'ng/ml',
+    DENSITY.picogramsPerLiter: 'pg/l',
+    DENSITY.picogramsPerMilliliter: 'pg/ml',
   };
 
   ///Class for density conversions, e.g. if you want to convert 1 gram per liter
@@ -77,21 +77,21 @@ class Density extends RatioProperty<DENSITY, MASS, VOLUME> {
 
   Unit get gramsPerLiter => getUnit(DENSITY.gramsPerLiter);
   Unit get gramsPerCubicCentimeter => getUnit(DENSITY.gramsPerCubicCentimeter);
-  Unit get gramsPerMilliLiter => getUnit(DENSITY.gramsPerMilliLiter);
-  Unit get gramsPerDeciLiter => getUnit(DENSITY.gramsPerDeciLiter);
+  Unit get gramsPerMilliliter => getUnit(DENSITY.gramsPerMilliliter);
+  Unit get gramsPerDeciliter => getUnit(DENSITY.gramsPerDeciliter);
   Unit get kilogramsPerLiter => getUnit(DENSITY.kilogramsPerLiter);
   Unit get kilogramsPerCubicMeter => getUnit(DENSITY.kilogramsPerCubicMeter);
-  Unit get milliGramsPerLiter => getUnit(DENSITY.milliGramsPerLiter);
-  Unit get milliGramsPerDeciLiter => getUnit(DENSITY.milliGramsPerDeciLiter);
-  Unit get milliGramsPerMilliLiter => getUnit(DENSITY.milliGramsPerMilliLiter);
-  Unit get milliGramsPerCubicMeter => getUnit(DENSITY.milliGramsPerCubicMeter);
-  Unit get milliGramsPerCubicCentimeter =>
-      getUnit(DENSITY.milliGramsPerCubicCentimeter);
-  Unit get microGramsPerLiter => getUnit(DENSITY.microGramsPerLiter);
-  Unit get microGramsPerDeciLiter => getUnit(DENSITY.microGramsPerDeciLiter);
-  Unit get microGramsPerMilliLiter => getUnit(DENSITY.microGramsPerMilliLiter);
-  Unit get nanoGramsPerLiter => getUnit(DENSITY.nanoGramsPerLiter);
-  Unit get nanoGramsPerMilliLiter => getUnit(DENSITY.nanoGramsPerMilliLiter);
-  Unit get picoGramsPerLiter => getUnit(DENSITY.picoGramsPerLiter);
-  Unit get picoGramsPerMilliLiter => getUnit(DENSITY.picoGramsPerMilliLiter);
+  Unit get milligramsPerLiter => getUnit(DENSITY.milligramsPerLiter);
+  Unit get milligramsPerDeciliter => getUnit(DENSITY.milligramsPerDeciliter);
+  Unit get milligramsPerMilliliter => getUnit(DENSITY.milligramsPerMilliliter);
+  Unit get milligramsPerCubicMeter => getUnit(DENSITY.milligramsPerCubicMeter);
+  Unit get milligramsPerCubicCentimeter =>
+      getUnit(DENSITY.milligramsPerCubicCentimeter);
+  Unit get microgramsPerLiter => getUnit(DENSITY.microgramsPerLiter);
+  Unit get microgramsPerDeciliter => getUnit(DENSITY.microgramsPerDeciliter);
+  Unit get microgramsPerMilliliter => getUnit(DENSITY.microgramsPerMilliliter);
+  Unit get nanogramsPerLiter => getUnit(DENSITY.nanogramsPerLiter);
+  Unit get nanogramsPerMilliliter => getUnit(DENSITY.nanogramsPerMilliliter);
+  Unit get picogramsPerLiter => getUnit(DENSITY.picogramsPerLiter);
+  Unit get picogramsPerMilliliter => getUnit(DENSITY.picogramsPerMilliliter);
 }

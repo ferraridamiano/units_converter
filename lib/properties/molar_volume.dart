@@ -6,20 +6,20 @@ import 'package:units_converter/utils/utils.dart';
 
 enum MOLAR_VOLUME {
   molesPerLiter(AMOUNT_OF_SUBSTANCE.moles, VOLUME.liters),
-  molesPerMilliLiter(AMOUNT_OF_SUBSTANCE.moles, VOLUME.milliliters),
+  molesPerMilliliter(AMOUNT_OF_SUBSTANCE.moles, VOLUME.milliliters),
   molesPerCubicMeter(AMOUNT_OF_SUBSTANCE.moles, VOLUME.cubicMeters),
-  milliMolesPerLiter(AMOUNT_OF_SUBSTANCE.millimoles, VOLUME.liters),
-  milliMolesPerDeciLiter(AMOUNT_OF_SUBSTANCE.millimoles, VOLUME.deciliters),
-  microMolesPerLiter(AMOUNT_OF_SUBSTANCE.micromoles, VOLUME.liters),
-  microMolesPerDeciLiter(AMOUNT_OF_SUBSTANCE.micromoles, VOLUME.deciliters),
-  microMolesPerMilliLiter(AMOUNT_OF_SUBSTANCE.micromoles, VOLUME.milliliters),
-  nanoMolesPerLiter(AMOUNT_OF_SUBSTANCE.nanomoles, VOLUME.liters),
-  nanoMolesPerDeciLiter(AMOUNT_OF_SUBSTANCE.nanomoles, VOLUME.deciliters),
-  nanoMolesPerMilliLiter(AMOUNT_OF_SUBSTANCE.nanomoles, VOLUME.milliliters),
-  picoMolesPerLiter(AMOUNT_OF_SUBSTANCE.picomoles, VOLUME.liters),
-  picoMolesPerDeciLiter(AMOUNT_OF_SUBSTANCE.picomoles, VOLUME.deciliters),
-  picoMolesPerMilliLiter(AMOUNT_OF_SUBSTANCE.picomoles, VOLUME.milliliters),
-  femtoMolesPerMilliLiter(AMOUNT_OF_SUBSTANCE.femtomoles, VOLUME.milliliters),
+  millimolesPerLiter(AMOUNT_OF_SUBSTANCE.millimoles, VOLUME.liters),
+  millimolesPerDeciliter(AMOUNT_OF_SUBSTANCE.millimoles, VOLUME.deciliters),
+  micromolesPerLiter(AMOUNT_OF_SUBSTANCE.micromoles, VOLUME.liters),
+  micromolesPerDeciliter(AMOUNT_OF_SUBSTANCE.micromoles, VOLUME.deciliters),
+  micromolesPerMilliliter(AMOUNT_OF_SUBSTANCE.micromoles, VOLUME.milliliters),
+  nanomolesPerLiter(AMOUNT_OF_SUBSTANCE.nanomoles, VOLUME.liters),
+  nanomolesPerDeciliter(AMOUNT_OF_SUBSTANCE.nanomoles, VOLUME.deciliters),
+  nanomolesPerMilliliter(AMOUNT_OF_SUBSTANCE.nanomoles, VOLUME.milliliters),
+  picomolesPerLiter(AMOUNT_OF_SUBSTANCE.picomoles, VOLUME.liters),
+  picomolesPerDeciliter(AMOUNT_OF_SUBSTANCE.picomoles, VOLUME.deciliters),
+  picomolesPerMilliliter(AMOUNT_OF_SUBSTANCE.picomoles, VOLUME.milliliters),
+  femtomolesPerMilliliter(AMOUNT_OF_SUBSTANCE.femtomoles, VOLUME.milliliters),
   ;
 
   final AMOUNT_OF_SUBSTANCE numerator;
@@ -32,28 +32,28 @@ class MolarVolume
   // NOTE: All values of MOLAR_VOLUME must be reported in this variable
   static const Map<MOLAR_VOLUME, String?> _mapSymbols = {
     MOLAR_VOLUME.molesPerLiter: 'mol/l',
-    MOLAR_VOLUME.molesPerMilliLiter: 'mol/ml',
+    MOLAR_VOLUME.molesPerMilliliter: 'mol/ml',
     MOLAR_VOLUME.molesPerCubicMeter: 'mol/m³',
-    MOLAR_VOLUME.milliMolesPerLiter: 'mmol/l',
-    MOLAR_VOLUME.milliMolesPerDeciLiter: 'mmol/dl',
-    MOLAR_VOLUME.microMolesPerLiter: 'µmol/l',
-    MOLAR_VOLUME.microMolesPerDeciLiter: 'µmol/dl',
-    MOLAR_VOLUME.microMolesPerMilliLiter: 'µmol/ml',
-    MOLAR_VOLUME.nanoMolesPerLiter: 'nmol/l',
-    MOLAR_VOLUME.nanoMolesPerDeciLiter: 'nmol/dl',
-    MOLAR_VOLUME.nanoMolesPerMilliLiter: 'nl/ml',
-    MOLAR_VOLUME.picoMolesPerLiter: 'pmol/l',
-    MOLAR_VOLUME.picoMolesPerDeciLiter: 'pmol/dl',
-    MOLAR_VOLUME.picoMolesPerMilliLiter: 'pmol/ml',
-    MOLAR_VOLUME.femtoMolesPerMilliLiter: 'fmol/ml',
+    MOLAR_VOLUME.millimolesPerLiter: 'mmol/l',
+    MOLAR_VOLUME.millimolesPerDeciliter: 'mmol/dl',
+    MOLAR_VOLUME.micromolesPerLiter: 'µmol/l',
+    MOLAR_VOLUME.micromolesPerDeciliter: 'µmol/dl',
+    MOLAR_VOLUME.micromolesPerMilliliter: 'µmol/ml',
+    MOLAR_VOLUME.nanomolesPerLiter: 'nmol/l',
+    MOLAR_VOLUME.nanomolesPerDeciliter: 'nmol/dl',
+    MOLAR_VOLUME.nanomolesPerMilliliter: 'nl/ml',
+    MOLAR_VOLUME.picomolesPerLiter: 'pmol/l',
+    MOLAR_VOLUME.picomolesPerDeciliter: 'pmol/dl',
+    MOLAR_VOLUME.picomolesPerMilliliter: 'pmol/ml',
+    MOLAR_VOLUME.femtomolesPerMilliliter: 'fmol/ml',
   };
 
-  ///Class for molar volume conversions, e.g. if you want to convert 1 gram per liter
-  ///in kilograms per liter:
+  ///Class for molar volume conversions, e.g. if you want to convert 1 mole per liter
+  ///in moles per milliliter:
   ///```dart
   ///var molarVolume = MolarVolume(removeTrailingZeros: false);
-  ///molarVolume.convert(Unit(MOLAR_VOLUME.gramsPerLiter, value: 1));
-  ///print(MOLAR_VOLUME.kilogramsPerLiter);
+  ///molarVolume.convert(Unit(MOLAR_VOLUME.molesPerLiter, value: 1));
+  ///print(MOLAR_VOLUME.molesPerMilliliter);
   /// ```
   MolarVolume(
       {super.significantFigures,
@@ -70,24 +70,24 @@ class MolarVolume
             mapSymbols: _mapSymbols);
 
   Unit get molesPerLiter => getUnit(MOLAR_VOLUME.molesPerLiter);
-  Unit get molesPerMilliLiter => getUnit(MOLAR_VOLUME.molesPerMilliLiter);
+  Unit get molesPerMilliliter => getUnit(MOLAR_VOLUME.molesPerMilliliter);
   Unit get molesPerCubicMeter => getUnit(MOLAR_VOLUME.molesPerCubicMeter);
-  Unit get milliMolesPerLiter => getUnit(MOLAR_VOLUME.milliMolesPerLiter);
-  Unit get milliMolesPerDeciLiter =>
-      getUnit(MOLAR_VOLUME.milliMolesPerDeciLiter);
-  Unit get microMolesPerLiter => getUnit(MOLAR_VOLUME.microMolesPerLiter);
-  Unit get microMolesPerDeciLiter =>
-      getUnit(MOLAR_VOLUME.microMolesPerDeciLiter);
-  Unit get microMolesPerMilliLiter =>
-      getUnit(MOLAR_VOLUME.microMolesPerMilliLiter);
-  Unit get nanoMolesPerLiter => getUnit(MOLAR_VOLUME.nanoMolesPerLiter);
-  Unit get nanoMolesPerDeciLiter => getUnit(MOLAR_VOLUME.nanoMolesPerDeciLiter);
-  Unit get nanoMolesPerMilliLiter =>
-      getUnit(MOLAR_VOLUME.nanoMolesPerMilliLiter);
-  Unit get picoMolesPerLiter => getUnit(MOLAR_VOLUME.picoMolesPerLiter);
-  Unit get picoMolesPerDeciLiter => getUnit(MOLAR_VOLUME.picoMolesPerDeciLiter);
-  Unit get picoMolesPerMilliLiter =>
-      getUnit(MOLAR_VOLUME.picoMolesPerMilliLiter);
-  Unit get femtoMolesPerMilliLiter =>
-      getUnit(MOLAR_VOLUME.femtoMolesPerMilliLiter);
+  Unit get millimolesPerLiter => getUnit(MOLAR_VOLUME.millimolesPerLiter);
+  Unit get millimolesPerDeciliter =>
+      getUnit(MOLAR_VOLUME.millimolesPerDeciliter);
+  Unit get micromolesPerLiter => getUnit(MOLAR_VOLUME.micromolesPerLiter);
+  Unit get micromolesPerDeciliter =>
+      getUnit(MOLAR_VOLUME.micromolesPerDeciliter);
+  Unit get micromolesPerMilliliter =>
+      getUnit(MOLAR_VOLUME.micromolesPerMilliliter);
+  Unit get nanomolesPerLiter => getUnit(MOLAR_VOLUME.nanomolesPerLiter);
+  Unit get nanomolesPerDeciliter => getUnit(MOLAR_VOLUME.nanomolesPerDeciliter);
+  Unit get nanomolesPerMilliliter =>
+      getUnit(MOLAR_VOLUME.nanomolesPerMilliliter);
+  Unit get picomolesPerLiter => getUnit(MOLAR_VOLUME.picomolesPerLiter);
+  Unit get picomolesPerDeciliter => getUnit(MOLAR_VOLUME.picomolesPerDeciliter);
+  Unit get picomolesPerMilliliter =>
+      getUnit(MOLAR_VOLUME.picomolesPerMilliliter);
+  Unit get femtomolesPerMilliliter =>
+      getUnit(MOLAR_VOLUME.femtomolesPerMilliliter);
 }

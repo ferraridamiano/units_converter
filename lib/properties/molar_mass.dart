@@ -6,19 +6,19 @@ import 'package:units_converter/utils/utils.dart';
 
 enum MOLAR_MASS {
   gramsPerMole(MASS.grams, AMOUNT_OF_SUBSTANCE.moles),
-  gramsPerMilliMole(MASS.grams, AMOUNT_OF_SUBSTANCE.millimoles),
-  gramsPerMicroMole(MASS.grams, AMOUNT_OF_SUBSTANCE.micromoles),
-  gramsPerNanoMole(MASS.grams, AMOUNT_OF_SUBSTANCE.nanomoles),
-  gramsPerPicoMole(MASS.grams, AMOUNT_OF_SUBSTANCE.picomoles),
-  gramsPerFemtoMole(MASS.grams, AMOUNT_OF_SUBSTANCE.femtomoles),
-  milliGramsPerMole(MASS.milligrams, AMOUNT_OF_SUBSTANCE.moles),
-  milliGramsPerMilliMole(MASS.milligrams, AMOUNT_OF_SUBSTANCE.millimoles),
-  milliGramsPerMicroMole(MASS.milligrams, AMOUNT_OF_SUBSTANCE.micromoles),
-  milliGramsPerNanoMole(MASS.milligrams, AMOUNT_OF_SUBSTANCE.nanomoles),
-  milliGramsPerPicoMole(MASS.milligrams, AMOUNT_OF_SUBSTANCE.picomoles),
-  milliGramsPerFemtoMole(MASS.milligrams, AMOUNT_OF_SUBSTANCE.femtomoles),
-  kiloGramsPerMole(MASS.kilograms, AMOUNT_OF_SUBSTANCE.moles),
-  kiloGramsPerMilliMole(MASS.kilograms, AMOUNT_OF_SUBSTANCE.millimoles),
+  gramsPerMillimole(MASS.grams, AMOUNT_OF_SUBSTANCE.millimoles),
+  gramsPerMicromole(MASS.grams, AMOUNT_OF_SUBSTANCE.micromoles),
+  gramsPerNanomole(MASS.grams, AMOUNT_OF_SUBSTANCE.nanomoles),
+  gramsPerPicomole(MASS.grams, AMOUNT_OF_SUBSTANCE.picomoles),
+  gramsPerFemtomole(MASS.grams, AMOUNT_OF_SUBSTANCE.femtomoles),
+  milligramsPerMole(MASS.milligrams, AMOUNT_OF_SUBSTANCE.moles),
+  milligramsPerMillimole(MASS.milligrams, AMOUNT_OF_SUBSTANCE.millimoles),
+  milligramsPerMicromole(MASS.milligrams, AMOUNT_OF_SUBSTANCE.micromoles),
+  milligramsPerNanomole(MASS.milligrams, AMOUNT_OF_SUBSTANCE.nanomoles),
+  milligramsPerPicomole(MASS.milligrams, AMOUNT_OF_SUBSTANCE.picomoles),
+  milligramsPerFemtomole(MASS.milligrams, AMOUNT_OF_SUBSTANCE.femtomoles),
+  kilogramsPerMole(MASS.kilograms, AMOUNT_OF_SUBSTANCE.moles),
+  kilogramsPerMillimole(MASS.kilograms, AMOUNT_OF_SUBSTANCE.millimoles),
   ;
 
   final MASS numerator;
@@ -30,27 +30,27 @@ class MolarMass extends RatioProperty<MOLAR_MASS, AMOUNT_OF_SUBSTANCE, MASS> {
   // NOTE: All values of MOLAR_MASS must be reported in this variable
   static const Map<MOLAR_MASS, String?> _mapSymbols = {
     MOLAR_MASS.gramsPerMole: 'g/mol',
-    MOLAR_MASS.gramsPerMilliMole: 'g/mmol',
-    MOLAR_MASS.gramsPerMicroMole: 'g/µmol',
-    MOLAR_MASS.gramsPerNanoMole: 'g/nmol',
-    MOLAR_MASS.gramsPerPicoMole: 'g/pmol',
-    MOLAR_MASS.gramsPerFemtoMole: 'g/fmol',
-    MOLAR_MASS.milliGramsPerMole: 'mg/mol',
-    MOLAR_MASS.milliGramsPerMilliMole: 'mg/mmol',
-    MOLAR_MASS.milliGramsPerMicroMole: 'mg/µmol',
-    MOLAR_MASS.milliGramsPerNanoMole: 'mg/nmol',
-    MOLAR_MASS.milliGramsPerPicoMole: 'mg/pmol',
-    MOLAR_MASS.milliGramsPerFemtoMole: 'mg/fmol',
-    MOLAR_MASS.kiloGramsPerMole: 'kg/mol',
-    MOLAR_MASS.kiloGramsPerMilliMole: 'kg/mmol',
+    MOLAR_MASS.gramsPerMillimole: 'g/mmol',
+    MOLAR_MASS.gramsPerMicromole: 'g/µmol',
+    MOLAR_MASS.gramsPerNanomole: 'g/nmol',
+    MOLAR_MASS.gramsPerPicomole: 'g/pmol',
+    MOLAR_MASS.gramsPerFemtomole: 'g/fmol',
+    MOLAR_MASS.milligramsPerMole: 'mg/mol',
+    MOLAR_MASS.milligramsPerMillimole: 'mg/mmol',
+    MOLAR_MASS.milligramsPerMicromole: 'mg/µmol',
+    MOLAR_MASS.milligramsPerNanomole: 'mg/nmol',
+    MOLAR_MASS.milligramsPerPicomole: 'mg/pmol',
+    MOLAR_MASS.milligramsPerFemtomole: 'mg/fmol',
+    MOLAR_MASS.kilogramsPerMole: 'kg/mol',
+    MOLAR_MASS.kilogramsPerMillimole: 'kg/mmol',
   };
 
-  ///Class for molar mass conversions, e.g. if you want to convert 1 gram per liter
-  ///in kilograms per liter:
+  ///Class for molar mass conversions, e.g. if you want to convert 1 gram per mole
+  /// to kilograms per mole:
   ///```dart
   ///var molarMass = MolarMass(removeTrailingZeros: false);
-  ///molarMass.convert(Unit(MOLAR_MASS.gramsPerLiter, value: 1));
-  ///print(MOLAR_MASS.kilogramsPerLiter);
+  ///molarMass.convert(Unit(MOLAR_MASS.gramsPerMole, value: 1));
+  ///print(MOLAR_MASS.kilogramsPerMole);
   /// ```
   MolarMass(
       {super.significantFigures,
@@ -67,17 +67,17 @@ class MolarMass extends RatioProperty<MOLAR_MASS, AMOUNT_OF_SUBSTANCE, MASS> {
             mapSymbols: _mapSymbols);
 
   Unit get gramsPerMole => getUnit(MOLAR_MASS.gramsPerMole);
-  Unit get gramsPerMilliMole => getUnit(MOLAR_MASS.gramsPerMilliMole);
-  Unit get gramsPerMicroMole => getUnit(MOLAR_MASS.gramsPerMicroMole);
-  Unit get gramsPerNanoMole => getUnit(MOLAR_MASS.gramsPerNanoMole);
-  Unit get gramsPerPicoMole => getUnit(MOLAR_MASS.gramsPerPicoMole);
-  Unit get gramsPerFemtoMole => getUnit(MOLAR_MASS.gramsPerFemtoMole);
-  Unit get milliGramsPerMole => getUnit(MOLAR_MASS.milliGramsPerMole);
-  Unit get milliGramsPerMilliMole => getUnit(MOLAR_MASS.milliGramsPerMilliMole);
-  Unit get milliGramsPerMicroMole => getUnit(MOLAR_MASS.milliGramsPerMicroMole);
-  Unit get milliGramsPerNanoMole => getUnit(MOLAR_MASS.milliGramsPerNanoMole);
-  Unit get milliGramsPerPicoMole => getUnit(MOLAR_MASS.milliGramsPerPicoMole);
-  Unit get milliGramsPerFemtoMole => getUnit(MOLAR_MASS.milliGramsPerFemtoMole);
-  Unit get kiloGramsPerMole => getUnit(MOLAR_MASS.kiloGramsPerMole);
-  Unit get kiloGramsPerMilliMole => getUnit(MOLAR_MASS.kiloGramsPerMilliMole);
+  Unit get gramsPerMillimole => getUnit(MOLAR_MASS.gramsPerMillimole);
+  Unit get gramsPerMicromole => getUnit(MOLAR_MASS.gramsPerMicromole);
+  Unit get gramsPerNanomole => getUnit(MOLAR_MASS.gramsPerNanomole);
+  Unit get gramsPerPicomole => getUnit(MOLAR_MASS.gramsPerPicomole);
+  Unit get gramsPerFemtomole => getUnit(MOLAR_MASS.gramsPerFemtomole);
+  Unit get milligramsPerMole => getUnit(MOLAR_MASS.milligramsPerMole);
+  Unit get milligramsPerMillimole => getUnit(MOLAR_MASS.milligramsPerMillimole);
+  Unit get milligramsPerMicromole => getUnit(MOLAR_MASS.milligramsPerMicromole);
+  Unit get milligramsPerNanomole => getUnit(MOLAR_MASS.milligramsPerNanomole);
+  Unit get milligramsPerPicomole => getUnit(MOLAR_MASS.milligramsPerPicomole);
+  Unit get milligramsPerFemtomole => getUnit(MOLAR_MASS.milligramsPerFemtomole);
+  Unit get kilogramsPerMole => getUnit(MOLAR_MASS.kilogramsPerMole);
+  Unit get kilogramsPerMillimole => getUnit(MOLAR_MASS.kilogramsPerMillimole);
 }
