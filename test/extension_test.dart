@@ -19,6 +19,10 @@ void main() {
     expect(
         1.convertFromTo(MOLAR_MASS.gramsPerMole, MOLAR_MASS.kilogramsPerMole),
         1e-3);
+    expect(
+        1.convertFromTo(
+            MOLAR_VOLUME.molesPerLiter, MOLAR_VOLUME.milliMolesPerDeciLiter),
+        1e2);
     expect(1.convertFromTo(POWER.kilowatt, POWER.watt), 1e3);
     expect(1.convertFromTo(PRESSURE.bar, PRESSURE.pascal), 1e5);
     expect(

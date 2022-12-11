@@ -26,8 +26,6 @@ void runConversionTest(Map<dynamic, double> expectedResult, Property property,
         var name = unit.name;
         double? convertedValue =
             unitList.where((element) => element.name == name).single.value;
-        print(convertedValue);
-        print(name);
         expect(
           isAcceptable(convertedValue, expectedResult[name]!, sensibility),
           true,
@@ -244,7 +242,6 @@ void main() {
     runConversionTest(expectedResult, MolarMass());
   });
 
-// TODO: not sure exactly how to approach these calculation isues
   group('Molar Volume conversion', () {
     const Map<MOLAR_VOLUME, double> expectedResult = {
       MOLAR_VOLUME.molesPerLiter: 1,
