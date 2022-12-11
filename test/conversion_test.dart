@@ -2,7 +2,7 @@ import 'package:test/test.dart';
 import 'package:units_converter/units_converter.dart';
 
 /// This function defines if a value is accettable. e.g. if we expect to have 1 but we get 1.00000000012, is this a valid result or not?
-/// The term sensbility is used improperly.
+/// The term sensibility is used improperly.
 bool isAcceptable(double? convertedValue, double? expectedValue, sensibility) {
   if ((convertedValue == null && expectedValue != null) ||
       (convertedValue != null && expectedValue == null)) {
@@ -87,8 +87,22 @@ void main() {
     const Map<DENSITY, double> expectedResult = {
       DENSITY.gramsPerLiter: 1,
       DENSITY.gramsPerCubicCentimeter: 0.001,
+      DENSITY.gramsPerMilliliter: 0.001,
+      DENSITY.gramsPerDeciliter: 0.1,
       DENSITY.kilogramsPerLiter: 0.001,
       DENSITY.kilogramsPerCubicMeter: 1,
+      DENSITY.milligramsPerLiter: 1000,
+      DENSITY.milligramsPerDeciliter: 100,
+      DENSITY.milligramsPerMilliliter: 1,
+      DENSITY.milligramsPerCubicMeter: 1e6,
+      DENSITY.milligramsPerCubicCentimeter: 1,
+      DENSITY.microgramsPerLiter: 1e6,
+      DENSITY.microgramsPerDeciliter: 1e5,
+      DENSITY.microgramsPerMilliliter: 1e3,
+      DENSITY.nanogramsPerLiter: 1e9,
+      DENSITY.nanogramsPerMilliliter: 1e6,
+      DENSITY.picogramsPerLiter: 1e12,
+      DENSITY.picogramsPerMilliliter: 1e9,
     };
     runConversionTest(expectedResult, Density());
   });
@@ -159,7 +173,7 @@ void main() {
     runConversionTest(expectedResult, FuelConsumption());
   });
 
-  group('Lenght', () {
+  group('Length', () {
     const Map<LENGTH, double> expectedResult = {
       LENGTH.meters: 1,
       LENGTH.centimeters: 100,
@@ -206,6 +220,47 @@ void main() {
       MASS.decigrams: 10,
     };
     runConversionTest(expectedResult, Mass(), sensibility: 1e9);
+  });
+
+  group('Molar Mass conversion', () {
+    const Map<MOLAR_MASS, double> expectedResult = {
+      MOLAR_MASS.gramsPerMole: 1,
+      MOLAR_MASS.gramsPerMillimole: 1e-3,
+      MOLAR_MASS.gramsPerMicromole: 1e-6,
+      MOLAR_MASS.gramsPerNanomole: 1e-9,
+      MOLAR_MASS.gramsPerPicomole: 1e-12,
+      MOLAR_MASS.gramsPerFemtomole: 1e-15,
+      MOLAR_MASS.milligramsPerMole: 1e3,
+      MOLAR_MASS.milligramsPerMillimole: 1,
+      MOLAR_MASS.milligramsPerMicromole: 1e-3,
+      MOLAR_MASS.milligramsPerNanomole: 1e-6,
+      MOLAR_MASS.milligramsPerPicomole: 1e-9,
+      MOLAR_MASS.milligramsPerFemtomole: 1e-12,
+      MOLAR_MASS.kilogramsPerMole: 1e-3,
+      MOLAR_MASS.kilogramsPerMillimole: 1e-6,
+    };
+    runConversionTest(expectedResult, MolarMass());
+  });
+
+  group('Molar Volume conversion', () {
+    const Map<MOLAR_VOLUME, double> expectedResult = {
+      MOLAR_VOLUME.molesPerLiter: 1,
+      MOLAR_VOLUME.molesPerMilliliter: 1e-3,
+      MOLAR_VOLUME.molesPerCubicMeter: 1000,
+      MOLAR_VOLUME.millimolesPerLiter: 1000,
+      MOLAR_VOLUME.millimolesPerDeciliter: 100,
+      MOLAR_VOLUME.micromolesPerLiter: 1e6,
+      MOLAR_VOLUME.micromolesPerDeciliter: 1e5,
+      MOLAR_VOLUME.micromolesPerMilliliter: 1e3,
+      MOLAR_VOLUME.nanomolesPerLiter: 1e9,
+      MOLAR_VOLUME.nanomolesPerDeciliter: 1e8,
+      MOLAR_VOLUME.nanomolesPerMilliliter: 1e6,
+      MOLAR_VOLUME.picomolesPerLiter: 1e12,
+      MOLAR_VOLUME.picomolesPerDeciliter: 1e11,
+      MOLAR_VOLUME.picomolesPerMilliliter: 1e9,
+      MOLAR_VOLUME.femtomolesPerMilliliter: 1e12
+    };
+    runConversionTest(expectedResult, MolarVolume());
   });
 
   group('Numeral systems', () {
@@ -283,6 +338,26 @@ void main() {
       PRESSURE.inchOfMercury: 0.00029529987508,
     };
     runConversionTest(expectedResult, Pressure());
+  });
+
+  group('Reciprocal OF Molar Mass conversion', () {
+    const Map<RECIPROCAL_OF_MOLAR_MASS, double> expectedResult = {
+      RECIPROCAL_OF_MOLAR_MASS.molesPerGram: 1,
+      RECIPROCAL_OF_MOLAR_MASS.millimolesPerGram: 1e3,
+      RECIPROCAL_OF_MOLAR_MASS.micromolesPerGram: 1e6,
+      RECIPROCAL_OF_MOLAR_MASS.nanomolesPerGram: 1e9,
+      RECIPROCAL_OF_MOLAR_MASS.picomolesPerGram: 1e12,
+      RECIPROCAL_OF_MOLAR_MASS.femtomolesPerGram: 1e15,
+      RECIPROCAL_OF_MOLAR_MASS.molesPerMilligram: 1e-3,
+      RECIPROCAL_OF_MOLAR_MASS.millimolesPerMilligram: 1,
+      RECIPROCAL_OF_MOLAR_MASS.micromolesPerMilligram: 1e3,
+      RECIPROCAL_OF_MOLAR_MASS.nanomolesPerMilligram: 1e6,
+      RECIPROCAL_OF_MOLAR_MASS.picomolesPerMilligram: 1e9,
+      RECIPROCAL_OF_MOLAR_MASS.femtomolesPerMilligram: 1e12,
+      RECIPROCAL_OF_MOLAR_MASS.molesPerKilogram: 1e3,
+      RECIPROCAL_OF_MOLAR_MASS.millimolesPerKilogram: 1e6,
+    };
+    runConversionTest(expectedResult, ReciprocalOfMolarMass());
   });
 
   group('Shoe size', () {
