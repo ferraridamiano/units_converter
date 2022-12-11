@@ -19,8 +19,7 @@ enum MOLAR_VOLUME {
   picomolesPerLiter(AMOUNT_OF_SUBSTANCE.picomoles, VOLUME.liters),
   picomolesPerDeciliter(AMOUNT_OF_SUBSTANCE.picomoles, VOLUME.deciliters),
   picomolesPerMilliliter(AMOUNT_OF_SUBSTANCE.picomoles, VOLUME.milliliters),
-  femtomolesPerMilliliter(AMOUNT_OF_SUBSTANCE.femtomoles, VOLUME.milliliters),
-  ;
+  femtomolesPerMilliliter(AMOUNT_OF_SUBSTANCE.femtomoles, VOLUME.milliliters);
 
   final AMOUNT_OF_SUBSTANCE numerator;
   final VOLUME denominator;

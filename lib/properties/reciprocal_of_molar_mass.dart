@@ -18,8 +18,7 @@ enum RECIPROCAL_OF_MOLAR_MASS {
   picomolesPerMilligram(AMOUNT_OF_SUBSTANCE.picomoles, MASS.milligrams),
   femtomolesPerMilligram(AMOUNT_OF_SUBSTANCE.femtomoles, MASS.milligrams),
   molesPerKilogram(AMOUNT_OF_SUBSTANCE.moles, MASS.kilograms),
-  millimolesPerKilogram(AMOUNT_OF_SUBSTANCE.millimoles, MASS.kilograms),
-  ;
+  millimolesPerKilogram(AMOUNT_OF_SUBSTANCE.millimoles, MASS.kilograms);
 
   final AMOUNT_OF_SUBSTANCE numerator;
   final MASS denominator;

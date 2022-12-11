@@ -251,14 +251,14 @@ void main() {
       MOLAR_VOLUME.millimolesPerDeciliter: 100,
       MOLAR_VOLUME.micromolesPerLiter: 1e6,
       MOLAR_VOLUME.micromolesPerDeciliter: 1e5,
-      MOLAR_VOLUME.micromolesPerMilliliter: 1000,
-      MOLAR_VOLUME.nanomolesPerLiter: 999999999.9999999,
-      MOLAR_VOLUME.nanomolesPerDeciliter: 99999999.99999999,
-      MOLAR_VOLUME.nanomolesPerMilliliter: 999999.9999999999,
+      MOLAR_VOLUME.micromolesPerMilliliter: 1e3,
+      MOLAR_VOLUME.nanomolesPerLiter: 1e9,
+      MOLAR_VOLUME.nanomolesPerDeciliter: 1e8,
+      MOLAR_VOLUME.nanomolesPerMilliliter: 1e6,
       MOLAR_VOLUME.picomolesPerLiter: 1e12,
       MOLAR_VOLUME.picomolesPerDeciliter: 1e11,
       MOLAR_VOLUME.picomolesPerMilliliter: 1e9,
-      MOLAR_VOLUME.femtomolesPerMilliliter: 999999999999.9999,
+      MOLAR_VOLUME.femtomolesPerMilliliter: 1e12
     };
     runConversionTest(expectedResult, MolarVolume());
   });

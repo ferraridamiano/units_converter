@@ -71,9 +71,7 @@ Property? getPropertyFromEnum(dynamic propertyEnum) {
       return Volume();
     default:
       {
-        print(propertyEnum);
-        print(propertyEnum.runtimeType);
-        assert(false, "Not a valid enum type");
+        assert(false, "${propertyEnum.runtimeType} is not a valid enum type");
         return null;
       }
   }

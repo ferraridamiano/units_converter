@@ -23,8 +23,7 @@ enum DENSITY {
   nanogramsPerLiter(MASS.nanograms, VOLUME.liters),
   nanogramsPerMilliliter(MASS.nanograms, VOLUME.milliliters),
   picogramsPerLiter(MASS.picograms, VOLUME.liters),
-  picogramsPerMilliliter(MASS.picograms, VOLUME.milliliters),
-  ;
+  picogramsPerMilliliter(MASS.picograms, VOLUME.milliliters);
 
   final MASS numerator;
   final VOLUME denominator;

@@ -18,8 +18,7 @@ enum MOLAR_MASS {
   milligramsPerPicomole(MASS.milligrams, AMOUNT_OF_SUBSTANCE.picomoles),
   milligramsPerFemtomole(MASS.milligrams, AMOUNT_OF_SUBSTANCE.femtomoles),
   kilogramsPerMole(MASS.kilograms, AMOUNT_OF_SUBSTANCE.moles),
-  kilogramsPerMillimole(MASS.kilograms, AMOUNT_OF_SUBSTANCE.millimoles),
-  ;
+  kilogramsPerMillimole(MASS.kilograms, AMOUNT_OF_SUBSTANCE.millimoles);
 
   final MASS numerator;
   final AMOUNT_OF_SUBSTANCE denominator;
