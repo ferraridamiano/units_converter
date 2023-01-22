@@ -57,6 +57,7 @@ class Length extends DoubleProperty<LENGTH> {
               LENGTH.astronomicalUnits: 'au',
               LENGTH.lightYears: 'ly',
               LENGTH.parsec: 'pc',
+              LENGTH.mils: 'th',
             },
             conversionTree: ConversionNode(name: LENGTH.meters, leafNodes: [
               ConversionNode(
