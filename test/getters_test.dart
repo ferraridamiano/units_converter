@@ -134,6 +134,7 @@ void main() {
     var property = Energy();
     property.convert(ENERGY.joules, 1);
     runGetterTest(property.joules, property.getUnit(ENERGY.joules));
+    runGetterTest(property.kilojoules, property.getUnit(ENERGY.kilojoules));
     runGetterTest(property.calories, property.getUnit(ENERGY.calories));
     runGetterTest(property.kilocalories, property.getUnit(ENERGY.kilocalories));
     runGetterTest(
