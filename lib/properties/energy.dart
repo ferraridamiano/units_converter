@@ -6,6 +6,7 @@ import 'package:units_converter/models/unit.dart';
 //Available ENERGY units
 enum ENERGY {
   joules,
+  kilojoules,
   calories,
   kilocalories,
   kilowattHours,
@@ -29,6 +30,7 @@ class Energy extends DoubleProperty<ENERGY> {
             name: name ?? PROPERTY.energy,
             mapSymbols: {
               ENERGY.joules: 'J',
+              ENERGY.kilojoules: 'kJ',
               ENERGY.calories: 'cal',
               ENERGY.kilocalories: 'kcal',
               ENERGY.kilowattHours: 'kwh',
@@ -36,6 +38,10 @@ class Energy extends DoubleProperty<ENERGY> {
               ENERGY.energyFootPound: 'ft⋅lbf',
             },
             conversionTree: ConversionNode(name: ENERGY.joules, leafNodes: [
+              ConversionNode(
+                coefficientProduct: 1000.0,
+                name: ENERGY.kilojoules,
+              ),
               ConversionNode(
                 coefficientProduct: 4.1867999409,
                 name: ENERGY.calories,
@@ -61,6 +67,7 @@ class Energy extends DoubleProperty<ENERGY> {
             ]));
 
   Unit get joules => getUnit(ENERGY.joules);
+  Unit get kilojoules => getUnit(ENERGY.kilojoules);
   Unit get calories => getUnit(ENERGY.calories);
   Unit get kilocalories => getUnit(ENERGY.kilocalories);
   Unit get kilowattHours => getUnit(ENERGY.kilowattHours);

@@ -143,6 +143,7 @@ void main() {
   group('Energy', () {
     const Map<ENERGY, double> expectedResult = {
       ENERGY.joules: 1,
+      ENERGY.kilojoules: 1e-3,
       ENERGY.calories: 0.2388459,
       ENERGY.kilocalories: 0.0002388459,
       ENERGY.kilowattHours: 2.7777777778e-7,
