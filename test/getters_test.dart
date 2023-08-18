@@ -169,6 +169,14 @@ void main() {
         property.getUnit(FUEL_CONSUMPTION.milesPerImperialGallon));
   });
 
+  group('Illuminance test', () {
+    var property = Illuminance();
+    property.convert(ILLUMINANCE.lux, 1);
+    runGetterTest(property.lux, property.getUnit(ILLUMINANCE.lux));
+    runGetterTest(
+        property.footCandle, property.getUnit(ILLUMINANCE.footCandle));
+  });
+
   group('Length test', () {
     var property = Length();
     property.convert(LENGTH.meters, 1);

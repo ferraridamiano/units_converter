@@ -11,6 +11,8 @@ void main() {
     expect(1.convertFromTo(ENERGY.kilocalories, ENERGY.calories), 1e3);
     expect(1.convertFromTo(FORCE.dyne, FORCE.newton), 1e-5);
     expect(
+        1.convertFromTo(ILLUMINANCE.lux, ILLUMINANCE.footCandle), 0.09290304);
+    expect(
         1.convertFromTo(FUEL_CONSUMPTION.kilometersPerLiter,
             FUEL_CONSUMPTION.litersPer100km),
         100);

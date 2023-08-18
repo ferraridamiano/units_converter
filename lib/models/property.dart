@@ -9,6 +9,7 @@ enum PROPERTY {
   energy,
   force,
   fuelConsumption,
+  illuminance,
   length,
   mass,
   molarmass,

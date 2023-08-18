@@ -174,6 +174,14 @@ void main() {
     runConversionTest(expectedResult, FuelConsumption());
   });
 
+  group('Illuminance', () {
+    const Map<ILLUMINANCE, double> expectedResult = {
+      ILLUMINANCE.lux: 1,
+      ILLUMINANCE.footCandle: 0.09290304,
+    };
+    runConversionTest(expectedResult, Illuminance());
+  });
+
   group('Length', () {
     const Map<LENGTH, double> expectedResult = {
       LENGTH.meters: 1,
