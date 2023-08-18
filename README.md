@@ -9,7 +9,7 @@
 
 This package is used by [Converter NOW](https://github.com/ferraridamiano/ConverterNOW)!
 
-The documentation is structured in examples of incresing complexity. But don't worry, in most cases you will only need the first examples.
+The documentation is structured in examples of increasing complexity. But don't worry, in most cases you will only need the first examples.
 
 ## Table of Contents
 - [Convert a unit to another unit (the easy way)](#convert-a-unit-to-another-unit-the-easy-way)
@@ -153,7 +153,7 @@ Output:
 
 ## Custom conversion
 
-*In most cases, you will only need `SimpleCustomProperty` (see the previous section). `SimpleCustomProperty` allow you to define conversions in the form of `y=ax`. But if you need to define special relationship between units you need `CustomProperty`. This allow you to perform conversion like: `y=ax+b` and `y=a/x+b` (where `y` and x are the value of two units and `a` and `b` are two coefficient), for example the conversion between Celsius and Fahreneit use the first relation and the conversion between km/l and l/100km has to be done with the second relation. Both can't be done with `SimpleCustomProperty`.*
+*In most cases, you will only need `SimpleCustomProperty` (see the previous section). `SimpleCustomProperty` allow you to define conversions in the form of `y=ax`. But if you need to define special relationship between units you need `CustomProperty`. This allow you to perform conversion like: `y=ax+b` and `y=a/x+b` (where `y` and x are the value of two units and `a` and `b` are two coefficient), for example the conversion between Celsius and Fahrenheit use the first relation and the conversion between km/l and l/100km has to be done with the second relation. Both can't be done with `SimpleCustomProperty`.*
 
 **Example 6**: let's define the following imaginary units of measurement:
 
@@ -228,7 +228,7 @@ name:OneOver(DashPlus1), value:0.5, stringValue:0.5, symbol:null
 
 - Speed (miles per hour, kilometers per hour, etc.)
 
-- Temperature (celsius, fahreneit, etc.)
+- Temperature (celsius, fahrenheit, etc.)
 
 - Time (seconds, years, etc.)
 

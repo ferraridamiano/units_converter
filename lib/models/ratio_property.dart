@@ -6,7 +6,7 @@ abstract class RatioProperty<T extends Enum, N, D> extends Property<T, double> {
   /// Map between units and its symbol, must be of the same size of T
   Map<T, String?> mapSymbols;
 
-  /// The number of significan figures to keep. E.g. 1.23456789) has 9
+  /// The number of significant figures to keep. E.g. 1.23456789) has 9
   /// significant figures
   int significantFigures;
 

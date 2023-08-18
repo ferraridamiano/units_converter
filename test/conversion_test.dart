@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 import 'package:units_converter/units_converter.dart';
 
-/// This function defines if a value is accettable. e.g. if we expect to have 1 but we get 1.00000000012, is this a valid result or not?
+/// This function defines if a value is acceptable. e.g. if we expect to have 1 but we get 1.00000000012, is this a valid result or not?
 /// The term sensibility is used improperly.
 bool isAcceptable(double? convertedValue, double? expectedValue, sensibility) {
   if ((convertedValue == null && expectedValue != null) ||
