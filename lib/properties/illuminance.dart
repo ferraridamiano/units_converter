@@ -11,9 +11,9 @@ enum ILLUMINANCE {
 class Illuminance extends DoubleProperty<ILLUMINANCE> {
   ///Class for light conversions, e.g. if you want to convert 1 lux in to foot-candle:
   ///```dart
-  ///var illuminance = Illuminance(removeTrailingZeros: false);
-  ///illuminance.convert(Unit(ILLUMINANCE.lux, value: 1));
-  ///print(ILLUMINANCE.footCandle);
+  ///const lux = 100;
+  ///const fc = lux.convertFromTo(ILLUMINANCE.lux, ILLUMINANCE.footCandle);
+  ///print(fc); // prints 9.290304
   /// ```
   Illuminance(
       {super.significantFigures,
