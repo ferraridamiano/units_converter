@@ -33,7 +33,7 @@ documentation for more details. Now you can easily convert in this way:
 
 # 1.2.0
 Improved the formatting of the string representation of the number
-(`stringValue`): now it is also possibile to choose between decimal or
+(`stringValue`): now it is also possible to choose between decimal or
 scientific notation. Added feet (US survey), feet squared (US survey) and
 kilocalories.
 

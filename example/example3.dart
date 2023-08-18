@@ -6,7 +6,7 @@ void main() {
       Angle(significantFigures: 7, removeTrailingZeros: false); // conversion
   angle.convert(ANGLE.degree, 1);
   // We get all the units
-  var units = angle.getAll(); //We get all ther others units
+  var units = angle.getAll(); //We get all the others units
   // Let's print all of them
   for (var unit in units) {
     print(

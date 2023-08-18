@@ -77,7 +77,7 @@ Property? getPropertyFromEnum(dynamic propertyEnum) {
   }
 }
 
-/// Given a double value it returns its rapresentation as a string with few
+/// Given a double value it returns its representation as a string with few
 /// tweaks: [significantFigures] is the number of significant figures to keep,
 /// [removeTrailingZeros] say if non important zeros should be removed.
 /// E.g. 1.000000 --> 1
