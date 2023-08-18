@@ -172,10 +172,9 @@ void main() {
   group('Illuminance test', () {
     var property = Illuminance();
     property.convert(ILLUMINANCE.lux, 1);
-    runGetterTest(property.lux,
-        property.getUnit(ILLUMINANCE.lux));
-    runGetterTest(property.footCandle,
-        property.getUnit(ILLUMINANCE.footCandle));
+    runGetterTest(property.lux, property.getUnit(ILLUMINANCE.lux));
+    runGetterTest(
+        property.footCandle, property.getUnit(ILLUMINANCE.footCandle));
   });
 
   group('Length test', () {
