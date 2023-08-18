@@ -1,13 +1,13 @@
 name: units_converter
 description: Simple and light units conversion package for all your needs.
-version: 2.1.0
+version: 2.1.1
 homepage: https://github.com/ferraridamiano/units_converter
 funding:
  - https://www.paypal.com/paypalme/DemApps
 
 environment:
-  sdk: '>=2.17.0 <3.0.0'
+  sdk: '>=2.17.0 <4.0.0'
 
 dev_dependencies:
-  lints: ^2.0.0
-  test: ^1.21.4
+  lints: ^2.1.1
+  test: ^1.24.6

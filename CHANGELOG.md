@@ -1,3 +1,9 @@
+# 2.1.1
+- Added Illuminance property (@denxorz)
+- Added kilojoules (@lhengl)
+- Fixed typos (@denxorz)
+- Bump Dart constraints
+
 # 2.1.0
 Added 5 new properties: density, amount of substance, molar volume, molar mass
 and reciprocal of molar mass. Now it is also possible to define a compound unit
