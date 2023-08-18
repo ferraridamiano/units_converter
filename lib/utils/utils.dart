@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/properties/amount_of_substance.dart';
+import 'package:units_converter/properties/illuminance.dart';
 import 'package:units_converter/properties/length.dart';
 import 'package:units_converter/properties/area.dart';
 import 'package:units_converter/properties/molar_mass.dart';
@@ -41,6 +42,8 @@ Property? getPropertyFromEnum(dynamic propertyEnum) {
       return Force();
     case FUEL_CONSUMPTION:
       return FuelConsumption();
+    case ILLUMINANCE:
+      return Illuminance();
     case LENGTH:
       return Length();
     case MASS:
