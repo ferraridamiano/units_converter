@@ -1,6 +1,8 @@
+import 'dart:collection';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
+import 'package:units_converter/properties/custom_property.dart';
 import 'package:units_converter/utils/utils.dart';
 
 abstract class DoubleProperty<T> extends Property<T, double> {
@@ -93,4 +95,60 @@ abstract class DoubleProperty<T> extends Property<T, double> {
   @override
   Unit getUnit(T name) =>
       _unitList.where((element) => element.name == name).single;
+
+  CustomProperty withCustomUnits(
+      T referenceUnit, List<ConversionNode<String>> newUnits,
+      {Map<String, String>? newSymbols}) {
+    ConversionNode<String> newConversionTree =
+        _convertToStringAndReturn(conversionTree);
+
+    // Use a BFS-like algorithm to search for the reference unit and append the
+    // list of unit to it.
+    Queue<ConversionNode<String>> nodeQueue = Queue.from([newConversionTree]);
+    while (nodeQueue.isNotEmpty) {
+      ConversionNode<String> currentNode = nodeQueue.removeFirst();
+      if (currentNode.name == referenceUnit.toString()) {
+        currentNode.leafNodes = [...currentNode.leafNodes, ...newUnits];
+        break;
+      }
+      nodeQueue.addAll(currentNode.leafNodes);
+    }
+
+    // Merge the new symbols and the previous symbols
+    Map<String, String>? newMapSymbols;
+    if (mapSymbols != null) {
+      newMapSymbols = {};
+      for (T unit in mapSymbols!.keys) {
+        newMapSymbols[unit.toString()] = mapSymbols![unit]!;
+      }
+    }
+    if (newSymbols != null) {
+      newMapSymbols ??= {};
+      newMapSymbols.addAll(newSymbols);
+    }
+    return CustomProperty(
+      conversionTree: newConversionTree,
+      mapSymbols: newMapSymbols,
+    );
+  }
+
+  /// Creates a copy of a ConversionNode, convert the name of each node to a
+  /// String and returns it. It is a recursive algorithm.
+  ConversionNode<String> _convertToStringAndReturn(
+    ConversionNode conversionNode,
+  ) {
+    List<ConversionNode<String>> newLeafNodes = [];
+    if (conversionNode.leafNodes.isNotEmpty) {
+      for (var node in conversionNode.leafNodes) {
+        newLeafNodes.add(_convertToStringAndReturn(node));
+      }
+    }
+    return ConversionNode(
+      name: conversionNode.name.toString(),
+      coefficientProduct: conversionNode.coefficientProduct,
+      coefficientSum: conversionNode.coefficientSum,
+      conversionType: conversionNode.conversionType,
+      leafNodes: newLeafNodes,
+    );
+  }
 }
