@@ -463,6 +463,7 @@ void main() {
       TORQUE.newtonMeter: 1,
       TORQUE.dyneMeter: 1e5,
       TORQUE.poundForceFeet: 0.7375621489,
+      TORQUE.poundForceInch: 8.8507457868,
       TORQUE.kilogramForceMeter: 0.10196798205364,
       TORQUE.poundalMeter: 7.2330138512099,
     };
