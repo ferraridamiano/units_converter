@@ -468,7 +468,7 @@ void main() {
     runGetterTest(
         property.poundForceFeet, property.getUnit(TORQUE.poundForceFeet));    
     runGetterTest(
-        property.poundForceFeet, property.getUnit(TORQUE.poundForceInch));
+        property.poundForceInch, property.getUnit(TORQUE.poundForceInch));
     runGetterTest(property.kilogramForceMeter,
         property.getUnit(TORQUE.kilogramForceMeter));
     runGetterTest(property.poundalMeter, property.getUnit(TORQUE.poundalMeter));
