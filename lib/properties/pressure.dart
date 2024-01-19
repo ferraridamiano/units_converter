@@ -12,6 +12,7 @@ enum PRESSURE {
   psi,
   torr, //Same as mmHg
   hectoPascal,
+  kiloPascal,
   inchOfMercury,
 }
 
@@ -69,6 +70,10 @@ class Pressure extends DoubleProperty<PRESSURE> {
             ConversionNode(
               coefficientProduct: 1e2,
               name: PRESSURE.hectoPascal,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e3,
+              name: PRESSURE.kiloPascal,
             )
           ]),
         );
@@ -80,5 +85,6 @@ class Pressure extends DoubleProperty<PRESSURE> {
   Unit get psi => getUnit(PRESSURE.psi);
   Unit get torr => getUnit(PRESSURE.torr);
   Unit get hectoPascal => getUnit(PRESSURE.hectoPascal);
+  Unit get kiloPascal => getUnit(PRESSURE.kiloPascal);
   Unit get inchOfMercury => getUnit(PRESSURE.inchOfMercury);
 }

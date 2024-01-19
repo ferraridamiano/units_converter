@@ -328,6 +328,7 @@ void main() {
     runGetterTest(property.psi, property.getUnit(PRESSURE.psi));
     runGetterTest(property.torr, property.getUnit(PRESSURE.torr));
     runGetterTest(property.hectoPascal, property.getUnit(PRESSURE.hectoPascal));
+    runGetterTest(property.kiloPascal, property.getUnit(PRESSURE.kiloPascal));
     runGetterTest(
         property.inchOfMercury, property.getUnit(PRESSURE.inchOfMercury));
   });
