@@ -38,12 +38,12 @@ class Temperature extends DoubleProperty<TEMPERATURE> {
             TEMPERATURE.rankine: '°R',
           },
           conversionTree:
-              ConversionNode(name: TEMPERATURE.fahrenheit, leafNodes: [
+              ConversionNode(name: TEMPERATURE.fahrenheit, children: [
             ConversionNode(
                 coefficientProduct: 1.8,
                 coefficientSum: 32.0,
                 name: TEMPERATURE.celsius,
-                leafNodes: [
+                children: [
                   ConversionNode(
                     coefficientSum: -273.15,
                     name: TEMPERATURE.kelvin,

@@ -41,7 +41,7 @@ class AmountOfSubstance extends DoubleProperty<AMOUNT_OF_SUBSTANCE> {
           },
           conversionTree: ConversionNode(
             name: AMOUNT_OF_SUBSTANCE.moles,
-            leafNodes: [
+            children: [
               ConversionNode(
                 coefficientProduct: 1e-3,
                 name: AMOUNT_OF_SUBSTANCE.millimoles,

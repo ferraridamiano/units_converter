@@ -31,7 +31,7 @@ class Angle extends DoubleProperty<ANGLE> {
             ANGLE.seconds: "''",
             ANGLE.radians: 'rad',
           },
-          conversionTree: ConversionNode(name: ANGLE.degree, leafNodes: [
+          conversionTree: ConversionNode(name: ANGLE.degree, children: [
             ConversionNode(
               coefficientProduct: 1 / 60,
               name: ANGLE.minutes,

@@ -34,7 +34,7 @@ class FuelConsumption extends DoubleProperty<FUEL_CONSUMPTION> {
             },
             conversionTree: ConversionNode(
                 name: FUEL_CONSUMPTION.kilometersPerLiter,
-                leafNodes: [
+                children: [
                   ConversionNode(
                     conversionType: ConversionType.reciprocalConversion,
                     coefficientProduct: 100.0,

@@ -1,4 +1,4 @@
-import 'package:units_converter/models/conversion_node.dart';
+/*import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 
@@ -34,7 +34,7 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
     this.name = name ?? PROPERTY.numeralSystems;
     size = NUMERAL_SYSTEMS.values.length;
     conversionTree =
-        ConversionNode(name: NUMERAL_SYSTEMS.decimal, base: 10, leafNodes: [
+        ConversionNode(name: NUMERAL_SYSTEMS.decimal, base: 10, children: [
       ConversionNode(
         conversionType: ConversionType.baseConversion,
         base: 16,
@@ -92,3 +92,4 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   Unit get octal => getUnit(NUMERAL_SYSTEMS.octal);
   Unit get binary => getUnit(NUMERAL_SYSTEMS.binary);
 }
+*/

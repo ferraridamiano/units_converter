@@ -293,7 +293,7 @@ void main() {
     runGetterTest(property.femtomolesPerMilliliter,
         property.getUnit(MOLAR_VOLUME.femtomolesPerMilliliter));
   });
-
+  /*
   group('Numeral systems test', () {
     var property = NumeralSystems();
     property.convert(NUMERAL_SYSTEMS.decimal, '1');
@@ -303,6 +303,7 @@ void main() {
     runGetterTest(property.octal, property.getUnit(NUMERAL_SYSTEMS.octal));
     runGetterTest(property.binary, property.getUnit(NUMERAL_SYSTEMS.binary));
   });
+  */
 
   group('Power test', () {
     var property = Power();

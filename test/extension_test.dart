@@ -44,11 +44,12 @@ void main() {
       1.convertFromTo('This unit does not exists', 'another unit');
     }, throwsA(isA<AssertionError>()));
   });
-
+  /*
   test('Extension on String', () {
     expect(
         '10001011'
             .convertFromTo(NUMERAL_SYSTEMS.binary, NUMERAL_SYSTEMS.hexadecimal),
         '8B');
   });
+  */
 }

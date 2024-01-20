@@ -23,7 +23,7 @@ enum ConversionType {
 class ConversionNode<T> {
   ConversionNode({
     required this.name,
-    this.leafNodes = const [],
+    this.children = const [],
     this.coefficientProduct = 1.0,
     this.coefficientSum = 0.0,
     this.value,
@@ -31,11 +31,17 @@ class ConversionNode<T> {
     this.conversionType = ConversionType.linearConversion,
     this.base,
     this.isConverted = false,
-  });
+  }) {
+    for (var child in children) {
+      child.parent = this;
+    }
+  }
+
+  ConversionNode<T>? parent;
 
   /// This are the list of the [ConversionNode]s that depend by this node. These are the
   /// children of this parent node.
-  List<ConversionNode<T>> leafNodes;
+  List<ConversionNode<T>> children;
 
   /// This is the product coefficient of [ConversionType.linearConversion] and
   /// [ConversionType.reciprocalConversion]. It is the a coefficient.
@@ -63,39 +69,53 @@ class ConversionNode<T> {
 
   /// This is defined just for numeral system conversion. It defines the base of
   /// this number. E.g. 16 for hexadecimal, 10 for decimal, 10 for binary, etc.
-  int? base;
+  int? base; // TODO get rid of this
 
   /// If true this node is already converted, false otherwise. The node where
   /// the conversion start has [isConverted] = true.
   bool isConverted;
 
-  /// **This method must be used on the root [ConversionNode] of the conversion**. It
-  /// converts all the [ConversionNode] of the tree from the [ConversionNode] which name is equal to
-  /// [name] ([value] is assigned to this [ConversionNode]) to all the other [ConversionNode]s of
-  /// the tree.
-  void convert(T name, dynamic value) {
+  /*void addChild(ConversionNode<T> child) {
+    child.parent = this;
+    children.add(child);
+  }*/
+
+  /// Convert this ConversionNode to all the other units
+  void convert(dynamic value) {
     assert(value is String || value is double);
 
-    List<ConversionNode> pathToConvertedNode =
-        _getNodesPathAndSelectNode(name, value);
-    for (int i = pathToConvertedNode.length - 2; i >= 0; i--) {
-      _convertTwoNodes(
-          parent: pathToConvertedNode[i],
-          child: pathToConvertedNode[i + 1],
-          fromParentToChild: false);
-    }
+    this.value = value;
+    isConverted = true;
 
-    //Now we use a BFS-like algorithm to convert everything from the root node
-    //to every other node.
     Queue<ConversionNode> queue = Queue.from([this]);
     while (queue.isNotEmpty) {
       ConversionNode node = queue.removeFirst();
-      if (node.leafNodes.isNotEmpty) {
-        for (ConversionNode leafNode in node.leafNodes) {
-          if (!leafNode.isConverted) {
-            _convertTwoNodes(parent: node, child: leafNode);
+
+      final parent = node.parent;
+      if (parent != null && !parent.isConverted) {
+        // TODO Maybe !node.parent!.isConverted is redundant, get rid of it
+        _convertTwoNodes(
+          parent: node.parent!,
+          child: this,
+          fromParentToChild: false,
+        );
+        parent.isConverted = true;
+        queue.addLast(parent);
+      }
+
+      final children = node.children;
+      if (children.isNotEmpty) {
+        for (ConversionNode child in children) {
+          if (!child.isConverted) {
+            // TODO Maybe this check is redundant, get rid of it
+            _convertTwoNodes(
+              parent: node,
+              child: child,
+              fromParentToChild: true,
+            );
+            child.isConverted = true;
           }
-          queue.addLast(leafNode);
+          queue.addLast(child);
         }
       }
     }
@@ -149,49 +169,10 @@ class ConversionNode<T> {
     }
   }
 
-  /// This function returns the path from the root ConversionNode up until the converted
-  /// ConversionNode in the form of a list. Moreover, it sets the node which name is equal
-  /// to name as converted [isConverted]=true. All the other nodes are marked as
-  /// not converted.
-  List<ConversionNode> _getNodesPathAndSelectNode(T name, dynamic value) {
-    Queue<ConversionNode> stack =
-        Queue.from([this]); // we will use a queue as a stack
-    Queue<List<ConversionNode>> breadcrumbListQueue = Queue.from([
-      [this]
-    ]);
-    List<ConversionNode> result = [];
-    while (stack.isNotEmpty) {
-      ConversionNode node = stack.removeLast();
-      List<ConversionNode> breadcrumbList = breadcrumbListQueue.removeLast();
-      // if the node is the starting point of the conversion we assign it
-      // its value and we mark it as converted. All the others are marked as
-      // not converted
-      if (node.name == name) {
-        if (value is double) {
-          node.value = value;
-        } else {
-          // value is String
-          node.stringValue = value;
-        }
-        node.isConverted = true;
-        result = [...breadcrumbList];
-      } else {
-        node.isConverted = false;
-      }
-      if (node.leafNodes.isNotEmpty) {
-        for (ConversionNode leafNode in node.leafNodes) {
-          stack.addLast(leafNode);
-          breadcrumbListQueue.addLast([...breadcrumbList, leafNode]);
-        }
-      }
-    }
-    return result;
-  }
-
   /// Recursive function to get a list of the nodes of the tree
   List<ConversionNode<T>> getTreeAsList() {
     List<ConversionNode<T>> result = [this];
-    for (ConversionNode<T> node in leafNodes) {
+    for (ConversionNode<T> node in children) {
       result = [...result, ...node.getTreeAsList()];
     }
     return result;

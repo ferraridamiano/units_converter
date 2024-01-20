@@ -33,6 +33,8 @@ abstract class DoubleProperty<T> extends Property<T, double> {
   /// Map between units and its symbol
   Map<T, String>? mapSymbols;
 
+  late Map<T, ConversionNode> _mapUnits;
+
   /// The number of significant figures to keep. E.g. 1.23456789) has 9
   /// significant figures
   int significantFigures;
@@ -58,6 +60,7 @@ abstract class DoubleProperty<T> extends Property<T, double> {
     conversionTree = conversionTree;
     this.name = name;
     _nodeList = conversionTree.getTreeAsList();
+    _mapUnits = {for (var node in _nodeList) node.name: node};
     size = _nodeList.length;
     for (var conversionNode in _nodeList) {
       _unitList.add(
@@ -76,7 +79,7 @@ abstract class DoubleProperty<T> extends Property<T, double> {
       }
       return;
     }
-    conversionTree.convert(name, value);
+    _mapUnits[name]!.convert(value);
     for (var i = 0; i < size; i++) {
       _unitList[i].value =
           _nodeList.singleWhere((node) => node.name == _unitList[i].name).value;

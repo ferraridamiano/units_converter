@@ -4,7 +4,7 @@ import 'package:units_converter/units_converter.dart';
 void main() {
   ConversionNode<String> conversionTree = ConversionNode(
     name: 'Dash',
-    leafNodes: [
+    children: [
       ConversionNode(
         name: 'KiloDash',
         coefficientProduct: 1000,
@@ -12,7 +12,7 @@ void main() {
       ConversionNode(
         name: 'DashPlus1',
         coefficientSum: -1,
-        leafNodes: [
+        children: [
           ConversionNode(
             name: 'OneOver(DashPlus1)',
             conversionType: ConversionType.reciprocalConversion,

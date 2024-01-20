@@ -65,7 +65,7 @@ class SIPrefixes extends DoubleProperty<SI_PREFIXES> {
             SI_PREFIXES.zepto: 'z-',
             SI_PREFIXES.yocto: 'y-',
           },
-          conversionTree: ConversionNode(name: SI_PREFIXES.base, leafNodes: [
+          conversionTree: ConversionNode(name: SI_PREFIXES.base, children: [
             ConversionNode(
               coefficientProduct: 1e1,
               name: SI_PREFIXES.deca,

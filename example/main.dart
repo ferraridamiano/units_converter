@@ -31,7 +31,7 @@ void main() {
   }
 
   //----------------------------------------------------------------------------
-
+  /*
   //example 4: convert 100 (decimal) in binary and hexadecimal
   var numeralSystems = NumeralSystems(); //initialize NumeralSystems object
   numeralSystems.convert(
@@ -41,7 +41,7 @@ void main() {
   print(
       'Hexadecimal: ${numeralSystems.hexadecimal.stringValue}'); //We get the hexadecimal value
   //Warning! Numeral systems conversion is the only conversion that need the input as a string, and not as a double/int for obvious reasons
-
+  */
   //----------------------------------------------------------------------------
 
   //example 5: given a list of coefficient converts units
@@ -74,7 +74,7 @@ void main() {
   //Example 6:
   ConversionNode<String> conversionTree = ConversionNode(
     name: 'Dash',
-    leafNodes: [
+    children: [
       ConversionNode(
         name: 'KiloDash',
         coefficientProduct: 1000,
@@ -82,7 +82,7 @@ void main() {
       ConversionNode(
         name: 'Dash+1',
         coefficientSum: -1,
-        leafNodes: [
+        children: [
           ConversionNode(
             name: 'OneOver(OneDash+1)',
             conversionType: ConversionType.reciprocalConversion,

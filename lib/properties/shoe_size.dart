@@ -37,7 +37,7 @@ class ShoeSize extends DoubleProperty<SHOE_SIZE> {
             SHOE_SIZE.inches: 'in',
           },
           conversionTree:
-              ConversionNode(name: SHOE_SIZE.centimeters, leafNodes: [
+              ConversionNode(name: SHOE_SIZE.centimeters, children: [
             ConversionNode(
               coefficientProduct: 1 / 1.5,
               coefficientSum: -1.5,
@@ -46,7 +46,7 @@ class ShoeSize extends DoubleProperty<SHOE_SIZE> {
             ConversionNode(
                 coefficientProduct: 2.54,
                 name: SHOE_SIZE.inches,
-                leafNodes: [
+                children: [
                   ConversionNode(
                     coefficientProduct: 1 / 3,
                     coefficientSum: 10 / 3,

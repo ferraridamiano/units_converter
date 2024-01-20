@@ -33,7 +33,7 @@ class Force extends DoubleProperty<FORCE> {
               FORCE.kilogramForce: 'kgf',
               FORCE.poundal: 'pdl',
             },
-            conversionTree: ConversionNode(name: FORCE.newton, leafNodes: [
+            conversionTree: ConversionNode(name: FORCE.newton, children: [
               ConversionNode(
                 coefficientProduct: 1e-5,
                 name: FORCE.dyne,

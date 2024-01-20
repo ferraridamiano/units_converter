@@ -36,11 +36,11 @@ class Speed extends DoubleProperty<SPEED> {
             SPEED.minutesPerKilometer: 'min/km',
           },
           conversionTree:
-              ConversionNode(name: SPEED.metersPerSecond, leafNodes: [
+              ConversionNode(name: SPEED.metersPerSecond, children: [
             ConversionNode(
                 coefficientProduct: 1 / 3.6,
                 name: SPEED.kilometersPerHour,
-                leafNodes: [
+                children: [
                   ConversionNode(
                     coefficientProduct: 1.609344,
                     name: SPEED.milesPerHour,
