@@ -477,6 +477,7 @@ void main() {
       VOLUME.imperialGallons: 219.96924829909,
       VOLUME.usGallons: 264.17205235815,
       VOLUME.imperialPints: 1759.7539863927,
+      VOLUME.imperialQuarts: 879.876993196,
       VOLUME.usPints: 2113.3764188652,
       VOLUME.milliliters: 1e6,
       VOLUME.tablespoonsUs: 67567.567567568,
