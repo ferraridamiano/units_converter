@@ -71,11 +71,7 @@ class ConversionNode<T> {
 
       final parent = node.parent;
       if (parent != null && parent.value == null) {
-        _convertTwoNodes(
-          parent: node.parent!,
-          child: this,
-          fromParentToChild: false,
-        );
+        _convertParentFromChild(node.parent!, this);
         queue.addLast(parent);
       }
 
@@ -83,11 +79,7 @@ class ConversionNode<T> {
       if (children.isNotEmpty) {
         for (ConversionNode child in children) {
           if (child.value == null) {
-            _convertTwoNodes(
-              parent: node,
-              child: child,
-              fromParentToChild: true,
-            );
+            _convertParentToChild(node, child);
           }
           queue.addLast(child);
         }
@@ -95,36 +87,25 @@ class ConversionNode<T> {
     }
   }
 
-  /// This function performs the conversion from a [parent] node to the [child]
-  /// node if [fromParentToChild]=true (the default). Otherwise the conversion
-  /// is performed from child to parent.
-  void _convertTwoNodes({
-    required ConversionNode parent,
-    required ConversionNode child,
+  /// This function performs the conversion from the parent node to a child
+  /// node.
+  void _convertParentToChild(ConversionNode parent, ConversionNode child) {
+    child.value = switch (child.conversionType) {
+      ConversionType.linearConversion =>
+        (parent.value! - child.coefficientSum) / child.coefficientProduct,
+      ConversionType.reciprocalConversion =>
+        child.coefficientProduct / (parent.value! - child.coefficientSum)
+    };
+  }
 
-    /// If true the value is stored in the parent node and we want to propagate
-    /// down to the child node. Otherwise if false.
-    bool fromParentToChild = true,
-  }) {
-    switch (child.conversionType) {
-      case ConversionType.linearConversion:
-        if (fromParentToChild) {
-          child.value =
-              (parent.value! - child.coefficientSum) / child.coefficientProduct;
-        } else {
-          parent.value =
-              child.value! * child.coefficientProduct + child.coefficientSum;
-        }
-        break;
-      case ConversionType.reciprocalConversion:
-        if (fromParentToChild) {
-          child.value =
-              child.coefficientProduct / (parent.value! - child.coefficientSum);
-        } else {
-          parent.value =
-              child.coefficientProduct / child.value! + child.coefficientSum;
-        }
-        break;
-    }
+  /// This function performs the conversion from a child node to the parent
+  /// node.
+  void _convertParentFromChild(ConversionNode parent, ConversionNode child) {
+    parent.value = switch (child.conversionType) {
+      ConversionType.linearConversion =>
+        child.value! * child.coefficientProduct + child.coefficientSum,
+      ConversionType.reciprocalConversion =>
+        child.coefficientProduct / child.value! + child.coefficientSum
+    };
   }
 }
