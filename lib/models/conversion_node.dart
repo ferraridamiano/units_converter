@@ -107,7 +107,6 @@ class ConversionNode<T> {
       if (children.isNotEmpty) {
         for (ConversionNode child in children) {
           if (!child.isConverted) {
-            // TODO Maybe this check is redundant, get rid of it
             _convertTwoNodes(
               parent: node,
               child: child,
@@ -167,14 +166,5 @@ class ConversionNode<T> {
     } else {
       parent.isConverted = true;
     }
-  }
-
-  /// Recursive function to get a list of the nodes of the tree
-  List<ConversionNode<T>> getTreeAsList() {
-    List<ConversionNode<T>> result = [this];
-    for (ConversionNode<T> node in children) {
-      result = [...result, ...node.getTreeAsList()];
-    }
-    return result;
   }
 }

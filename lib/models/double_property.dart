@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
@@ -57,9 +59,8 @@ abstract class DoubleProperty<T> extends Property<T, double> {
       this.significantFigures = 10,
       this.removeTrailingZeros = true,
       this.useScientificNotation = true}) {
-    conversionTree = conversionTree;
     this.name = name;
-    _nodeList = conversionTree.getTreeAsList();
+    _nodeList = _getTreeAsList();
     _mapUnits = {for (var node in _nodeList) node.name: node};
     size = _nodeList.length;
     for (var conversionNode in _nodeList) {
@@ -96,4 +97,18 @@ abstract class DoubleProperty<T> extends Property<T, double> {
   @override
   Unit getUnit(T name) =>
       _unitList.where((element) => element.name == name).single;
+
+  /// Get the a list of the nodes from the conversionTree
+  List<ConversionNode<T>> _getTreeAsList() {
+    List<ConversionNode<T>> result = [conversionTree];
+    Queue<ConversionNode<T>> queue = Queue.from([conversionTree]);
+    while (queue.isNotEmpty) {
+      final children = queue.removeFirst().children;
+      if (children.isNotEmpty) {
+        result.addAll(children);
+        queue.addAll(children);
+      }
+    }
+    return result;
+  }
 }
