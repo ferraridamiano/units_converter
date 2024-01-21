@@ -39,7 +39,7 @@ class SimpleCustomProperty extends DoubleProperty<String> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
-      Map<String, String>? mapSymbols,
+      super.mapSymbols,
       name})
       : assert(mapConversion.containsValue(1),
             'One conversion coefficient must be 1, this will considered the base unit'),
@@ -56,7 +56,6 @@ class SimpleCustomProperty extends DoubleProperty<String> {
             'mapSymbols should be null or containing all the keys of mapConversion'),
         super(
           name: name ?? 'SimpleCustomProperty',
-          mapSymbols: mapSymbols,
           conversionTree: _convertMapToConversionTree(mapConversion),
         );
 }

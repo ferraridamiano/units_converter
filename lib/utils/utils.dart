@@ -25,59 +25,35 @@ import 'package:units_converter/properties/shoe_size.dart';
 import 'package:units_converter/properties/density.dart';
 
 Property? getPropertyFromEnum(dynamic propertyEnum) {
-  switch (propertyEnum.runtimeType) {
-    case AMOUNT_OF_SUBSTANCE:
-      return AmountOfSubstance();
-    case ANGLE:
-      return Angle();
-    case AREA:
-      return Area();
-    case DENSITY:
-      return Density();
-    case DIGITAL_DATA:
-      return DigitalData();
-    case ENERGY:
-      return Energy();
-    case FORCE:
-      return Force();
-    case FUEL_CONSUMPTION:
-      return FuelConsumption();
-    case ILLUMINANCE:
-      return Illuminance();
-    case LENGTH:
-      return Length();
-    case MASS:
-      return Mass();
-    case MOLAR_MASS:
-      return MolarMass();
-    case MOLAR_VOLUME:
-      return MolarVolume();
-    case POWER:
-      return Power();
-    case PRESSURE:
-      return Pressure();
-    case RECIPROCAL_OF_MOLAR_MASS:
-      return ReciprocalOfMolarMass();
-    case SHOE_SIZE:
-      return ShoeSize();
-    case SI_PREFIXES:
-      return SIPrefixes();
-    case SPEED:
-      return Speed();
-    case TEMPERATURE:
-      return Temperature();
-    case TIME:
-      return Time();
-    case TORQUE:
-      return Torque();
-    case VOLUME:
-      return Volume();
-    default:
-      {
+  return switch (propertyEnum.runtimeType) {
+    const (AMOUNT_OF_SUBSTANCE) => AmountOfSubstance(),
+    const (ANGLE) => Angle(),
+    const (AREA) => Area(),
+    const (DENSITY) => Density(),
+    const (DIGITAL_DATA) => DigitalData(),
+    const (ENERGY) => Energy(),
+    const (FORCE) => Force(),
+    const (FUEL_CONSUMPTION) => FuelConsumption(),
+    const (ILLUMINANCE) => Illuminance(),
+    const (LENGTH) => Length(),
+    const (MASS) => Mass(),
+    const (MOLAR_MASS) => MolarMass(),
+    const (MOLAR_VOLUME) => MolarVolume(),
+    const (POWER) => Power(),
+    const (PRESSURE) => Pressure(),
+    const (RECIPROCAL_OF_MOLAR_MASS) => ReciprocalOfMolarMass(),
+    const (SHOE_SIZE) => ShoeSize(),
+    const (SI_PREFIXES) => SIPrefixes(),
+    const (SPEED) => Speed(),
+    const (TEMPERATURE) => Temperature(),
+    const (TIME) => Time(),
+    const (TORQUE) => Torque(),
+    const (VOLUME) => Volume(),
+    _ => () {
         assert(false, "${propertyEnum.runtimeType} is not a valid enum type");
         return null;
-      }
-  }
+      }()
+  } as Property?;
 }
 
 /// Given a double value it returns its representation as a string with few
