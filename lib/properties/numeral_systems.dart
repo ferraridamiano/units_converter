@@ -1,6 +1,7 @@
-/*import 'package:units_converter/models/conversion_node.dart';
+import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
+import 'package:units_converter/utils/utils.dart';
 
 //Available NUMERAL_SYSTEMS units
 // ignore: camel_case_types
@@ -22,7 +23,6 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   };
 
   final List<Unit> _unitList = [];
-  late List<ConversionNode<NUMERAL_SYSTEMS>> _nodeList;
 
   ///Class for numeralSystems conversions, e.g. if you want to convert 10 (decimal) in binary:
   ///```dart
@@ -33,26 +33,7 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   NumeralSystems({name}) {
     this.name = name ?? PROPERTY.numeralSystems;
     size = NUMERAL_SYSTEMS.values.length;
-    conversionTree =
-        ConversionNode(name: NUMERAL_SYSTEMS.decimal, base: 10, children: [
-      ConversionNode(
-        conversionType: ConversionType.baseConversion,
-        base: 16,
-        name: NUMERAL_SYSTEMS.hexadecimal,
-      ),
-      ConversionNode(
-        conversionType: ConversionType.baseConversion,
-        base: 8,
-        name: NUMERAL_SYSTEMS.octal,
-      ),
-      ConversionNode(
-        conversionType: ConversionType.baseConversion,
-        base: 2,
-        name: NUMERAL_SYSTEMS.binary,
-      ),
-    ]);
     mapSymbols.forEach((key, value) => _unitList.add(Unit(key, symbol: value)));
-    _nodeList = conversionTree.getTreeAsList();
   }
 
   ///Converts a unit with a specific name (e.g. NUMERAL_SYSTEMS.decimal) and value to all other units
@@ -69,12 +50,29 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
       return;
     }
 
-    conversionTree.convert(name, value);
-    for (var i = 0; i < NUMERAL_SYSTEMS.values.length; i++) {
-      _unitList[i].stringValue = _nodeList
-          .singleWhere(
-              (node) => node.name == NUMERAL_SYSTEMS.values.elementAt(i))
-          .stringValue;
+    const Map<NUMERAL_SYSTEMS, int> bases = {
+      NUMERAL_SYSTEMS.decimal: 10,
+      NUMERAL_SYSTEMS.hexadecimal: 16,
+      NUMERAL_SYSTEMS.octal: 8,
+      NUMERAL_SYSTEMS.binary: 2,
+    };
+
+    _unitList.singleWhere((e) => e.name == name).stringValue = value;
+    if (name == NUMERAL_SYSTEMS.decimal) {
+      for (var base in bases.keys.where((e) => e != NUMERAL_SYSTEMS.decimal)) {
+        _unitList.singleWhere((e) => e.name == base).stringValue =
+            decToBase(value, bases[base]!);
+      }
+    } else {
+      final decimal = baseToDec(value, bases[name]!);
+      _unitList
+          .singleWhere((e) => e.name == NUMERAL_SYSTEMS.decimal)
+          .stringValue = decimal;
+      for (var base in bases.keys
+          .where((e) => e != NUMERAL_SYSTEMS.decimal && e != name)) {
+        _unitList.singleWhere((e) => e.name == base).stringValue =
+            decToBase(decimal, bases[base]!);
+      }
     }
   }
 
@@ -92,4 +90,3 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   Unit get octal => getUnit(NUMERAL_SYSTEMS.octal);
   Unit get binary => getUnit(NUMERAL_SYSTEMS.binary);
 }
-*/

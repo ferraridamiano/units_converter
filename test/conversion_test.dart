@@ -271,7 +271,7 @@ void main() {
     };
     runConversionTest(expectedResult, MolarVolume());
   });
-  /*
+
   group('Numeral systems', () {
     const Map<NUMERAL_SYSTEMS, String> expectedResult = {
       NUMERAL_SYSTEMS.decimal: '178897',
@@ -321,7 +321,6 @@ void main() {
       });
     }
   });
-  */
 
   group('Power', () {
     const Map<POWER, double> expectedResult = {
