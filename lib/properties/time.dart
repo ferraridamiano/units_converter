@@ -49,7 +49,7 @@ class Time extends DoubleProperty<TIME> {
             TIME.years365: 'a',
             TIME.centuries: 'c.',
           },
-          conversionTree: ConversionNode(name: TIME.seconds, leafNodes: [
+          conversionTree: ConversionNode(name: TIME.seconds, children: [
             ConversionNode(
               coefficientProduct: 1e-1,
               name: TIME.deciseconds,
@@ -73,15 +73,15 @@ class Time extends DoubleProperty<TIME> {
             ConversionNode(
                 coefficientProduct: 60.0,
                 name: TIME.minutes,
-                leafNodes: [
+                children: [
                   ConversionNode(
                       coefficientProduct: 60.0,
                       name: TIME.hours,
-                      leafNodes: [
+                      children: [
                         ConversionNode(
                             coefficientProduct: 24.0,
                             name: TIME.days,
-                            leafNodes: [
+                            children: [
                               ConversionNode(
                                 coefficientProduct: 7.0,
                                 name: TIME.weeks,
@@ -89,7 +89,7 @@ class Time extends DoubleProperty<TIME> {
                               ConversionNode(
                                   coefficientProduct: 365.0,
                                   name: TIME.years365,
-                                  leafNodes: [
+                                  children: [
                                     ConversionNode(
                                       coefficientProduct: 5.0,
                                       name: TIME.lustrum,

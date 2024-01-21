@@ -26,7 +26,7 @@ class Illuminance extends DoubleProperty<ILLUMINANCE> {
               ILLUMINANCE.lux: 'lx',
               ILLUMINANCE.footCandle: 'fc',
             },
-            conversionTree: ConversionNode(name: ILLUMINANCE.lux, leafNodes: [
+            conversionTree: ConversionNode(name: ILLUMINANCE.lux, children: [
               ConversionNode(
                 coefficientProduct: 10.763910416709722,
                 name: ILLUMINANCE.footCandle,

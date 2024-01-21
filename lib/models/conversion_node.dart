@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'package:units_converter/utils/utils.dart';
 
 /// Defines the type of the conversion between two nodes.
 enum ConversionType {
@@ -10,9 +9,6 @@ enum ConversionType {
   /// The conversion is expressed in a form like: y=(a/x)+b. Where a is
   /// [coefficientProduct] and b is [coefficientSum].
   reciprocalConversion,
-
-  /// This is a special conversion. Use this just with base conversion.
-  baseConversion,
 }
 
 /// This is the building block of the conversion tree. Thanks to the [leafNodes]
@@ -23,19 +19,23 @@ enum ConversionType {
 class ConversionNode<T> {
   ConversionNode({
     required this.name,
-    this.leafNodes = const [],
+    this.children = const [],
     this.coefficientProduct = 1.0,
     this.coefficientSum = 0.0,
     this.value,
     this.stringValue,
     this.conversionType = ConversionType.linearConversion,
-    this.base,
-    this.isConverted = false,
-  });
+  }) {
+    for (var child in children) {
+      child.parent = this;
+    }
+  }
+
+  ConversionNode<T>? parent;
 
   /// This are the list of the [ConversionNode]s that depend by this node. These are the
   /// children of this parent node.
-  List<ConversionNode<T>> leafNodes;
+  List<ConversionNode<T>> children;
 
   /// This is the product coefficient of [ConversionType.linearConversion] and
   /// [ConversionType.reciprocalConversion]. It is the a coefficient.
@@ -61,139 +61,54 @@ class ConversionNode<T> {
   /// root node (because it has no parent node).
   ConversionType conversionType;
 
-  /// This is defined just for numeral system conversion. It defines the base of
-  /// this number. E.g. 16 for hexadecimal, 10 for decimal, 10 for binary, etc.
-  int? base;
+  /// Convert this ConversionNode to all the other units
+  void convert(double value) {
+    this.value = value;
 
-  /// If true this node is already converted, false otherwise. The node where
-  /// the conversion start has [isConverted] = true.
-  bool isConverted;
-
-  /// **This method must be used on the root [ConversionNode] of the conversion**. It
-  /// converts all the [ConversionNode] of the tree from the [ConversionNode] which name is equal to
-  /// [name] ([value] is assigned to this [ConversionNode]) to all the other [ConversionNode]s of
-  /// the tree.
-  void convert(T name, dynamic value) {
-    assert(value is String || value is double);
-
-    List<ConversionNode> pathToConvertedNode =
-        _getNodesPathAndSelectNode(name, value);
-    for (int i = pathToConvertedNode.length - 2; i >= 0; i--) {
-      _convertTwoNodes(
-          parent: pathToConvertedNode[i],
-          child: pathToConvertedNode[i + 1],
-          fromParentToChild: false);
-    }
-
-    //Now we use a BFS-like algorithm to convert everything from the root node
-    //to every other node.
     Queue<ConversionNode> queue = Queue.from([this]);
     while (queue.isNotEmpty) {
       ConversionNode node = queue.removeFirst();
-      if (node.leafNodes.isNotEmpty) {
-        for (ConversionNode leafNode in node.leafNodes) {
-          if (!leafNode.isConverted) {
-            _convertTwoNodes(parent: node, child: leafNode);
+
+      final parent = node.parent;
+      if (parent != null && parent.value == null) {
+        _convertParentFromChild(node.parent!, node);
+        queue.addLast(parent);
+      }
+
+      final children = node.children;
+      if (children.isNotEmpty) {
+        for (ConversionNode child in children) {
+          if (child.value == null) {
+            _convertParentToChild(node, child);
           }
-          queue.addLast(leafNode);
+          queue.addLast(child);
         }
       }
     }
   }
 
-  /// This function performs the conversion from a [parent] node to the [child]
-  /// node if [fromParentToChild]=true (the default). Otherwise the conversion
-  /// is performed from child to parent.
-  void _convertTwoNodes({
-    required ConversionNode parent,
-    required ConversionNode child,
-
-    /// If true the value is stored in the parent node and we want to propagate
-    /// down to the child node. Otherwise if false.
-    bool fromParentToChild = true,
-  }) {
-    switch (child.conversionType) {
-      case ConversionType.linearConversion:
-        if (fromParentToChild) {
-          child.value =
-              (parent.value! - child.coefficientSum) / child.coefficientProduct;
-        } else {
-          parent.value =
-              child.value! * child.coefficientProduct + child.coefficientSum;
-        }
-        break;
-      case ConversionType.reciprocalConversion:
-        if (fromParentToChild) {
-          child.value =
-              child.coefficientProduct / (parent.value! - child.coefficientSum);
-        } else {
-          parent.value =
-              child.coefficientProduct / child.value! + child.coefficientSum;
-        }
-        break;
-      case ConversionType.baseConversion:
-        // Note: in this case the parent is always the decimal
-        assert(parent.base != null && child.base != null);
-        if (fromParentToChild) {
-          child.stringValue = decToBase(parent.stringValue!, child.base!);
-        } else {
-          parent.stringValue = baseToDec(child.stringValue!, child.base!);
-        }
-        break;
-    }
-    // At this point the child (or the father) is converted
-    if (fromParentToChild) {
-      child.isConverted = true;
-    } else {
-      parent.isConverted = true;
-    }
+  /// This function performs the conversion from the parent node to a child
+  /// node.
+  void _convertParentToChild(ConversionNode parent, ConversionNode child) {
+    child.value = switch (child.conversionType) {
+      ConversionType.linearConversion =>
+        (parent.value! - child.coefficientSum) / child.coefficientProduct,
+      ConversionType.reciprocalConversion =>
+        child.coefficientProduct / (parent.value! - child.coefficientSum)
+    };
   }
 
-  /// This function returns the path from the root ConversionNode up until the converted
-  /// ConversionNode in the form of a list. Moreover, it sets the node which name is equal
-  /// to name as converted [isConverted]=true. All the other nodes are marked as
-  /// not converted.
-  List<ConversionNode> _getNodesPathAndSelectNode(T name, dynamic value) {
-    Queue<ConversionNode> stack =
-        Queue.from([this]); // we will use a queue as a stack
-    Queue<List<ConversionNode>> breadcrumbListQueue = Queue.from([
-      [this]
-    ]);
-    List<ConversionNode> result = [];
-    while (stack.isNotEmpty) {
-      ConversionNode node = stack.removeLast();
-      List<ConversionNode> breadcrumbList = breadcrumbListQueue.removeLast();
-      // if the node is the starting point of the conversion we assign it
-      // its value and we mark it as converted. All the others are marked as
-      // not converted
-      if (node.name == name) {
-        if (value is double) {
-          node.value = value;
-        } else {
-          // value is String
-          node.stringValue = value;
-        }
-        node.isConverted = true;
-        result = [...breadcrumbList];
-      } else {
-        node.isConverted = false;
-      }
-      if (node.leafNodes.isNotEmpty) {
-        for (ConversionNode leafNode in node.leafNodes) {
-          stack.addLast(leafNode);
-          breadcrumbListQueue.addLast([...breadcrumbList, leafNode]);
-        }
-      }
-    }
-    return result;
+  /// This function performs the conversion from a child node to the parent
+  /// node.
+  void _convertParentFromChild(ConversionNode parent, ConversionNode child) {
+    parent.value = switch (child.conversionType) {
+      ConversionType.linearConversion =>
+        child.value! * child.coefficientProduct + child.coefficientSum,
+      ConversionType.reciprocalConversion =>
+        child.coefficientProduct / child.value! + child.coefficientSum
+    };
   }
 
-  /// Recursive function to get a list of the nodes of the tree
-  List<ConversionNode<T>> getTreeAsList() {
-    List<ConversionNode<T>> result = [this];
-    for (ConversionNode<T> node in leafNodes) {
-      result = [...result, ...node.getTreeAsList()];
-    }
-    return result;
-  }
+  @override
+  String toString() => '$name: $value';
 }

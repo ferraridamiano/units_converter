@@ -65,12 +65,12 @@ ConversionNode<String> _convertMapToConversionTree(
     Map<String, double> mapConversion) {
   var baseUnit = mapConversion.keys.firstWhere(
       (element) => mapConversion[element] == 1); //take the base unit
-  List<ConversionNode<String>> leafNodes = [];
+  List<ConversionNode<String>> children = [];
   mapConversion.forEach((key, value) {
     if (key != baseUnit) {
       //I'm just interested in the relationship between the base unit and the other units
-      leafNodes.add(ConversionNode(name: key, coefficientProduct: 1 / value));
+      children.add(ConversionNode(name: key, coefficientProduct: 1 / value));
     }
   });
-  return ConversionNode(name: baseUnit, leafNodes: leafNodes);
+  return ConversionNode(name: baseUnit, children: children);
 }

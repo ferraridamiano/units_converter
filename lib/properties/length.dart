@@ -59,15 +59,15 @@ class Length extends DoubleProperty<LENGTH> {
               LENGTH.parsec: 'pc',
               LENGTH.mils: 'th',
             },
-            conversionTree: ConversionNode(name: LENGTH.meters, leafNodes: [
+            conversionTree: ConversionNode(name: LENGTH.meters, children: [
               ConversionNode(
                   coefficientProduct: 0.01,
                   name: LENGTH.centimeters,
-                  leafNodes: [
+                  children: [
                     ConversionNode(
                         coefficientProduct: 2.54,
                         name: LENGTH.inches,
-                        leafNodes: [
+                        children: [
                           ConversionNode(
                             coefficientProduct: 12.0,
                             name: LENGTH.feet,
@@ -89,7 +89,7 @@ class Length extends DoubleProperty<LENGTH> {
               ConversionNode(
                   coefficientProduct: 0.9144,
                   name: LENGTH.yards,
-                  leafNodes: [
+                  children: [
                     ConversionNode(
                       coefficientProduct: 1760.0,
                       name: LENGTH.miles,
@@ -118,15 +118,15 @@ class Length extends DoubleProperty<LENGTH> {
               ConversionNode(
                   coefficientProduct: 1000.0,
                   name: LENGTH.kilometers,
-                  leafNodes: [
+                  children: [
                     ConversionNode(
                         coefficientProduct: 149597870.7,
                         name: LENGTH.astronomicalUnits,
-                        leafNodes: [
+                        children: [
                           ConversionNode(
                               coefficientProduct: 63241.1,
                               name: LENGTH.lightYears,
-                              leafNodes: [
+                              children: [
                                 ConversionNode(
                                   coefficientProduct: 3.26,
                                   name: LENGTH.parsec,

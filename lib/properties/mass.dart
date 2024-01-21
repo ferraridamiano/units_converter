@@ -62,7 +62,7 @@ class Mass extends DoubleProperty<MASS> {
             MASS.micrograms: 'µg',
             MASS.decigrams: 'dg',
           },
-          conversionTree: ConversionNode(name: MASS.grams, leafNodes: [
+          conversionTree: ConversionNode(name: MASS.grams, children: [
             ConversionNode(
               coefficientProduct: 100.0,
               name: MASS.ettograms,
@@ -70,11 +70,11 @@ class Mass extends DoubleProperty<MASS> {
             ConversionNode(
               coefficientProduct: 1000.0,
               name: MASS.kilograms,
-              leafNodes: [
+              children: [
                 ConversionNode(
                   coefficientProduct: 0.45359237,
                   name: MASS.pounds,
-                  leafNodes: [
+                  children: [
                     ConversionNode(
                       coefficientProduct: 1 / 16,
                       name: MASS.ounces,
@@ -114,7 +114,7 @@ class Mass extends DoubleProperty<MASS> {
             ConversionNode(
                 coefficientProduct: 1.55517384,
                 name: MASS.pennyweights,
-                leafNodes: [
+                children: [
                   ConversionNode(
                     coefficientProduct: 20,
                     name: MASS.troyOunces,

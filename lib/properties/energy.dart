@@ -37,7 +37,7 @@ class Energy extends DoubleProperty<ENERGY> {
               ENERGY.electronvolts: 'eV',
               ENERGY.energyFootPound: 'ft⋅lbf',
             },
-            conversionTree: ConversionNode(name: ENERGY.joules, leafNodes: [
+            conversionTree: ConversionNode(name: ENERGY.joules, children: [
               ConversionNode(
                 coefficientProduct: 1000.0,
                 name: ENERGY.kilojoules,
@@ -45,7 +45,7 @@ class Energy extends DoubleProperty<ENERGY> {
               ConversionNode(
                 coefficientProduct: 4.1867999409,
                 name: ENERGY.calories,
-                leafNodes: [
+                children: [
                   ConversionNode(
                     coefficientProduct: 1000.0,
                     name: ENERGY.kilocalories,

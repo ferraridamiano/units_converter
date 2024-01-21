@@ -48,15 +48,15 @@ class Area extends DoubleProperty<AREA> {
             AREA.acres: 'ac',
             AREA.are: 'a',
           },
-          conversionTree: ConversionNode(name: AREA.squareMeters, leafNodes: [
+          conversionTree: ConversionNode(name: AREA.squareMeters, children: [
             ConversionNode(
                 coefficientProduct: 1e-4,
                 name: AREA.squareCentimeters,
-                leafNodes: [
+                children: [
                   ConversionNode(
                       coefficientProduct: 6.4516,
                       name: AREA.squareInches,
-                      leafNodes: [
+                      children: [
                         ConversionNode(
                           coefficientProduct: 144.0,
                           name: AREA.squareFeet,
@@ -82,7 +82,7 @@ class Area extends DoubleProperty<AREA> {
             ConversionNode(
               coefficientProduct: 0.83612736,
               name: AREA.squareYard,
-              leafNodes: [
+              children: [
                 ConversionNode(
                   coefficientProduct: 3097600.0,
                   name: AREA.squareMiles,

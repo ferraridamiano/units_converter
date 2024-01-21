@@ -166,7 +166,7 @@ As you can see all this relations can be structured like a conversion tree. Now 
 ```dart
 ConversionNode conversionTree = ConversionNode(
   name: 'Dash',
-  leafNodes: [
+  children: [
     ConversionNode(
       name: 'KiloDash',
       coefficientProduct: 1000,
@@ -174,7 +174,7 @@ ConversionNode conversionTree = ConversionNode(
     ConversionNode(
       name: 'DashPlus1',
       coefficientSum: -1,
-      leafNodes: [
+      children: [
         ConversionNode(
           name: 'OneOver(DashPlus1)',
           conversionType: ConversionType.reciprocalConversion,

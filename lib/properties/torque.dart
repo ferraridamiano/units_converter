@@ -33,7 +33,7 @@ class Torque extends DoubleProperty<TORQUE> {
             TORQUE.kilogramForceMeter: 'kgf·m',
             TORQUE.poundalMeter: 'pdl·m',
           },
-          conversionTree: ConversionNode(name: TORQUE.newtonMeter, leafNodes: [
+          conversionTree: ConversionNode(name: TORQUE.newtonMeter, children: [
             ConversionNode(
               coefficientProduct: 1e-5,
               name: TORQUE.dyneMeter,

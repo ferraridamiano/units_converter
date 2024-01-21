@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
@@ -33,6 +34,8 @@ abstract class DoubleProperty<T> extends Property<T, double> {
   /// Map between units and its symbol
   Map<T, String>? mapSymbols;
 
+  late Map<T, ConversionNode> _mapUnits;
+
   /// The number of significant figures to keep. E.g. 1.23456789) has 9
   /// significant figures
   int significantFigures;
@@ -55,9 +58,9 @@ abstract class DoubleProperty<T> extends Property<T, double> {
       this.significantFigures = 10,
       this.removeTrailingZeros = true,
       this.useScientificNotation = true}) {
-    conversionTree = conversionTree;
     this.name = name;
-    _nodeList = conversionTree.getTreeAsList();
+    _nodeList = _getTreeAsList();
+    _mapUnits = {for (var node in _nodeList) node.name: node};
     size = _nodeList.length;
     for (var conversionNode in _nodeList) {
       _unitList.add(
@@ -76,7 +79,12 @@ abstract class DoubleProperty<T> extends Property<T, double> {
       }
       return;
     }
-    conversionTree.convert(name, value);
+    // Reset previous values
+    for (var node in _nodeList) {
+      node.value = null;
+    }
+    // Start the conversion
+    _mapUnits[name]!.convert(value);
     for (var i = 0; i < size; i++) {
       _unitList[i].value =
           _nodeList.singleWhere((node) => node.name == _unitList[i].name).value;
@@ -93,4 +101,18 @@ abstract class DoubleProperty<T> extends Property<T, double> {
   @override
   Unit getUnit(T name) =>
       _unitList.where((element) => element.name == name).single;
+
+  /// Get the a list of the nodes from the conversionTree
+  List<ConversionNode<T>> _getTreeAsList() {
+    List<ConversionNode<T>> result = [conversionTree];
+    Queue<ConversionNode<T>> queue = Queue.from([conversionTree]);
+    while (queue.isNotEmpty) {
+      final children = queue.removeFirst().children;
+      if (children.isNotEmpty) {
+        result.addAll(children);
+        queue.addAll(children);
+      }
+    }
+    return result;
+  }
 }

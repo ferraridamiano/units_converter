@@ -77,7 +77,7 @@ class DigitalData extends DoubleProperty<DIGITAL_DATA> {
             DIGITAL_DATA.pebibyte: 'PiB',
             DIGITAL_DATA.exbibyte: 'EiB',
           },
-          conversionTree: ConversionNode(name: DIGITAL_DATA.bit, leafNodes: [
+          conversionTree: ConversionNode(name: DIGITAL_DATA.bit, children: [
             ConversionNode(
               coefficientProduct: 4.0,
               name: DIGITAL_DATA.nibble,
@@ -109,23 +109,23 @@ class DigitalData extends DoubleProperty<DIGITAL_DATA> {
             ConversionNode(
                 coefficientProduct: 1024.0,
                 name: DIGITAL_DATA.kibibit,
-                leafNodes: [
+                children: [
                   ConversionNode(
                       coefficientProduct: 1024.0,
                       name: DIGITAL_DATA.mebibit,
-                      leafNodes: [
+                      children: [
                         ConversionNode(
                             coefficientProduct: 1024.0,
                             name: DIGITAL_DATA.gibibit,
-                            leafNodes: [
+                            children: [
                               ConversionNode(
                                   coefficientProduct: 1024.0,
                                   name: DIGITAL_DATA.tebibit,
-                                  leafNodes: [
+                                  children: [
                                     ConversionNode(
                                         coefficientProduct: 1024.0,
                                         name: DIGITAL_DATA.pebibit,
-                                        leafNodes: [
+                                        children: [
                                           ConversionNode(
                                             coefficientProduct: 1024.0,
                                             name: DIGITAL_DATA.exbibit,
@@ -138,7 +138,7 @@ class DigitalData extends DoubleProperty<DIGITAL_DATA> {
             ConversionNode(
                 coefficientProduct: 8.0,
                 name: DIGITAL_DATA.byte,
-                leafNodes: [
+                children: [
                   ConversionNode(
                     coefficientProduct: 1e3,
                     name: DIGITAL_DATA.kilobyte,
@@ -166,23 +166,23 @@ class DigitalData extends DoubleProperty<DIGITAL_DATA> {
                   ConversionNode(
                       coefficientProduct: 1024.0,
                       name: DIGITAL_DATA.kibibyte,
-                      leafNodes: [
+                      children: [
                         ConversionNode(
                             coefficientProduct: 1024.0,
                             name: DIGITAL_DATA.mebibyte,
-                            leafNodes: [
+                            children: [
                               ConversionNode(
                                   coefficientProduct: 1024.0,
                                   name: DIGITAL_DATA.gibibyte,
-                                  leafNodes: [
+                                  children: [
                                     ConversionNode(
                                         coefficientProduct: 1024.0,
                                         name: DIGITAL_DATA.tebibyte,
-                                        leafNodes: [
+                                        children: [
                                           ConversionNode(
                                               coefficientProduct: 1024.0,
                                               name: DIGITAL_DATA.pebibyte,
-                                              leafNodes: [
+                                              children: [
                                                 ConversionNode(
                                                   coefficientProduct: 1024.0,
                                                   name: DIGITAL_DATA.exbibyte,

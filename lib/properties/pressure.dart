@@ -40,11 +40,11 @@ class Pressure extends DoubleProperty<PRESSURE> {
             PRESSURE.hectoPascal: 'hPa',
             PRESSURE.inchOfMercury: 'inHg',
           },
-          conversionTree: ConversionNode(name: PRESSURE.pascal, leafNodes: [
+          conversionTree: ConversionNode(name: PRESSURE.pascal, children: [
             ConversionNode(
                 coefficientProduct: 1e5,
                 name: PRESSURE.bar,
-                leafNodes: [
+                children: [
                   ConversionNode(
                     coefficientProduct: 1e-3,
                     name: PRESSURE.millibar,
@@ -61,7 +61,7 @@ class Pressure extends DoubleProperty<PRESSURE> {
             ConversionNode(
                 coefficientProduct: 133.322368421,
                 name: PRESSURE.torr,
-                leafNodes: [
+                children: [
                   ConversionNode(
                     coefficientProduct: 25.4,
                     name: PRESSURE.inchOfMercury,

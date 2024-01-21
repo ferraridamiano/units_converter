@@ -74,7 +74,7 @@ void main() {
   //Example 6:
   ConversionNode<String> conversionTree = ConversionNode(
     name: 'Dash',
-    leafNodes: [
+    children: [
       ConversionNode(
         name: 'KiloDash',
         coefficientProduct: 1000,
@@ -82,7 +82,7 @@ void main() {
       ConversionNode(
         name: 'Dash+1',
         coefficientSum: -1,
-        leafNodes: [
+        children: [
           ConversionNode(
             name: 'OneOver(OneDash+1)',
             conversionType: ConversionType.reciprocalConversion,

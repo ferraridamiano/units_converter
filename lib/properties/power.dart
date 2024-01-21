@@ -37,7 +37,7 @@ class Power extends DoubleProperty<POWER> {
             POWER.europeanHorsePower: 'hp(M)',
             POWER.imperialHorsePower: 'hp(I)',
           },
-          conversionTree: ConversionNode(name: POWER.watt, leafNodes: [
+          conversionTree: ConversionNode(name: POWER.watt, children: [
             ConversionNode(
               coefficientProduct: 1e-3,
               name: POWER.milliwatt,
