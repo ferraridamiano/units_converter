@@ -1,5 +1,4 @@
 import 'dart:collection';
-
 import 'package:units_converter/models/conversion_node.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
