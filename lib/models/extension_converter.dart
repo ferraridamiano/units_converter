@@ -15,11 +15,9 @@ extension ConvertUnitNum on num {
   }
 }
 
-/*
 extension ConvertUnitString on String {
   String? convertFromTo(NUMERAL_SYSTEMS from, NUMERAL_SYSTEMS to) {
     Property property = NumeralSystems()..convert(from, this);
     return property.getUnit(to).stringValue;
   }
 }
-*/

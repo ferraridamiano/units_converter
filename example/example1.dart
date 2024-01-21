@@ -1,5 +1,5 @@
 import 'package:units_converter/units_converter.dart';
-/*
+
 void main() {
   // Convert 1 meter in inches
   var inches = 1.convertFromTo(LENGTH.meters, LENGTH.inches);
@@ -11,4 +11,3 @@ void main() {
       '8B'.convertFromTo(NUMERAL_SYSTEMS.hexadecimal, NUMERAL_SYSTEMS.octal);
   print(octal);
 }
-*/
