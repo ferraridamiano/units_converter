@@ -483,6 +483,8 @@ void main() {
     runGetterTest(property.usGallons, property.getUnit(VOLUME.usGallons));
     runGetterTest(
         property.imperialPints, property.getUnit(VOLUME.imperialPints));
+    runGetterTest(
+        property.imperialQuarts, property.getUnit(VOLUME.imperialQuarts));
     runGetterTest(property.usPints, property.getUnit(VOLUME.usPints));
     runGetterTest(property.milliliters, property.getUnit(VOLUME.milliliters));
     runGetterTest(

@@ -10,6 +10,7 @@ enum VOLUME {
   imperialGallons,
   usGallons,
   imperialPints,
+  imperialQuarts,
   usPints,
   milliliters,
   tablespoonsUs,
@@ -52,6 +53,7 @@ class Volume extends DoubleProperty<VOLUME> {
             VOLUME.imperialGallons: 'imp gal',
             VOLUME.usGallons: 'US gal',
             VOLUME.imperialPints: 'imp pt',
+            VOLUME.imperialQuarts: 'imp qt',
             VOLUME.usPints: 'US pt',
             VOLUME.milliliters: 'ml',
             VOLUME.tablespoonsUs: 'tbsp.',
@@ -90,6 +92,10 @@ class Volume extends DoubleProperty<VOLUME> {
                     coefficientProduct: 0.56826125,
                     name: VOLUME.imperialPints,
                     children: [
+                      ConversionNode(
+                        coefficientProduct: 2,
+                        name: VOLUME.imperialQuarts,
+                      ),
                       ConversionNode(
                         coefficientProduct: 1 / 20,
                         name: VOLUME.imperialFluidOunces,
@@ -188,6 +194,7 @@ class Volume extends DoubleProperty<VOLUME> {
   Unit get imperialGallons => getUnit(VOLUME.imperialGallons);
   Unit get usGallons => getUnit(VOLUME.usGallons);
   Unit get imperialPints => getUnit(VOLUME.imperialPints);
+  Unit get imperialQuarts => getUnit(VOLUME.imperialQuarts);
   Unit get usPints => getUnit(VOLUME.usPints);
   Unit get milliliters => getUnit(VOLUME.milliliters);
   Unit get tablespoonsUs => getUnit(VOLUME.tablespoonsUs);
