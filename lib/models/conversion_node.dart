@@ -71,7 +71,7 @@ class ConversionNode<T> {
 
       final parent = node.parent;
       if (parent != null && parent.value == null) {
-        _convertParentFromChild(node.parent!, this);
+        _convertParentFromChild(node.parent!, node);
         queue.addLast(parent);
       }
 
@@ -108,4 +108,7 @@ class ConversionNode<T> {
         child.coefficientProduct / child.value! + child.coefficientSum
     };
   }
+
+  @override
+  String toString() => '$name: $value';
 }
