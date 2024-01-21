@@ -79,6 +79,11 @@ abstract class DoubleProperty<T> extends Property<T, double> {
       }
       return;
     }
+    // Reset previous values
+    for (var node in _nodeList) {
+      node.value = null;
+    }
+    // Start the conversion
     _mapUnits[name]!.convert(value);
     for (var i = 0; i < size; i++) {
       _unitList[i].value =

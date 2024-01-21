@@ -25,7 +25,6 @@ class ConversionNode<T> {
     this.value,
     this.stringValue,
     this.conversionType = ConversionType.linearConversion,
-    this.isConverted = false,
   }) {
     for (var child in children) {
       child.parent = this;
@@ -62,26 +61,16 @@ class ConversionNode<T> {
   /// root node (because it has no parent node).
   ConversionType conversionType;
 
-  /// If true this node is already converted, false otherwise. The node where
-  /// the conversion start has [isConverted] = true.
-  bool isConverted;
-
-  /*void addChild(ConversionNode<T> child) {
-    child.parent = this;
-    children.add(child);
-  }*/
-
   /// Convert this ConversionNode to all the other units
   void convert(double value) {
     this.value = value;
-    isConverted = true;
 
     Queue<ConversionNode> queue = Queue.from([this]);
     while (queue.isNotEmpty) {
       ConversionNode node = queue.removeFirst();
 
       final parent = node.parent;
-      if (parent != null && !parent.isConverted) {
+      if (parent != null && parent.value == null) {
         _convertTwoNodes(
           parent: node.parent!,
           child: this,
@@ -93,7 +82,7 @@ class ConversionNode<T> {
       final children = node.children;
       if (children.isNotEmpty) {
         for (ConversionNode child in children) {
-          if (!child.isConverted) {
+          if (child.value == null) {
             _convertTwoNodes(
               parent: node,
               child: child,
@@ -136,12 +125,6 @@ class ConversionNode<T> {
               child.coefficientProduct / child.value! + child.coefficientSum;
         }
         break;
-    }
-    // At this point the child (or the father) is converted
-    if (fromParentToChild) {
-      child.isConverted = true;
-    } else {
-      parent.isConverted = true;
     }
   }
 }
