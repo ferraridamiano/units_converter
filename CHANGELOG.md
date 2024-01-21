@@ -1,3 +1,11 @@
+# 3.0.0
+- Improvements to the conversion algorithm: now it is simpler and ~10% faster
+- Now requires Dart >= 3.0
+- New unit: kilopascal (@jmguazzo)
+
+**Breaking**:
+- In custom conversion `leafNodes` has been renamed to `children`
+
 # 2.1.1
 - Added Illuminance property (@denxorz)
 - Added kilojoules (@lhengl)
