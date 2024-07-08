@@ -14,6 +14,7 @@ enum VOLUME {
   usPints,
   milliliters,
   tablespoonsUs,
+  teaspoonsUs,
   australianTablespoons,
   cups,
   cubicCentimeters,
@@ -57,6 +58,7 @@ class Volume extends DoubleProperty<VOLUME> {
             VOLUME.usPints: 'US pt',
             VOLUME.milliliters: 'ml',
             VOLUME.tablespoonsUs: 'tbsp.',
+            VOLUME.teaspoonsUs: 'tsp.',
             VOLUME.australianTablespoons: 'tbsp.',
             VOLUME.cups: 'cup',
             VOLUME.cubicCentimeters: 'cm³',
@@ -135,6 +137,10 @@ class Volume extends DoubleProperty<VOLUME> {
                           name: VOLUME.tablespoonsUs,
                         ),
                         ConversionNode(
+                          coefficientProduct: 4.92892,
+                          name: VOLUME.teaspoonsUs,
+                        ),
+                        ConversionNode(
                           coefficientProduct: 20.0,
                           name: VOLUME.australianTablespoons,
                         ),
@@ -198,6 +204,7 @@ class Volume extends DoubleProperty<VOLUME> {
   Unit get usPints => getUnit(VOLUME.usPints);
   Unit get milliliters => getUnit(VOLUME.milliliters);
   Unit get tablespoonsUs => getUnit(VOLUME.tablespoonsUs);
+  Unit get teaspoonsUs => getUnit(VOLUME.teaspoonsUs);
   Unit get australianTablespoons => getUnit(VOLUME.australianTablespoons);
   Unit get cups => getUnit(VOLUME.cups);
   Unit get cubicCentimeters => getUnit(VOLUME.cubicCentimeters);
