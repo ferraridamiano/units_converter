@@ -481,6 +481,7 @@ void main() {
       VOLUME.usPints: 2113.3764188652,
       VOLUME.milliliters: 1e6,
       VOLUME.tablespoonsUs: 67567.567567568,
+      VOLUME.teaspoonsUs: 202884.20181297325,
       VOLUME.australianTablespoons: 50000,
       VOLUME.cups: 4166.6666666667,
       VOLUME.cubicCentimeters: 1e6,

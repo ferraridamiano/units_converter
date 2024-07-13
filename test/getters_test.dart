@@ -489,6 +489,7 @@ void main() {
     runGetterTest(property.milliliters, property.getUnit(VOLUME.milliliters));
     runGetterTest(
         property.tablespoonsUs, property.getUnit(VOLUME.tablespoonsUs));
+    runGetterTest(property.teaspoonsUs, property.getUnit(VOLUME.teaspoonsUs));
     runGetterTest(property.australianTablespoons,
         property.getUnit(VOLUME.australianTablespoons));
     runGetterTest(property.cups, property.getUnit(VOLUME.cups));
