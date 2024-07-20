@@ -1,3 +1,7 @@
+# 3.0.1
+- New unit: imperial quarts (@jacksonlo)
+- New unit: teaspoon US (@vasba)
+
 # 3.0.0
 - Improvements to the conversion algorithm: now it is simpler and ~10% faster
 - Now requires Dart >= 3.0
