@@ -89,6 +89,38 @@ class Volume extends DoubleProperty<VOLUME> {
                   ConversionNode(
                     coefficientProduct: 3.785411784,
                     name: VOLUME.usGallons,
+                    children: [
+                      ConversionNode(
+                        coefficientProduct: 1 / 4,
+                        name: VOLUME.usQuarts,
+                      ),
+                      ConversionNode(
+                        coefficientProduct: 1 / 8,
+                        name: VOLUME.usPints,
+                      ),
+                      ConversionNode(
+                        coefficientProduct: 1 / 16,
+                        name: VOLUME.cups,
+                      ),
+                      ConversionNode(
+                        coefficientProduct: 1 / 32,
+                        name: VOLUME.usGill,
+                      ),
+                      ConversionNode(
+                        coefficientProduct: 1 / 128,
+                        name: VOLUME.usFluidOunces,
+                      ),
+                      ConversionNode(
+                        coefficientProduct: 1 / 256,
+                        name: VOLUME.tablespoonsUs,
+                        children: [
+                          ConversionNode(
+                            coefficientProduct: 1 / 3,
+                            name: VOLUME.teaspoonsUs,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                   ConversionNode(
                     coefficientProduct: 0.56826125,
@@ -109,44 +141,12 @@ class Volume extends DoubleProperty<VOLUME> {
                     ],
                   ),
                   ConversionNode(
-                    coefficientProduct: 0.473176473,
-                    name: VOLUME.usPints,
-                    children: [
-                      ConversionNode(
-                        coefficientProduct: 1 / 16,
-                        name: VOLUME.usFluidOunces,
-                        children: [
-                          ConversionNode(
-                            coefficientProduct: 4,
-                            name: VOLUME.usGill,
-                          ),
-                        ],
-                      ),
-                      ConversionNode(
-                        coefficientProduct: 2,
-                        name: VOLUME.usQuarts,
-                      )
-                    ],
-                  ),
-                  ConversionNode(
                       coefficientProduct: 1e-3,
                       name: VOLUME.milliliters,
                       children: [
                         ConversionNode(
-                          coefficientProduct: 14.8,
-                          name: VOLUME.tablespoonsUs,
-                        ),
-                        ConversionNode(
-                          coefficientProduct: 4.92892,
-                          name: VOLUME.teaspoonsUs,
-                        ),
-                        ConversionNode(
                           coefficientProduct: 20.0,
                           name: VOLUME.australianTablespoons,
-                        ),
-                        ConversionNode(
-                          coefficientProduct: 240.0,
-                          name: VOLUME.cups,
                         ),
                       ]),
                   ConversionNode(

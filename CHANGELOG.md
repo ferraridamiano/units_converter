@@ -1,3 +1,6 @@
+# 3.0.2
+- Minor refinements to US volume units (cups, tablespoon, teaspoon)
+
 # 3.0.1
 - New unit: imperial quarts (@jacksonlo)
 - New unit: teaspoon US (@vasba)
