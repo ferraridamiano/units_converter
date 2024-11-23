@@ -54,7 +54,7 @@ jobs:
         dart run coverage:format_coverage --lcov --in=coverage \
           --out=coverage/lcov.info --report-on=lib
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         verbose: true
