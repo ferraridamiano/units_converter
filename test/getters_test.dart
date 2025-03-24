@@ -224,6 +224,7 @@ void main() {
     runGetterTest(property.nanograms, property.getUnit(MASS.nanograms));
     runGetterTest(property.micrograms, property.getUnit(MASS.micrograms));
     runGetterTest(property.decigrams, property.getUnit(MASS.decigrams));
+    runGetterTest(property.grains, property.getUnit(MASS.grains));
   });
 
   group('Molar Mass test', () {

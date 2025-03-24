@@ -227,6 +227,7 @@ void main() {
       MASS.nanograms: 1e9,
       MASS.micrograms: 1e6,
       MASS.decigrams: 10,
+      MASS.grains: 15.432358353,
     };
     runConversionTest(expectedResult, Mass(), sensibility: 1e9);
   });
