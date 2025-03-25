@@ -145,7 +145,7 @@ class Mass extends DoubleProperty<MASS> {
             ConversionNode(
               coefficientProduct: 0.06479891,
               name: MASS.grains,
-            )
+            ),
           ]),
         );
 
