@@ -18,6 +18,7 @@ enum MASS {
   nanograms,
   micrograms,
   decigrams,
+  grains,
 
   /// unified atomic mass unit
   uma,
@@ -61,6 +62,7 @@ class Mass extends DoubleProperty<MASS> {
             MASS.nanograms: 'ng',
             MASS.micrograms: 'µg',
             MASS.decigrams: 'dg',
+            MASS.grains: 'gr',
           },
           conversionTree: ConversionNode(name: MASS.grams, children: [
             ConversionNode(
@@ -140,6 +142,10 @@ class Mass extends DoubleProperty<MASS> {
               coefficientProduct: 0.1,
               name: MASS.decigrams,
             ),
+            ConversionNode(
+              coefficientProduct: 0.06479891,
+              name: MASS.grains,
+            ),
           ]),
         );
 
@@ -162,4 +168,5 @@ class Mass extends DoubleProperty<MASS> {
   Unit get nanograms => getUnit(MASS.nanograms);
   Unit get micrograms => getUnit(MASS.micrograms);
   Unit get decigrams => getUnit(MASS.decigrams);
+  Unit get grains => getUnit(MASS.grains);
 }
