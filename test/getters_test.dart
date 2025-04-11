@@ -96,6 +96,10 @@ void main() {
         property.getUnit(DENSITY.picogramsPerLiter));
     runGetterTest(property.picogramsPerMilliliter,
         property.getUnit(DENSITY.picogramsPerMilliliter));
+    runGetterTest(property.poundsPerCubicInches,
+        property.getUnit(DENSITY.poundsPerCubicInches));
+    runGetterTest(property.poundsPerCubicFeet,
+        property.getUnit(DENSITY.poundsPerCubicFeet));
   });
 
   group('Digital data test', () {

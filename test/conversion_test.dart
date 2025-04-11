@@ -103,6 +103,8 @@ void main() {
       DENSITY.nanogramsPerMilliliter: 1e6,
       DENSITY.picogramsPerLiter: 1e12,
       DENSITY.picogramsPerMilliliter: 1e9,
+      DENSITY.poundsPerCubicInches: 3.612729200008368e-5,
+      DENSITY.poundsPerCubicFeet: 0.06242796057614461,
     };
     runConversionTest(expectedResult, Density());
   });
