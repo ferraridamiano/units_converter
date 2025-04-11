@@ -349,6 +349,8 @@ void main() {
       PRESSURE.hectoPascal: 1e-2,
       PRESSURE.kiloPascal: 1e-3,
       PRESSURE.inchOfMercury: 0.00029529987508,
+      PRESSURE.ksi: 1.4503773773E-7,
+      PRESSURE.megaPascal: 1e-6,
     };
     runConversionTest(expectedResult, Pressure());
   });
