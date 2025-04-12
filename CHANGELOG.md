@@ -1,3 +1,8 @@
+# 3.0.3
+- New mass unit: grains (@TheRealFakeAdmin)
+- New density units: lb/in³ and lb/ft³ (@Kheirlb)
+- New pressure units: ksi, megapascal (@Kheirlb)
+
 # 3.0.2
 - Minor refinements to US volume units (cups, tablespoon, teaspoon)
 
