@@ -103,6 +103,8 @@ void main() {
       DENSITY.nanogramsPerMilliliter: 1e6,
       DENSITY.picogramsPerLiter: 1e12,
       DENSITY.picogramsPerMilliliter: 1e9,
+      DENSITY.poundsPerCubicInches: 3.612729200008368e-5,
+      DENSITY.poundsPerCubicFeet: 0.06242796057614461,
     };
     runConversionTest(expectedResult, Density());
   });
@@ -347,6 +349,8 @@ void main() {
       PRESSURE.hectoPascal: 1e-2,
       PRESSURE.kiloPascal: 1e-3,
       PRESSURE.inchOfMercury: 0.00029529987508,
+      PRESSURE.ksi: 1.4503773773E-7,
+      PRESSURE.megaPascal: 1e-6,
     };
     runConversionTest(expectedResult, Pressure());
   });

@@ -23,7 +23,9 @@ enum DENSITY {
   nanogramsPerLiter(MASS.nanograms, VOLUME.liters),
   nanogramsPerMilliliter(MASS.nanograms, VOLUME.milliliters),
   picogramsPerLiter(MASS.picograms, VOLUME.liters),
-  picogramsPerMilliliter(MASS.picograms, VOLUME.milliliters);
+  picogramsPerMilliliter(MASS.picograms, VOLUME.milliliters),
+  poundsPerCubicInches(MASS.pounds, VOLUME.cubicInches),
+  poundsPerCubicFeet(MASS.pounds, VOLUME.cubicFeet);
 
   final MASS numerator;
   final VOLUME denominator;
@@ -51,6 +53,8 @@ class Density extends RatioProperty<DENSITY, MASS, VOLUME> {
     DENSITY.nanogramsPerMilliliter: 'ng/ml',
     DENSITY.picogramsPerLiter: 'pg/l',
     DENSITY.picogramsPerMilliliter: 'pg/ml',
+    DENSITY.poundsPerCubicInches: 'lb/in³',
+    DENSITY.poundsPerCubicFeet: 'lb/ft³',
   };
 
   ///Class for density conversions, e.g. if you want to convert 1 gram per liter
@@ -93,4 +97,6 @@ class Density extends RatioProperty<DENSITY, MASS, VOLUME> {
   Unit get nanogramsPerMilliliter => getUnit(DENSITY.nanogramsPerMilliliter);
   Unit get picogramsPerLiter => getUnit(DENSITY.picogramsPerLiter);
   Unit get picogramsPerMilliliter => getUnit(DENSITY.picogramsPerMilliliter);
+  Unit get poundsPerCubicInches => getUnit(DENSITY.poundsPerCubicInches);
+  Unit get poundsPerCubicFeet => getUnit(DENSITY.poundsPerCubicFeet);
 }
