@@ -338,6 +338,7 @@ void main() {
         property.inchOfMercury, property.getUnit(PRESSURE.inchOfMercury));
     runGetterTest(property.ksi, property.getUnit(PRESSURE.ksi));
     runGetterTest(property.megaPascal, property.getUnit(PRESSURE.megaPascal));
+    runGetterTest(property.gigaPascal, property.getUnit(PRESSURE.gigaPascal));
   });
 
   group('Reciprocal of Molar Mass test', () {
