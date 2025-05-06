@@ -16,6 +16,7 @@ enum PRESSURE {
   inchOfMercury,
   ksi,
   megaPascal,
+  gigaPascal,
 }
 
 class Pressure extends DoubleProperty<PRESSURE> {
@@ -44,6 +45,7 @@ class Pressure extends DoubleProperty<PRESSURE> {
             PRESSURE.kiloPascal: 'kPa',
             PRESSURE.ksi: 'ksi',
             PRESSURE.megaPascal: 'MPa',
+            PRESSURE.gigaPascal: 'GPa',
           },
           conversionTree: ConversionNode(name: PRESSURE.pascal, children: [
             ConversionNode(
@@ -87,6 +89,10 @@ class Pressure extends DoubleProperty<PRESSURE> {
             ConversionNode(
               coefficientProduct: 1e6,
               name: PRESSURE.megaPascal,
+            ),
+            ConversionNode(
+              coefficientProduct: 1e9,
+              name: PRESSURE.gigaPascal,
             )
           ]),
         );
@@ -102,4 +108,5 @@ class Pressure extends DoubleProperty<PRESSURE> {
   Unit get inchOfMercury => getUnit(PRESSURE.inchOfMercury);
   Unit get ksi => getUnit(PRESSURE.ksi);
   Unit get megaPascal => getUnit(PRESSURE.megaPascal);
+  Unit get gigaPascal => getUnit(PRESSURE.gigaPascal);
 }

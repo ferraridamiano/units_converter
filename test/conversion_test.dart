@@ -351,6 +351,7 @@ void main() {
       PRESSURE.inchOfMercury: 0.00029529987508,
       PRESSURE.ksi: 1.4503773773E-7,
       PRESSURE.megaPascal: 1e-6,
+      PRESSURE.gigaPascal: 1e-9,
     };
     runConversionTest(expectedResult, Pressure());
   });
