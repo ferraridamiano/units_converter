@@ -1,3 +1,6 @@
+# 3.0.4
+- New pressure units: gigapascal (@Kheirlb)
+
 # 3.0.3
 - New mass unit: grains (@TheRealFakeAdmin)
 - New density units: lb/in³ and lb/ft³ (@Kheirlb)
