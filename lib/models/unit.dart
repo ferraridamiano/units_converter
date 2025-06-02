@@ -9,7 +9,7 @@ class Unit {
 
   /// The name of the unit (e.g. LENGTH.meters, VOLUME.liters).
   // ignore: prefer_typing_uninitialized_variables
-  var name;
+  dynamic name;
 
   /// The symbols that represent the unit (e.g. "m" stands for meters, "l"
   /// stands for liter).

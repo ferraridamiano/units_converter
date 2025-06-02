@@ -30,7 +30,7 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   ///numeralSystems.convert(Unit(NUMERAL_SYSTEMS.decimal, stringValue: '10'));
   ///print(NUMERAL_SYSTEMS.binary.stringValue);
   /// ```
-  NumeralSystems({name}) {
+  NumeralSystems({dynamic name}) {
     this.name = name ?? PROPERTY.numeralSystems;
     size = NUMERAL_SYSTEMS.values.length;
     mapSymbols.forEach((key, value) => _unitList.add(Unit(key, symbol: value)));
