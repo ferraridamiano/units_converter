@@ -1,3 +1,11 @@
+# 3.1.0
+- New units added: speed of light, teaspoon metric, pound force inch, watt
+hours, BTU
+
+**Breaking**
+- `MASS.tons` has been renamed to `MASS.tonnes` since these are two different
+units
+
 # 3.0.4
 - New pressure units: gigapascal (@Kheirlb)
 
