@@ -3,7 +3,7 @@ import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 import 'package:units_converter/utils/utils.dart';
 
-//Available NUMERAL_SYSTEMS units
+/// Available numeral systems units
 // ignore: camel_case_types
 enum NUMERAL_SYSTEMS {
   decimal,

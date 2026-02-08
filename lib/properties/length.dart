@@ -3,7 +3,7 @@ import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 
-//Available length units
+/// Available length units
 enum LENGTH {
   meters,
   centimeters,

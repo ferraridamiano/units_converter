@@ -3,7 +3,7 @@ import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 
-//Available FUEL_CONSUMPTION units
+/// Available fuel consumption units
 // ignore: camel_case_types
 enum FUEL_CONSUMPTION {
   kilometersPerLiter,

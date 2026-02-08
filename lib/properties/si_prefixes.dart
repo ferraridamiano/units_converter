@@ -3,7 +3,7 @@ import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 
-//Available SI_PREFIXES units
+/// Available SI prefixes units
 // ignore: camel_case_types
 enum SI_PREFIXES {
   base,

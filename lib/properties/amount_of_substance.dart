@@ -5,7 +5,7 @@ import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 
-//Available length units
+/// Available amount of substance units
 enum AMOUNT_OF_SUBSTANCE {
   moles,
   millimoles,

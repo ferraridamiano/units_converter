@@ -3,7 +3,7 @@ import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 
-//Available TORQUE units
+/// Available torque units
 enum TORQUE {
   newtonMeter,
   dyneMeter,

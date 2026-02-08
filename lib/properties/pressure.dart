@@ -3,7 +3,7 @@ import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 
-//Available PRESSURE units
+/// Available pressure units
 enum PRESSURE {
   pascal,
   atmosphere,

@@ -3,7 +3,7 @@ import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 
-//Available SPEED units
+/// Available speed units
 enum SPEED {
   metersPerSecond,
   kilometersPerHour,

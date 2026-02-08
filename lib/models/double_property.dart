@@ -11,7 +11,7 @@ abstract class DoubleProperty<T> extends Property<T, double> {
   /// ```dart
   /// ConversionNode conversionTree = ConversionNode(
   ///   name: 'Dash',
-  ///   leafNodes: [
+  ///   children: [
   ///     ConversionNode(
   ///       name: 'KiloDash',
   ///       coefficientProduct: 1000,
@@ -19,7 +19,7 @@ abstract class DoubleProperty<T> extends Property<T, double> {
   ///     ConversionNode(
   ///       name: 'DashPlus1',
   ///       coefficientSum: -1,
-  ///       leafNodes: [
+  ///       children: [
   ///         ConversionNode(
   ///           name: 'OneOver(DashPlus1)',
   ///           conversionType: ConversionType.reciprocalConversion,
@@ -54,7 +54,7 @@ abstract class DoubleProperty<T> extends Property<T, double> {
   DoubleProperty(
       {required this.conversionTree,
       this.mapSymbols,
-      name,
+      dynamic name,
       this.significantFigures = 10,
       this.removeTrailingZeros = true,
       this.useScientificNotation = true}) {

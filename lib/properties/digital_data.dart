@@ -3,7 +3,7 @@ import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 
-//Available DIGITAL_DATA units
+/// Available digital data units
 // ignore: camel_case_types
 enum DIGITAL_DATA {
   bit,

@@ -11,11 +11,11 @@ enum ConversionType {
   reciprocalConversion,
 }
 
-/// This is the building block of the conversion tree. Thanks to the [leafNodes]
-/// parameter you can set other [ConversionNode]s that depends on this parent node. Thanks
-/// to the [coefficientProduct], [coefficientSum], [conversionType] and [base]
-/// parameters you can set the relationship between this node and the parent
-/// node.
+/// This is the building block of the conversion tree. Thanks to the [children]
+/// parameter you can set other [ConversionNode]s that depends on this parent
+/// node. Thanks to the [coefficientProduct], [coefficientSum], [conversionType]
+/// and [base] parameters you can set the relationship between this node and the
+/// parent node.
 class ConversionNode<T> {
   ConversionNode({
     required this.name,
@@ -33,8 +33,8 @@ class ConversionNode<T> {
 
   ConversionNode<T>? parent;
 
-  /// This are the list of the [ConversionNode]s that depend by this node. These are the
-  /// children of this parent node.
+  /// This is the list of the [ConversionNode]s that depend on this node. These
+  /// are the children of this parent node.
   List<ConversionNode<T>> children;
 
   /// This is the product coefficient of [ConversionType.linearConversion] and

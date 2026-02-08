@@ -218,20 +218,17 @@ name:OneOver(DashPlus1), value:0.5, stringValue:0.5, symbol:null
 - Force (Newton, kilogram-force, etc.)
 - Fuel consumption (miles per hour, kilometers per hour, etc.)
 - Length (meter, miles, etc)
-- Molar mass (grams per mole, milligrams per millimole, etc.)
 - Mass (kilograms, ounces, etc.)
+- Molar mass (grams per mole, milligrams per millimole, etc.)
+- Molar mass (moles per cubic meter, moles per liter, etc.)
 - Numeral systems (hexadecimal, binary, etc.)
 - Power (kilowatt, horse power, etc.)
 - Pressure (bar, psi, etc.)
+- Reciprocal of molar mass (moles per gram, etc.)
 - Shoe size (eu size, us size, etc.)
 - SI prefixes (giga, tera, etc.)
-
 - Speed (miles per hour, kilometers per hour, etc.)
-
 - Temperature (celsius, fahrenheit, etc.)
-
 - Time (seconds, years, etc.)
-
 - Torque (newtons per meter, dyne meter, etc.)
-
 - Volume (liter, cubic meters, etc.)

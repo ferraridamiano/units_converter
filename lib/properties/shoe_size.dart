@@ -3,7 +3,7 @@ import 'package:units_converter/models/double_property.dart';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/models/unit.dart';
 
-//Available SHOE_SIZE units
+/// Available shoe size units
 // ignore: camel_case_types
 enum SHOE_SIZE {
   centimeters,

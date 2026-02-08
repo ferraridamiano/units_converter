@@ -5,7 +5,7 @@ class CustomProperty extends DoubleProperty<String> {
   ///```dart
   ///ConversionNode conversionTree = ConversionNode(
   ///  name: 'Dash',    // base unit
-  ///  leafNodes: [
+  ///  children: [
   ///    ConversionNode(
   ///      name: 'KiloDash',
   ///      coefficientProduct: 1000, // 1 k=KiloDash is 1000 Dash
@@ -13,7 +13,7 @@ class CustomProperty extends DoubleProperty<String> {
   ///    ConversionNode(
   ///      name: 'DashPlus1',
   ///      coefficientSum: -1,
-  ///      leafNodes: [
+  ///      children: [
   ///        ConversionNode(
   ///          name: 'OneOver(DashPlus1)',
   ///          conversionType: ConversionType.reciprocalConversion,
