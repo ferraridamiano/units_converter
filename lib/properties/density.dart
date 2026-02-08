@@ -61,7 +61,7 @@ class Density extends RatioProperty<DENSITY, MASS, VOLUME> {
   ///in kilograms per liter:
   ///```dart
   ///var density = Density(removeTrailingZeros: false);
-  ///density.convert(Unit(DENSITY.gramsPerLiter, value: 1));
+  ///density.convert(DENSITY.gramsPerLiter, 1);
   ///print(DENSITY.kilogramsPerLiter);
   /// ```
   Density(

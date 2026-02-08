@@ -11,7 +11,7 @@ enum MASS {
   pounds,
   ounces,
   quintals,
-  tons,
+  tonnes,
   milligrams,
   femtograms,
   picograms,
@@ -49,7 +49,7 @@ class Mass extends DoubleProperty<MASS> {
             MASS.kilograms: 'kg',
             MASS.pounds: 'lb',
             MASS.ounces: 'oz',
-            MASS.tons: 't',
+            MASS.tonnes: 't',
             MASS.milligrams: 'mg',
             MASS.uma: 'u',
             MASS.carats: 'ct',
@@ -95,7 +95,7 @@ class Mass extends DoubleProperty<MASS> {
             ),
             ConversionNode(
               coefficientProduct: 1000000.0,
-              name: MASS.tons,
+              name: MASS.tonnes,
             ),
             ConversionNode(
               coefficientProduct: 1e-2,
@@ -155,7 +155,7 @@ class Mass extends DoubleProperty<MASS> {
   Unit get pounds => getUnit(MASS.pounds);
   Unit get ounces => getUnit(MASS.ounces);
   Unit get quintals => getUnit(MASS.quintals);
-  Unit get tons => getUnit(MASS.tons);
+  Unit get tons => getUnit(MASS.tonnes);
   Unit get milligrams => getUnit(MASS.milligrams);
   Unit get uma => getUnit(MASS.uma);
   Unit get carats => getUnit(MASS.carats);

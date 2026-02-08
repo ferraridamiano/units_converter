@@ -39,7 +39,7 @@ class DigitalData extends DoubleProperty<DIGITAL_DATA> {
   ///Class for digitalData conversions, e.g. if you want to convert 1 megabit in kilobyte:
   ///```dart
   ///var digitalData = DigitalData(removeTrailingZeros: false);
-  ///digitalData.convert(Unit(DIGITAL_DATA.megabit, value: 1));
+  ///digitalData.convert(DIGITAL_DATA.megabit, 1);
   ///print(DIGITAL_DATA.kilobyte);
   /// ```
   DigitalData(

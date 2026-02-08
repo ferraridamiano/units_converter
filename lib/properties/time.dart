@@ -26,7 +26,7 @@ class Time extends DoubleProperty<TIME> {
   ///Class for time conversions, e.g. if you want to convert 1 hour in seconds:
   ///```dart
   ///var time = Time(removeTrailingZeros: false);
-  ///time.convert(Unit(TIME.hours, value: 1));
+  ///time.convert(TIME.hours, 1);
   ///print(TIME.seconds);
   /// ```
   Time(

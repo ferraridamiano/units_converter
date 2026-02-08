@@ -24,7 +24,7 @@ class Area extends DoubleProperty<AREA> {
   ///acres:
   ///```dart
   ///var area = Area(removeTrailingZeros: false);
-  ///area.convert(Unit(AREA.square_meters, value: 1));
+  ///area.convert(AREA.square_meters, 1);
   ///print(AREA.acres);
   /// ```
   Area(

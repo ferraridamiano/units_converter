@@ -147,6 +147,9 @@ void main() {
         property.electronvolts, property.getUnit(ENERGY.electronvolts));
     runGetterTest(
         property.energyFootPound, property.getUnit(ENERGY.energyFootPound));
+    runGetterTest(property.wattHours, property.getUnit(ENERGY.wattHours));
+    runGetterTest(property.britishThermalUnit,
+        property.getUnit(ENERGY.britishThermalUnit));
   });
 
   group('Force test', () {
@@ -215,7 +218,7 @@ void main() {
     runGetterTest(property.pounds, property.getUnit(MASS.pounds));
     runGetterTest(property.ounces, property.getUnit(MASS.ounces));
     runGetterTest(property.quintals, property.getUnit(MASS.quintals));
-    runGetterTest(property.tons, property.getUnit(MASS.tons));
+    runGetterTest(property.tons, property.getUnit(MASS.tonnes));
     runGetterTest(property.milligrams, property.getUnit(MASS.milligrams));
     runGetterTest(property.uma, property.getUnit(MASS.uma));
     runGetterTest(property.carats, property.getUnit(MASS.carats));
@@ -434,6 +437,9 @@ void main() {
         property.feetsPerSecond, property.getUnit(SPEED.feetsPerSecond));
     runGetterTest(property.minutesPerKilometer,
         property.getUnit(SPEED.minutesPerKilometer));
+    runGetterTest(
+        property.minutesPerMile, property.getUnit(SPEED.minutesPerMile));
+    runGetterTest(property.speedOfLight, property.getUnit(SPEED.speedOfLight));
   });
 
   group('Temperature test', () {
@@ -479,6 +485,8 @@ void main() {
     runGetterTest(property.kilogramForceMeter,
         property.getUnit(TORQUE.kilogramForceMeter));
     runGetterTest(property.poundalMeter, property.getUnit(TORQUE.poundalMeter));
+    runGetterTest(
+        property.poundForceInch, property.getUnit(TORQUE.poundForceInch));
   });
 
   group('Volume test', () {
@@ -520,5 +528,7 @@ void main() {
     runGetterTest(property.microliter, property.getUnit(VOLUME.microliters));
     runGetterTest(property.deciliter, property.getUnit(VOLUME.deciliters));
     runGetterTest(property.centiliter, property.getUnit(VOLUME.centiliters));
+    runGetterTest(
+        property.teaspoonsMetric, property.getUnit(VOLUME.teaspoonsMetric));
   });
 }

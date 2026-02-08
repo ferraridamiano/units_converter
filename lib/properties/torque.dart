@@ -10,14 +10,15 @@ enum TORQUE {
   poundForceFeet,
   kilogramForceMeter,
   poundalMeter,
+  poundForceInch,
 }
 
 class Torque extends DoubleProperty<TORQUE> {
-  ///Class for torque conversions, e.g. if you want to convert 1 square meters in acres:
+  ///Class for torque conversions, e.g. if you want to convert 1 newton meter in dyne meter:
   ///```dart
   ///var torque = Torque(removeTrailingZeros: false);
-  ///torque.convert(Unit(TORQUE.square_meters, value: 1));
-  ///print(TORQUE.acres);
+  ///torque.convert(TORQUE.newtonMeter, 1);
+  ///print(torque.dyneMeter);
   /// ```
   Torque(
       {super.significantFigures,
@@ -32,6 +33,7 @@ class Torque extends DoubleProperty<TORQUE> {
             TORQUE.poundForceFeet: 'lbf·ft',
             TORQUE.kilogramForceMeter: 'kgf·m',
             TORQUE.poundalMeter: 'pdl·m',
+            TORQUE.poundForceInch: 'lbf·in',
           },
           conversionTree: ConversionNode(name: TORQUE.newtonMeter, children: [
             ConversionNode(
@@ -39,9 +41,14 @@ class Torque extends DoubleProperty<TORQUE> {
               name: TORQUE.dyneMeter,
             ),
             ConversionNode(
-              coefficientProduct: 1.35581794902490555,
-              name: TORQUE.poundForceFeet,
-            ),
+                coefficientProduct: 1.35581794902490555,
+                name: TORQUE.poundForceFeet,
+                children: [
+                  ConversionNode(
+                    coefficientProduct: 1 / 12,
+                    name: TORQUE.poundForceInch,
+                  ),
+                ]),
             ConversionNode(
               coefficientProduct: 9.807,
               name: TORQUE.kilogramForceMeter,
@@ -58,4 +65,5 @@ class Torque extends DoubleProperty<TORQUE> {
   Unit get poundForceFeet => getUnit(TORQUE.poundForceFeet);
   Unit get kilogramForceMeter => getUnit(TORQUE.kilogramForceMeter);
   Unit get poundalMeter => getUnit(TORQUE.poundalMeter);
+  Unit get poundForceInch => getUnit(TORQUE.poundForceInch);
 }

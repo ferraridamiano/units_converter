@@ -51,7 +51,7 @@ class MolarVolume
   ///in moles per milliliter:
   ///```dart
   ///var molarVolume = MolarVolume(removeTrailingZeros: false);
-  ///molarVolume.convert(Unit(MOLAR_VOLUME.molesPerLiter, value: 1));
+  ///molarVolume.convert(MOLAR_VOLUME.molesPerLiter, 1);
   ///print(MOLAR_VOLUME.molesPerMilliliter);
   /// ```
   MolarVolume(

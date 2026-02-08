@@ -29,7 +29,7 @@ class Length extends DoubleProperty<LENGTH> {
   ///Class for length conversions, e.g. if you want to convert 1 meter in inches:
   ///```dart
   ///var length = Length(removeTrailingZeros: false);
-  ///length.convert(Unit(LENGTH.meters, value: 1));
+  ///length.convert(LENGTH.meters, 1);
   ///print(length.inches);
   /// ```
   Length(

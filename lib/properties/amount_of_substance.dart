@@ -21,7 +21,7 @@ class AmountOfSubstance extends DoubleProperty<AMOUNT_OF_SUBSTANCE> {
   ///e.g. if you want to convert 1 mole to millimoles:
   ///```dart
   ///var amountOfSubstance = AMOUNT_OF_SUBSTANCE(removeTrailingZeros: false);
-  ///amountOfSubstance.convert(Unit(AMOUNT_OF_SUBSTANCE.moles, value: 1));
+  ///amountOfSubstance.convert(AMOUNT_OF_SUBSTANCE.moles, 1);
   ///print(amountOfSubstance.millimoles);
   /// ```
   AmountOfSubstance(

@@ -22,7 +22,7 @@ class ShoeSize extends DoubleProperty<SHOE_SIZE> {
   ///Class for ShoeSize conversions, e.g. if you want to convert 1 centimeter in eu shoes size:
   ///```dart
   ///var ShoeSize = ShoeSize(removeTrailingZeros: false);
-  ///ShoeSize.convert(Unit(SHOE_SIZE.centimeters, value: 1));
+  ///ShoeSize.convert(SHOE_SIZE.centimeters, 1);
   ///print(SHOE_SIZE.eu_china);
   /// ```
   ShoeSize(

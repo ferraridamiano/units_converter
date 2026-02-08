@@ -18,7 +18,7 @@ class Temperature extends DoubleProperty<TEMPERATURE> {
   ///Class for temperature conversions, e.g. if you want to convert 1 celsius in kelvin:
   ///```dart
   ///var temperature = Temperature(removeTrailingZeros: false);
-  ///temperature.convert(Unit(TEMPERATURE.celsius, value: 1));
+  ///temperature.convert(TEMPERATURE.celsius, 1);
   ///print(TEMPERATURE.kelvin);
   /// ```
   Temperature(

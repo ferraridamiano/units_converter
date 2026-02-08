@@ -32,6 +32,7 @@ enum VOLUME {
   microliters,
   deciliters,
   centiliters,
+  teaspoonsMetric,
 }
 
 class Volume extends DoubleProperty<VOLUME> {
@@ -76,6 +77,7 @@ class Volume extends DoubleProperty<VOLUME> {
             VOLUME.microliters: 'µl',
             VOLUME.deciliters: 'dl',
             VOLUME.centiliters: 'cl',
+            VOLUME.teaspoonsMetric: 'tsp.',
           },
           conversionTree: ConversionNode(name: VOLUME.cubicMeters, children: [
             ConversionNode(
@@ -147,6 +149,10 @@ class Volume extends DoubleProperty<VOLUME> {
                         ConversionNode(
                           coefficientProduct: 20.0,
                           name: VOLUME.australianTablespoons,
+                        ),
+                        ConversionNode(
+                          coefficientProduct: 5.0,
+                          name: VOLUME.teaspoonsMetric,
                         ),
                       ]),
                   ConversionNode(
@@ -222,4 +228,5 @@ class Volume extends DoubleProperty<VOLUME> {
   Unit get microliter => getUnit(VOLUME.microliters);
   Unit get deciliter => getUnit(VOLUME.deciliters);
   Unit get centiliter => getUnit(VOLUME.centiliters);
+  Unit get teaspoonsMetric => getUnit(VOLUME.teaspoonsMetric);
 }

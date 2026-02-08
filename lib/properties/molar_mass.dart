@@ -48,7 +48,7 @@ class MolarMass extends RatioProperty<MOLAR_MASS, AMOUNT_OF_SUBSTANCE, MASS> {
   /// to kilograms per mole:
   ///```dart
   ///var molarMass = MolarMass(removeTrailingZeros: false);
-  ///molarMass.convert(Unit(MOLAR_MASS.gramsPerMole, value: 1));
+  ///molarMass.convert(MOLAR_MASS.gramsPerMole, 1);
   ///print(MOLAR_MASS.kilogramsPerMole);
   /// ```
   MolarMass(

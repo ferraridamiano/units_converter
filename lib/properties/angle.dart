@@ -15,7 +15,7 @@ class Angle extends DoubleProperty<ANGLE> {
   ///Class for angle conversions, e.g. if you want to convert 1 radiant in degree:
   ///```dart
   ///var angle = Angle(removeTrailingZeros: false);
-  ///angle.convert(Unit(ANGLE.radians, value: 1));
+  ///angle.convert(ANGLE.radians, 1);
   ///print(ANGLE.degree);
   /// ```
   Angle(

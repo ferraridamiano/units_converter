@@ -151,6 +151,8 @@ void main() {
       ENERGY.kilowattHours: 2.7777777778e-7,
       ENERGY.electronvolts: 6.2415097523028e18,
       ENERGY.energyFootPound: 0.7375621493,
+      ENERGY.wattHours: 0.00027777777778,
+      ENERGY.britishThermalUnit: 0.000947817122667,
     };
     runConversionTest(expectedResult, Energy());
   });
@@ -216,7 +218,7 @@ void main() {
       MASS.pounds: 0.0022046226218488,
       MASS.ounces: 0.03527396194958,
       MASS.quintals: 0.00001,
-      MASS.tons: 0.000001,
+      MASS.tonnes: 0.000001,
       MASS.milligrams: 1e3,
       MASS.uma: 6.0221410036139e23,
       MASS.carats: 5,
@@ -427,6 +429,8 @@ void main() {
       SPEED.knots: 1.9438444924406,
       SPEED.feetsPerSecond: 3.2808398950131,
       SPEED.minutesPerKilometer: 60 / 3.6,
+      SPEED.speedOfLight: 3.33564095198152e-9,
+      SPEED.minutesPerMile: 26.8224,
     };
     runConversionTest(expectedResult, Speed());
   });
@@ -472,6 +476,7 @@ void main() {
       TORQUE.poundForceFeet: 0.7375621489,
       TORQUE.kilogramForceMeter: 0.10196798205364,
       TORQUE.poundalMeter: 7.2330138512099,
+      TORQUE.poundForceInch: 8.8507457868,
     };
     runConversionTest(expectedResult, Torque());
   });
@@ -505,6 +510,7 @@ void main() {
       VOLUME.microliters: 1e9,
       VOLUME.deciliters: 1e4,
       VOLUME.centiliters: 1e5,
+      VOLUME.teaspoonsMetric: 200000,
     };
     runConversionTest(expectedResult, Volume(), sensibility: 1e9);
   });

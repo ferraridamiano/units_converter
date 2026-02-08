@@ -18,7 +18,7 @@ class Power extends DoubleProperty<POWER> {
   ///Class for power conversions, e.g. if you want to convert 1 kilowatt in european horse power:
   ///```dart
   ///var power = Power(removeTrailingZeros: false);
-  ///power.convert(Unit(POWER.kilowatt, value: 1));
+  ///power.convert(POWER.kilowatt, 1);
   ///print(POWER.european_horse_power);
   /// ```
   Power(

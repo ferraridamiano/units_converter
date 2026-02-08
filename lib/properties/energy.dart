@@ -12,14 +12,16 @@ enum ENERGY {
   kilowattHours,
   electronvolts,
   energyFootPound,
+  wattHours,
+  britishThermalUnit,
 }
 
 class Energy extends DoubleProperty<ENERGY> {
   ///Class for energy conversions, e.g. if you want to convert 1 joule in kilowatt hours:
   ///```dart
   ///var energy = Energy(removeTrailingZeros: false);
-  ///energy.convert(Unit(ENERGY.joules, value: 1));
-  ///print(ENERGY.kilowatt_hours);
+  ///energy.convert(ENERGY.joules, 1);
+  ///print(energy.kilowattHours);
   /// ```
   Energy(
       {super.significantFigures,
@@ -33,9 +35,11 @@ class Energy extends DoubleProperty<ENERGY> {
               ENERGY.kilojoules: 'kJ',
               ENERGY.calories: 'cal',
               ENERGY.kilocalories: 'kcal',
-              ENERGY.kilowattHours: 'kwh',
+              ENERGY.kilowattHours: 'kWh',
               ENERGY.electronvolts: 'eV',
               ENERGY.energyFootPound: 'ft⋅lbf',
+              ENERGY.wattHours: 'Wh',
+              ENERGY.britishThermalUnit: 'BTU',
             },
             conversionTree: ConversionNode(name: ENERGY.joules, children: [
               ConversionNode(
@@ -53,9 +57,14 @@ class Energy extends DoubleProperty<ENERGY> {
                 ],
               ),
               ConversionNode(
-                coefficientProduct: 3600000.0,
-                name: ENERGY.kilowattHours,
-              ),
+                  coefficientProduct: 3600000.0,
+                  name: ENERGY.kilowattHours,
+                  children: [
+                    ConversionNode(
+                      coefficientProduct: 0.001,
+                      name: ENERGY.wattHours,
+                    ),
+                  ]),
               ConversionNode(
                 coefficientProduct: 1.60217646e-19,
                 name: ENERGY.electronvolts,
@@ -63,6 +72,10 @@ class Energy extends DoubleProperty<ENERGY> {
               ConversionNode(
                 coefficientProduct: 1.3558179483314004,
                 name: ENERGY.energyFootPound,
+              ),
+              ConversionNode(
+                coefficientProduct: 1055.05585,
+                name: ENERGY.britishThermalUnit,
               ),
             ]));
 
@@ -73,4 +86,6 @@ class Energy extends DoubleProperty<ENERGY> {
   Unit get kilowattHours => getUnit(ENERGY.kilowattHours);
   Unit get electronvolts => getUnit(ENERGY.electronvolts);
   Unit get energyFootPound => getUnit(ENERGY.energyFootPound);
+  Unit get wattHours => getUnit(ENERGY.wattHours);
+  Unit get britishThermalUnit => getUnit(ENERGY.britishThermalUnit);
 }

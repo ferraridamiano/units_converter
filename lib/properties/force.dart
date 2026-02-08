@@ -16,7 +16,7 @@ class Force extends DoubleProperty<FORCE> {
   ///Class for force conversions, e.g. if you want to convert 1 newton in pound force:
   ///```dart
   ///var force = Force(removeTrailingZeros: false);
-  ///force.Convert(Unit(FORCE.newton, value: 1));
+  ///force.Convert(FORCE.newton, 1);
   ///print(FORCE.pound_force);
   /// ```
   Force(

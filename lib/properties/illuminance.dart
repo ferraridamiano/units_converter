@@ -12,7 +12,7 @@ class Illuminance extends DoubleProperty<ILLUMINANCE> {
   ///Class for light conversions, e.g. if you want to convert 1 lux in to foot-candle:
   ///```dart
   ///var illuminance = Illuminance(removeTrailingZeros: false);
-  ///illuminance.convert(Unit(ILLUMINANCE.lux, value: 1));
+  ///illuminance.convert(ILLUMINANCE.lux, 1);
   ///print(illuminance.footCandle);
   /// ```
   Illuminance(

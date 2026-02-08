@@ -49,7 +49,7 @@ class ReciprocalOfMolarMass
   ///convert 1 mole per gram to moles per milligram:
   ///```dart
   ///var reciprocalOfMolarMass = MolarMass(removeTrailingZeros: false);
-  ///reciprocalOfMolarMass.convert(Unit(RECIPROCAL_OF_MOLAR_MASS.molesPerGram, value: 1));
+  ///reciprocalOfMolarMass.convert(RECIPROCAL_OF_MOLAR_MASS.molesPerGram, 1);
   ///print(RECIPROCAL_OF_MOLAR_MASS.molesPerMilligram);
   /// ```
   ReciprocalOfMolarMass(
