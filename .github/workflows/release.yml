@@ -1,0 +1,30 @@
+name: "Publish Github release"
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  create_release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Generate Changelog using git-cliff
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff
+        with:
+          args: --latest
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body: ${{ steps.git-cliff.outputs.content }}
