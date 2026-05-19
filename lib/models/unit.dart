@@ -12,20 +12,20 @@ class Unit {
   /// `removeTrailingZeros` and `useScientificNotation`).
   String? _stringValue;
   String? get stringValue {
-    if (_stringValue != null) return _stringValue;
-    if (_value == null) return null;
-    if (stringValueCallback != null) {
-      _stringValue = stringValueCallback!(_value!);
+    if (_stringValue != null) {
       return _stringValue;
     }
-    return _value.toString();
+    if (_value == null) {
+      return null;
+    }
+    return stringValueCallback(_value!);
   }
 
   set stringValue(String? val) {
     _stringValue = val;
   }
 
-  String Function(double)? stringValueCallback;
+  late String Function(double) stringValueCallback;
 
   /// The name of the unit (e.g. LENGTH.meters, VOLUME.liters).
   dynamic name;
@@ -35,7 +35,11 @@ class Unit {
   String? symbol;
 
   /// The class that defines a unit of measurement object.
-  Unit(this.name, {double? value, this.symbol}) {
+  Unit(this.name,
+      {double? value,
+      this.symbol,
+      String Function(double)? stringValueCallback}) {
     this.value = value;
+    this.stringValueCallback = stringValueCallback ?? (val) => val.toString();
   }
 }
