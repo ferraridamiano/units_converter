@@ -19,6 +19,7 @@ abstract class RatioProperty<T extends Enum, N, D> extends Property<T, double> {
   bool useScientificNotation;
 
   final List<Unit> _unitList = [];
+  late Map<T, Unit> _mapUnitsMap;
   Property numeratorProperty;
   Property denominatorProperty;
 
@@ -32,9 +33,13 @@ abstract class RatioProperty<T extends Enum, N, D> extends Property<T, double> {
       this.useScientificNotation = true}) {
     size = mapSymbols.length;
     this.name = name;
-    size = mapSymbols.length;
+    _mapUnitsMap = {};
     for (var unit in mapSymbols.keys) {
-      _unitList.add(Unit(unit, symbol: mapSymbols[unit]));
+      final newUnit = Unit(unit, symbol: mapSymbols[unit]);
+      newUnit.stringValueCallback = (val) => valueToString(
+          val, significantFigures, removeTrailingZeros, useScientificNotation);
+      _unitList.add(newUnit);
+      _mapUnitsMap[unit] = newUnit;
     }
   }
 
@@ -59,8 +64,6 @@ abstract class RatioProperty<T extends Enum, N, D> extends Property<T, double> {
       _unitList[i].value =
           numeratorProperty.getUnit(_unitList[i].name.numerator).value! /
               denominatorProperty.getUnit(_unitList[i].name.denominator).value!;
-      _unitList[i].stringValue = valueToString(_unitList[i].value!,
-          significantFigures, removeTrailingZeros, useScientificNotation);
     }
   }
 
@@ -70,6 +73,5 @@ abstract class RatioProperty<T extends Enum, N, D> extends Property<T, double> {
 
   ///Returns the Unit with the corresponding name
   @override
-  Unit getUnit(T name) =>
-      _unitList.where((element) => element.name == name).single;
+  Unit getUnit(T name) => _mapUnitsMap[name]!;
 }

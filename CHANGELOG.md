@@ -1,3 +1,7 @@
+# 3.2.0
+- This release significantly boosts conversion performance by introducing lazy
+string conversion and variable reference buffering.
+
 # 3.1.0
 - New units added: speed of light, teaspoon metric, pound force inch, watt
 hours, BTU

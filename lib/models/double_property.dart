@@ -34,7 +34,8 @@ abstract class DoubleProperty<T> extends Property<T, double> {
   /// Map between units and its symbol
   Map<T, String>? mapSymbols;
 
-  late Map<T, ConversionNode> _mapUnits;
+  late Map<T, ConversionNode> _mapNodes;
+  late Map<T, Unit> _mapUnitsMap;
 
   /// The number of significant figures to keep. E.g. 1.23456789) has 9
   /// significant figures
@@ -60,11 +61,16 @@ abstract class DoubleProperty<T> extends Property<T, double> {
       this.useScientificNotation = true}) {
     this.name = name;
     _nodeList = _getTreeAsList();
-    _mapUnits = {for (var node in _nodeList) node.name: node};
+    _mapNodes = {for (var node in _nodeList) node.name: node};
     size = _nodeList.length;
-    for (var conversionNode in _nodeList) {
-      _unitList.add(
-          Unit(conversionNode.name, symbol: mapSymbols?[conversionNode.name]));
+    _mapUnitsMap = {};
+    for (final conversionNode in _nodeList) {
+      final unit =
+          Unit(conversionNode.name, symbol: mapSymbols?[conversionNode.name]);
+      unit.stringValueCallback = (val) => valueToString(
+          val, significantFigures, removeTrailingZeros, useScientificNotation);
+      _unitList.add(unit);
+      _mapUnitsMap[conversionNode.name] = unit;
     }
   }
 
@@ -84,12 +90,9 @@ abstract class DoubleProperty<T> extends Property<T, double> {
       node.value = null;
     }
     // Start the conversion
-    _mapUnits[name]!.convert(value);
+    _mapNodes[name]!.convert(value);
     for (var i = 0; i < size; i++) {
-      _unitList[i].value =
-          _nodeList.singleWhere((node) => node.name == _unitList[i].name).value;
-      _unitList[i].stringValue = valueToString(_unitList[i].value!,
-          significantFigures, removeTrailingZeros, useScientificNotation);
+      _unitList[i].value = _nodeList[i].value;
     }
   }
 
@@ -99,8 +102,7 @@ abstract class DoubleProperty<T> extends Property<T, double> {
 
   ///Returns the Unit with the corresponding name
   @override
-  Unit getUnit(T name) =>
-      _unitList.where((element) => element.name == name).single;
+  Unit getUnit(T name) => _mapUnitsMap[name]!;
 
   /// Get the a list of the nodes from the conversionTree
   List<ConversionNode<T>> _getTreeAsList() {

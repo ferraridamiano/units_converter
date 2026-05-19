@@ -23,6 +23,7 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   };
 
   final List<Unit> _unitList = [];
+  late Map<NUMERAL_SYSTEMS, Unit> _mapUnitsMap;
 
   ///Class for numeralSystems conversions, e.g. if you want to convert 10 (decimal) in binary:
   ///```dart
@@ -33,7 +34,12 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
   NumeralSystems({dynamic name}) {
     this.name = name ?? PROPERTY.numeralSystems;
     size = NUMERAL_SYSTEMS.values.length;
-    mapSymbols.forEach((key, value) => _unitList.add(Unit(key, symbol: value)));
+    _mapUnitsMap = {};
+    mapSymbols.forEach((key, value) {
+      final unit = Unit(key, symbol: value);
+      _unitList.add(unit);
+      _mapUnitsMap[key] = unit;
+    });
   }
 
   ///Converts a unit with a specific name (e.g. NUMERAL_SYSTEMS.decimal) and value to all other units
@@ -57,21 +63,17 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
       NUMERAL_SYSTEMS.binary: 2,
     };
 
-    _unitList.singleWhere((e) => e.name == name).stringValue = value;
+    _mapUnitsMap[name]!.stringValue = value;
     if (name == NUMERAL_SYSTEMS.decimal) {
       for (var base in bases.keys.where((e) => e != NUMERAL_SYSTEMS.decimal)) {
-        _unitList.singleWhere((e) => e.name == base).stringValue =
-            decToBase(value, bases[base]!);
+        _mapUnitsMap[base]!.stringValue = decToBase(value, bases[base]!);
       }
     } else {
       final decimal = baseToDec(value, bases[name]!);
-      _unitList
-          .singleWhere((e) => e.name == NUMERAL_SYSTEMS.decimal)
-          .stringValue = decimal;
+      _mapUnitsMap[NUMERAL_SYSTEMS.decimal]!.stringValue = decimal;
       for (var base in bases.keys
           .where((e) => e != NUMERAL_SYSTEMS.decimal && e != name)) {
-        _unitList.singleWhere((e) => e.name == base).stringValue =
-            decToBase(decimal, bases[base]!);
+        _mapUnitsMap[base]!.stringValue = decToBase(decimal, bases[base]!);
       }
     }
   }
@@ -82,8 +84,7 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
 
   ///Returns the Unit with the corresponding name
   @override
-  Unit getUnit(var name) =>
-      _unitList.where((element) => element.name == name).single;
+  Unit getUnit(var name) => _mapUnitsMap[name]!;
 
   Unit get decimal => getUnit(NUMERAL_SYSTEMS.decimal);
   Unit get hexadecimal => getUnit(NUMERAL_SYSTEMS.hexadecimal);

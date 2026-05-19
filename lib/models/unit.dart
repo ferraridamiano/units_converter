@@ -1,11 +1,31 @@
 class Unit {
   /// The value of the unit of measurement.
-  double? value;
+  double? _value;
+  double? get value => _value;
+  set value(double? val) {
+    _value = val;
+    _stringValue = null;
+  }
 
   /// The String representation of [value]. It could be changed according to
   /// other parameters of the property (e.g. `significantFigures`,
   /// `removeTrailingZeros` and `useScientificNotation`).
-  String? stringValue;
+  String? _stringValue;
+  String? get stringValue {
+    if (_stringValue != null) {
+      return _stringValue;
+    }
+    if (_value == null) {
+      return null;
+    }
+    return stringValueCallback(_value!);
+  }
+
+  set stringValue(String? val) {
+    _stringValue = val;
+  }
+
+  late String Function(double) stringValueCallback;
 
   /// The name of the unit (e.g. LENGTH.meters, VOLUME.liters).
   dynamic name;
@@ -15,5 +35,11 @@ class Unit {
   String? symbol;
 
   /// The class that defines a unit of measurement object.
-  Unit(this.name, {this.value, this.stringValue, this.symbol});
+  Unit(this.name,
+      {double? value,
+      this.symbol,
+      String Function(double)? stringValueCallback}) {
+    this.value = value;
+    this.stringValueCallback = stringValueCallback ?? (val) => val.toString();
+  }
 }
