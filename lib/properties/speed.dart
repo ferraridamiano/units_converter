@@ -13,6 +13,7 @@ enum SPEED {
   minutesPerKilometer,
   minutesPerMile,
   speedOfLight,
+  speedOfSound,
 }
 
 class Speed extends DoubleProperty<SPEED> {
@@ -38,12 +39,17 @@ class Speed extends DoubleProperty<SPEED> {
             SPEED.minutesPerKilometer: 'min/km',
             SPEED.minutesPerMile: 'min/mi',
             SPEED.speedOfLight: 'c',
+            SPEED.speedOfSound: 'Mach',
           },
           conversionTree:
               ConversionNode(name: SPEED.metersPerSecond, children: [
             ConversionNode(
               coefficientProduct: 299792458.0,
               name: SPEED.speedOfLight,
+            ),
+            ConversionNode(
+              coefficientProduct: 343.21,
+              name: SPEED.speedOfSound,
             ),
             ConversionNode(
                 coefficientProduct: 1 / 3.6,
@@ -84,4 +90,5 @@ class Speed extends DoubleProperty<SPEED> {
   Unit get minutesPerKilometer => getUnit(SPEED.minutesPerKilometer);
   Unit get minutesPerMile => getUnit(SPEED.minutesPerMile);
   Unit get speedOfLight => getUnit(SPEED.speedOfLight);
+  Unit get speedOfSound => getUnit(SPEED.speedOfSound);
 }

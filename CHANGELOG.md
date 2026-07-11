@@ -1,3 +1,19 @@
+# 3.3.0
+Added the following units:
+- Average month
+- Speed of sound
+- Metric cup
+- US cup
+- British cup
+- Miles / Liter
+- Short ton
+- Long ton
+- US Barrel
+- Cubic yard
+
+**Breaking**
+- `VOLUME.cups` has been renamed to `VOLUME.usCups`
+
 # 3.2.0
 - This release significantly boosts conversion performance by introducing lazy
 string conversion and variable reference buffering.

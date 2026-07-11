@@ -16,6 +16,7 @@ enum TIME {
   days,
   weeks,
   years365,
+  averageMonth,
   lustrum,
   decades,
   centuries,
@@ -48,6 +49,7 @@ class Time extends DoubleProperty<TIME> {
             TIME.days: 'd',
             TIME.years365: 'a',
             TIME.centuries: 'c.',
+            TIME.averageMonth: 'mo',
           },
           conversionTree: ConversionNode(name: TIME.seconds, children: [
             ConversionNode(
@@ -87,6 +89,10 @@ class Time extends DoubleProperty<TIME> {
                                 name: TIME.weeks,
                               ),
                               ConversionNode(
+                                coefficientProduct: 365.25 / 12,
+                                name: TIME.averageMonth,
+                              ),
+                              ConversionNode(
                                   coefficientProduct: 365.0,
                                   name: TIME.years365,
                                   children: [
@@ -124,6 +130,7 @@ class Time extends DoubleProperty<TIME> {
   Unit get days => getUnit(TIME.days);
   Unit get weeks => getUnit(TIME.weeks);
   Unit get years365 => getUnit(TIME.years365);
+  Unit get averageMonth => getUnit(TIME.averageMonth);
   Unit get lustrum => getUnit(TIME.lustrum);
   Unit get decades => getUnit(TIME.decades);
   Unit get centuries => getUnit(TIME.centuries);

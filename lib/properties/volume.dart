@@ -16,7 +16,9 @@ enum VOLUME {
   tablespoonsUs,
   teaspoonsUs,
   australianTablespoons,
-  cups,
+  usCups,
+  metricCup,
+  imperialCup,
   cubicCentimeters,
   cubicFeet,
   cubicInches,
@@ -33,6 +35,8 @@ enum VOLUME {
   deciliters,
   centiliters,
   teaspoonsMetric,
+  usBarrel,
+  cubicYard,
 }
 
 class Volume extends DoubleProperty<VOLUME> {
@@ -61,7 +65,9 @@ class Volume extends DoubleProperty<VOLUME> {
             VOLUME.tablespoonsUs: 'tbsp.',
             VOLUME.teaspoonsUs: 'tsp.',
             VOLUME.australianTablespoons: 'tbsp.',
-            VOLUME.cups: 'cup',
+            VOLUME.usCups: 'US cup',
+            VOLUME.metricCup: 'metric cup',
+            VOLUME.imperialCup: 'imp cup',
             VOLUME.cubicCentimeters: 'cm³',
             VOLUME.cubicFeet: 'ft³',
             VOLUME.cubicInches: 'in³',
@@ -78,6 +84,8 @@ class Volume extends DoubleProperty<VOLUME> {
             VOLUME.deciliters: 'dl',
             VOLUME.centiliters: 'cl',
             VOLUME.teaspoonsMetric: 'tsp.',
+            VOLUME.cubicYard: 'yd³',
+            VOLUME.usBarrel: 'bbl',
           },
           conversionTree: ConversionNode(name: VOLUME.cubicMeters, children: [
             ConversionNode(
@@ -102,7 +110,7 @@ class Volume extends DoubleProperty<VOLUME> {
                       ),
                       ConversionNode(
                         coefficientProduct: 1 / 16,
-                        name: VOLUME.cups,
+                        name: VOLUME.usCups,
                       ),
                       ConversionNode(
                         coefficientProduct: 1 / 32,
@@ -121,6 +129,10 @@ class Volume extends DoubleProperty<VOLUME> {
                             name: VOLUME.teaspoonsUs,
                           ),
                         ],
+                      ),
+                      ConversionNode(
+                        coefficientProduct: 42,
+                        name: VOLUME.usBarrel,
                       ),
                     ],
                   ),
@@ -164,6 +176,14 @@ class Volume extends DoubleProperty<VOLUME> {
                     name: VOLUME.centiliters,
                   ),
                   ConversionNode(
+                    coefficientProduct: 0.25,
+                    name: VOLUME.metricCup,
+                  ),
+                  ConversionNode(
+                    coefficientProduct: 0.284130642624675,
+                    name: VOLUME.imperialCup,
+                  ),
+                  ConversionNode(
                     coefficientProduct: 1e-6,
                     name: VOLUME.microliters,
                   ),
@@ -198,6 +218,10 @@ class Volume extends DoubleProperty<VOLUME> {
               coefficientProduct: 1e-9,
               name: VOLUME.cubicMillimeters,
             ),
+            ConversionNode(
+              coefficientProduct: 0.764554857984,
+              name: VOLUME.cubicYard,
+            ),
           ]),
         );
 
@@ -212,7 +236,9 @@ class Volume extends DoubleProperty<VOLUME> {
   Unit get tablespoonsUs => getUnit(VOLUME.tablespoonsUs);
   Unit get teaspoonsUs => getUnit(VOLUME.teaspoonsUs);
   Unit get australianTablespoons => getUnit(VOLUME.australianTablespoons);
-  Unit get cups => getUnit(VOLUME.cups);
+  Unit get cups => getUnit(VOLUME.usCups);
+  Unit get metricCup => getUnit(VOLUME.metricCup);
+  Unit get imperialCup => getUnit(VOLUME.imperialCup);
   Unit get cubicCentimeters => getUnit(VOLUME.cubicCentimeters);
   Unit get cubicFeet => getUnit(VOLUME.cubicFeet);
   Unit get cubicInches => getUnit(VOLUME.cubicInches);
@@ -229,4 +255,6 @@ class Volume extends DoubleProperty<VOLUME> {
   Unit get deciliter => getUnit(VOLUME.deciliters);
   Unit get centiliter => getUnit(VOLUME.centiliters);
   Unit get teaspoonsMetric => getUnit(VOLUME.teaspoonsMetric);
+  Unit get usBarrel => getUnit(VOLUME.usBarrel);
+  Unit get cubicYard => getUnit(VOLUME.cubicYard);
 }

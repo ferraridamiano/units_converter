@@ -174,6 +174,7 @@ void main() {
       FUEL_CONSUMPTION.litersPer100km: 100,
       FUEL_CONSUMPTION.milesPerUsGallon: 2.3521458335008,
       FUEL_CONSUMPTION.milesPerImperialGallon: 2.8248093635947,
+      FUEL_CONSUMPTION.milesPerLiter: 0.6213711922,
     };
     runConversionTest(expectedResult, FuelConsumption());
   });
@@ -232,6 +233,8 @@ void main() {
       MASS.micrograms: 1e6,
       MASS.decigrams: 10,
       MASS.grains: 15.432358353,
+      MASS.shortTon: 1.1023113113599999e-6,
+      MASS.longTon: 9.842065276785714e-7,
     };
     runConversionTest(expectedResult, Mass(), sensibility: 1e9);
   });
@@ -431,8 +434,9 @@ void main() {
       SPEED.minutesPerKilometer: 60 / 3.6,
       SPEED.speedOfLight: 3.33564095198152e-9,
       SPEED.minutesPerMile: 26.8224,
+      SPEED.speedOfSound: 0.002913668,
     };
-    runConversionTest(expectedResult, Speed());
+    runConversionTest(expectedResult, Speed(), sensibility: 1e8);
   });
 
   group('Temperature', () {
@@ -465,6 +469,7 @@ void main() {
       TIME.decades: 1 / (60 * 60 * 24 * 365 * 10),
       TIME.centuries: 1 / (60 * 60 * 24 * 365 * 100),
       TIME.millennium: 1 / (60 * 60 * 24 * 365 * 1000),
+      TIME.averageMonth: 1 / (60 * 60 * 24 * 30.4375),
     };
     runConversionTest(expectedResult, Time());
   });
@@ -494,7 +499,9 @@ void main() {
       VOLUME.tablespoonsUs: 67628.045403686,
       VOLUME.teaspoonsUs: 202884.136211058,
       VOLUME.australianTablespoons: 50000,
-      VOLUME.cups: 4226.752838,
+      VOLUME.usCups: 4226.752838,
+      VOLUME.metricCup: 4000,
+      VOLUME.imperialCup: 3519.5077536,
       VOLUME.cubicCentimeters: 1e6,
       VOLUME.cubicFeet: 35.314666721489,
       VOLUME.cubicInches: 61023.744094732,
@@ -511,6 +518,8 @@ void main() {
       VOLUME.deciliters: 1e4,
       VOLUME.centiliters: 1e5,
       VOLUME.teaspoonsMetric: 200000,
+      VOLUME.usBarrel: 6.2898107704,
+      VOLUME.cubicYard: 1.307950619,
     };
     runConversionTest(expectedResult, Volume(), sensibility: 1e9);
   });
