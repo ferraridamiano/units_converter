@@ -444,8 +444,7 @@ void main() {
     runGetterTest(
         property.minutesPerMile, property.getUnit(SPEED.minutesPerMile));
     runGetterTest(property.speedOfLight, property.getUnit(SPEED.speedOfLight));
-    runGetterTest(
-        property.speedOfSound, property.getUnit(SPEED.speedOfSound));
+    runGetterTest(property.speedOfSound, property.getUnit(SPEED.speedOfSound));
   });
 
   group('Temperature test', () {
@@ -475,8 +474,7 @@ void main() {
     runGetterTest(property.days, property.getUnit(TIME.days));
     runGetterTest(property.weeks, property.getUnit(TIME.weeks));
     runGetterTest(property.years365, property.getUnit(TIME.years365));
-    runGetterTest(
-        property.averageMonth, property.getUnit(TIME.averageMonth));
+    runGetterTest(property.averageMonth, property.getUnit(TIME.averageMonth));
     runGetterTest(property.lustrum, property.getUnit(TIME.lustrum));
     runGetterTest(property.decades, property.getUnit(TIME.decades));
     runGetterTest(property.centuries, property.getUnit(TIME.centuries));
