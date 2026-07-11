@@ -10,6 +10,7 @@ enum FUEL_CONSUMPTION {
   litersPer100km,
   milesPerUsGallon,
   milesPerImperialGallon,
+  milesPerLiter,
 }
 
 class FuelConsumption extends DoubleProperty<FUEL_CONSUMPTION> {
@@ -31,6 +32,7 @@ class FuelConsumption extends DoubleProperty<FUEL_CONSUMPTION> {
               FUEL_CONSUMPTION.litersPer100km: 'l/100km',
               FUEL_CONSUMPTION.milesPerUsGallon: 'mpg',
               FUEL_CONSUMPTION.milesPerImperialGallon: 'mpg',
+              FUEL_CONSUMPTION.milesPerLiter: 'mi/l',
             },
             conversionTree: ConversionNode(
                 name: FUEL_CONSUMPTION.kilometersPerLiter,
@@ -48,6 +50,10 @@ class FuelConsumption extends DoubleProperty<FUEL_CONSUMPTION> {
                     coefficientProduct: 0.3540061899,
                     name: FUEL_CONSUMPTION.milesPerImperialGallon,
                   ),
+                  ConversionNode(
+                    coefficientProduct: 1.609344,
+                    name: FUEL_CONSUMPTION.milesPerLiter,
+                  ),
                 ]));
 
   Unit get kilometersPerLiter => getUnit(FUEL_CONSUMPTION.kilometersPerLiter);
@@ -55,4 +61,5 @@ class FuelConsumption extends DoubleProperty<FUEL_CONSUMPTION> {
   Unit get milesPerUsGallon => getUnit(FUEL_CONSUMPTION.milesPerUsGallon);
   Unit get milesPerImperialGallon =>
       getUnit(FUEL_CONSUMPTION.milesPerImperialGallon);
+  Unit get milesPerLiter => getUnit(FUEL_CONSUMPTION.milesPerLiter);
 }

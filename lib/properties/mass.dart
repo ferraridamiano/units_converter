@@ -27,6 +27,8 @@ enum MASS {
   pennyweights,
   troyOunces,
   stones,
+  shortTon,
+  longTon,
 }
 
 class Mass extends DoubleProperty<MASS> {
@@ -57,6 +59,8 @@ class Mass extends DoubleProperty<MASS> {
             MASS.pennyweights: 'dwt',
             MASS.troyOunces: 'oz t',
             MASS.stones: 'st.',
+            MASS.shortTon: 'US ton',
+            MASS.longTon: 'UK ton',
             MASS.femtograms: 'fg',
             MASS.picograms: 'pg',
             MASS.nanograms: 'ng',
@@ -84,6 +88,14 @@ class Mass extends DoubleProperty<MASS> {
                     ConversionNode(
                       coefficientProduct: 14,
                       name: MASS.stones,
+                    ),
+                    ConversionNode(
+                      coefficientProduct: 2000.0,
+                      name: MASS.shortTon,
+                    ),
+                    ConversionNode(
+                      coefficientProduct: 2240.0,
+                      name: MASS.longTon,
                     ),
                   ],
                 ),
@@ -163,6 +175,8 @@ class Mass extends DoubleProperty<MASS> {
   Unit get pennyweights => getUnit(MASS.pennyweights);
   Unit get troyOunces => getUnit(MASS.troyOunces);
   Unit get stones => getUnit(MASS.stones);
+  Unit get shortTon => getUnit(MASS.shortTon);
+  Unit get longTon => getUnit(MASS.longTon);
   Unit get femtograms => getUnit(MASS.femtograms);
   Unit get picograms => getUnit(MASS.picograms);
   Unit get nanograms => getUnit(MASS.nanograms);

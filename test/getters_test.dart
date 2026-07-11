@@ -174,6 +174,8 @@ void main() {
         property.getUnit(FUEL_CONSUMPTION.milesPerUsGallon));
     runGetterTest(property.milesPerImperialGallon,
         property.getUnit(FUEL_CONSUMPTION.milesPerImperialGallon));
+    runGetterTest(property.milesPerLiter,
+        property.getUnit(FUEL_CONSUMPTION.milesPerLiter));
   });
 
   group('Illuminance test', () {
@@ -232,6 +234,8 @@ void main() {
     runGetterTest(property.micrograms, property.getUnit(MASS.micrograms));
     runGetterTest(property.decigrams, property.getUnit(MASS.decigrams));
     runGetterTest(property.grains, property.getUnit(MASS.grains));
+    runGetterTest(property.shortTon, property.getUnit(MASS.shortTon));
+    runGetterTest(property.longTon, property.getUnit(MASS.longTon));
   });
 
   group('Molar Mass test', () {
@@ -440,6 +444,8 @@ void main() {
     runGetterTest(
         property.minutesPerMile, property.getUnit(SPEED.minutesPerMile));
     runGetterTest(property.speedOfLight, property.getUnit(SPEED.speedOfLight));
+    runGetterTest(
+        property.speedOfSound, property.getUnit(SPEED.speedOfSound));
   });
 
   group('Temperature test', () {
@@ -469,6 +475,8 @@ void main() {
     runGetterTest(property.days, property.getUnit(TIME.days));
     runGetterTest(property.weeks, property.getUnit(TIME.weeks));
     runGetterTest(property.years365, property.getUnit(TIME.years365));
+    runGetterTest(
+        property.averageMonth, property.getUnit(TIME.averageMonth));
     runGetterTest(property.lustrum, property.getUnit(TIME.lustrum));
     runGetterTest(property.decades, property.getUnit(TIME.decades));
     runGetterTest(property.centuries, property.getUnit(TIME.centuries));
@@ -508,7 +516,9 @@ void main() {
     runGetterTest(property.teaspoonsUs, property.getUnit(VOLUME.teaspoonsUs));
     runGetterTest(property.australianTablespoons,
         property.getUnit(VOLUME.australianTablespoons));
-    runGetterTest(property.cups, property.getUnit(VOLUME.cups));
+    runGetterTest(property.cups, property.getUnit(VOLUME.usCups));
+    runGetterTest(property.metricCup, property.getUnit(VOLUME.metricCup));
+    runGetterTest(property.imperialCup, property.getUnit(VOLUME.imperialCup));
     runGetterTest(
         property.cubicCentimeters, property.getUnit(VOLUME.cubicCentimeters));
     runGetterTest(property.cubicFeet, property.getUnit(VOLUME.cubicFeet));
@@ -530,5 +540,7 @@ void main() {
     runGetterTest(property.centiliter, property.getUnit(VOLUME.centiliters));
     runGetterTest(
         property.teaspoonsMetric, property.getUnit(VOLUME.teaspoonsMetric));
+    runGetterTest(property.usBarrel, property.getUnit(VOLUME.usBarrel));
+    runGetterTest(property.cubicYard, property.getUnit(VOLUME.cubicYard));
   });
 }
