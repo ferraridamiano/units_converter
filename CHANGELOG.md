@@ -1,3 +1,9 @@
+# 3.3.1
+- Significant speedup of the `convertFromTo` extensions by caching the
+underlying property instances instead of rebuilding them on every call
+- Numeral systems conversion is now faster: cached regular expressions and more
+efficient base conversion algorithms
+
 # 3.3.0
 Added the following units:
 - Average month

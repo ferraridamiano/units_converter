@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:units_converter/models/property.dart';
 import 'package:units_converter/properties/amount_of_substance.dart';
 import 'package:units_converter/properties/illuminance.dart';
@@ -167,20 +166,16 @@ String decToBase(String stringDec, int base) {
   var regExp = getBaseRegExp(10);
   if (!regExp.hasMatch(stringDec)) return '';
 
-  var myString = '';
-  String restoString;
-  int resto;
   var dec = int.parse(stringDec);
+  var digits = <int>[];
   while (dec > 0) {
-    resto = (dec % base);
-    restoString = resto.toString();
-    if (resto >= 10) {
-      restoString = String.fromCharCode(resto + 55);
-    }
-    myString = restoString + myString; //aggiungo in testa
+    final remainder = dec % base;
+    // '0'-'9' have code unit 48-57, 'A'-'F' have code unit 65-70
+    digits.add(remainder >= 10 ? remainder + 55 : remainder + 48);
     dec = dec ~/ base;
   }
-  return myString;
+  if (digits.isEmpty) return '';
+  return String.fromCharCodes(digits.reversed);
 }
 
 /// Convert [toBeConverted], the String representation of a value with a certain
@@ -197,18 +192,25 @@ String baseToDec(String toBeConverted, int base) {
   int len = toBeConverted.length;
   for (int i = 0; i < len; i++) {
     int unitCode = toBeConverted.codeUnitAt(i);
+    int digit;
     if (unitCode >= 65 && unitCode <= 70) {
       // from A to F
-      conversion =
-          conversion + (unitCode - 55) * pow(base, len - i - 1).toInt();
+      digit = unitCode - 55;
     } else if (unitCode >= 48 && unitCode <= 57) {
       // from 0 to 9
-      conversion =
-          conversion + (unitCode - 48) * pow(base, len - i - 1).toInt();
+      digit = unitCode - 48;
+    } else {
+      return '';
     }
+    conversion = conversion * base + digit;
   }
   return conversion.toString();
 }
+
+final RegExp _binaryRegExp = RegExp(r'^[0-1]+$');
+final RegExp _octalRegExp = RegExp(r'^[0-7]+$');
+final RegExp _hexadecimalRegExp = RegExp(r'^[0-9A-Fa-f]+$');
+final RegExp _decimalRegExp = RegExp(r'^[0-9]+$');
 
 /// Returns a regular expression that could match a certain String expressed
 /// with a certain [base].
@@ -216,13 +218,13 @@ RegExp getBaseRegExp(int base) {
   assert([2, 8, 10, 16].contains(base), 'Base not supported');
   switch (base) {
     case 2:
-      return RegExp(r'^[0-1]+$');
+      return _binaryRegExp;
     case 8:
-      return RegExp(r'^[0-7]+$');
+      return _octalRegExp;
     case 16:
-      return RegExp(r'^[0-9A-Fa-f]+$');
+      return _hexadecimalRegExp;
     case 10:
     default:
-      return RegExp(r'^[0-9]+$');
+      return _decimalRegExp;
   }
 }

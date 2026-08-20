@@ -22,6 +22,16 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
     NUMERAL_SYSTEMS.binary: '₂',
   };
 
+  static const Map<NUMERAL_SYSTEMS, int> bases = {
+    NUMERAL_SYSTEMS.decimal: 10,
+    NUMERAL_SYSTEMS.hexadecimal: 16,
+    NUMERAL_SYSTEMS.octal: 8,
+    NUMERAL_SYSTEMS.binary: 2,
+  };
+
+  static final List<NUMERAL_SYSTEMS> _nonDecimalBases =
+      bases.keys.where((e) => e != NUMERAL_SYSTEMS.decimal).toList();
+
   final List<Unit> _unitList = [];
   late Map<NUMERAL_SYSTEMS, Unit> _mapUnitsMap;
 
@@ -56,24 +66,18 @@ class NumeralSystems extends Property<NUMERAL_SYSTEMS, String> {
       return;
     }
 
-    const Map<NUMERAL_SYSTEMS, int> bases = {
-      NUMERAL_SYSTEMS.decimal: 10,
-      NUMERAL_SYSTEMS.hexadecimal: 16,
-      NUMERAL_SYSTEMS.octal: 8,
-      NUMERAL_SYSTEMS.binary: 2,
-    };
-
     _mapUnitsMap[name]!.stringValue = value;
     if (name == NUMERAL_SYSTEMS.decimal) {
-      for (var base in bases.keys.where((e) => e != NUMERAL_SYSTEMS.decimal)) {
+      for (var base in _nonDecimalBases) {
         _mapUnitsMap[base]!.stringValue = decToBase(value, bases[base]!);
       }
     } else {
       final decimal = baseToDec(value, bases[name]!);
       _mapUnitsMap[NUMERAL_SYSTEMS.decimal]!.stringValue = decimal;
-      for (var base in bases.keys
-          .where((e) => e != NUMERAL_SYSTEMS.decimal && e != name)) {
-        _mapUnitsMap[base]!.stringValue = decToBase(decimal, bases[base]!);
+      for (var base in _nonDecimalBases) {
+        if (base != name) {
+          _mapUnitsMap[base]!.stringValue = decToBase(decimal, bases[base]!);
+        }
       }
     }
   }
