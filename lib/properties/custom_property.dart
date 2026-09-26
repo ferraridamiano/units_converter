@@ -47,6 +47,7 @@ class CustomProperty extends DoubleProperty<String> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       required super.conversionTree,
       super.mapSymbols,
       name})

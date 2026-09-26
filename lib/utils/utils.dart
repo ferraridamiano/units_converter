@@ -58,12 +58,15 @@ Property? getPropertyFromEnum(dynamic propertyEnum) {
 /// Given a double value it returns its representation as a string with few
 /// tweaks: [significantFigures] is the number of significant figures to keep,
 /// [removeTrailingZeros] say if non important zeros should be removed.
+/// [decimalSeparator] is the string used to separate the integer part from the
+/// decimal one (default is ".").
 /// E.g. 1.000000 --> 1
 String valueToString(
   double value,
   int significantFigures,
   bool removeTrailingZeros,
   bool useScientificNotation,
+  String decimalSeparator,
 ) {
   //Round to a fixed number of significant figures
   String stringValue;
@@ -148,10 +151,10 @@ String valueToString(
     exponentialPart = null;
   }
 
-  //Recompose the string
+  // Recompose the string
   String finalString = integerPart;
   if (decimalPart != null) {
-    finalString = '$finalString.$decimalPart';
+    finalString = '$finalString$decimalSeparator$decimalPart';
   }
   if (exponentialPart != null) {
     finalString = '${finalString}e$exponentialPart';

@@ -42,6 +42,7 @@ class Mass extends DoubleProperty<MASS> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       name})
       : super(
           name: name ?? PROPERTY.mass,

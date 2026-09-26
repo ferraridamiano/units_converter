@@ -68,6 +68,7 @@ class Density extends RatioProperty<DENSITY, MASS, VOLUME> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       name})
       : assert(_mapSymbols.length == DENSITY.values.length),
         super(

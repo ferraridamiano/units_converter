@@ -27,6 +27,7 @@ class Energy extends DoubleProperty<ENERGY> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       name})
       : super(
             name: name ?? PROPERTY.energy,

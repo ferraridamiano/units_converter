@@ -40,6 +40,7 @@ class SIPrefixes extends DoubleProperty<SI_PREFIXES> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       name})
       : super(
           name: name ?? PROPERTY.siPrefixes,

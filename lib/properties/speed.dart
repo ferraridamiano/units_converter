@@ -27,6 +27,7 @@ class Speed extends DoubleProperty<SPEED> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       name})
       : super(
           name: name ?? PROPERTY.speed,

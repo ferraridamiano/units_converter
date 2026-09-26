@@ -22,6 +22,7 @@ class Angle extends DoubleProperty<ANGLE> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       name})
       : super(
           name: name ?? PROPERTY.angle,

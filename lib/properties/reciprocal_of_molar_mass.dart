@@ -56,6 +56,7 @@ class ReciprocalOfMolarMass
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       name})
       : assert(_mapSymbols.length == RECIPROCAL_OF_MOLAR_MASS.values.length),
         super(
