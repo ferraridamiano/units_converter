@@ -64,7 +64,10 @@ abstract class DoubleProperty<T> extends Property<T, double> {
       this.removeTrailingZeros = true,
       this.useScientificNotation = true,
       this.decimalSeparator = '.'}) {
-    assert(decimalSeparator.isNotEmpty, 'The decimal separator cannot be empty');
+    assert(
+      decimalSeparator.isNotEmpty,
+      'The decimal separator cannot be empty',
+    );
     this.name = name;
     _nodeList = _getTreeAsList();
     _mapNodes = {for (var node in _nodeList) node.name: node};
@@ -74,11 +77,12 @@ abstract class DoubleProperty<T> extends Property<T, double> {
       final unit =
           Unit(conversionNode.name, symbol: mapSymbols?[conversionNode.name]);
       unit.stringValueCallback = (val) => valueToString(
-          val,
-          significantFigures,
-          removeTrailingZeros,
-          useScientificNotation,
-          decimalSeparator);
+            val,
+            significantFigures,
+            removeTrailingZeros,
+            useScientificNotation,
+            decimalSeparator,
+          );
       _unitList.add(unit);
       _mapUnitsMap[conversionNode.name] = unit;
     }

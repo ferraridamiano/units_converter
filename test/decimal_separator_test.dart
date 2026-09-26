@@ -45,11 +45,16 @@ void main() {
       var fuel = FuelConsumption(decimalSeparator: ',');
       fuel.convert(FUEL_CONSUMPTION.kilometersPerLiter, 1);
       expect(
-          fuel.milesPerLiter.stringValue!.startsWith('0,62'), isTrue);
+        fuel.milesPerLiter.stringValue!.startsWith('0,62'),
+        isTrue,
+      );
     });
 
     test('Empty decimal separator is not allowed', () {
-      expect(() => Length(decimalSeparator: ''), throwsA(isA<AssertionError>()));
+      expect(
+        () => Length(decimalSeparator: ''),
+        throwsA(isA<AssertionError>()),
+      );
     });
   });
 }

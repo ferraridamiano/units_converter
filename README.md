@@ -103,17 +103,13 @@ If you want to use a different string to separate the integer part from the deci
 // Initialization of the object
 var length = Length(decimalSeparator: ',');
 length.convert(LENGTH.inches, 1);
-print(length.meters.stringValue); // 0,0254
+print(length.meters.stringValue);
 ```
 
-The default is `.`. It can also be changed after the object has been created (the next conversion / `stringValue` read will use the new separator):
+Output:
 
-```dart
-var length = Length();
-length.convert(LENGTH.inches, 1);
-print(length.meters.stringValue); // 0.0254
-length.decimalSeparator = ',';
-print(length.meters.stringValue); // 0,0254
+```
+0,0254
 ```
 
 ## Special type of conversion: numeral systems conversion

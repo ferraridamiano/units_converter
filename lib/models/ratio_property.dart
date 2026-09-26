@@ -36,7 +36,10 @@ abstract class RatioProperty<T extends Enum, N, D> extends Property<T, double> {
       this.removeTrailingZeros = true,
       this.useScientificNotation = true,
       this.decimalSeparator = '.'}) {
-    assert(decimalSeparator.isNotEmpty, 'The decimal separator cannot be empty');
+    assert(
+      decimalSeparator.isNotEmpty,
+      'The decimal separator cannot be empty',
+    );
     size = mapSymbols.length;
     this.name = name;
     _mapUnitsMap = {};
