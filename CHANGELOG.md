@@ -1,3 +1,9 @@
+# 3.3.2
+- Added the `decimalSeparator` parameter to every property: it lets you choose
+the string used to separate the integer part from the decimal one in
+`stringValue`s (default is "."). It can also be changed at runtime through the
+public `decimalSeparator` field
+
 # 3.3.1
 - Significant speedup of the `convertFromTo` extensions by caching the
 underlying property instances instead of rebuilding them on every call

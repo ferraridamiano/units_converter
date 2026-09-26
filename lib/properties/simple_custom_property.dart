@@ -39,6 +39,7 @@ class SimpleCustomProperty extends DoubleProperty<String> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       super.mapSymbols,
       name})
       : assert(mapConversion.containsValue(1),

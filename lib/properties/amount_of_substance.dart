@@ -28,6 +28,7 @@ class AmountOfSubstance extends DoubleProperty<AMOUNT_OF_SUBSTANCE> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       name})
       : super(
           name: name ?? PROPERTY.length,

@@ -46,6 +46,7 @@ class DigitalData extends DoubleProperty<DIGITAL_DATA> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       name})
       : super(
           name: name ?? PROPERTY.digitalData,

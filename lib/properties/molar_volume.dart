@@ -58,6 +58,7 @@ class MolarVolume
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       name})
       : assert(_mapSymbols.length == MOLAR_VOLUME.values.length),
         super(

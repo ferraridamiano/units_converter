@@ -49,6 +49,10 @@ abstract class DoubleProperty<T> extends Property<T, double> {
   /// decimal notation (false)
   bool useScientificNotation;
 
+  /// The string used to separate the integer part from the decimal one in
+  /// [stringValue]s. Default is ".".
+  String decimalSeparator;
+
   final List<Unit> _unitList = [];
   late List<ConversionNode> _nodeList;
 
@@ -58,7 +62,12 @@ abstract class DoubleProperty<T> extends Property<T, double> {
       dynamic name,
       this.significantFigures = 10,
       this.removeTrailingZeros = true,
-      this.useScientificNotation = true}) {
+      this.useScientificNotation = true,
+      this.decimalSeparator = '.'}) {
+    assert(
+      decimalSeparator.isNotEmpty,
+      'The decimal separator cannot be empty',
+    );
     this.name = name;
     _nodeList = _getTreeAsList();
     _mapNodes = {for (var node in _nodeList) node.name: node};
@@ -68,7 +77,12 @@ abstract class DoubleProperty<T> extends Property<T, double> {
       final unit =
           Unit(conversionNode.name, symbol: mapSymbols?[conversionNode.name]);
       unit.stringValueCallback = (val) => valueToString(
-          val, significantFigures, removeTrailingZeros, useScientificNotation);
+            val,
+            significantFigures,
+            removeTrailingZeros,
+            useScientificNotation,
+            decimalSeparator,
+          );
       _unitList.add(unit);
       _mapUnitsMap[conversionNode.name] = unit;
     }

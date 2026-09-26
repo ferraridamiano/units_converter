@@ -50,6 +50,7 @@ class Volume extends DoubleProperty<VOLUME> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       name})
       : super(
           name: name ?? PROPERTY.volume,

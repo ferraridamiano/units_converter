@@ -55,6 +55,7 @@ class MolarMass extends RatioProperty<MOLAR_MASS, AMOUNT_OF_SUBSTANCE, MASS> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       name})
       : assert(_mapSymbols.length == MOLAR_MASS.values.length),
         super(

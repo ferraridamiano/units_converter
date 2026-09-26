@@ -96,6 +96,22 @@ name:ANGLE.seconds, value:3600.0, stringValue:3600.000, symbol:''
 
 As you can see in this example if you specify `removeTrailingZeros: false`, the `stringValue` keeps all the trailing zeros (the default is `true`). You can also ask for an certain number of significant figures in the `stringValue`.
 
+## Change the decimal separator
+If you want to use a different string to separate the integer part from the decimal one in the `stringValue` (e.g. the comma for some European locales), you can use the `decimalSeparator` parameter, available in every property. Any non-empty `String` is allowed:
+
+```dart
+// Initialization of the object
+var length = Length(decimalSeparator: ',');
+length.convert(LENGTH.inches, 1);
+print(length.meters.stringValue);
+```
+
+Output:
+
+```
+0,0254
+```
+
 ## Special type of conversion: numeral systems conversion
 *Warning! Numeral systems conversion is the only conversion that need the input as a `String`, and not as a `double` / `int` for obvious reasons*
 

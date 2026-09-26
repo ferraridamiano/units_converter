@@ -18,6 +18,10 @@ abstract class RatioProperty<T extends Enum, N, D> extends Property<T, double> {
   /// decimal notation (false)
   bool useScientificNotation;
 
+  /// The string used to separate the integer part from the decimal one in
+  /// [stringValue]s. Default is ".".
+  String decimalSeparator;
+
   final List<Unit> _unitList = [];
   late Map<T, Unit> _mapUnitsMap;
   Property numeratorProperty;
@@ -30,14 +34,23 @@ abstract class RatioProperty<T extends Enum, N, D> extends Property<T, double> {
       name,
       this.significantFigures = 10,
       this.removeTrailingZeros = true,
-      this.useScientificNotation = true}) {
+      this.useScientificNotation = true,
+      this.decimalSeparator = '.'}) {
+    assert(
+      decimalSeparator.isNotEmpty,
+      'The decimal separator cannot be empty',
+    );
     size = mapSymbols.length;
     this.name = name;
     _mapUnitsMap = {};
     for (var unit in mapSymbols.keys) {
       final newUnit = Unit(unit, symbol: mapSymbols[unit]);
       newUnit.stringValueCallback = (val) => valueToString(
-          val, significantFigures, removeTrailingZeros, useScientificNotation);
+          val,
+          significantFigures,
+          removeTrailingZeros,
+          useScientificNotation,
+          decimalSeparator);
       _unitList.add(newUnit);
       _mapUnitsMap[unit] = newUnit;
     }

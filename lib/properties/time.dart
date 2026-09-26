@@ -34,6 +34,7 @@ class Time extends DoubleProperty<TIME> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       name})
       : super(
           name: name ?? PROPERTY.time,

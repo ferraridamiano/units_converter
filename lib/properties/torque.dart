@@ -24,6 +24,7 @@ class Torque extends DoubleProperty<TORQUE> {
       {super.significantFigures,
       super.removeTrailingZeros,
       super.useScientificNotation,
+      super.decimalSeparator,
       name})
       : super(
           name: name ?? PROPERTY.torque,
